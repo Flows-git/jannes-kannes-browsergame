@@ -1,0 +1,2113 @@
+[
+  {
+    "id": "1_1_1",
+    "question": "Was passiert mit einem Wisp der getaunted wird?",
+    "answers": [
+      "Der Wisp bewegt sich Richtung des Mountain Giants",
+      "Nichts",
+      "Der Wisp bleibt stehen"
+    ],
+    "correctAnswer": "Nichts",
+    "meta": {
+      "episode": "1",
+      "creepjackEpisode": "1",
+      "questionNr": "1",
+      "questionTimeOnStream": "3m 55s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "1_1_2",
+    "question": "Was passiert wenn eine unsichtbare getaunted wird?",
+    "answers": [
+      "Wird revealed und greift an",
+      "Wird revealed greift aber nicht an",
+      "Nichts"
+    ],
+    "correctAnswer": "Nichts",
+    "meta": {
+      "episode": "1",
+      "creepjackEpisode": "1",
+      "questionNr": "2",
+      "questionTimeOnStream": "5m 15s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "1_1_3",
+    "question": "Kann eine entgangelte Einheit in den Goblinzeppelin geladen werden?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "1",
+      "creepjackEpisode": "1",
+      "questionNr": "3",
+      "questionTimeOnStream": "6m 37s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "2_2_1",
+    "question": "Wird die Dauer einer beschworenen Einheit zurückgesetzt wenn sie mit Control Magic übernommen wird?",
+    "answers": [
+      "Nein, die Dauer bleibt wie sie ist",
+      "Ja, die Dauer wird zurückgesetzt"
+    ],
+    "correctAnswer": "Ja, die Dauer wird zurückgesetzt",
+    "meta": {
+      "episode": "2",
+      "creepjackEpisode": "2",
+      "questionNr": "1",
+      "questionTimeOnStream": "21m 13s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "2_2_2",
+    "question": "Kann der Effekt einer Clarity Potion dispelled werden?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "2",
+      "creepjackEpisode": "2",
+      "questionNr": "2",
+      "questionTimeOnStream": "22m 47s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "2_2_3",
+    "question": "Was passiert wenn ein durch Potion of Invisibility unsichtbar gemachter Blademaster Wind Walk einsetzt?",
+    "answers": [
+      "Wind Walk übernimmt und Blademaster bleibt unsichtbar",
+      "Wind Walk kann nicht eingesetzt werden",
+      "Wind Walk übernimmt und Blademaster wird kurzzeitig sichtbar"
+    ],
+    "correctAnswer": "Wind Walk übernimmt und Blademaster wird kurzzeitig sichtbar",
+    "meta": {
+      "episode": "2",
+      "creepjackEpisode": "2",
+      "questionNr": "3",
+      "questionTimeOnStream": "23m 49s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "3_3_1",
+    "question": "Was passiert mit der von einer Kodo gefressenen Einheit wenn der Kodo übernommen wird?",
+    "answers": [
+      "Einheit kommt aus der Kodo",
+      "Einheit bleibt in der Kodo"
+    ],
+    "correctAnswer": "Einheit kommt aus der Kodo",
+    "meta": {
+      "episode": "3",
+      "creepjackEpisode": "3",
+      "questionNr": "1",
+      "questionTimeOnStream": "54m 28s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "3_3_2",
+    "question": "Bekommt ein schlafender Held Erfahrung?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "3",
+      "creepjackEpisode": "3",
+      "questionNr": "2",
+      "questionTimeOnStream": "55m 36s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "3_3_2,1",
+    "question": "Bekommt ein gehexter Held Erfahrung?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "3",
+      "creepjackEpisode": "3",
+      "questionNr": "2,1",
+      "questionTimeOnStream": "56m 15s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "3_3_3",
+    "question": "Kann ein gebanishter Arbeiter Gold abbauen?",
+    "answers": [
+      "Ja",
+      "Nein, außer Akolyten",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "3",
+      "creepjackEpisode": "3",
+      "questionNr": "3",
+      "questionTimeOnStream": "56m 51s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "4_4_1",
+    "question": "Wird eine Clarity Potion durch den Angriff einer Illusion abgebrochen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "4",
+      "creepjackEpisode": "4",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 26m 16s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "4_4_2",
+    "question": "Kann ein gehexter Held Items kaufen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "4",
+      "creepjackEpisode": "4",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 27m 55s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "4_4_3",
+    "question": "Was passiert mit dem Acid Bomb Debuff auf einer Hippogryph-Reiterin wenn die Bogenschützin absteigt?",
+    "answers": [
+      "Debuff verschwindet",
+      "Nur Bogenschützin behält den Debuff",
+      "Nur Hippogryph behält den Debuff",
+      "Beide Eineiten haben den Debuff"
+    ],
+    "correctAnswer": "Debuff verschwindet",
+    "meta": {
+      "episode": "4",
+      "creepjackEpisode": "4",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 29m 4s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "5_5_1",
+    "question": "Kann ein Banshee beschworene Einheiten übernehmen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "5",
+      "creepjackEpisode": "5",
+      "questionNr": "1",
+      "questionTimeOnStream": "53m 49s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "5_5_2",
+    "question": "Springt ein Kettenblitz des Faar Seer auf nahe feindliche Einheiten über, wenn er auf ein Schaf gezaubert wird?",
+    "answers": [
+      "Ja",
+      "Nein",
+      "Kettenblitz kann nicht auf ein Schaf gewirkt werden"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "5",
+      "creepjackEpisode": "5",
+      "questionNr": "2",
+      "questionTimeOnStream": "54m 57s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "5_5_3",
+    "question": "Schützt Anti-Magic Shell gegen Bash?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "5",
+      "creepjackEpisode": "5",
+      "questionNr": "3",
+      "questionTimeOnStream": "57m 11s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "6_7_1",
+    "question": "Kann ein Mechanisches Tier in einen Goblin Zeppelin geladen werden?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "6",
+      "creepjackEpisode": "7",
+      "questionNr": "1",
+      "questionTimeOnStream": "55m 21s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "6_7_2",
+    "question": "Wird Shadowmeld unterbrochen wenn man selbst einen Zauber wirkt?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "6",
+      "creepjackEpisode": "7",
+      "questionNr": "2",
+      "questionTimeOnStream": "56m 22s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "6_7_3",
+    "question": "Was passiert wenn AnimatedDead in der Nähe von Graveyardleichen gewirkt wird?",
+    "answers": [
+      "Die Leichen werden Crypt Fients",
+      "Die Leichen werden Ghule",
+      "Animated Dead wirkt nicht auf Graveyardleichen"
+    ],
+    "correctAnswer": "Die Leichen werden Ghule",
+    "meta": {
+      "episode": "6",
+      "creepjackEpisode": "7",
+      "questionNr": "3",
+      "questionTimeOnStream": "57m 7s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "7_9_1",
+    "question": "Kann ein Mechanisches Tier repariert werden?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "7",
+      "creepjackEpisode": "9",
+      "questionNr": "1",
+      "questionTimeOnStream": "43m 19s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "7_9_2",
+    "question": "Kann man gegen eine eigene Einheit einen kritischen Treffer landen?",
+    "answers": [
+      "Ja, aber nur mit Drunken Brawler des Pandas",
+      "Ja, aber nur mit dem kritischen Schaden des Blademasters",
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja, aber nur mit Drunken Brawler des Pandas",
+    "meta": {
+      "episode": "7",
+      "creepjackEpisode": "9",
+      "questionNr": "2",
+      "questionTimeOnStream": "44m 19s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "7_9_3",
+    "question": "Kann eine Leiche wiederbelebt werden auf der ein Gebäude gebaut wurde?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "7",
+      "creepjackEpisode": "9",
+      "questionNr": "3",
+      "questionTimeOnStream": "46m 15s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "8_10_1",
+    "question": "Kann eine Einheit durch den Schaden der Dornen-Aura sterben?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "8",
+      "creepjackEpisode": "10",
+      "questionNr": "1",
+      "questionTimeOnStream": "59m 1s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "8_10_2",
+    "question": "Nimmt eine Einheit im Shadowmeld Schaden, wenn eine Belagerungseinheit in ihre Nähe schießt?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "8",
+      "creepjackEpisode": "10",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 0m 18s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "8_10_3",
+    "question": "Wird eine gestorbene Miliz als Miliz wiederbelebt?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "8",
+      "creepjackEpisode": "10",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 1m 28s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "9_11_1",
+    "question": "Schützt der Gottesschild vor Taunt?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "9",
+      "creepjackEpisode": "11",
+      "questionNr": "1",
+      "questionTimeOnStream": "59m 43s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "9_11_2",
+    "question": "Verliert eine gebanishte Einheit mehr Mana durch Detonate?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "9",
+      "creepjackEpisode": "11",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 0m 50s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "9_11_3",
+    "question": "Was passiert mit Unsichtbarkeit auf einer Miliz wenn die Miliz ausläuft?",
+    "answers": [
+      "Peasant bleibt unsichtbar",
+      "Peasant wird sichtbar"
+    ],
+    "correctAnswer": "Peasant wird sichtbar",
+    "meta": {
+      "episode": "9",
+      "creepjackEpisode": "11",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 2m 34s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "10_12_1",
+    "question": "Kann ein mit Animated Dead belebter Arbeiter Gebäude bauen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "10",
+      "creepjackEpisode": "12",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 26m 49s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "10_12_2",
+    "question": "Kann ein Bat Rider eine am Boden ensnarte Lufteinheit mit Unstable Concotion angreifen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "10",
+      "creepjackEpisode": "12",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 27m 34s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "10_12_3",
+    "question": "Profitieren verbündete Einheiten von Auraitems des Pandas während seines Ultimates?",
+    "answers": [
+      "Ja, aber nur der Erd-Panda behält die Auren",
+      "Ja, alle Pandas haben die Auren",
+      "Ja, aber nur der Sturm-Panda behält die Auren",
+      "Nein",
+      "Ja, aber nur der Feuer-Panda behält die Auren",
+      "Ja, aber die Auren bleibt an dem Ort an dem der Panda sich verwandelt hat"
+    ],
+    "correctAnswer": "Ja, aber die Auren bleibt an dem Ort an dem der Panda sich verwandelt hat",
+    "meta": {
+      "episode": "10",
+      "creepjackEpisode": "12",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 29m 39s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "11_13_1",
+    "question": "Droppt ein von einer Banshee übernommener Creep seine Items wenn er stirbt?",
+    "answers": [
+      "Nein, das Item wird nie gedroppt",
+      "Ja",
+      "Nein, das Item wird direkt nach der Übernahme gedroppt"
+    ],
+    "correctAnswer": "Nein, das Item wird direkt nach der Übernahme gedroppt",
+    "meta": {
+      "episode": "11",
+      "creepjackEpisode": "13",
+      "questionNr": "1",
+      "questionTimeOnStream": "57m 19s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "11_13_2",
+    "question": "Was passiert wenn eine Einheit mit Mindestreichweite getauntet wird?",
+    "answers": [
+      "Einheit bleibt stehen, aber kann nicht angreifen",
+      "Einheit bewegt sich in eine Position in der sie angreifen kann und greift an",
+      "Taunt wirkt nicht"
+    ],
+    "correctAnswer": "Taunt wirkt nicht",
+    "meta": {
+      "episode": "11",
+      "creepjackEpisode": "13",
+      "questionNr": "2",
+      "questionTimeOnStream": "58m 52s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "11_13_3",
+    "question": "Kann die Sentinel Eule dispellt werden?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "11",
+      "creepjackEpisode": "13",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 1m 8s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "12_14_1",
+    "question": "Wird Wind Walk durch das Ein- und Ausladen in einen Goblin Zeppelin abgebrochen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "12",
+      "creepjackEpisode": "14",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 6m 4s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "12_14_2",
+    "question": "Können verbündete nichtelfische Arbeiter Urtume reparieren?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "12",
+      "creepjackEpisode": "14",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 7m 12s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "12_14_3",
+    "question": "Kann die Illusion einer Bogenschützin Shadowmeld einsetzen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "12",
+      "creepjackEpisode": "14",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 8m 27s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "13_15_1",
+    "question": "Kann eine Kodo eine ensnarte Lufteinheit verschlingen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "13",
+      "creepjackEpisode": "15",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 31m 9s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "13_15_2",
+    "question": "Läuft die Tageszeit während einer Mondsteinnacht weiter?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "13",
+      "creepjackEpisode": "15",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 32m 19s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "13_15_3",
+    "question": "Was passiert, wenn eine Sacrificial Pit während des Erschaffens eines Shades zerstört wird?",
+    "answers": [
+      "Der Akolyt ist weg",
+      "Der Akolyt wird gedroppt"
+    ],
+    "correctAnswer": "Der Akolyt wird gedroppt",
+    "meta": {
+      "episode": "13",
+      "creepjackEpisode": "15",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 34m 31s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "14_17_1",
+    "question": "Regenieren Urtume nachts HP?",
+    "answers": [
+      "Ja",
+      "Nein",
+      "Ja, aber nur ausgewurzelt"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "14",
+      "creepjackEpisode": "17",
+      "questionNr": "1",
+      "questionTimeOnStream": "47m 38s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "14_17_2",
+    "question": "Wirkt Pillage gegen die Pocket Factory?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "14",
+      "creepjackEpisode": "17",
+      "questionNr": "2",
+      "questionTimeOnStream": "49m 30s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "14_17_3",
+    "question": "Kann ein gebanishter Sapper explodieren?",
+    "answers": [
+      "Ja, Sapper können gebanisht explodieren",
+      "Nein, Sapper können gebanisht nicht explodieren",
+      "Nein, da Sapper nicht gebanisht werden können"
+    ],
+    "correctAnswer": "Nein, da Sapper nicht gebanisht werden können",
+    "meta": {
+      "episode": "14",
+      "creepjackEpisode": "17",
+      "questionNr": "3",
+      "questionTimeOnStream": "50m 59s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "15_19_1",
+    "question": "Kann ein Mountain King mit Orb eine Lufteinheit bashen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "15",
+      "creepjackEpisode": "19",
+      "questionNr": "1",
+      "questionTimeOnStream": "54m 29s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "15_19_2",
+    "question": "Macht der Blitzschild Schaden an nahen Einheiten, wenn die verzauberte Einheit im Shadowmeld ist?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "15",
+      "creepjackEpisode": "19",
+      "questionNr": "2",
+      "questionTimeOnStream": "56m 42s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "15_19_3",
+    "question": "Was passiert mit einem Phönix wenn der Bloodmage mit einem Tome of Retraining das Ultimate verlernt?",
+    "answers": [
+      "Der Phönix Spell kann nicht verlernt werden, solange der Phönix auf dem Feld ist",
+      "Der Phönix Spell kann nicht verlernt werden, solange der Phönix Spell auf Cooldown ist",
+      "Wenn der Phönix Spell auf Cooldown ist verschwindet der Phönix"
+    ],
+    "correctAnswer": "Der Phönix Spell kann nicht verlernt werden, solange der Phönix Spell auf Cooldown ist",
+    "meta": {
+      "episode": "15",
+      "creepjackEpisode": "19",
+      "questionNr": "3",
+      "questionTimeOnStream": "58m 4s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "16_20_1",
+    "question": "Wird eine Dryade durch einen abstürzenden Zeppelin verlangsamt?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "16",
+      "creepjackEpisode": "20",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 8m 3s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "16_20_2",
+    "question": "Wird ein Arbeiter, der mit gesammeltem Holz stirbt, auch mit Holz wiederbelebt?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "16",
+      "creepjackEpisode": "20",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 19m 18s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "16_20_3",
+    "question": "Wie viel Mana hat ein im Altar wiederbelebter Held?",
+    "answers": [
+      "0 Mana",
+      "100 Mana",
+      "Mit so viel wie er gestorben ist",
+      "200 Mana",
+      "Hälfte des Manapools",
+      "Hängt von der Intelligenz ab"
+    ],
+    "correctAnswer": "100 Mana",
+    "meta": {
+      "episode": "16",
+      "creepjackEpisode": "20",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 11m 47s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "17_24_1",
+    "question": "Kann ein Held einem gegnerischen Helden ein Item zum tragen geben?",
+    "answers": [
+      "Ja (F)",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "17",
+      "creepjackEpisode": "24",
+      "questionNr": "1",
+      "questionTimeOnStream": "52m 6s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "17_24_2",
+    "question": "Werden beide Lava-Spawns teleportiert, wenn er sich währenddessen teilt",
+    "answers": [
+      "Nein (F)",
+      "Ja",
+      "Nur ein Lava-Spawn wird teleportiert"
+    ],
+    "correctAnswer": "Nur ein Lava-Spawn wird teleportiert",
+    "meta": {
+      "episode": "17",
+      "creepjackEpisode": "24",
+      "questionNr": "2",
+      "questionTimeOnStream": "54m 36s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "17_24_3",
+    "question": "Welchen Schaden fügt ein Spell zu, der während seines Fluges aufgewertet wird?",
+    "answers": [
+      "Den aufgewerteten Schaden",
+      "Den alten Schaden (F)"
+    ],
+    "correctAnswer": "Den alten Schaden (F)",
+    "meta": {
+      "episode": "17",
+      "creepjackEpisode": "24",
+      "questionNr": "3",
+      "questionTimeOnStream": "58m 59s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "18_25_1",
+    "question": "Was passiert wenn der Blood Mage einer Illusion Mana entziehen will?",
+    "answers": [
+      "Die Illusion verliert Mana und der Blood Mage bekommt es",
+      "Die Illusion verliert Mana, aber der Blood Mage bekommt keins",
+      "Die Illusion verschwindet"
+    ],
+    "correctAnswer": "Die Illusion verschwindet",
+    "meta": {
+      "episode": "18",
+      "creepjackEpisode": "25",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 23m 35s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "18_25_2",
+    "question": "Kann ein Walker einen Tauren wiederbeleben wenn dadurch das Supplylimit überstiegen werden würde?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "18",
+      "creepjackEpisode": "25",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 25m 3s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "18_25_3",
+    "question": "Kann ein Shredder an einem entwurzelten Tree of Life Holz abgeben?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "18",
+      "creepjackEpisode": "25",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 26m 30s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "19_26_1",
+    "question": "Kann eine Einheit durch Unholy Frenzy sterben?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "19",
+      "creepjackEpisode": "26",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 56m 48s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "19_26_2",
+    "question": "Gibt ein auf begehbares Wasser angewendeter Skull Untoten Regeneration? ",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "19",
+      "creepjackEpisode": "26",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 57m 42s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "19_26_3",
+    "question": "Kann ein Spell Breaker Unsichtbarkeit stehlen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "19",
+      "creepjackEpisode": "26",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 58m 38s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "20_30_1",
+    "question": "Hat die Illusion eines Death Knight mit Unholy Aura auch die Aura?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "20",
+      "creepjackEpisode": "30",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 23m 2s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "20_30_2",
+    "question": "Was sieht der Gegner, wenn ein Blademaster im Wind Walk mit Healing Wave geheilt wird?",
+    "answers": [
+      "Unsichtbare Einheiten können von Heal Wave nicht geheilt werden",
+      "Der Blademaster wird für den Gegner optisch übersprungen",
+      "Man sieht die Position des unsichtbaren Blademasters"
+    ],
+    "correctAnswer": "Man sieht die Position des unsichtbaren Blademasters",
+    "meta": {
+      "episode": "20",
+      "creepjackEpisode": "30",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 24m 13s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "20_30_3",
+    "question": "Kann ein Spirit des Warden Ultimates übernommen werden?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "20",
+      "creepjackEpisode": "30",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 26m 7s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "20_30_4",
+    "question": "Welches Item verändert die Stehanimation mancher Helden?",
+    "answers": [
+      "Lionhorn of Stormwind",
+      "Warsum Battledrums",
+      "Cloak of Shadows",
+      "Cloak of Flames"
+    ],
+    "correctAnswer": "Warsum Battledrums",
+    "meta": {
+      "episode": "20",
+      "creepjackEpisode": "30",
+      "questionNr": "4",
+      "questionTimeOnStream": "1h 27m 50s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "21_31_1",
+    "question": "Hat ein Lightning Shield auf einer größeren Einheit einen größeren Radius?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "21",
+      "creepjackEpisode": "31",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 44m 10s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "21_31_2",
+    "question": "Was passiert mit Items im Backpack, wenn die Trägereinheit übernommen werden?",
+    "answers": [
+      "Das Item wird gedroppt, es sei den man spielt die gleiche Rasse und hat Backpack erforscht",
+      "Die Einheit behält das Item wenn Backpack erforscht wurde",
+      "Das Item verschwindet",
+      "Das Item wird immer gedroppt"
+    ],
+    "correctAnswer": "Das Item wird gedroppt, es sei den man spielt die gleiche Rasse und hat Backpack erforscht",
+    "meta": {
+      "episode": "21",
+      "creepjackEpisode": "31",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 46m 13s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "21_31_3",
+    "question": "Können Spirit-Walker feindliche Tauren wiederbeleben?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "21",
+      "creepjackEpisode": "31",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 48m 50s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "22_32_1",
+    "question": "Ist die Illusion eines Alchemist in Chemical Rage auch in Chemical Rage?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "22",
+      "creepjackEpisode": "32",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 14m 58s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "22_32_2",
+    "question": "Bekommt eine Einheit Schaden, die eine Naga mit Mana Shield und Thorns Aura angreift?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "22",
+      "creepjackEpisode": "32",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 16m 53s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "22_32_3",
+    "question": "Kann Cloud dispellt werden?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "22",
+      "creepjackEpisode": "32",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 19m 20s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "23_33_1",
+    "question": "Bewegen sich alle Ancients gleich schnell?",
+    "answers": [
+      "Nein der Ancient of Wonders ist langsamer",
+      "Nein, der Ancient Protector ist schneller",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "23",
+      "creepjackEpisode": "33",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 14m 50s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "23_33_2",
+    "question": "Kann ein Spell Breaker Illusionen übernehmen?",
+    "answers": [
+      "Ja",
+      "Nein, aber die Illusion wird zerstört",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "23",
+      "creepjackEpisode": "33",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 17m 10s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "23_33_3",
+    "question": "Bekommt eine eingegrabene Fient Schaden durch Burning Oil?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "23",
+      "creepjackEpisode": "33",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 19m 33s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "23_33_4",
+    "question": "Was passiert, wenn durch EINEN Sapper die jeweils letzten Gebäude beider Spieler gleichzeitig zerstört werden?",
+    "answers": [
+      "Es hängt davon ab wo die Gebäude stehen",
+      "Der Spieler mit der höheren Gesamtpunktzahlt gewinnt",
+      "Das Spiel geht unentschieden aus",
+      "Der Spieler dem der Sapper gehört gewinnt",
+      "Der Spieler dem der Sapper NICHT gehört gewinnt"
+    ],
+    "correctAnswer": "Es hängt davon ab wo die Gebäude stehen",
+    "meta": {
+      "episode": "23",
+      "creepjackEpisode": "33",
+      "questionNr": "4",
+      "questionTimeOnStream": "1h 23m 11s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "24_34_1",
+    "question": "Bleiben die Leichen von Spielereinheiten genauso lange erhalten wie Leichen von Creeps?",
+    "answers": [
+      "Nein, Creepleichen bleiben länger erhalten",
+      "Ja",
+      "Nein, Spielerleichen bleiben länger erhalten"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "24",
+      "creepjackEpisode": "34",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 20m 28s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "24_34_2",
+    "question": "Schützt Burrow vor Impale?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "24",
+      "creepjackEpisode": "34",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 22m 35s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "24_34_3",
+    "question": "Wird der Dreadlord geheilt, der mit Vampiric Aura und Orb eine Lufteinheit angreift?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "24",
+      "creepjackEpisode": "34",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 24m 13s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "Firelord Special_35_1",
+    "question": "Wie viele Lava Spawns können aus einem beschworenen Lava Spawn maximal gleichzeitig entstehen?",
+    "answers": [
+      "unbegrenzt",
+      "-4-",
+      "8"
+    ],
+    "correctAnswer": "-4-",
+    "meta": {
+      "episode": "Firelord Special",
+      "creepjackEpisode": "35",
+      "questionNr": "1",
+      "questionTimeOnStream": "19m 29s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "Firelord Special_35_2",
+    "question": "Verursacht auch ein Critter AoE Damage, wenn es durch Incinerate stirbt?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "Firelord Special",
+      "creepjackEpisode": "35",
+      "questionNr": "2",
+      "questionTimeOnStream": "22m 49s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "Firelord Special_35_3",
+    "question": "Verursacht auch ein Mechanisches Tier AoE des Firelord Spielers Damage, wenn es durch Incinerate stirbt.",
+    "answers": [
+      "Ja",
+      "Incinerate wirkt nicht auf eigene Einheiten",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "Firelord Special",
+      "creepjackEpisode": "35",
+      "questionNr": "3",
+      "questionTimeOnStream": "23m 42s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "25_35_1",
+    "question": "Werden Ghule, die Holz abbauen, bei einem TP mit teleportiert?",
+    "answers": [
+      "Nein",
+      "Ja",
+      "Nur wenn sie gerade kein Holz tragen"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "25",
+      "creepjackEpisode": "35",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 27m 37s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "25_35_2",
+    "question": "Kann Reincarnation durch Silence verhindert werden?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "25",
+      "creepjackEpisode": "35",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 28m 43s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "25_35_3",
+    "question": "Was passiert mit einer Anti-Magic Shell auf einer Obsidian Statue, wenn die Statue in einen Destroyer morpht?",
+    "answers": [
+      "Anti-Magic Shell hört auf zu wirken",
+      "Anti-Magic Shell bleibt auf dem Destroyer bestehen"
+    ],
+    "correctAnswer": "Anti-Magic Shell bleibt auf dem Destroyer bestehen",
+    "meta": {
+      "episode": "25",
+      "creepjackEpisode": "35",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 30m 34s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "26_36_1",
+    "question": "Ist eine beschworene Einheit mit Anti-Magic Shell vor Dispel geschützt?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "26",
+      "creepjackEpisode": "36",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 27m 9s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "26_36_2",
+    "question": "Kann eine getauntete Einheit getauntet werden?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "26",
+      "creepjackEpisode": "36",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 30m 5s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "26_36_3",
+    "question": "Wie viel HP hat ein Item?",
+    "answers": [
+      "75 HP",
+      "50 HP",
+      "100 HP",
+      "25 HP"
+    ],
+    "correctAnswer": "75 HP",
+    "meta": {
+      "episode": "26",
+      "creepjackEpisode": "36",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 34m",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "27_38_1",
+    "question": "Kann ein Death Knight einen verbündeten, untoten Helden mit Death Pact opfern?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "27",
+      "creepjackEpisode": "38",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 45m 27s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "27_38_2",
+    "question": "Verlangsamt der Nerubian Tower den Angriff von Türmen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "27",
+      "creepjackEpisode": "38",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 46m 11s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "27_38_3",
+    "question": "Was passiert mit einer von einer Kodo verschlungenen Einheit, wenn die Kodo gehext wird?",
+    "answers": [
+      "Die Einheit wird gedroppt",
+      "Die Einheit verschwindet",
+      "Die Einheit bleibt im Magen und wird weiter verdaut",
+      "Die Einheit bleibt weiter im Magen aber die Verdauung wird gestoppt"
+    ],
+    "correctAnswer": "Die Einheit verschwindet",
+    "meta": {
+      "episode": "27",
+      "creepjackEpisode": "38",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 47m 42s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "28_39_1",
+    "question": "Kann eine gesilencte Naga mit Frost Arrow angreifen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "28",
+      "creepjackEpisode": "39",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 19m 43s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "28_39_2",
+    "question": "Unterbricht Freezing Breath auf einer Entangled Gold Mine den Goldabbau?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "28",
+      "creepjackEpisode": "39",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 21m 8s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "28_39_3",
+    "question": "Kann ein Held mit Wand of Mana Stealing Mana von einem Moon Well stehlen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "28",
+      "creepjackEpisode": "39",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 24m 41s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "29_40_1",
+    "question": "Stacken Healing Ward und Fountain of Health",
+    "answers": [
+      "Ja",
+      "Nein, nur der Healing Ward wirkt",
+      "Nein, nur der Fountain of Health wirkt"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "29",
+      "creepjackEpisode": "40",
+      "questionNr": "1",
+      "questionTimeOnStream": "59m 41s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "29_40_2",
+    "question": "Wird ein toter Headhunter als Berserker wiederbelebt, wenn mittlerweile das Upgrade erforscht wurde?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "29",
+      "creepjackEpisode": "40",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 0m 53s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "29_40_3",
+    "question": "Kann ein unsichtbarer Arbeiter Holz abbauen?",
+    "answers": [
+      "Ja, aber der Arbeiter wird sichtbar wenn das Holz abgegeben wird",
+      "Nein, der Arbeiter wird direkt beim abbauen sichtbar",
+      "Ja, der Arbeiter bleibt unsichtbar"
+    ],
+    "correctAnswer": "Ja, aber der Arbeiter wird sichtbar wenn das Holz abgegeben wird",
+    "meta": {
+      "episode": "29",
+      "creepjackEpisode": "40",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 3m 23s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "30_43_1",
+    "question": "Was passiert wenn man eine Illusion hext?",
+    "answers": [
+      "Die Illusion wird gehext",
+      "Die Illusion verschwindet",
+      "Hex funktioniert auf der Illusion nicht"
+    ],
+    "correctAnswer": "Die Illusion verschwindet",
+    "meta": {
+      "episode": "30",
+      "creepjackEpisode": "43",
+      "questionNr": "1",
+      "questionTimeOnStream": "47m 6s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "30_43_2",
+    "question": "Werden Einheiten im Shadowmeld von Starfall getroffen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "30",
+      "creepjackEpisode": "43",
+      "questionNr": "2",
+      "questionTimeOnStream": "47m 41s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "30_43_3",
+    "question": "Hat ein mit Raise Dead wiederbelebter Raider Pillage wenn der Orcspieler es entwickelt hatte?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "30",
+      "creepjackEpisode": "43",
+      "questionNr": "3",
+      "questionTimeOnStream": "49m 6s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "31_44_1",
+    "question": "Kann eine Banshee ein Schaf übernehmen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "31",
+      "creepjackEpisode": "44",
+      "questionNr": "1",
+      "questionTimeOnStream": "46m 31s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "31_44_2",
+    "question": "Hat ein Sentry Ward dieselbe Sichtweite wie Detectionweite?",
+    "answers": [
+      "Nein, die Sichtweite ist niedriger",
+      "Nein, die Detection Reichweite ist niedriger",
+      "Ja"
+    ],
+    "correctAnswer": "Nein, die Detection Reichweite ist niedriger",
+    "meta": {
+      "episode": "31",
+      "creepjackEpisode": "44",
+      "questionNr": "2",
+      "questionTimeOnStream": "48m 14s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "31_44_3",
+    "question": "Was passiert wenn zwei Summons mit Spirit Link verbunden sind und einer durch Dispel Schaden bekommt?",
+    "answers": [
+      "Beide Summons bekommen den vollen Dispel Schaden",
+      "Der Schaden wird aufgeteilt, der zweite Summon erhält auch etwas Schaden",
+      "Nur die direkt vom Dispel betroffene Einheit bekommt Schaden"
+    ],
+    "correctAnswer": "Der Schaden wird aufgeteilt, der zweite Summon erhält auch etwas Schaden",
+    "meta": {
+      "episode": "31",
+      "creepjackEpisode": "44",
+      "questionNr": "3",
+      "questionTimeOnStream": "50m 20s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "Jannes weiß es_47_1",
+    "question": "Welche Einheiten töten einen Raider schneller: 2 Huntress oder 3 Fients (Keine Upgrades)",
+    "answers": [
+      "3 Fients",
+      "2 Huntress"
+    ],
+    "correctAnswer": "3 Fients",
+    "meta": {
+      "episode": "Jannes weiß es",
+      "creepjackEpisode": "47",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 24m 58s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "Jannes weiß es_47_2",
+    "question": "Welche Einheit hat die langsamste Angriffsgeschwindigkeit",
+    "answers": [
+      "Meat Wagon",
+      "Mortar Team",
+      "Tank",
+      "Acolyte",
+      "Frost Wyrm",
+      "Chimera",
+      "Demolisher"
+    ],
+    "correctAnswer": "Demolisher",
+    "meta": {
+      "episode": "Jannes weiß es",
+      "creepjackEpisode": "47",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 28m 1s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "Jannes weiß es_47_3",
+    "question": "Auf welcher/n Map/s hat die Startgoldmine eine andere Goldmenge als die üblichen 12500?",
+    "answers": [
+      "Terenas Stand",
+      "Northern Isles",
+      "Echo Isles",
+      "Amazonia",
+      "Twisted Meadows",
+      "Concealed Hill",
+      "Last Refuge"
+    ],
+    "correctAnswer": "Echo Isles| Northern Isles|",
+    "meta": {
+      "episode": "Jannes weiß es",
+      "creepjackEpisode": "47",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 33m 1s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "32_47_1",
+    "question": "Ist eine gestunnte Einheit nach einem TP immer noch gestunnt?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "32",
+      "creepjackEpisode": "47",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 37m 10s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "32_47_2",
+    "question": "Bekommen gebanishte Einheiten mehr HP durch Replenish?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "32",
+      "creepjackEpisode": "47",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 39m 30s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "32_47_3",
+    "question": "Passt ein gehexter Held durch Lücken, durch die er normalerweise nicht passen würde?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "32",
+      "creepjackEpisode": "47",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 42m 1s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "32_47_4",
+    "question": "Wie viel HP hat ein Baum?",
+    "answers": [
+      "75",
+      "50",
+      "120",
+      "100"
+    ],
+    "correctAnswer": "50",
+    "meta": {
+      "episode": "32",
+      "creepjackEpisode": "47",
+      "questionNr": "4",
+      "questionTimeOnStream": "1h 44m 42s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "32_47_5",
+    "question": "Was passiert wenn das erste Ziel eines Chain Lightning ein Amulet of Spell Shield trägt?",
+    "answers": [
+      "Spell wirkt nicht",
+      "Spell wird für den Träger geblockt, springt aber weiter"
+    ],
+    "correctAnswer": "Spell wird für den Träger geblockt, springt aber weiter",
+    "meta": {
+      "episode": "32",
+      "creepjackEpisode": "47",
+      "questionNr": "5",
+      "questionTimeOnStream": "1h 47m 9s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "32_47_6",
+    "question": "Kann ein ensnarter Dragon Hawk Rider Aerial Shakles einsetzen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "32",
+      "creepjackEpisode": "47",
+      "questionNr": "6",
+      "questionTimeOnStream": "1h 48m 59s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "32_47_7",
+    "question": "Kann ein Spell Breaker Unholy Frenzy stehlen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "32",
+      "creepjackEpisode": "47",
+      "questionNr": "7",
+      "questionTimeOnStream": "1h 51m 5s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "33_48_1",
+    "question": "Profitieren Moon Wells von der Brilliance Aura?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "33",
+      "creepjackEpisode": "48",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 38m 55s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "33_48_2",
+    "question": "Kann ein Lich mit Animate Dead wiederbelebte Einheiten opfern?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "33",
+      "creepjackEpisode": "48",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 39m 42s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "33_48_3",
+    "question": "Können Serpent Wards repariert werden?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "33",
+      "creepjackEpisode": "48",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 42m",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "34_50_1",
+    "question": "Zerstört Stampede Healing Wards?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "34",
+      "creepjackEpisode": "50",
+      "questionNr": "1",
+      "questionTimeOnStream": "22m 8s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "34_50_2",
+    "question": "Erhält man Gold mit Pillage wenn man ein ausgewurzeltes Ancient angreift?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "34",
+      "creepjackEpisode": "50",
+      "questionNr": "2",
+      "questionTimeOnStream": "24m 10s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "34_50_3",
+    "question": "Kann sich eine Einheit an einem Moon Well heilen während sich ein Held zu diesem teleportiert?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "34",
+      "creepjackEpisode": "50",
+      "questionNr": "3",
+      "questionTimeOnStream": "26m 6s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "35_53_1",
+    "question": "Kann man eine Doom Guard mit Death Coil heilen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "35",
+      "creepjackEpisode": "53",
+      "questionNr": "1",
+      "questionTimeOnStream": "54m 34s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "35_53_2",
+    "question": "Wird der Schaden von Unstable Concoction durch Spirit Link aufgeteilt?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "35",
+      "creepjackEpisode": "53",
+      "questionNr": "2",
+      "questionTimeOnStream": "55m 35s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "35_53_3",
+    "question": "Kann man Illusionen mit einem Staff of Preservation teleportieren?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "35",
+      "creepjackEpisode": "53",
+      "questionNr": "3",
+      "questionTimeOnStream": "56m 32s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "36_54_1",
+    "question": "Kann man mit einer Illusion eine schlafende Einheit aufwecken?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "36",
+      "creepjackEpisode": "54",
+      "questionNr": "1",
+      "questionTimeOnStream": "1h 17m 51s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "36_54_2",
+    "question": "Behält ein Demon Hunter Immolation während er gehext ist?",
+    "answers": [
+      "Nein, Immolation verschwindet",
+      "Ja, es wirkt weiterhin",
+      "Die Animation bleibt, verursacht aber keinen Schaden"
+    ],
+    "correctAnswer": "Die Animation bleibt, verursacht aber keinen Schaden",
+    "meta": {
+      "episode": "36",
+      "creepjackEpisode": "54",
+      "questionNr": "2",
+      "questionTimeOnStream": "1h 20m 13s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "36_54_3",
+    "question": "Kann eine gesilencte Naga Mana Shield ausschalten?",
+    "answers": [
+      "Nein",
+      "Ja",
+      "Nein, da Mana Shield beim silencen deaktiviert wird"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "36",
+      "creepjackEpisode": "54",
+      "questionNr": "3",
+      "questionTimeOnStream": "1h 21m 59s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "36_54_4",
+    "question": "Kann man Siphon Mana dispellen?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "36",
+      "creepjackEpisode": "54",
+      "questionNr": "4",
+      "questionTimeOnStream": "1h 26m 27s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "36_54_5",
+    "question": "Können gehexte Wisps Gold abbauen?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "36",
+      "creepjackEpisode": "54",
+      "questionNr": "5",
+      "questionTimeOnStream": "1h 28m 20s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "36_54_6",
+    "question": "Was passiert wenn ein gedoomter Peon ein Gebäude baut?",
+    "answers": [
+      "Peon kann kein Gebäude bauen",
+      "Peon baut das Gebäude bis er sich verwandelt",
+      "Debuff wird während des Bauens unterbrochen"
+    ],
+    "correctAnswer": "Peon kann kein Gebäude bauen",
+    "meta": {
+      "episode": "36",
+      "creepjackEpisode": "54",
+      "questionNr": "6",
+      "questionTimeOnStream": "1h 31m 45s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "36_54_7",
+    "question": "Bekommt man für das zerstören einer Watch Tower Baustelle EP?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Ja",
+    "meta": {
+      "episode": "36",
+      "creepjackEpisode": "54",
+      "questionNr": "7",
+      "questionTimeOnStream": "1h 36m 25s",
+      "jannesCorrect": false
+    }
+  },
+  {
+    "id": "37_55_1",
+    "question": "Bekommt eine Pocket Factory Schaden durch Mana Flare?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "37",
+      "creepjackEpisode": "55",
+      "questionNr": "1",
+      "questionTimeOnStream": "49m 50s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "37_55_2",
+    "question": "Verbessert Ultravision auch die Nachtsichtweite der Huntress Sentinels?",
+    "answers": [
+      "Nein",
+      "Ja"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "37",
+      "creepjackEpisode": "55",
+      "questionNr": "2",
+      "questionTimeOnStream": "51m 22s",
+      "jannesCorrect": true
+    }
+  },
+  {
+    "id": "37_55_3",
+    "question": "Bekommt ein Mountain Giant mit Baum Bonusschaden durch die Trueshot Aura?",
+    "answers": [
+      "Ja",
+      "Nein"
+    ],
+    "correctAnswer": "Nein",
+    "meta": {
+      "episode": "37",
+      "creepjackEpisode": "55",
+      "questionNr": "3",
+      "questionTimeOnStream": "53m 50s",
+      "jannesCorrect": false
+    }
+  }
+]
