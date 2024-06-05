@@ -1,4 +1,10 @@
-<script setup></script>
+<script setup lang="ts">
+async function startClassicGame() {
+  await useFetch('/api/game/start')
+  const router = useRouter()
+  router.push('/game')
+}
+</script>
 
 <template>
   <v-container class="d-flex justify-center">
@@ -20,7 +26,7 @@
           </div>
         </div>
         <div class="pt-8">
-          <v-btn color="primary" to="/game">
+          <v-btn color="primary" @click="startClassicGame">
             Spiel starten
           </v-btn>
         </div>

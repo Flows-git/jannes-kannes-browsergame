@@ -35,3 +35,10 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## API
+
+[GET] `/api/game/start` - starts a new game
+[GET] `/api/game` - returns the current question, when a game is started
+[POST] `/api/game` - expects the answer of the current question - params: { answer: 'Answer of the Question' }
+[GET] `/api/game/end` - end a game manually

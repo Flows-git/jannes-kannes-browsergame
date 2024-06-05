@@ -16,9 +16,6 @@ for (const question of questions) {
   const correctAnswer = question.answer.replace('(J)', '').trim()
   // Parse all possible answers to an Array
   const answers = `${question.answer}| ${question.other_answers}`.split('|').map(a => a.replaceAll('(J)', '').trim()).filter(n => n)
-  shuffleAnswers(answers)
-  shuffleAnswers(answers)
-  shuffleAnswers(answers)
 
   parsedQuestions.push({
     id: `${question.episode}_${question.creepjack_episode}_${question.question_nr}`,
