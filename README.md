@@ -2,6 +2,8 @@
 
 > This is the browsergame for the popular game "Jannes Kann es"
 
+Logo created by: <a href="https://www.textstudio.com/">Font generator</a>
+
 ## Setup
 
 Make sure to install the dependencies:

@@ -7,40 +7,38 @@ async function startClassicGame() {
 </script>
 
 <template>
-  <v-container class="d-flex justify-center">
-    <v-card width="600">
+  <v-container style="max-width: 800px;">
+    <v-card>
       <v-card-text class="text-center py-8">
-        <div class="d-flex align-center justify-center">
-          <div>
-            <div class="text-h1 font-weight-bold text-center">
-              <div class="wc3-color-gradient">
-                JANNES
-              </div>
-              <div class="wc3-color-gradient">
-                KANNES
-              </div>
-            </div>
-            <div class="text-end text-h5 align-self-end ml-n8 mt-n4">
-              Das Spiel
-            </div>
-          </div>
-        </div>
-        <div class="pt-8">
+        <GameLogo show-subtitle width="350" />
+        <!-- <div class="pt-8">
           <v-btn color="primary" @click="startClassicGame">
             Spiel starten
           </v-btn>
-        </div>
+        </div> -->
       </v-card-text>
     </v-card>
+    <v-row class="pt-6">
+      <v-col cols="12" md="6">
+        <v-card class="fill-height" @click="startClassicGame">
+          <v-card-title>Schnelles Spiel</v-card-title>
+          <v-card-text>Eine klassische Runde "Jannes Kann es". Es werden drei Fragen aus "Jannes Kann es" gestellt und das Spiel ist gewonnen wenn alle Fragen richtig beantwortet wurden. Es gibt natürlich einen Preis! </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="6">
+        <v-card class="fill-height" disabled>
+          <v-card-title>Endlos</v-card-title>
+          <v-card-text>Es werden alle "Jannes Kann es" Fragen gestellt. Man hat drei Leben und drei Jannes-Joker mit dem man sehen kann was Jannes getippt hat. Das Spiel ist vorbei wenn man keine Leben mehr hat. Das Ergebnis kann in eine Rangliste eingetragen werden.</v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="6">
+        <v-card class="fill-height" disabled>
+          <v-card-title>Eigenes Spiel</v-card-title>
+          <v-card-text>
+            Erstelle ein "Jannes Kann es" Spiel nach deinen Wünschen. Spiele den klassischen oder endlos Modus, bestimme die Anzahl der Fragen oder Fehlversuche...
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
-
-<style>
-.wc3-color-gradient {
-  background: rgb(255,255,255);
-  background-image: linear-gradient(0deg, rgba(255,255,255,1) 25%, rgba(253,227,22,1) 50%, rgba(255,69,0,1) 75%) !important;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-</style>

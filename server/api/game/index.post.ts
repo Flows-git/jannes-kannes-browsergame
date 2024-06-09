@@ -15,8 +15,8 @@ export default defineEventHandler(async (event) => {
   // ends the game after the last question was answered
   if (session.data.currentQuestion > session.data.totalQuestions) {
     await session.update({
+      currentQuestion: session.data.currentQuestion - 1,
       running: false,
-      currentQuestion: undefined,
     })
   }
 
