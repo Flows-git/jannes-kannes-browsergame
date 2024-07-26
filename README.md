@@ -44,3 +44,6 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 [GET] `/api/game` - returns the current question, when a game is started
 [POST] `/api/game` - expects the answer of the current question - params: { answer: 'Answer of the Question' }
 [GET] `/api/game/end` - end a game manually
+
+## Download playlist video names:
+yt-dlp https://www.youtube.com/playlist\?list\=PLfU2RMxoOiSBinJrGNPSJffiJybUEFyYt --skip-download --no-warning --print "%(id)s;\"%(title)s\";%(upload_date)s"

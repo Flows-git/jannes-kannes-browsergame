@@ -1,3 +1,16 @@
+interface TagCsv {
+  name: string
+  icon?: string
+  main_attributes: string
+}
+
+interface GameTag {
+  name: string
+  icon?: string
+  reforgedIcon
+  mainAttributes: Array<string>
+}
+
 interface QuestionCsv {
   id: number
   episode: string
