@@ -9,17 +9,20 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lintfix": "eslint . --fix",
+    "setup": "bun ./scripts/_setup.ts",
     "script:parseQuestionsCSV": "bun ./scripts/parseQuestionsCsvToJson.ts"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
-    "convert-csv-to-json": "^2.47.0",
     "nuxt": "^3.11.2",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.19.0",
+    "@types/decompress": "^4.2.7",
+    "convert-csv-to-json": "^2.47.0",
+    "decompress": "^4.2.1",
     "eslint": "9.3.0",
     "sass": "^1.77.4",
     "vite-plugin-vuetify": "^2.0.3",
