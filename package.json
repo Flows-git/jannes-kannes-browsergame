@@ -9,8 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lintfix": "eslint . --fix",
-    "setup": "bun ./scripts/_setup.ts",
-    "script:parseQuestionsCSV": "bun ./scripts/parseQuestionsCsvToJson.ts"
+    "setup": "bun ./scripts/_setup.ts"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
