@@ -15,6 +15,10 @@ const b2wTheme: ThemeDefinition = {
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FB8C00',
+    undead: '#722F90',
+    orc: '#C51C28',
+    human: '#21A4EB',
+    nightelf: '#05953B',
   },
 }
 

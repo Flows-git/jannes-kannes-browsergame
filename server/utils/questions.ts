@@ -1,52 +1,21 @@
-import questionsJson from '@/public/questions.json'
+import questionsJson from '@/data/questions.json'
 
 const questions: GameQuestion[] = questionsJson
 
-/**
- * Get n random questions for JannesKannes
- */
-export async function getRandomQuestions(count: number) {
-  const selectedQuestions: GameQuestion[] = []
-  while (selectedQuestions.length < count) {
-    const addedQuestionIds: string[] = []
-    const question_id = getRandomInt(0, questions.length - 1)
-    if (!addedQuestionIds.find(q => q === questions[question_id].id)) {
-      const question = questions[question_id]
-      shuffleAnswers(question.answers)
-      selectedQuestions.push(question)
-      addedQuestionIds.push(question.id)
-    }
-  }
-
-  return selectedQuestions
+export function getAllQuestionsCount() {
+  return questions.length
 }
 
-/**
- * Shuffle the answers to have every round another order
- */
-export function shuffleAnswers(array: Array<string>) {
-  let currentIndex = array.length
-
-  // While there remain elements to shuffle...
-  while (currentIndex !== 0) {
-    // Pick a remaining element...
-    const randomIndex = Math.floor(Math.random() * currentIndex)
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ]
+export function getQuestionById(id: string) {
+  const question = questions.find(q => q.id === id)
+  if (!question) {
+    throw createError('question not found')
   }
-
-  return array
+  return question
 }
 
-/**
- * Parse Question to the data the player gets - so no answer obviously :P
- */
-export function parseQuestion(question: GameQuestion): GameQuestionPlayer {
+export function getQuestionByIdForPlayer(id: string) {
+  const question = getQuestionById(id)
   return {
     id: question.id,
     question: question.question,
@@ -60,9 +29,28 @@ export function parseQuestion(question: GameQuestion): GameQuestionPlayer {
   }
 }
 
-// Helper
-function getRandomInt(min: number, max: number) {
-  const minCeiled = Math.ceil(min)
-  const maxFloored = Math.floor(max)
-  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled) // The maximum is inclusive and the minimum is inclusive
+/**
+ * Get n random question Ids for JannesKannes
+ */
+export function getRandomQuestionIds(count: number) {
+  // Get all question Ids
+  const qIds = questions.map(q => q.id)
+
+  // Randomize order of question Ids
+  randomizeArrayOrder(qIds)
+
+  return qIds.slice(0, count)
+}
+
+/**
+ * Randomises the order of the passed array directly in the array
+ * return is not necessary but helpful if you want to assign the array to something
+ */
+export function randomizeArrayOrder(array: Array<any>) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]
+  }
+
+  return array
 }

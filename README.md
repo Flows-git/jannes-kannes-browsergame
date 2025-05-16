@@ -1,20 +1,26 @@
-# Jannes Kann es - Das Spiel
-
-> This is the browsergame for the popular game "Jannes Kann es"
-
+<div style="text-align: center">
+  <img src="./public/logo.png" alt="Jannes Kann es Logo" width="400"/>
+</div>
 Logo created by: <a href="https://www.textstudio.com/">Font generator</a>
 
-## Setup
+---
+# Warcraft 3 Quiz App -  Jannes Kann es
 
-Make sure to install the dependencies:
+> This is a Warcraft 3 quiz game based on the popular section "Jannes Kann Es" from the internet tv show "Creepjack"
+
+## Development
+### Setup
+
+Make sure to install the dependencies and run the setup script:
 
 ```bash
 bun install
-# Update Question JSON
-bun run script:parseQuestionsCSV
+# downloads the wc3 icons
+# parses the questions, tags to json
+bun run setup
 ```
 
-## Development Server
+### Start Development Server
 
 Start the development server on `http://localhost:3000`:
 
@@ -22,7 +28,7 @@ Start the development server on `http://localhost:3000`:
 bun run dev
 ```
 
-## Production
+## Build for Production
 
 Build the application for production:
 
@@ -36,14 +42,44 @@ Locally preview production build:
 bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Check out the [nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
-## API
+## Docs
 
-[GET] `/api/game/start` - starts a new game
-[GET] `/api/game` - returns the current question, when a game is started
-[POST] `/api/game` - expects the answer of the current question - params: { answer: 'Answer of the Question' }
-[GET] `/api/game/end` - end a game manually
+**Server Session**
+Represents the current state of a game
+When data is empty no game is started
+
+contains:
+- the meta data of the current game
+- a list of ids of the selected questions for the game
+- The current question (with randomized answer order)is  KK
+
+### API Endpoints
+
+**[POST]** `/api/game/start`
+Parameter: GameSettings
+Starts a new game with the passed settings.
+Inits the server session and selects random questions to be answered
+
+**[GET]** `/api/game`
+Returns the current question
+(maybe use websockets instead later)
+
+**[POST]** `/api/game`
+Parameter: { answer: string }
+Validates the answer of the current question and updates the session
+
+**[DELETE]** `/api/game`
+Ends a game manually
+
+**[GET]** `/api/game/result`
+Returns the game result when the game is finished
+contains:
+- Correct Questions / QuestionCount
+- Result in percent
+- Game Time
+- Answered questions with result (player answer, correct answer
 
 ## Download playlist video names:
 yt-dlp https://www.youtube.com/playlist\?list\=PLfU2RMxoOiSBinJrGNPSJffiJybUEFyYt --skip-download --no-warning --print "%(id)s;\"%(title)s\";%(upload_date)s"

@@ -1,28 +1,7 @@
 export default defineEventHandler(async (event) => {
-  const answer = await readBody(event)
+  const { checkIfGameIsStarted, answerCurrentQuestion } = await useGame(event)
+  await checkIfGameIsStarted()
 
-  const session = await useGameSession(event)
-  const question = session.data.questions[session.data.currentQuestion - 1]
-
-  // check if answer was correct
-  const answerCorrect = answer.answer === question.correctAnswer
-
-  await session.update({
-    currentQuestion: session.data.currentQuestion + 1,
-    correctAnswers: answerCorrect ? session.data.correctAnswers + 1 : session.data.correctAnswers,
-  })
-
-  // ends the game after the last question was answered
-  if (session.data.currentQuestion > session.data.totalQuestions) {
-    await session.update({
-      currentQuestion: session.data.currentQuestion - 1,
-      running: false,
-    })
-  }
-
-  // returns if given answer was correct and the correct answer
-  return {
-    correct: answerCorrect,
-    corretAnswer: question.correctAnswer,
-  }
+  const body = await readBody<{ answer: string }>(event)
+  return answerCurrentQuestion(body.answer)
 })

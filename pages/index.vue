@@ -1,6 +1,6 @@
 <script setup lang="ts">
 async function startClassicGame() {
-  await useFetch('/api/game/start')
+  await useFetch('/api/game/start', { method: 'POST' }) // , body: { questionCount: 10 }
   const router = useRouter()
   router.push('/game')
 }

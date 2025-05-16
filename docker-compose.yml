@@ -1,0 +1,50 @@
+services:
+  frontend:
+    image: oven/bun
+    container_name: 'janneskannes-frontend'
+    working_dir: /usr/app/frontend
+    ports:
+      - 3000:3000
+    command: sh -c "bun install && bun dev --host"
+    environment:
+      - HOST=0.0.0.0
+      - MONGO_URL=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@janneskannes-db:27017
+      - MONGO_DATA_DB=${MONGO_DATA_DB}
+    networks:
+      - app-network
+    volumes:
+      - ./:/usr/app/frontend
+      - node_modules-frontend:/usr/app/frontend/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mongo
+    container_name: 'janneskannes-db'
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+      - mongodb-config:/data/configdb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_DATA_DB}
+    networks:
+      - app-network
+    healthcheck: 
+      test: echo 'db.runCommand({find:"app_db_name.devUser"}).ok' | mongosh --authenticationDatabase admin --host localhost -u root -p root admin --quiet | grep -q 1
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+networks:
+  app-network:
+
+volumes:
+  mongodb-data:
+  mongodb-config:
+  node_modules-frontend:

@@ -24,5 +24,10 @@ export default defineNuxtConfig({
         transformAssetUrls,
       },
     },
+    server: {
+      hmr: {
+        host: '0.0.0.0',
+      },
+    },
   },
 })

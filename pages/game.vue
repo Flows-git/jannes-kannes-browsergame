@@ -6,7 +6,7 @@ if (error.value) {
   router.replace('/')
 }
 
-const answer = ref()
+const answer = ref<number>()
 const answerResult = ref()
 
 async function sendAnswer() {
@@ -26,11 +26,11 @@ function nextQuestion() {
 }
 
 function endGame() {
-  return $fetch('/api/game/end')
+  return $fetch('/api/game', { method: 'DELETE' })
 }
 
 function startGame() {
-  return $fetch('/api/game/start')
+  return $fetch('/api/game/start', { method: 'POST' })
 }
 
 async function restartGame() {

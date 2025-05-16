@@ -1,10 +1,9 @@
-import type { Tag } from '~/public/tags'
-import tagLibrary from '~/public/tags.json'
+import tagLibrary from '~/data/tags.json'
 
 export default defineEventHandler(async (event) => {
   const parentTag = getQuery(event)?.tag
 
-  let tags: Array<Tag> = []
+  let tags: Array<GameTag> = []
   if (parentTag) {
     tags = tagLibrary.filter(t => t.mainAttributes?.find(mainTag => mainTag === parentTag))
   }

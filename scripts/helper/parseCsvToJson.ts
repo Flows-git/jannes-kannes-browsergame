@@ -12,7 +12,7 @@ export async function parseCsvToJson<CsvT = Record<string, string | number>, Tra
     parsedRows.push(transformer(row))
   }
 
-  fs.writeFile(path.join(process.cwd(), 'public', `${filename}.json`), JSON.stringify(parsedRows), (err) => {
+  fs.writeFile(path.join(process.cwd(), 'data', `${filename}.json`), JSON.stringify(parsedRows), (err) => {
     if (err) {
       console.error(err)
     }

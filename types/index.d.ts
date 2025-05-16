@@ -7,7 +7,7 @@ interface TagCsv {
 interface GameTag {
   name: string
   icon?: string
-  reforgedIcon
+  reforgedIcon?: string
   mainAttributes: Array<string>
 }
 
@@ -51,9 +51,10 @@ interface GameQuestion {
 }
 
 interface GameSession {
-  questions: Array<GameQuestion>
+  currentQuestion: GameQuestion
+  questions: Array<string>
   running: boolean
-  currentQuestion: number
+  currentQuestionNr: number
   totalQuestions: number
   correctAnswers: number
 }
@@ -77,4 +78,33 @@ interface GameStartParamsEndless extends GameStartParamsBase {
   type: 'endless'
   maxMistakes: number // -1 === endless mistakes
 
+}
+
+interface GameSettings {
+  // mode?: 'classic' | 'endless'
+  questionCount?: number
+  // maxFailtures?: number
+  // jokerCount?: number
+}
+
+interface GameMode {
+  validateGameSettings: (settings: GameSettings) => boolean
+  createGameSessionData: (settings: GameSettings) => GameSession
+}
+
+interface GameResponseMeta {
+  running: boolean
+  currentQuestion: number
+  totalQuestions: number
+  correctAnswers: number
+}
+
+interface GetQuestionRespone {
+  question: GameQuestionPlayer
+  meta: GameResponseMeta
+}
+
+interface AnswerQuestionResponse {
+  correct: boolean
+  corretAnswer: string
 }

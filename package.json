@@ -2,29 +2,36 @@
   "name": "nuxt-app",
   "type": "module",
   "private": true,
+  "module": "index.ts",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "lint": "eslint .",
     "lintfix": "eslint . --fix",
     "setup": "bun ./scripts/_setup.ts"
   },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
   "dependencies": {
     "@mdi/font": "^7.4.47",
-    "nuxt": "^3.11.2",
-    "vue": "^3.4.27",
-    "vue-router": "^4.3.2"
+    "nuxt": "^3.17.3",
+    "vue": "latest",
+    "vue-router": "latest"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.19.0",
+    "@antfu/eslint-config": "^4.13.1",
+    "@types/bun": "latest",
     "@types/decompress": "^4.2.7",
-    "convert-csv-to-json": "^2.47.0",
+    "convert-csv-to-json": "^3.4.0",
     "decompress": "^4.2.1",
-    "eslint": "9.3.0",
-    "sass": "^1.77.4",
-    "vite-plugin-vuetify": "^2.0.3",
-    "vuetify": "^3.6.7"
+    "eslint": "9.26.0",
+    "sass": "^1.89.0",
+    "typescript": "~5.8.3",
+    "vite-plugin-vuetify": "^2.1.1",
+    "vuetify": "^3.8.5"
   }
 }
