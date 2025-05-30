@@ -85,7 +85,7 @@ async function restartGame() {
       <!-- Action Bar -->
       <v-card-actions v-if="gameRunning || !showResult" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
         <div v-if="gameMeta.totalLives" style="width: 150px;">
-          <HealthBar v-if="gameMeta.totalLives" :total-lives="3" :remaining-lives="3" />
+          <HealthBar v-if="gameMeta.totalLives" :total-lives="gameMeta.totalLives" :remaining-lives="gameMeta.remainingLives as number" />
           <!-- <ManaBar :total-joker="3" :remaining-joker="2" /> -->
         </div>
         <v-spacer v-else />

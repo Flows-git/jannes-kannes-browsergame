@@ -14,7 +14,16 @@ export async function useGame(event: H3Event) {
    * It's needed for basically all interactions with the game
    */
   const session = await useSession<GameSession>(event, {
-    name: 'JANNES KANN ES',
+    name: 'jannes-kann-es-game',
+    password: 'superSuperSecretSessionPassword!', // TODO: add password to .env
+    cookie: {
+      secure: false,
+    },
+    maxAge: 60 * 60 * 24 * 7, // 7 days
+  })
+
+  const questions = await useSession<{ questions: Array<string | number> }>(event, {
+    name: 'jannes-kann-es-questions',
     password: 'superSuperSecretSessionPassword!', // TODO: add password to .env
     cookie: {
       secure: false,
@@ -77,7 +86,7 @@ export async function useGame(event: H3Event) {
    * updates the current question in the question
    */
   async function updateCurrentQuestion() {
-    const questionId = data.questions[data.currentQuestionNr - 1]
+    const questionId = questions.data.questions[data.currentQuestionNr - 1]
     const question = getQuestionById(questionId)
     randomizeArrayOrder(question.answers)
     await session.update({
@@ -92,9 +101,9 @@ export async function useGame(event: H3Event) {
   async function startGame(settings: GameSettings) {
     const questionCount = settings?.questionCount ?? 3
     const questionIds = getRandomQuestionIds(questionCount)
+    await questions.update({ questions: questionIds })
     await session.update({
       running: true,
-      questions: questionIds,
       answeredQuestions: 0,
       currentQuestionNr: 1,
       totalQuestions: questionCount,

@@ -8,9 +8,9 @@ export async function parseQuestionsCsvToJson() {
     const correctAnswer = question.answer.replace('(J)', '').trim()
     // Parse all possible answers to an Array
     const answers = `${question.answer}| ${question.other_answers}`.split('|').map(a => a.replaceAll('(J)', '').trim()).filter(n => n)
-
     return {
-      id: `${question.episode}_${question.creepjack_episode}_${question.question_nr}`,
+      // id: `${question.episode}_${question.creepjack_episode}_${question.question_nr}`,
+      id: question.id,
       question: question.question,
       answers,
       correctAnswer,

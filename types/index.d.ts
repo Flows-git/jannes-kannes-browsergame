@@ -24,7 +24,7 @@ interface QuestionCsv {
 }
 
 interface GameQuestionPlayer {
-  id: string // pattern: episode_creepjackEpisode_questionNr
+  id: string | number // pattern: episode_creepjackEpisode_questionNr
   meta: {
     episode: string
     creepjackEpisode: string
@@ -37,7 +37,7 @@ interface GameQuestionPlayer {
 }
 
 interface GameQuestion {
-  id: string // pattern: episode_creepjackEpisode_questionNr
+  id: string | number // pattern: episode_creepjackEpisode_questionNr
   meta: {
     episode: string
     creepjackEpisode: string
@@ -68,25 +68,12 @@ interface GameSession {
  * params to start a game
  * EP: /api/game/start
  */
-type GameStartParams = GameStartParamsClassic | GameStartParamsEndless
-
-interface GameStartParamsBase {
-  // category: string
-}
-
-interface GameStartParamsClassic extends GameStartParamsBase {
-  type: 'classic'
-  questionsCount: number
-}
-
-interface GameStartParamsEndless extends GameStartParamsBase {
-  type: 'endless'
-  maxMistakes: number // -1 === endless mistakes
-
+interface GameStartParams {
+  mode: 'classic' | 'endless' | 'endless-casual'
+  settings?: GameSettings
 }
 
 interface GameSettings {
-  // mode?: 'classic' | 'endless'
   questionCount?: number
   liveCount?: number
   // maxFailtures?: number
