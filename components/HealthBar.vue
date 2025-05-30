@@ -11,27 +11,9 @@ const colors = [
   { percent: 0, color: 'error' },
 ]
 
-const barColor = computed(() => colors.find(r => livesPercentage.value >= r.percent)?.color)
+const barColor = computed(() => colors.find(r => livesPercentage.value >= r.percent)?.color as string)
 </script>
 
 <template>
-  <div class="health-bar rounded">
-    <v-progress-linear height="20" :color="barColor" :model-value="remainingLives" :max="totalLives" class="rounded" style="">
-      <div style="text-shadow: 1px 1px 0px #000000;">
-        {{ remainingLives }} / {{ totalLives }}
-      </div>
-    </v-progress-linear>
-  </div>
+  <StatsBar :color="barColor" :remaining="remainingLives" :total="totalLives" suffix="HP" />
 </template>
-
-<style lang="scss" scoped>
-.health-bar {
-  width: 100px;
-  border: 1px solid #000;
-
-  &,
-  :deep(.v-progress-linear__determinate) {
-    box-shadow: inset 1px -4px 3px -3px #000000, inset 1px 4px 3px -3px #FFFFFF;
-  }
-}
-</style>
