@@ -27,20 +27,30 @@ export async function useGame(event: H3Event) {
   /**
    * Checks if a game is started to make sure EPs which need a running game throws the same error
    */
-  async function checkIfGameIsStarted() {
+  function isGameStarted() {
     // When data is empty no game is started
     if (Object.keys(data).length === 0) {
       throw createError({ status: 416, message: 'No game started' })
     }
-    return data
+    return true
+  }
+
+  function isGameRunning() {
+    isGameStarted()
+    if (!data.running) {
+      throw createError({ status: 416, message: 'game ended' })
+    }
   }
 
   function getGameMeta(): GameResponseMeta {
     return {
       running: data.running,
-      currentQuestion: data.currentQuestionNr,
       totalQuestions: data.totalQuestions,
+      currentQuestion: data.currentQuestionNr,
+      answeredQuestions: data.answeredQuestions,
       correctAnswers: data.correctAnswers,
+      totalLives: data.totalLives,
+      remainingLives: data.remainingLives,
     }
   }
 
@@ -84,9 +94,12 @@ export async function useGame(event: H3Event) {
     await session.update({
       running: true,
       questions: questionIds,
+      answeredQuestions: 0,
       currentQuestionNr: 1,
       totalQuestions: questionCount,
       correctAnswers: 0,
+      totalLives: settings?.liveCount,
+      remainingLives: settings?.liveCount,
     })
     await updateCurrentQuestion()
   }
@@ -100,14 +113,17 @@ export async function useGame(event: H3Event) {
     // check if answer was correct and updates the session accordingly
     const answerCorrect = answer === question.correctAnswer
     await session.update({
+      answeredQuestions: session.data.answeredQuestions + 1,
       currentQuestionNr: session.data.currentQuestionNr + 1,
       correctAnswers: answerCorrect ? session.data.correctAnswers + 1 : session.data.correctAnswers,
+      remainingLives: (!answerCorrect && typeof session.data.remainingLives === 'number') ? session.data.remainingLives - 1 : session.data.remainingLives,
     })
 
     // ends the game after the last question was answered
-    if (session.data.currentQuestionNr > session.data.totalQuestions) {
+    if (session.data.remainingLives === 0 || session.data.currentQuestionNr > session.data.totalQuestions) {
       await session.update({
-        currentQuestionNr: session.data.currentQuestionNr - 1,
+        answeredQuestions: session.data.totalQuestions,
+        currentQuestionNr: session.data.totalQuestions,
         running: false,
       })
     }
@@ -131,7 +147,8 @@ export async function useGame(event: H3Event) {
   }
 
   return {
-    checkIfGameIsStarted,
+    isGameStarted,
+    isGameRunning,
     getQuestionForPlayer,
     getGameMeta,
     startGame,

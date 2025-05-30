@@ -9,6 +9,7 @@ interface GameTag {
   icon?: string
   reforgedIcon?: string
   mainAttributes: Array<string>
+  children?: Array<GameTag>
 }
 
 interface QuestionCsv {
@@ -55,8 +56,11 @@ interface GameSession {
   questions: Array<string>
   running: boolean
   currentQuestionNr: number
+  answeredQuestions: number
   totalQuestions: number
   correctAnswers: number
+  totalLives?: number
+  remainingLives?: number
 }
 
 /**
@@ -83,6 +87,7 @@ interface GameStartParamsEndless extends GameStartParamsBase {
 interface GameSettings {
   // mode?: 'classic' | 'endless'
   questionCount?: number
+  liveCount?: number
   // maxFailtures?: number
   // jokerCount?: number
 }
@@ -95,8 +100,11 @@ interface GameMode {
 interface GameResponseMeta {
   running: boolean
   currentQuestion: number
+  answeredQuestions: number
   totalQuestions: number
   correctAnswers: number
+  totalLives?: number
+  remainingLives?: number
 }
 
 interface GetQuestionRespone {
