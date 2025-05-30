@@ -32,6 +32,7 @@ interface GameQuestionPlayer {
     questionTimeOnStream: string
   }
   question: string
+  questionNr: number
   answers: Array<string>
 }
 

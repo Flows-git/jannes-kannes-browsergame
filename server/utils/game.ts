@@ -61,6 +61,7 @@ export async function useGame(event: H3Event) {
     const question = data.currentQuestion
     return {
       id: question.id,
+      questionNr: data.currentQuestionNr,
       question: question.question,
       answers: question.answers,
       meta: {
@@ -122,8 +123,7 @@ export async function useGame(event: H3Event) {
     // ends the game after the last question was answered
     if (session.data.remainingLives === 0 || session.data.currentQuestionNr > session.data.totalQuestions) {
       await session.update({
-        answeredQuestions: session.data.totalQuestions,
-        currentQuestionNr: session.data.totalQuestions,
+        currentQuestionNr: session.data.currentQuestionNr - 1,
         running: false,
       })
     }

@@ -1,12 +1,24 @@
 <script setup lang="ts">
-const { data, refresh, error } = await useFetch('/api/game')
+const gameMeta = ref<GameResponseMeta>()
+const gameRunning = computed(() => gameMeta.value?.running)
+const showResult = ref(false)
+
+const { data, refresh, error, pending } = await useFetch<GetQuestionRespone>('/api/game', {
+  server: false,
+  onResponse: ({ response }) => {
+    gameMeta.value = response._data.meta
+  },
+})
 
 if (error.value) {
   const router = useRouter()
   router.replace('/')
 }
+if (!data.value?.meta.running) {
+  showResult.value = true
+}
 
-const answer = ref<number>()
+const answer = ref<string>()
 const answerResult = ref()
 
 async function sendAnswer() {
@@ -16,13 +28,18 @@ async function sendAnswer() {
       answer: answer.value,
     },
   })
-  answerResult.value = result
+  answerResult.value = result.result
+  gameMeta.value = result.meta as GameResponseMeta
 }
 
-function nextQuestion() {
+async function nextQuestion() {
   answerResult.value = undefined
   answer.value = undefined
   refresh()
+}
+
+async function getResult() {
+  showResult.value = true
 }
 
 function endGame() {
@@ -30,63 +47,68 @@ function endGame() {
 }
 
 function startGame() {
-  return $fetch('/api/game/start', { method: 'POST' })
+  return $fetch('/api/game/start', { method: 'POST', body: { questionCount: gameMeta.value?.totalQuestions, liveCount: gameMeta.value?.totalLives } })
 }
 
 async function restartGame() {
   await endGame()
   await startGame()
-  refresh()
+  showResult.value = false
+  nextQuestion()
 }
 </script>
 
 <template>
-  <v-container v-if="data" class="fill-height jk-game--container">
+  <div v-if="!data && pending" />
+  <v-container v-if="data && gameMeta" class="fill-height jk-game--container">
     <v-card width="800">
       <!-- Header -->
       <v-card-text class="jk-game--header d-flex justify-center bg-surface-variant">
         <GameLogo />
         <v-chip class="jk-game--questions-chip" size="x-large">
-          {{ data.meta?.currentQuestion }} / {{ data.meta?.totalQuestions }}
+          {{ data?.question.questionNr }} / {{ gameMeta?.totalQuestions }}
         </v-chip>
       </v-card-text>
-      <v-progress-linear
-        color="primary" :model-value="data.meta?.running ? data.meta?.currentQuestion - 1 : data.meta?.currentQuestion"
-        :buffer-value="data.meta?.currentQuestion" :max="data.meta.totalQuestions"
-      />
+      <v-progress-linear color="primary" :model-value="gameMeta?.answeredQuestions" :buffer-value="gameMeta?.currentQuestion" :max="gameMeta?.totalQuestions" />
 
       <!-- Frage -->
-      <v-card-text>
-        <GameQuestion
-          v-if="data.meta?.running" v-model="answer" :current-question-nr="data.meta.currentQuestion" :question="data.question"
-          :correct-answer="answerResult?.corretAnswer"
-        />
-        <GameResultScreen v-else :correct-answers="data.meta.correctAnswers" :total-questions="data.meta.totalQuestions" @do-restart="restartGame" />
+      <v-card-text style="position: relative;">
+        <template v-if="!showResult">
+          <GameQuestion
+            v-model="answer" :current-question-nr="data.question.questionNr" :question="data.question"
+            :correct-answer="answerResult?.corretAnswer"
+          />
+          <HeroFallenOverlay v-if="gameMeta.remainingLives === 0" @show-results="getResult" />
+        </template>
+        <GameResultScreen v-else :correct-answers="gameMeta.correctAnswers" :total-questions="gameMeta.totalQuestions" @do-restart="restartGame" />
       </v-card-text>
 
       <!-- Action Bar -->
-      <v-card-actions v-if="data.meta?.running" class="bg-surface-variant d-flex justify-center justify-md-end">
-        <v-btn v-if="!answerResult && data.meta.running" size="large" :disabled="!answer && answer !== 0" color="primary" variant="outlined" @click="sendAnswer">
-          Antworten absenden
-        </v-btn>
-        <v-btn v-if="data.meta.currentQuestion < data.meta.totalQuestions && answerResult" size="large" color="primary" variant="outlined" @click="nextQuestion">
-          Nächste Frage
-        </v-btn>
-        <v-btn
-          v-if="data.meta.currentQuestion === data.meta.totalQuestions && answerResult" size="large" color="primary" variant="outlined"
-          @click="nextQuestion"
-        >
-          Resultat anzeigen
-        </v-btn>
+      <v-card-actions v-if="gameRunning || !showResult" class="bg-surface-variant d-flex justify-space-between">
+        <HealthBar v-if="gameMeta.totalLives" :total-lives="gameMeta.totalLives" :remaining-lives="gameMeta.remainingLives as number" />
+        <div>
+          <v-btn v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" @click="sendAnswer">
+            Antworten absenden
+          </v-btn>
+          <v-btn
+            v-if="gameRunning && answerResult && gameMeta.answeredQuestions < gameMeta.totalQuestions" size="large" color="primary" variant="outlined"
+            @click="nextQuestion"
+          >
+            Nächste Frage
+          </v-btn>
+          <!-- <v-btn v-if="!gameRunning && answerResult" size="large" color="primary" variant="outlined" @click="getResult">
+            Resultat anzeigen
+          </v-btn> -->
+        </div>
       </v-card-actions>
     </v-card>
   </v-container>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .jk-game {
   &--container {
-  max-width: 800px;
+    max-width: 800px;
   }
 
   &--header {
@@ -99,6 +121,15 @@ async function restartGame() {
     top: 50%;
     transform: translateY(-50%);
   }
+}
 
+.health-bar {
+  width: 100px;
+  border: 1px solid #000;
+
+  &,
+  :deep(.v-progress-linear__determinate) {
+    box-shadow: inset 1px -4px 3px -3px #000000, inset 1px 4px 3px -3px #FFFFFF;
+  }
 }
 </style>
