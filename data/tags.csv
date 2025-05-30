@@ -20,7 +20,7 @@ Item;BTNPickUpItem.png;
 Gather;BTNGatherGold.png;Worker,Ability
 Repair;BTNRepair.png;Worker,Ability
 Backpack;BTNPackBeast.png;Spell
-Undead;;
+Undead;undead.svg;
 Death Knight;BTNHeroDeathKnight.png;Undead,Hero
 Death Coil;BTNDeathCoil.png;Death Knight,Spell
 Death Pact;BTNDeathPact.png;Death Knight,Spell
@@ -85,7 +85,7 @@ Slaughterhouse;BTNSlaughterHouse.png;Undead Building,Production Building
 Boneyard;BTNBoneYard.png;Undead Building,Production Building
 Nerubian Tower;BTNFrostTower.png;Undead Building,Tower,Ziggurat
 Spirit Tower;BTNZigguratUpgrade.png ;Undead Building,Tower,Ziggurat
-Orc;;
+Orc;orc.svg;
 Blademaster;BTNHeroBlademaster.png;Orc,Hero
 Wind Walk;BTNWindWalkOn.png;Blademaster,Spell
 Mirror Image;BTNMirrorImage.png;Blademaster,Spell
@@ -150,7 +150,7 @@ Barracks;BTNBarracks.png;Orc Building,Production Building
 Spirit Lodge;BTNSpiritLodge;Orc Building,Production Building
 Beastiary;BTNBeastiary.png;Orc Building,Production Building
 Tauren Totem;BTNTaurenTotem.png;Orc Building,Production Building
-Night Elf;;
+Night Elf;nightelf.svg;
 Demon Hunter;BTNHeroDemonHunter.png;Night Elf,Hero
 Mana Burn;BTNManaBurn.png;Demon Hunter,Spell
 Immolation;BTNImmolationOn.png;Demon Hunter,Spell
@@ -218,7 +218,7 @@ Ancient of War;BTNAncientOfTheEarth;Ancient,Production Building
 Ancient of Wind;BTNAncientOfTheMoon;Ancient,Production Building
 Ancient of Lore;BTNAncientOfLore;Ancient,Production Building
 Chimaera Roost;BTNChimaeraRoost.png;Night Elf Building,Production Building
-Human;;
+Human;human.svg;
 Archmage;BTNHeroArchMage;Human,Hero
 Blizzard;BTNBlizzard.png;Archmage,Spell
 Water Elemental;BTNSummonWaterElemental.png;Archmage,Summon
