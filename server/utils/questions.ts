@@ -6,7 +6,7 @@ export function getAllQuestionsCount() {
   return questions.length
 }
 
-export function getQuestionById(id: string) {
+export function getQuestionById(id: string | number) {
   const question = questions.find(q => q.id === id)
   if (!question) {
     throw createError('question not found')

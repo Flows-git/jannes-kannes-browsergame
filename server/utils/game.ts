@@ -60,6 +60,7 @@ export async function useGame(event: H3Event) {
       correctAnswers: data.correctAnswers,
       totalLives: data.totalLives,
       remainingLives: data.remainingLives,
+      gameTime: data.gameTime,
     }
   }
 
@@ -110,6 +111,7 @@ export async function useGame(event: H3Event) {
       correctAnswers: 0,
       totalLives: settings?.liveCount,
       remainingLives: settings?.liveCount,
+      startTime: new Date().getTime(),
     })
     await updateCurrentQuestion()
   }
@@ -130,10 +132,13 @@ export async function useGame(event: H3Event) {
     })
 
     // ends the game after the last question was answered
-    if (session.data.remainingLives === 0 || session.data.currentQuestionNr > session.data.totalQuestions) {
+    if (session.data.running && (session.data.remainingLives === 0 || session.data.currentQuestionNr > session.data.totalQuestions)) {
+      const endTime = new Date().getTime()
       await session.update({
         currentQuestionNr: session.data.currentQuestionNr - 1,
         running: false,
+        endTime,
+        gameTime: getGameTime(endTime),
       })
     }
     else {
@@ -153,6 +158,17 @@ export async function useGame(event: H3Event) {
    */
   function endGame() {
     session.clear()
+  }
+
+  function getGameTime(endTime: number) {
+    const diffMs = endTime - data.startTime // Difference in ms
+    const totalSeconds = Math.floor(diffMs / 1000)
+
+    const hours = Math.floor(totalSeconds / 3600)
+    const minutes = Math.floor((totalSeconds % 3600) / 60)
+    const seconds = totalSeconds % 60
+
+    return `${hours}h ${minutes}m ${seconds}s`
   }
 
   return {

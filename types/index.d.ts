@@ -62,6 +62,9 @@ interface GameSession {
   correctAnswers: number
   totalLives?: number
   remainingLives?: number
+  startTime: number
+  endTime?: number
+  gameTime?: string
 }
 
 /**
@@ -93,6 +96,7 @@ interface GameResponseMeta {
   correctAnswers: number
   totalLives?: number
   remainingLives?: number
+  gameTime?: string
 }
 
 interface GetQuestionRespone {
