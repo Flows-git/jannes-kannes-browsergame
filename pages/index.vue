@@ -21,13 +21,13 @@ async function startGame(mode: string) {
         </v-card>
       </v-col>
       <v-col cols="12" md="6">
-        <v-card class="fill-height" @click="startGame('endless-casual')">
+        <v-card class="fill-height" @click="startGame('endless')">
           <v-card-title>Endlos Casual</v-card-title>
           <v-card-text>Es werden alle "Jannes Kann es" Fragen gestellt.</v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" md="6">
-        <v-card class="fill-height" @click="startGame('casual')">
+        <v-card class="fill-height" @click="startGame('ranked')">
           <v-card-title>Endlos Ranked</v-card-title>
           <v-card-text>Es werden alle "Jannes Kann es" Fragen gestellt. Man hat drei Leben und drei Jannes-Joker mit dem man sehen kann was Jannes getippt hat. Das Spiel ist vorbei wenn man keine Leben mehr hat. Das Ergebnis kann in eine Rangliste eingetragen werden.</v-card-text>
         </v-card>

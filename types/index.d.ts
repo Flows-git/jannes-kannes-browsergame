@@ -72,7 +72,7 @@ interface GameSession {
  * EP: /api/game/start
  */
 interface GameStartParams {
-  mode: 'classic' | 'endless' | 'endless-casual'
+  mode: 'classic' | 'ranked' | 'endless'
   settings?: GameSettings
 }
 
