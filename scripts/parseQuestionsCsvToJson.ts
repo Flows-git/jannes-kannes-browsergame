@@ -1,7 +1,7 @@
 import { parseCsvToJson } from './helper/parseCsvToJson'
 
 export async function parseQuestionsCsvToJson() {
-  parseCsvToJson<QuestionCsv, GameQuestion>('questions', (question) => {
+  parseCsvToJson<QuestionCsv, GameQuestionServer>('questions', (question) => {
   // Check is Jannes has answered correctly
     const jannesCorrect = question.answer.includes('(J)')
     // Save correct answer

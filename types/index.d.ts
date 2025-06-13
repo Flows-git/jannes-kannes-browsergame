@@ -23,8 +23,8 @@ interface QuestionCsv {
   other_answers: string
 }
 
-interface GameQuestionPlayer {
-  id: string | number // pattern: episode_creepjackEpisode_questionNr
+interface GameQuestionClient {
+  id: string | number
   meta: {
     episode: string
     creepjackEpisode: string
@@ -36,8 +36,8 @@ interface GameQuestionPlayer {
   answers: Array<string>
 }
 
-interface GameQuestion {
-  id: string | number // pattern: episode_creepjackEpisode_questionNr
+interface GameQuestionServer {
+  id: string | number
   meta: {
     episode: string
     creepjackEpisode: string
@@ -53,7 +53,7 @@ interface GameQuestion {
 }
 
 interface GameSession {
-  currentQuestion: GameQuestion
+  currentQuestion: GameQuestionServer
   questions: Array<string>
   running: boolean
   currentQuestionNr: number
@@ -67,28 +67,24 @@ interface GameSession {
   gameTime?: string
 }
 
+type GameMode = 'classic' | 'ranked' | 'endless'
+
 /**
  * params to start a game
  * EP: /api/game/start
  */
 interface GameStartParams {
-  mode: 'classic' | 'ranked' | 'endless'
+  mode: GameMode
   settings?: GameSettings
 }
 
 interface GameSettings {
   questionCount?: number
   liveCount?: number
-  // maxFailtures?: number
   // jokerCount?: number
 }
 
-interface GameMode {
-  validateGameSettings: (settings: GameSettings) => boolean
-  createGameSessionData: (settings: GameSettings) => GameSession
-}
-
-interface GameResponseMeta {
+interface GameMeta {
   running: boolean
   currentQuestion: number
   answeredQuestions: number
@@ -100,8 +96,8 @@ interface GameResponseMeta {
 }
 
 interface GetQuestionRespone {
-  question: GameQuestionPlayer
-  meta: GameResponseMeta
+  question: GameQuestionClient
+  meta: GameMeta
 }
 
 interface AnswerQuestionResponse {

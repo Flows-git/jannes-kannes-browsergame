@@ -1,6 +1,6 @@
 import questionsJson from '@/data/questions.json'
 
-const questions: GameQuestion[] = questionsJson
+const questions: GameQuestionServer[] = questionsJson
 
 export function getAllQuestionsCount() {
   return questions.length

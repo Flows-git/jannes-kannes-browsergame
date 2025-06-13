@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
   const { isGameStarted, endGame } = await useGame(event)
   await isGameStarted()
-  endGame()
+  await endGame()
   return true
 })

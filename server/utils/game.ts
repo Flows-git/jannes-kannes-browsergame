@@ -51,7 +51,7 @@ export async function useGame(event: H3Event) {
     }
   }
 
-  function getGameMeta(): GameResponseMeta {
+  function getGameMeta(): GameMeta {
     return {
       running: data.running,
       totalQuestions: data.totalQuestions,
@@ -67,7 +67,7 @@ export async function useGame(event: H3Event) {
   /**
    * returns the question parsed for the player (without answer) and with the necessary meta for the frontend
    */
-  function getQuestionForPlayer(): GameQuestionPlayer {
+  function getQuestionForPlayer(): GameQuestionClient {
     const question = data.currentQuestion
     return {
       id: question.id,
@@ -133,13 +133,10 @@ export async function useGame(event: H3Event) {
 
     // ends the game after the last question was answered
     if (session.data.running && (session.data.remainingLives === 0 || session.data.currentQuestionNr > session.data.totalQuestions)) {
-      const endTime = new Date().getTime()
       await session.update({
         currentQuestionNr: session.data.currentQuestionNr - 1,
-        running: false,
-        endTime,
-        gameTime: getGameTime(endTime),
       })
+      await endGame()
     }
     else {
       // updates the current question in the session
@@ -156,19 +153,33 @@ export async function useGame(event: H3Event) {
   /**
    * Ends the game manually to enable to cancel a running game
    */
-  function endGame() {
-    session.clear()
+  async function endGame() {
+    // session.clear()
+    const endTime = new Date().getTime()
+    await session.update({
+      running: false,
+      endTime,
+      gameTime: getGameTime(endTime),
+    })
   }
 
   function getGameTime(endTime: number) {
     const diffMs = endTime - data.startTime // Difference in ms
     const totalSeconds = Math.floor(diffMs / 1000)
+    let time = ``
 
     const hours = Math.floor(totalSeconds / 3600)
+    if (hours > 0) {
+      time += `${hours}h `
+    }
     const minutes = Math.floor((totalSeconds % 3600) / 60)
+    if (hours > 0) {
+      time += `${minutes}m `
+    }
     const seconds = totalSeconds % 60
+    time += `${seconds}s `
 
-    return `${hours}h ${minutes}m ${seconds}s`
+    return time
   }
 
   return {
