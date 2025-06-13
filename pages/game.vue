@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const gameMeta = ref<GameResponseMeta>()
+const gameMeta = ref<GameMeta>()
 const gameRunning = computed(() => gameMeta.value?.running)
 const showResult = ref(false)
+const router = useRouter()
 
 const { data, refresh, pending } = await useFetch<GetQuestionRespone>('/api/game', {
   server: false,
@@ -12,13 +13,14 @@ const { data, refresh, pending } = await useFetch<GetQuestionRespone>('/api/game
     }
   },
   onResponseError: () => {
-    const router = useRouter()
     router.replace('/')
   },
 })
 
 const answer = ref<string>()
 const answerResult = ref()
+
+const showEndScreen = ref(false)
 
 async function sendAnswer() {
   const result = await $fetch('/api/game', {
@@ -28,7 +30,7 @@ async function sendAnswer() {
     },
   })
   answerResult.value = result.result
-  gameMeta.value = result.meta as GameResponseMeta
+  gameMeta.value = result.meta as GameMeta
 }
 
 async function nextQuestion() {
@@ -40,6 +42,10 @@ async function nextQuestion() {
 async function getResult() {
   showResult.value = true
 }
+async function cancelGame() {
+  showResult.value = true
+  await endGame()
+}
 
 function endGame() {
   return $fetch('/api/game', { method: 'DELETE' })
@@ -50,7 +56,6 @@ function startGame() {
 }
 
 async function restartGame() {
-  await endGame()
   await startGame()
   showResult.value = false
   nextQuestion()
@@ -63,6 +68,19 @@ async function restartGame() {
     <v-card width="800">
       <!-- Header -->
       <v-card-text class="jk-game--header d-flex justify-center bg-surface-variant">
+        <v-menu icon="mdi-dots-vertical">
+          <template #activator="{ props }">
+            <v-btn icon="mdi-dots-vertical" variant="text" v-bind="props" style="position: absolute; top: 50%; left: 16px; transform: translateY(-50%);" />
+          </template>
+          <v-list>
+            <v-list-item @click="showEndScreen = true">
+              <template #prepend>
+                <warcraft-icon src="BTNCancel.png" height="32px" width="32px" class="mr-1" />
+              </template>
+              Spiel Beenden
+            </v-list-item>
+          </v-list>
+        </v-menu>
         <GameLogo />
         <v-chip class="jk-game--questions-chip" size="x-large">
           {{ data?.question.questionNr }} / {{ gameMeta?.totalQuestions }}
@@ -83,7 +101,7 @@ async function restartGame() {
       </v-card-text>
 
       <!-- Action Bar -->
-      <v-card-actions v-if="gameRunning || !showResult" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
+      <v-card-actions v-if="gameRunning && !showResult" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
         <div v-if="gameMeta.totalLives" style="width: 150px;">
           <HealthBar v-if="gameMeta.totalLives" :total-lives="gameMeta.totalLives" :remaining-lives="gameMeta.remainingLives as number" />
           <!-- <ManaBar :total-joker="3" :remaining-joker="2" /> -->
@@ -105,6 +123,7 @@ async function restartGame() {
         </div>
       </v-card-actions>
     </v-card>
+    <GameCancelDialog v-model="showEndScreen" @cancel-game="cancelGame()" />
   </v-container>
 </template>
 

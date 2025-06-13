@@ -2,7 +2,7 @@
 const props = defineProps<{
   modelValue?: string
   currentQuestionNr: number
-  question?: GameQuestionPlayer
+  question?: GameQuestionClient
   correctAnswer?: string
 }>()
 
