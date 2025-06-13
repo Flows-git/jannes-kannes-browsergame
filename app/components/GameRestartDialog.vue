@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const emits = defineEmits<{
-  cancelGame: []
+  restartGame: []
 }>()
 
 const showDialog = defineModel<boolean>()
@@ -9,8 +9,8 @@ const showDialog = defineModel<boolean>()
 <template>
   <game-confirm-dialog
     v-model="showDialog"
-    text="Möchtest du das aktuelle Spiel wirklich beenden?"
-    accept-btn-text="Spiel Beenden"
-    @accept="emits('cancelGame')"
+    text="Möchtest du das aktuelle Spiel wirklich neustarten?"
+    accept-btn-text="Spiel Neustarten"
+    @accept="emits('restartGame')"
   />
 </template>

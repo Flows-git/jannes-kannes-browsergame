@@ -4,7 +4,7 @@ const gameRunning = computed(() => gameMeta.value?.running)
 const showResult = ref(false)
 const router = useRouter()
 
-const { data, refresh, pending } = await useFetch<GetQuestionRespone>('/api/game', {
+const { data, refresh } = useFetch<GetQuestionRespone>('/api/game', {
   server: false,
   onResponse: ({ response }) => {
     gameMeta.value = response._data.meta
@@ -20,17 +20,18 @@ const { data, refresh, pending } = await useFetch<GetQuestionRespone>('/api/game
 const answer = ref<string>()
 const answerResult = ref()
 
-const showEndScreen = ref(false)
+const showAbortConfirm = ref(false)
+const showRestartConfirm = ref(false)
 
 async function sendAnswer() {
-  const result = await $fetch('/api/game', {
+  const result = await $fetch<{ result: AnswerQuestionResponse, meta: GameMeta }>('/api/game', {
     method: 'POST',
     body: {
       answer: answer.value,
     },
   })
   answerResult.value = result.result
-  gameMeta.value = result.meta as GameMeta
+  gameMeta.value = result.meta
 }
 
 async function nextQuestion() {
@@ -47,23 +48,20 @@ async function cancelGame() {
   await endGame()
 }
 
-function endGame() {
-  return $fetch('/api/game', { method: 'DELETE' })
-}
-
-function startGame() {
-  return $fetch('/api/game/start', { method: 'POST', body: { questionCount: gameMeta.value?.totalQuestions, liveCount: gameMeta.value?.totalLives } })
+async function endGame() {
+  const result = await $fetch<{ meta: GameMeta }>('/api/game', { method: 'DELETE' })
+  gameMeta.value = result.meta
 }
 
 async function restartGame() {
-  await startGame()
+  await $fetch('/api/game/restart')
   showResult.value = false
   nextQuestion()
 }
 </script>
 
 <template>
-  <div v-if="!data && pending" />
+  <!-- <div v-if="!data && pending" /> -->
   <v-container v-if="data && gameMeta" class="fill-height jk-game--container">
     <v-card width="800">
       <!-- Header -->
@@ -73,7 +71,14 @@ async function restartGame() {
             <v-btn icon="mdi-dots-vertical" variant="text" v-bind="props" style="position: absolute; top: 50%; left: 16px; transform: translateY(-50%);" />
           </template>
           <v-list>
-            <v-list-item @click="showEndScreen = true">
+            <v-list-item @click="showRestartConfirm = true">
+              <template #prepend>
+                <warcraft-icon src="BTNPatrol.png" height="32px" width="32px" class="mr-1" />
+              </template>
+              Spiel Neustarten
+            </v-list-item>
+
+            <v-list-item @click="showAbortConfirm = true">
               <template #prepend>
                 <warcraft-icon src="BTNCancel.png" height="32px" width="32px" class="mr-1" />
               </template>
@@ -97,7 +102,7 @@ async function restartGame() {
           />
           <HeroFallenOverlay v-if="gameMeta.remainingLives === 0" @show-results="getResult" />
         </template>
-        <GameResultScreen v-else :correct-answers="gameMeta.correctAnswers" :total-questions="gameMeta.totalQuestions" @do-restart="restartGame" />
+        <GameResultScreen v-else :meta="gameMeta" @do-restart="restartGame" />
       </v-card-text>
 
       <!-- Action Bar -->
@@ -123,7 +128,8 @@ async function restartGame() {
         </div>
       </v-card-actions>
     </v-card>
-    <GameCancelDialog v-model="showEndScreen" @cancel-game="cancelGame()" />
+    <GameCancelDialog v-model="showAbortConfirm" @cancel-game="cancelGame()" />
+    <GameRestartDialog v-model="showRestartConfirm" @restart-game="restartGame()" />
   </v-container>
 </template>
 
