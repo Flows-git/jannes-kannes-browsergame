@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  totalQuestions: number
-  correctAnswers: number
+  meta: GameMeta
 }>()
 
 const emits = defineEmits<{
@@ -17,7 +16,7 @@ const results = [
   { percent: 0, icon: 'panda-0.png', text: 'Das war wohl nix!' },
 ]
 
-const resultPercentage = computed(() => (props.correctAnswers / props.totalQuestions) * 100)
+const resultPercentage = computed(() => (props.meta.correctAnswers / props.meta.totalQuestions) * 100)
 
 const image = computed(() => results.find(r => resultPercentage.value >= r.percent)?.icon)
 const text = computed(() => results.find(r => resultPercentage.value >= r.percent)?.text)
@@ -36,10 +35,13 @@ onMounted(() => {
     </div>
     <div class="text-center flex-grow-1">
       <div class="text-h1">
-        {{ correctAnswers }} / {{ totalQuestions }}
+        {{ meta.correctAnswers }} / {{ meta.totalQuestions }}
       </div>
       <div class="text-h4">
         {{ text }}
+      </div>
+      <div class="pt-3">
+        Spielzeit: <span class="font-weight-bold">{{ meta.gameTime }}</span>
       </div>
       <div class="d-flex justify-space-around">
         <v-btn color="primary" variant="outlined" class="mt-4" @click="emits('doRestart')">
