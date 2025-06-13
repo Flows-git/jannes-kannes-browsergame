@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
   },
+  future: {
+    compatibilityVersion: 4,
+  },
   build: {
     transpile: ['vuetify'],
   },
