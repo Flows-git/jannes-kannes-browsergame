@@ -68,7 +68,7 @@ async function restartGame() {
     <v-card width="800">
       <!-- Header -->
       <v-card-text class="jk-game--header d-flex justify-center bg-surface-variant">
-        <v-menu icon="mdi-dots-vertical">
+        <v-menu v-if="gameRunning" icon="mdi-dots-vertical">
           <template #activator="{ props }">
             <v-btn icon="mdi-dots-vertical" variant="text" v-bind="props" style="position: absolute; top: 50%; left: 16px; transform: translateY(-50%);" />
           </template>
@@ -101,7 +101,7 @@ async function restartGame() {
       </v-card-text>
 
       <!-- Action Bar -->
-      <v-card-actions v-if="gameRunning && !showResult" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
+      <v-card-actions v-if="gameRunning || !showResult" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
         <div v-if="gameMeta.totalLives" style="width: 150px;">
           <HealthBar v-if="gameMeta.totalLives" :total-lives="gameMeta.totalLives" :remaining-lives="gameMeta.remainingLives as number" />
           <!-- <ManaBar :total-joker="3" :remaining-joker="2" /> -->
