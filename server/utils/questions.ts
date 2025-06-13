@@ -1,4 +1,4 @@
-import questionsJson from '@/data/questions.json'
+import questionsJson from '@@/data/questions.json'
 
 const questions: GameQuestionServer[] = questionsJson
 

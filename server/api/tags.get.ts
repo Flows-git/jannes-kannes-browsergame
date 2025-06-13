@@ -1,4 +1,4 @@
-import tagLibrary from '~/data/tags.json'
+import tagLibrary from '@@/data/tags.json'
 
 export default defineEventHandler(async (event) => {
   const parentTag = getQuery(event)?.tag
