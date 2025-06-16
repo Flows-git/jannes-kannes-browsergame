@@ -1,21 +1,9 @@
 <script setup lang="ts">
-const gameMeta = ref<GameMeta>()
-const gameRunning = computed(() => gameMeta.value?.running)
-const showResult = ref(false)
-const router = useRouter()
+const { answerQuestion, currentQuestion, gameMeta, fetchQuestion, endGame, restartGame, showResult } = useGame()
 
-const { data, refresh } = useFetch<GetQuestionRespone>('/api/game', {
-  server: false,
-  onResponse: ({ response }) => {
-    gameMeta.value = response._data.meta
-    if (!response._data.meta.running) {
-      showResult.value = true
-    }
-  },
-  onResponseError: () => {
-    router.replace('/')
-  },
-})
+const loading = ref(false)
+const error = ref()
+const gameRunning = computed(() => gameMeta.value?.running)
 
 const answer = ref<string>()
 const answerResult = ref()
@@ -23,46 +11,50 @@ const answerResult = ref()
 const showAbortConfirm = ref(false)
 const showRestartConfirm = ref(false)
 
+async function fetchCurrentQuestion() {
+  loading.value = true
+  try {
+    await fetchQuestion()
+  }
+  catch (e) {
+    error.value = e
+  }
+  loading.value = false
+}
+
+await fetchCurrentQuestion()
+if (gameMeta.value && !gameMeta.value.running) {
+  showResult.value = true
+}
+
 async function sendAnswer() {
-  const result = await $fetch<{ result: AnswerQuestionResponse, meta: GameMeta }>('/api/game', {
-    method: 'POST',
-    body: {
-      answer: answer.value,
-    },
-  })
-  answerResult.value = result.result
-  gameMeta.value = result.meta
+  if (answer.value) {
+    loading.value = true
+    const result = await answerQuestion(answer.value)
+    answerResult.value = result
+    loading.value = false
+  }
 }
 
 async function nextQuestion() {
+  await fetchCurrentQuestion()
   answerResult.value = undefined
   answer.value = undefined
-  refresh()
 }
 
-async function getResult() {
+async function showEndResult() {
+  answerResult.value = undefined
+  answer.value = undefined
   showResult.value = true
 }
 async function cancelGame() {
-  showResult.value = true
+  showEndResult()
   await endGame()
-}
-
-async function endGame() {
-  const result = await $fetch<{ meta: GameMeta }>('/api/game', { method: 'DELETE' })
-  gameMeta.value = result.meta
-}
-
-async function restartGame() {
-  await $fetch('/api/game/restart')
-  showResult.value = false
-  nextQuestion()
 }
 </script>
 
 <template>
-  <!-- <div v-if="!data && pending" /> -->
-  <v-container v-if="data && gameMeta" class="fill-height jk-game--container">
+  <v-container v-if="gameMeta" class="fill-height jk-game--container">
     <v-card width="800">
       <!-- Header -->
       <v-card-text class="jk-game--header d-flex justify-center bg-surface-variant">
@@ -87,22 +79,22 @@ async function restartGame() {
           </v-list>
         </v-menu>
         <GameLogo />
-        <v-chip class="jk-game--questions-chip" size="x-large">
-          {{ data?.question.questionNr }} / {{ gameMeta?.totalQuestions }}
+        <v-chip v-if="currentQuestion" class="jk-game--questions-chip" size="x-large">
+          {{ currentQuestion.questionNr }} / {{ gameMeta?.totalQuestions }}
         </v-chip>
       </v-card-text>
       <v-progress-linear color="primary" :model-value="gameMeta?.answeredQuestions" :buffer-value="gameMeta?.currentQuestion" :max="gameMeta?.totalQuestions" />
 
       <!-- Frage -->
       <v-card-text style="position: relative;">
-        <template v-if="!showResult">
+        <template v-if="!showResult && currentQuestion">
           <GameQuestion
-            v-model="answer" :current-question-nr="data.question.questionNr" :question="data.question"
+            v-model="answer" :current-question-nr="currentQuestion.questionNr" :question="currentQuestion" :loading="loading"
             :correct-answer="answerResult?.corretAnswer"
           />
-          <HeroFallenOverlay v-if="gameMeta.remainingLives === 0" @show-results="getResult" />
+          <HeroFallenOverlay v-if="gameMeta.remainingLives === 0" @show-results="showEndResult" />
         </template>
-        <GameResultScreen v-else :meta="gameMeta" @do-restart="restartGame" />
+        <GameResultScreen v-if="showResult" :meta="gameMeta" @do-restart="restartGame" />
       </v-card-text>
 
       <!-- Action Bar -->
@@ -113,16 +105,17 @@ async function restartGame() {
         </div>
         <v-spacer v-else />
         <div>
-          <v-btn v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" @click="sendAnswer">
+          <v-btn v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" :loading="loading" @click="sendAnswer">
             Antworten absenden
           </v-btn>
           <v-btn
             v-if="gameRunning && answerResult && gameMeta.answeredQuestions < gameMeta.totalQuestions" size="large" color="primary" variant="outlined"
+            :loading="loading"
             @click="nextQuestion"
           >
             Nächste Frage
           </v-btn>
-          <v-btn v-if="!gameRunning && gameMeta.remainingLives !== 0" size="large" color="primary" variant="outlined" @click="getResult">
+          <v-btn v-if="!gameRunning && gameMeta.remainingLives !== 0" size="large" color="primary" variant="outlined" @click="showEndResult">
             Resultat anzeigen
           </v-btn>
         </div>

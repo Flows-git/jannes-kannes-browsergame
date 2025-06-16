@@ -4,6 +4,7 @@ const props = defineProps<{
   currentQuestionNr: number
   question?: GameQuestionClient
   correctAnswer?: string
+  loading?: boolean
 }>()
 
 const emits = defineEmits<{
@@ -37,7 +38,7 @@ function getAnswerClass(answer: string, isSelected?: boolean, selectedClass?: st
       {{ question?.question }}
     </div>
   </div>
-  <v-item-group :model-value="modelValue" selected-class="bg-primary" :disabled="!!correctAnswer" @update:model-value="emits('update:model-value', $event)">
+  <v-item-group :model-value="modelValue" selected-class="bg-primary" :disabled="loading || !!correctAnswer" @update:model-value="emits('update:model-value', $event)">
     <v-row class="py-3">
       <v-col
         v-for="a of question?.answers"
