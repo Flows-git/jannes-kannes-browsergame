@@ -47,9 +47,11 @@ async function showEndResult() {
   answer.value = undefined
   showResult.value = true
 }
+
+const router = useRouter()
 async function cancelGame() {
-  showEndResult()
   await endGame()
+  router.replace('/')
 }
 </script>
 
