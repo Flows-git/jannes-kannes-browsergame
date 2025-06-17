@@ -10,16 +10,16 @@ const emits = defineEmits<{
 const { startConfetti } = useConfetti()
 
 const results = [
-  { percent: 100, icon: 'panda-3.png', text: 'Super gemacht!' },
-  { percent: 66.6, icon: 'panda-2.png', text: 'Das war OK. Aber es geht noch besser!' },
-  { percent: 33.3, icon: 'panda-1.png', text: 'Naja...' },
-  { percent: 0, icon: 'panda-0.png', text: 'Das war wohl nix!' },
+  { percent: 100, points: 3, icon: 'panda-3.png' },
+  { percent: 66.6, points: 2, icon: 'panda-2.png' },
+  { percent: 33.3, points: 1, icon: 'panda-1.png' },
+  { percent: 0, points: 0, icon: 'panda-0.png' },
 ]
 
 const resultPercentage = computed(() => (props.meta.correctAnswers / props.meta.totalQuestions) * 100)
 
 const image = computed(() => results.find(r => resultPercentage.value >= r.percent)?.icon)
-const text = computed(() => results.find(r => resultPercentage.value >= r.percent)?.text)
+const text = computed(() => getRandomPhrase(results.find(r => resultPercentage.value >= r.percent)?.points as any))
 
 onMounted(() => {
   if (resultPercentage.value === 100) {
