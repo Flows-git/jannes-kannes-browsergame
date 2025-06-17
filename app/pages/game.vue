@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { answerQuestion, currentQuestion, gameMeta, fetchQuestion, endGame, restartGame, showResult } = useGame()
+const router = useRouter()
 
 const loading = ref(false)
 const error = ref()
@@ -22,10 +23,16 @@ async function fetchCurrentQuestion() {
   loading.value = false
 }
 
-await fetchCurrentQuestion()
-if (gameMeta.value && !gameMeta.value.running) {
-  showResult.value = true
+async function initalFetch() {
+  await fetchCurrentQuestion()
+  if (gameMeta.value && !gameMeta.value.running) {
+    showResult.value = true
+  }
+  if (error.value) {
+    router.replace('/')
+  }
 }
+initalFetch()
 
 async function sendAnswer() {
   if (answer.value) {
@@ -48,7 +55,6 @@ async function showEndResult() {
   showResult.value = true
 }
 
-const router = useRouter()
 async function cancelGame() {
   await endGame()
   router.replace('/')
@@ -56,7 +62,7 @@ async function cancelGame() {
 </script>
 
 <template>
-  <v-container v-if="gameMeta" class="fill-height jk-game--container">
+  <v-container class="fill-height jk-game--container">
     <v-card width="800">
       <!-- Header -->
       <v-card-text class="jk-game--header d-flex justify-center bg-surface-variant">
@@ -85,35 +91,46 @@ async function cancelGame() {
           {{ currentQuestion.questionNr }} / {{ gameMeta?.totalQuestions }}
         </v-chip>
       </v-card-text>
-      <v-progress-linear color="primary" :model-value="gameMeta?.answeredQuestions" :buffer-value="gameMeta?.currentQuestion" :max="gameMeta?.totalQuestions" />
+      <v-progress-linear
+        color="primary" :model-value="gameMeta?.answeredQuestions" :buffer-value="gameMeta?.currentQuestion"
+        :max="gameMeta?.totalQuestions"
+      />
 
       <!-- Frage -->
-      <v-card-text style="position: relative;">
+      <v-card-text>
+        <div v-if="loading && !currentQuestion" class="text-center">
+          <v-progress-circular indeterminate color="primary" size="100" />
+          <div class="text-primary pt-3 text-h5">
+            Spieldaten werden geladen...
+          </div>
+        </div>
         <template v-if="!showResult && currentQuestion">
           <GameQuestion
             v-model="answer" :current-question-nr="currentQuestion.questionNr" :question="currentQuestion" :loading="loading"
             :correct-answer="answerResult?.corretAnswer"
           />
-          <HeroFallenOverlay v-if="gameMeta.remainingLives === 0" @show-results="showEndResult" />
+          <HeroFallenOverlay v-if="gameMeta?.remainingLives === 0" @show-results="showEndResult" />
         </template>
-        <GameResultScreen v-if="showResult" :meta="gameMeta" @do-restart="restartGame" />
+        <GameResultScreen v-if="gameMeta && showResult" :meta="gameMeta" @do-restart="restartGame" />
       </v-card-text>
 
       <!-- Action Bar -->
-      <v-card-actions v-if="gameRunning || !showResult" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
-        <div v-if="gameMeta.totalLives" style="width: 150px;">
+      <v-card-actions v-if="gameMeta && (gameRunning || !showResult)" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
+        <div v-if="gameMeta.totalLives" class="jk-game--stats-container">
           <HealthBar v-if="gameMeta.totalLives" :total-lives="gameMeta.totalLives" :remaining-lives="gameMeta.remainingLives as number" />
           <!-- <ManaBar :total-joker="3" :remaining-joker="2" /> -->
         </div>
         <v-spacer v-else />
         <div>
-          <v-btn v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" :loading="loading" @click="sendAnswer">
+          <v-btn
+            v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" :loading="loading"
+            @click="sendAnswer"
+          >
             Antworten absenden
           </v-btn>
           <v-btn
             v-if="gameRunning && answerResult && gameMeta.answeredQuestions < gameMeta.totalQuestions" size="large" color="primary" variant="outlined"
-            :loading="loading"
-            @click="nextQuestion"
+            :loading="loading" @click="nextQuestion"
           >
             Nächste Frage
           </v-btn>
@@ -143,6 +160,10 @@ async function cancelGame() {
     right: 16px;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  &--stats-container {
+    width: 150px;
   }
 }
 
