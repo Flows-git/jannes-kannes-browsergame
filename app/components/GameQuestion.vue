@@ -30,12 +30,12 @@ function getAnswerClass(answer: string, isSelected?: boolean, selectedClass?: st
 </script>
 
 <template>
-  <div v-if="question" class="text-h4 py-4 d-flex align-center justify-center text-center" style="height: 300px;">
-    <div>
+  <div v-if="question" class="game-question--container text-h4 py-4 d-flex align-center justify-center text-center" style="height: 300px;">
+    <div class="game-question">
       <div class="text-h2 pb-3">
         Frage {{ currentQuestionNr }}
       </div>
-      {{ question?.question }}
+      {{ question.question }}
     </div>
   </div>
   <v-item-group :model-value="modelValue" selected-class="bg-primary" :disabled="loading || !!correctAnswer" @update:model-value="emits('update:model-value', $event)">

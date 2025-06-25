@@ -27,3 +27,8 @@ logs
 public/warcraft3_icons/**/*
 data/tags.json
 data/questions.json
+
+# vitest/playwright
+coverage/**/*
+playwright-report/**/*
+test-results/**/*

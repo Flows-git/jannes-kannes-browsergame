@@ -13,13 +13,13 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
   modules: [
+    '@nuxt/test-utils/module',
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         // @ts-expect-error config possibly undefined but it isnt undefined
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
-    // ...
   ],
   vite: {
     vue: {

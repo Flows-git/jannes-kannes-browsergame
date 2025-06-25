@@ -28,7 +28,7 @@ async function startNewGame(mode: GameMode) {
     </v-card>
     <v-row class="pt-6">
       <v-col cols="12">
-        <v-card class="fill-height" :disabled="loading" @click="startNewGame('classic')">
+        <v-card class="fill-height" :disabled="loading" data-testid="quick-game-btn" @click="startNewGame('classic')">
           <v-card-title>Schnelles Spiel</v-card-title>
           <v-card-text>
             Eine klassische Runde "Jannes Kann es". Es werden drei Fragen aus "Jannes Kann es" gestellt und das Spiel ist gewonnen wenn alle Fragen
@@ -37,13 +37,13 @@ async function startNewGame(mode: GameMode) {
         </v-card>
       </v-col>
       <v-col cols="12" sm="6">
-        <v-card class="fill-height" :disabled="loading" @click="startNewGame('endless')">
+        <v-card class="fill-height" :disabled="loading" data-testid="endless-game-btn" @click="startNewGame('endless')">
           <v-card-title>Endlos Casual</v-card-title>
           <v-card-text>Es werden alle "Jannes Kann es" Fragen gestellt.</v-card-text>
         </v-card>
       </v-col>
       <v-col cols="12" sm="6">
-        <v-card class="fill-height" :disabled="loading" @click="startNewGame('ranked')">
+        <v-card class="fill-height" :disabled="loading" data-testid="ranked-game-btn" @click="startNewGame('ranked')">
           <v-card-title>Endlos Ranked</v-card-title>
           <v-card-text>
             Es werden alle "Jannes Kann es" Fragen gestellt. Man hat drei Leben.

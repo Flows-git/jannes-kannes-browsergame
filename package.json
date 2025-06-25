@@ -11,7 +11,10 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
-    "setup": "bun ./scripts/_setup.ts"
+    "setup": "bun ./scripts/_setup.ts",
+    "test": "bun run test:unit && bun run test:e2e",
+    "test:unit": "vitest run  --coverage",
+    "test:e2e": "playwright test"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -25,14 +28,20 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.13.1",
+    "@nuxt/test-utils": "^3.19.1",
+    "@playwright/test": "^1.53.1",
     "@types/bun": "latest",
     "@types/decompress": "^4.2.7",
+    "@vitest/coverage-v8": "3.2.4",
+    "@vue/test-utils": "^2.4.6",
     "convert-csv-to-json": "^3.4.0",
     "decompress": "^4.2.1",
     "eslint": "9.26.0",
+    "happy-dom": "^18.0.1",
     "sass": "^1.89.0",
     "typescript": "~5.8.3",
     "vite-plugin-vuetify": "^2.1.1",
+    "vitest": "^3.2.4",
     "vuetify": "^3.8.5"
   }
 }
