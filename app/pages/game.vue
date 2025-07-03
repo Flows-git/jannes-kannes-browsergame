@@ -117,8 +117,8 @@ async function cancelGame() {
       <!-- Action Bar -->
       <v-card-actions v-if="gameMeta && (gameRunning || !showResult)" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
         <div v-if="gameMeta.totalLives" class="jk-game--stats-container">
-          <HealthBar v-if="gameMeta.totalLives" :total-lives="gameMeta.totalLives" :remaining-lives="gameMeta.remainingLives as number" />
-          <!-- <ManaBar :total-joker="3" :remaining-joker="2" /> -->
+          <StatsBarHealth v-if="gameMeta.totalLives" :total="gameMeta.totalLives" :remaining="gameMeta.remainingLives as number" />
+          <!-- <StatsBarMana :total="3" :remaining="2" /> -->
         </div>
         <v-spacer v-else />
         <div>

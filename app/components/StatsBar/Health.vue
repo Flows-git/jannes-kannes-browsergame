@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const props = defineProps<{
-  totalLives: number
-  remainingLives: number
+  total: number
+  remaining: number
 }>()
-const livesPercentage = computed(() => (props.remainingLives / props.totalLives) * 100)
+const livesPercentage = computed(() => (props.remaining / props.total) * 100)
 
 const colors = [
   { percent: 80, color: '#00d00c' },
@@ -15,5 +15,5 @@ const barColor = computed(() => colors.find(r => livesPercentage.value >= r.perc
 </script>
 
 <template>
-  <StatsBar :color="barColor" :remaining="remainingLives" :total="totalLives" suffix="HP" />
+  <StatsBar :color="barColor" :remaining="remaining" :total="total" suffix="HP" />
 </template>
