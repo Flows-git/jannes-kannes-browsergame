@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { VImg } from 'vuetify/components';
+
 withDefaults(defineProps<{
   showSubtitle?: boolean
   width?: string | number
@@ -8,7 +10,7 @@ withDefaults(defineProps<{
   width: 120,
 })
 
-const mainImg = ref()
+const mainImg = useTemplateRef<VImg>('form')
 </script>
 
 <template>
