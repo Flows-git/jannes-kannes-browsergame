@@ -7,7 +7,7 @@ const phraseList = {
     '„Ihr seid eine Beleidigung für diesen Wald.“ – Dryad',
     '„So viel Zerstörung... durch Unwissenheit.“ – Druid of the Claw',
     '„Du dienst dem Tod... schlecht.“ – Death Knight',
-    '„Selbst ein Ghul hätte besser geantwortet.“ – Ghoul',
+    '„Selbst ein Ghul hätte besser geantwortet.“ – Ghul',
     '„Eure Schwäche ekelt mich an.“ – Dreadlord',
     '„Das war beschämend!“ – Paladin',
     '„Ihr braucht dringend Training.“ – Footman',
