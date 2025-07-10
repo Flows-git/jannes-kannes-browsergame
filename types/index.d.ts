@@ -68,6 +68,7 @@ interface GameSession {
   startTime: number
   endTime?: number
   gameTime?: string
+  averageAnswerTime: string
 }
 
 type GameMode = 'classic' | 'ranked' | 'endless'
@@ -96,6 +97,7 @@ interface GameMeta {
   totalLives?: number
   remainingLives?: number
   gameTime?: string
+  averageAnswerTime: string
 }
 
 interface GetQuestionRespone {

@@ -1,4 +1,5 @@
 import type { H3Event } from 'h3'
+import { getTimeDurationString } from './gameTime'
 
 /**
  * Composable to manage the game, made for simple usage in a event handler
@@ -61,6 +62,7 @@ export async function useGame(event: H3Event) {
       totalLives: data.totalLives,
       remainingLives: data.remainingLives,
       gameTime: data.gameTime,
+      averageAnswerTime: data.averageAnswerTime,
     }
   }
 
@@ -101,6 +103,10 @@ export async function useGame(event: H3Event) {
    *
    */
   async function startGame(settings: GameSettings) {
+    if (isGameStarted()) {
+      await session.clear()
+      await questions.clear()
+    }
     const questionCount = settings?.questionCount ?? 3
     const questionIds = getRandomQuestionIds(questionCount)
     await questions.update({ questions: questionIds })
@@ -113,6 +119,9 @@ export async function useGame(event: H3Event) {
       totalLives: settings?.liveCount,
       remainingLives: settings?.liveCount,
       startTime: new Date().getTime(),
+      averageAnswerTime: '0s',
+      gameTime: '0s',
+      endTime: undefined,
     })
     await updateCurrentQuestion()
   }
@@ -130,6 +139,7 @@ export async function useGame(event: H3Event) {
       currentQuestionNr: session.data.currentQuestionNr + 1,
       correctAnswers: answerCorrect ? session.data.correctAnswers + 1 : session.data.correctAnswers,
       remainingLives: (!answerCorrect && typeof session.data.remainingLives === 'number') ? session.data.remainingLives - 1 : session.data.remainingLives,
+      averageAnswerTime: getAverageAnswerTimeString(session.data.startTime, session.data.answeredQuestions + 1),
     })
 
     // ends the game after the last question was answered
@@ -160,27 +170,8 @@ export async function useGame(event: H3Event) {
     await session.update({
       running: false,
       endTime,
-      gameTime: getGameTime(endTime),
+      gameTime: getTimeDurationString(data.startTime, endTime),
     })
-  }
-
-  function getGameTime(endTime: number) {
-    const diffMs = endTime - data.startTime // Difference in ms
-    const totalSeconds = Math.floor(diffMs / 1000)
-    let time = ``
-
-    const hours = Math.floor(totalSeconds / 3600)
-    if (hours > 0) {
-      time += `${hours}h `
-    }
-    const minutes = Math.floor((totalSeconds % 3600) / 60)
-    if (hours > 0) {
-      time += `${minutes}m `
-    }
-    const seconds = totalSeconds % 60
-    time += `${seconds}s `
-
-    return time
   }
 
   return {
