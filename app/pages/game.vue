@@ -43,8 +43,13 @@ async function sendAnswer() {
   }
 }
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 async function nextQuestion() {
   await fetchCurrentQuestion()
+  scrollToTop()
   answerResult.value = undefined
   answer.value = undefined
 }
@@ -53,6 +58,7 @@ async function showEndResult() {
   answerResult.value = undefined
   answer.value = undefined
   showResult.value = true
+  scrollToTop()
 }
 
 async function cancelGame() {
