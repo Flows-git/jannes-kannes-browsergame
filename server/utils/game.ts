@@ -79,6 +79,7 @@ export async function useGame(event: H3Event) {
         episode: question.meta.episode,
         questionNr: question.meta.questionNr,
         questionTimeOnStream: question.meta.questionTimeOnStream,
+        author: question.meta.author,
       },
     }
   }

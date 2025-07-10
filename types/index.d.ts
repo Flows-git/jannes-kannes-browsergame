@@ -21,6 +21,7 @@ interface QuestionCsv {
   question: string
   answer: string
   other_answers: string
+  author?: string
 }
 
 interface GameQuestionClient {
@@ -30,6 +31,7 @@ interface GameQuestionClient {
     creepjackEpisode: string
     questionNr: string
     questionTimeOnStream: string
+    author?: string
   }
   question: string
   questionNr: number
@@ -45,6 +47,7 @@ interface GameQuestionServer {
     questionTimeOnStream: string
     // jannesAnswer: string
     jannesCorrect: boolean
+    author?: string
   }
   question: string
   answers: Array<string>

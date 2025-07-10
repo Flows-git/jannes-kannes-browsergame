@@ -20,6 +20,7 @@ export async function parseQuestionsCsvToJson() {
         questionNr: question.question_nr,
         questionTimeOnStream: question.question_time_on_stream,
         jannesCorrect,
+        author: question.author?.length ? question.author : undefined, // Only add author if it exists
       },
     }
   })
