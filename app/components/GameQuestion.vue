@@ -59,14 +59,26 @@ function getAnswerClass(answer: string, isSelected?: boolean, selectedClass?: st
       </v-row>
     </v-item-group>
     <div class="text-body-2 text-center">
-      <span class="pr-1 opacity-40 ">Creepjack Folge:</span>
-      <span>{{ question?.meta.creepjackEpisode }}</span>
-      <span class="px-1 opacity-40 ">|</span>
-      <span class="pr-1 opacity-40 ">Frage Nr.:</span>
-      <span>{{ question?.meta.questionNr }}</span>
-      <span class="px-1 opacity-40 ">|</span>
-      <span class="pr-1 opacity-40 ">Author:</span>
-      <span>{{ question?.meta.author ?? 'Anonym' }}</span>
+      <span class="question-meta">
+        <span class="pr-1 opacity-40 ">Creepjack Folge:</span>
+        <span>{{ question?.meta.creepjackEpisode }}</span>
+      </span>
+      <span class="question-meta">
+        <span class="px-1 opacity-40 ">|</span>
+        <span class="pr-1 opacity-40 ">Frage Nr.:</span>
+        <span>{{ question?.meta.questionNr }}</span>
+      </span>
+      <span class="question-meta">
+        <span class="px-1 opacity-40 ">|</span>
+        <span class="pr-1 opacity-40 ">Author:</span>
+        <span>{{ question?.meta.author ?? 'Anonym' }}</span>
+      </span>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.question-meta {
+  white-space: nowrap;
+}
+</style>
