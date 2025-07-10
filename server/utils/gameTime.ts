@@ -61,7 +61,7 @@ function parseTimeToString(timeInSeconds: number): string {
   if (minutes > 0) {
     time += `${minutes}m `
   }
-  const seconds = Math.floor(timeInSeconds % 60)
+  const seconds = (timeInSeconds % 60).toFixed(0)
   time += `${seconds}s`
 
   return time

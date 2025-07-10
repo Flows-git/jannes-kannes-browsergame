@@ -51,6 +51,18 @@ describe('gameTime utils', () => {
       expect(getAverageAnswerTimeString(start, 2)).toBe('5s')
     })
 
+    it('rounds average correctly (up)', () => {
+      const start = Date.now()
+      vi.setSystemTime(start + 25000) // 25 seconds later
+      expect(getAverageAnswerTimeString(start, 16)).toBe('2s') // = 1.5625 seconds per question
+    })
+
+    it('rounds average correctly (down)', () => {
+      const start = Date.now()
+      vi.setSystemTime(start + 25000) // 25 seconds later
+      expect(getAverageAnswerTimeString(start, 17)).toBe('1s') // = 1,47058824 seconds per question
+    })
+
     it('should handle zero answeredQuestions (avoid division by zero)', () => {
       const start = Date.now()
       vi.setSystemTime(start + 9000)
