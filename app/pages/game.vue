@@ -63,7 +63,13 @@ async function showEndResult() {
 
 async function cancelGame() {
   await endGame()
-  router.replace('/')
+  showEndResult()
+}
+
+async function doRestartGame() {
+  answerResult.value = undefined
+  answer.value = undefined
+  await restartGame()
 }
 </script>
 
@@ -97,10 +103,7 @@ async function cancelGame() {
           {{ currentQuestion.questionNr }} / {{ gameMeta?.totalQuestions }}
         </v-chip>
       </v-card-text>
-      <v-progress-linear
-        color="primary" :model-value="gameMeta?.answeredQuestions" :buffer-value="gameMeta?.currentQuestion"
-        :max="gameMeta?.totalQuestions"
-      />
+      <v-progress-linear color="primary" :model-value="gameMeta?.answeredQuestions" :buffer-value="gameMeta?.currentQuestion" :max="gameMeta?.totalQuestions" />
 
       <!-- Frage -->
       <v-card-text>
@@ -111,13 +114,15 @@ async function cancelGame() {
           </div>
         </div>
         <template v-if="!showResult && currentQuestion">
-          <GameQuestion
-            v-model="answer" :current-question-nr="currentQuestion.questionNr" :question="currentQuestion" :loading="loading"
-            :correct-answer="answerResult?.corretAnswer"
-          />
-          <HeroFallenOverlay v-if="gameMeta?.remainingLives === 0" @show-results="showEndResult" />
+          <GameQuestion v-model="answer" :current-question-nr="currentQuestion.questionNr" :question="currentQuestion" :loading="loading"
+            :correct-answer="answerResult?.corretAnswer" />
+          <!-- <HeroFallenOverlay v-if="gameMeta?.remainingLives === 0" @show-results="showEndResult" /> -->
         </template>
-        <GameResultScreen v-if="gameMeta && showResult" :meta="gameMeta" @do-restart="restartGame" />
+        <template v-if="gameMeta && showResult">
+          <GameResultScreen v-if="gameMeta.totalQuestions === 3" :meta="gameMeta" @do-restart="doRestartGame" />
+          <GameResultScreenEndless v-else :meta="gameMeta" @do-restart="doRestartGame" />
+
+        </template>
       </v-card-text>
 
       <!-- Action Bar -->
@@ -128,26 +133,21 @@ async function cancelGame() {
         </div>
         <v-spacer v-else />
         <div>
-          <v-btn
-            v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" :loading="loading"
-            @click="sendAnswer"
-          >
+          <v-btn v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" :loading="loading" @click="sendAnswer">
             Antworten absenden
           </v-btn>
-          <v-btn
-            v-if="gameRunning && answerResult && gameMeta.answeredQuestions < gameMeta.totalQuestions" size="large" color="primary" variant="outlined"
-            :loading="loading" @click="nextQuestion"
-          >
+          <v-btn v-if="gameRunning && answerResult && gameMeta.answeredQuestions < gameMeta.totalQuestions" size="large" color="primary" variant="outlined"
+            :loading="loading" @click="nextQuestion">
             Nächste Frage
           </v-btn>
-          <v-btn v-if="!gameRunning && gameMeta.remainingLives !== 0" size="large" color="primary" variant="outlined" @click="showEndResult">
+          <v-btn v-if="!gameRunning" size="large" color="primary" variant="outlined" @click="showEndResult">
             Resultat anzeigen
           </v-btn>
         </div>
       </v-card-actions>
     </v-card>
     <GameCancelDialog v-model="showAbortConfirm" @cancel-game="cancelGame()" />
-    <GameRestartDialog v-model="showRestartConfirm" @restart-game="restartGame()" />
+    <GameRestartDialog v-model="showRestartConfirm" @restart-game="doRestartGame()" />
   </v-container>
 </template>
 

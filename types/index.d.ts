@@ -94,10 +94,12 @@ interface GameMeta {
   answeredQuestions: number
   totalQuestions: number
   correctAnswers: number
+  wrongAnswers: number
   totalLives?: number
   remainingLives?: number
   gameTime?: string
   averageAnswerTime: string
+  answeredQuestionsTotalPercent: number
 }
 
 interface GetQuestionRespone {

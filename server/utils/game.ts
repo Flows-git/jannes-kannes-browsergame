@@ -1,5 +1,6 @@
 import type { H3Event } from 'h3'
 import { getTimeDurationString } from './gameTime'
+import { getAnsweredQuestionsInPercent } from './questions'
 
 /**
  * Composable to manage the game, made for simple usage in a event handler
@@ -59,10 +60,12 @@ export async function useGame(event: H3Event) {
       currentQuestion: data.currentQuestionNr,
       answeredQuestions: data.answeredQuestions,
       correctAnswers: data.correctAnswers,
+      wrongAnswers: data.answeredQuestions - data.correctAnswers,
       totalLives: data.totalLives,
       remainingLives: data.remainingLives,
       gameTime: data.gameTime,
       averageAnswerTime: data.averageAnswerTime,
+      answeredQuestionsTotalPercent: getAnsweredQuestionsInPercent(data.answeredQuestions),
     }
   }
 
@@ -103,7 +106,7 @@ export async function useGame(event: H3Event) {
    *
    */
   async function startGame(settings: GameSettings) {
-    if (isGameStarted()) {
+    if (Object.keys(data).length === 0) {
       await session.clear()
       await questions.clear()
     }

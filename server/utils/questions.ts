@@ -14,11 +14,12 @@ export function getQuestionById(id: string | number) {
   return question
 }
 
-export function getQuestionByIdForPlayer(id: string) {
+export function getQuestionByIdForPlayer(id: string): GameQuestionClient {
   const question = getQuestionById(id)
   return {
     id: question.id,
     question: question.question,
+    questionNr: 0, // This will be set by the game logic
     answers: question.answers,
     meta: {
       creepjackEpisode: question.meta.creepjackEpisode,
@@ -35,10 +36,8 @@ export function getQuestionByIdForPlayer(id: string) {
 export function getRandomQuestionIds(count: number) {
   // Get all question Ids
   const qIds = questions.map(q => q.id)
-
   // Randomize order of question Ids
   randomizeArrayOrder(qIds)
-
   return qIds.slice(0, count)
 }
 
@@ -53,4 +52,14 @@ export function randomizeArrayOrder(array: Array<any>) {
   }
 
   return array
+}
+
+/**
+ * Get the percentage of answered questions from all questions
+ * @param answeredQuestion 
+ * @returns 
+ */
+export function getAnsweredQuestionsInPercent(answeredQuestion: number) {
+  const totalQuestions = getAllQuestionsCount()
+  return Number(((answeredQuestion / totalQuestions) * 100).toFixed(2))
 }
