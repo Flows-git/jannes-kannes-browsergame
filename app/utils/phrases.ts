@@ -38,7 +38,7 @@ const phraseList = {
     '„Noch nicht perfekt... aber du lernst.“ – Necromancer',
     '„Du bist kein völliger Abfall.“ – Abomination',
     '„Ein weiterer Sieg für die Allianz.“ – Knight',
-    '„Du bist würdig, Seite an Seite zu kämpfen.“ – Paladin',
+    '„Du bist fast würdig, Seite an Seite zu kämpfen.“ – Paladin',
     '„Nicht perfekt, aber ehrenvoll.“ – Footman',
   ],
   3: [

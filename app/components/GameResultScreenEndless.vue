@@ -1,31 +1,11 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   meta: GameMeta
 }>()
 
 const emits = defineEmits<{
   (e: 'doRestart'): void
 }>()
-
-const { startConfetti } = useConfetti()
-
-const results = [
-  { percent: 100, points: 3, icon: 'panda-3.png' },
-  { percent: 66.6, points: 2, icon: 'panda-2.png' },
-  { percent: 33.3, points: 1, icon: 'panda-1.png' },
-  { percent: 0, points: 0, icon: 'panda-0.png' },
-]
-
-const resultPercentage = computed(() => (props.meta.correctAnswers / props.meta.totalQuestions) * 100)
-
-const image = computed(() => results.find(r => resultPercentage.value >= r.percent)?.icon)
-const phrase = computed(() => getRandomPhrase(results.find(r => resultPercentage.value >= r.percent)?.points as any))
-
-onMounted(() => {
-  if (resultPercentage.value === 100) {
-    startConfetti(5)
-  }
-})
 </script>
 
 <template>
@@ -68,7 +48,8 @@ onMounted(() => {
   </v-row>
   <div class="text-center py-3">
     Du hast <span class="text-h5 text-primary">{{ meta.answeredQuestionsTotalPercent.toLocaleString() }}%</span> aller erfassten Fragen (<span
-      class="text-primary">{{ meta.totalQuestions }}</span>) beantwortet
+      class="text-primary"
+    >{{ meta.totalQuestions }}</span>) beantwortet
   </div>
   <v-divider />
   <div class="text-h5 text-center opacity-70 py-3">

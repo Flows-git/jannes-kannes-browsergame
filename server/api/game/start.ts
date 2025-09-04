@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   else if (request.mode === 'ranked') {
     gameSettings = {
       questionCount: getAllQuestionsCount(),
-      liveCount: request.settings?.liveCount ?? 3,
+      liveCount: 3,
     }
   }
   else if (request.mode === 'endless') {
