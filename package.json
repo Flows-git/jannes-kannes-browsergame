@@ -22,7 +22,7 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@tsparticles/confetti": "^3.8.1",
-    "nuxt": "^3.17.3",
+    "nuxt": "^4.1.0",
     "vue": "latest",
     "vue-router": "latest"
   },
