@@ -19,9 +19,24 @@ interface QuestionCsv {
   question_nr: string
   question_time_on_stream: string
   question: string
+  answer_video_time: string
   answer: string
   other_answers: string
   author?: string
+}
+
+interface QuestionDB {
+  id: number
+  question: string
+  answers: Array<string>
+  correctAnswer: string
+  author?: string
+  creepjackEpisode: number
+  jkEpisode: string
+  questionNr: number
+  jannesAnswer: string
+  questionTimeOnStream: string
+  answerTimeOnStream: string
 }
 
 interface GameQuestionClient {
@@ -45,8 +60,8 @@ interface GameQuestionServer {
     creepjackEpisode: string
     questionNr: string
     questionTimeOnStream: string
-    // jannesAnswer: string
-    jannesCorrect: boolean
+    answerTimeOnStream: string
+    jannesAnswer: string
     author?: string
   }
   question: string
