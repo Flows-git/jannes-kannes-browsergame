@@ -17,7 +17,20 @@ async function getAllQuestionsIds(): Promise<string[]> {
 }
 
 export async function getAllQuestionsCount() {
-  return (await getAllQuestionsIds()).length
+  const supabase = await useSupabaseServer()
+  const { count, error } = await supabase
+    .from('questions')
+    .select('id', { count: 'exact', head: true })
+
+  if (error) {
+    console.error(error)
+    throw createError({
+      statusCode: 500,
+      statusMessage: error.message,
+    })
+  }
+
+  return count ?? 0
 }
 
 export async function getQuestionById(id: string | number): Promise<QuestionDB> {
