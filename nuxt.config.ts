@@ -26,4 +26,9 @@ export default defineNuxtConfig({
       vuetify({ autoImport: true }),
     ],
   },
+  typescript: {
+    tsConfig: {
+      include: ['../scripts/**/*'],
+    },
+  },
 })
