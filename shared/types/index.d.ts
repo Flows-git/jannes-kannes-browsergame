@@ -39,12 +39,12 @@ interface QuestionDB {
   answerTimeOnStream: string
 }
 
-interface GameQuestionClient {
+interface GameQuestion {
   id: string | number
   meta: {
     episode: string
-    creepjackEpisode: string
-    questionNr: string
+    creepjackEpisode: number
+    questionNr: number
     questionTimeOnStream: string
     author?: string
   }
@@ -53,25 +53,8 @@ interface GameQuestionClient {
   answers: Array<string>
 }
 
-interface GameQuestionServer {
-  id: string | number
-  meta: {
-    episode: string
-    creepjackEpisode: string
-    questionNr: string
-    questionTimeOnStream: string
-    answerTimeOnStream: string
-    jannesAnswer: string
-    author?: string
-  }
-  question: string
-  answers: Array<string>
-  correctAnswer: string
-  //
-}
-
 interface GameSession {
-  currentQuestion: GameQuestionServer
+  currentQuestion: QuestionDB
   questions: Array<string>
   running: boolean
   currentQuestionNr: number
@@ -118,7 +101,7 @@ interface GameMeta {
 }
 
 interface GetQuestionRespone {
-  question: GameQuestionClient
+  question: GameQuestion
   meta: GameMeta
 }
 

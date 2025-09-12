@@ -3,6 +3,6 @@ export default defineEventHandler(async (event) => {
   await isGameStarted()
   await endGame()
   return {
-    meta: getGameMeta(),
+    meta: await getGameMeta(),
   }
 })

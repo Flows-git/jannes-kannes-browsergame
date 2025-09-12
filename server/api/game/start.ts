@@ -9,14 +9,15 @@ export default defineEventHandler(async (event) => {
   }
   else if (request.mode === 'ranked') {
     gameSettings = {
-      questionCount: getAllQuestionsCount(),
+      questionCount: await getAllQuestionsCount(),
       liveCount: 3,
     }
   }
   else if (request.mode === 'endless') {
+    const questionCount = await getAllQuestionsCount()
     gameSettings = {
-      questionCount: getAllQuestionsCount(),
-      liveCount: getAllQuestionsCount(),
+      questionCount,
+      liveCount: questionCount,
     }
   }
   await (await useGame(event)).startGame(gameSettings)

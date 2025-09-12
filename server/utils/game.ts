@@ -1,6 +1,4 @@
 import type { H3Event } from 'h3'
-import { getTimeDurationString } from './gameTime'
-import { getAnsweredQuestionsInPercent } from './questions'
 
 /**
  * Composable to manage the game, made for simple usage in a event handler
@@ -53,7 +51,7 @@ export async function useGame(event: H3Event) {
     }
   }
 
-  function getGameMeta(): GameMeta {
+  async function getGameMeta(): Promise<GameMeta> {
     return {
       running: data.running,
       totalQuestions: data.totalQuestions,
@@ -65,14 +63,14 @@ export async function useGame(event: H3Event) {
       remainingLives: data.remainingLives,
       gameTime: data.gameTime,
       averageAnswerTime: data.averageAnswerTime,
-      answeredQuestionsTotalPercent: getAnsweredQuestionsInPercent(data.answeredQuestions),
+      answeredQuestionsTotalPercent: await getAnsweredQuestionsInPercent(data.answeredQuestions),
     }
   }
 
   /**
    * returns the question parsed for the player (without answer) and with the necessary meta for the frontend
    */
-  function getQuestionForPlayer(): GameQuestionClient {
+  function getQuestionForPlayer(): GameQuestion {
     const question = data.currentQuestion
     return {
       id: question.id,
@@ -80,11 +78,11 @@ export async function useGame(event: H3Event) {
       question: question.question,
       answers: question.answers,
       meta: {
-        creepjackEpisode: question.meta.creepjackEpisode,
-        episode: question.meta.episode,
-        questionNr: question.meta.questionNr,
-        questionTimeOnStream: question.meta.questionTimeOnStream,
-        author: question.meta.author,
+        creepjackEpisode: question.creepjackEpisode,
+        episode: question.jkEpisode,
+        questionNr: question.questionNr,
+        questionTimeOnStream: question.questionTimeOnStream,
+        author: question.author,
       },
     }
   }
@@ -93,8 +91,8 @@ export async function useGame(event: H3Event) {
    * updates the current question in the question
    */
   async function updateCurrentQuestion() {
-    const questionId = questions.data.questions[data.currentQuestionNr - 1]
-    const question = getQuestionById(questionId)
+    const questionId = questions.data.questions[session.data.currentQuestionNr - 1]
+    const question = await getQuestionById(questionId)
     randomizeArrayOrder(question.answers)
     await session.update({
       currentQuestion: question,
@@ -111,7 +109,7 @@ export async function useGame(event: H3Event) {
       await questions.clear()
     }
     const questionCount = settings?.questionCount ?? 3
-    const questionIds = getRandomQuestionIds(questionCount)
+    const questionIds = await getRandomQuestionIds(questionCount)
     await questions.update({ questions: questionIds })
     await session.update({
       running: true,
