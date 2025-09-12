@@ -19,17 +19,32 @@ interface QuestionCsv {
   question_nr: string
   question_time_on_stream: string
   question: string
+  answer_video_time: string
   answer: string
   other_answers: string
   author?: string
 }
 
-interface GameQuestionClient {
+interface QuestionDB {
+  id: number
+  question: string
+  answers: Array<string>
+  correctAnswer: string
+  author?: string
+  creepjackEpisode: number
+  jkEpisode: string
+  questionNr: number
+  jannesAnswer: string
+  questionTimeOnStream: string
+  answerTimeOnStream: string
+}
+
+interface GameQuestion {
   id: string | number
   meta: {
     episode: string
-    creepjackEpisode: string
-    questionNr: string
+    creepjackEpisode: number
+    questionNr: number
     questionTimeOnStream: string
     author?: string
   }
@@ -38,25 +53,8 @@ interface GameQuestionClient {
   answers: Array<string>
 }
 
-interface GameQuestionServer {
-  id: string | number
-  meta: {
-    episode: string
-    creepjackEpisode: string
-    questionNr: string
-    questionTimeOnStream: string
-    // jannesAnswer: string
-    jannesCorrect: boolean
-    author?: string
-  }
-  question: string
-  answers: Array<string>
-  correctAnswer: string
-  //
-}
-
 interface GameSession {
-  currentQuestion: GameQuestionServer
+  currentQuestion: QuestionDB
   questions: Array<string>
   running: boolean
   currentQuestionNr: number
@@ -103,7 +101,7 @@ interface GameMeta {
 }
 
 interface GetQuestionRespone {
-  question: GameQuestionClient
+  question: GameQuestion
   meta: GameMeta
 }
 

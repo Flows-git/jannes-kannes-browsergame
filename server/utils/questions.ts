@@ -1,41 +1,58 @@
-import questionsJson from '@@/data/questions.json'
+async function getAllQuestionsIds(): Promise<string[]> {
+  const supabase = await useSupabaseServer()
 
-const questions: GameQuestionServer[] = questionsJson
+  const { data, error } = await supabase
+    .from('questions')
+    .select('id')
 
-export function getAllQuestionsCount() {
-  return questions.length
+  if (error) {
+    console.error(error)
+    throw createError({
+      statusCode: 500,
+      statusMessage: error.message,
+    })
+  }
+
+  return data.map(q => q.id)
 }
 
-export function getQuestionById(id: string | number) {
-  const question = questions.find(q => q.id === id)
-  if (!question) {
+export async function getAllQuestionsCount() {
+  const supabase = await useSupabaseServer()
+  const { count, error } = await supabase
+    .from('questions')
+    .select('id', { count: 'exact', head: true })
+
+  if (error) {
+    console.error(error)
+    throw createError({
+      statusCode: 500,
+      statusMessage: error.message,
+    })
+  }
+
+  return count ?? 0
+}
+
+export async function getQuestionById(id: string | number): Promise<QuestionDB> {
+  const supabase = await useSupabaseServer()
+  const { data, error } = await supabase
+    .from('questions')
+    .select('*')
+    .filter('id', 'eq', id)
+    .single<QuestionDB>()
+
+  if (error) {
     throw createError('question not found')
   }
-  return question
-}
-
-export function getQuestionByIdForPlayer(id: string): GameQuestionClient {
-  const question = getQuestionById(id)
-  return {
-    id: question.id,
-    question: question.question,
-    questionNr: 0, // This will be set by the game logic
-    answers: question.answers,
-    meta: {
-      creepjackEpisode: question.meta.creepjackEpisode,
-      episode: question.meta.episode,
-      questionNr: question.meta.questionNr,
-      questionTimeOnStream: question.meta.questionTimeOnStream,
-    },
-  }
+  return data
 }
 
 /**
  * Get n random question Ids for JannesKannes
  */
-export function getRandomQuestionIds(count: number) {
+export async function getRandomQuestionIds(count: number) {
   // Get all question Ids
-  const qIds = questions.map(q => q.id)
+  const qIds = await getAllQuestionsIds()
   // Randomize order of question Ids
   randomizeArrayOrder(qIds)
   return qIds.slice(0, count)
@@ -56,10 +73,10 @@ export function randomizeArrayOrder(array: Array<any>) {
 
 /**
  * Get the percentage of answered questions from all questions
- * @param answeredQuestion 
- * @returns 
+ * @param answeredQuestion
+ * @returns percentage of players answered questions in relation to total questions
  */
-export function getAnsweredQuestionsInPercent(answeredQuestion: number) {
-  const totalQuestions = getAllQuestionsCount()
+export async function getAnsweredQuestionsInPercent(answeredQuestion: number) {
+  const totalQuestions = await getAllQuestionsCount()
   return Number(((answeredQuestion / totalQuestions) * 100).toFixed(2))
 }

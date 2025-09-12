@@ -47,5 +47,5 @@ export async function downloadFile(url: string, fileName: string) {
   // Save the file in public folder
   const destination = path.resolve('public', fileName)
   const streamPipeline = promisify(pipeline)
-  await streamPipeline(response.body, createWriteStream(destination))
+  await streamPipeline(response.body as any, createWriteStream(destination))
 }

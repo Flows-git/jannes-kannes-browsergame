@@ -1,6 +1,6 @@
 export function useGame() {
   const gameMeta = ref<GameMeta>()
-  const currentQuestion = ref<GameQuestionClient>()
+  const currentQuestion = ref<GameQuestion>()
   const showResult = ref<boolean>(false)
 
   async function startGame(mode: GameMode, settings?: GameSettings) {

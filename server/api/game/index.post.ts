@@ -6,6 +6,6 @@ export default defineEventHandler(async (event) => {
   const result = await answerCurrentQuestion(body.answer)
   return {
     result,
-    meta: getGameMeta(),
+    meta: await getGameMeta(),
   }
 })
