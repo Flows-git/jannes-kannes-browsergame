@@ -1,4 +1,4 @@
-import { createWriteStream, existsSync, unlinkSync, WriteStream } from 'node:fs'
+import { createWriteStream, existsSync, unlinkSync } from 'node:fs'
 import { pipeline } from 'node:stream'
 import path from 'node:path'
 

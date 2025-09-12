@@ -1,12 +1,16 @@
-import questionsJson from '@@/data/questions.json'
 import { useQuestionDB } from './helper/questionDB'
+import { parseQuestionsCsvToJson } from './parseQuestionsCsvToJson'
 
-console.log('setup supabase database...')
-const { addQuestionListToDB, parseQuestionForDB } = await useQuestionDB()
+export async function setupSupabaseDB() {
+  console.log('setup supabase database...')
+  const { addQuestionListToDB } = await useQuestionDB()
 
-const questions: GameQuestionServer[] = questionsJson
-const dbQuestions = questions.map(q => parseQuestionForDB(q))
-const skipped = await addQuestionListToDB(dbQuestions)
+  const questions: QuestionDB[] = await parseQuestionsCsvToJson()
+  const skipped = await addQuestionListToDB(questions)
 
-console.log(`${skipped.length}/${questions.length} questions skipped`)
-console.log(`skipped entries: ${skipped.sort((a, b) => a - b)}`)
+  console.log(`${skipped.length}/${questions.length} questions skipped`)
+  if (skipped.length > 0) {
+    console.log(`skipped entries: ${skipped.sort((a, b) => a - b)}`)
+  }
+  console.log('setup supabase database DONE')
+}
