@@ -54,6 +54,7 @@ interface GameQuestion {
 }
 
 interface GameSession {
+  gameMode: GameMode
   currentQuestion: QuestionDB
   questions: Array<string>
   running: boolean
@@ -81,6 +82,7 @@ interface GameStartParams {
 }
 
 interface GameSettings {
+  mode: GameMode
   questionCount?: number
   liveCount?: number
   // jokerCount?: number

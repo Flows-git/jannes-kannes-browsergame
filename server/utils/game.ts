@@ -112,6 +112,7 @@ export async function useGame(event: H3Event) {
     const questionIds = await getRandomQuestionIds(questionCount)
     await questions.update({ questions: questionIds })
     await session.update({
+      gameMode: settings.mode,
       running: true,
       answeredQuestions: 0,
       currentQuestionNr: 1,
@@ -154,6 +155,9 @@ export async function useGame(event: H3Event) {
       // updates the current question in the session
       await updateCurrentQuestion()
     }
+
+    // add answer metrics entry
+    addAnswerMetrics(question.id, answer, answerCorrect, session.data.gameMode)
 
     // returns if given answer was correct and the correct answer
     return {
