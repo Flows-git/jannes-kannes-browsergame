@@ -36,4 +36,9 @@ export default defineNuxtConfig({
       ],
     },
   },
+  $development: {
+    extends: [
+      './admin',
+    ],
+  },
 })
