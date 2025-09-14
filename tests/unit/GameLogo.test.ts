@@ -31,8 +31,8 @@ describe('gameLogo.vue', () => {
     wrapper.setData({ mainImg: { state: 'loaded' } })
     await img.vm.$forceUpdate()
     await wrapper.vm.$forceUpdate()
-    console.log(img.vm.state)
-    console.log(wrapper.html())
+    // console.log(img.vm.state)
+    // console.log(wrapper.html())
     // Subtitle should be rendered
     expect(wrapper.find('.jk-game-logo--subtitle').exists()).toBe(true)
     expect(wrapper.find('.jk-game-logo--subtitle').text()).toBe('Das Spiel')

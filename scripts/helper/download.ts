@@ -1,6 +1,6 @@
 import { createWriteStream, existsSync, unlinkSync } from 'node:fs'
-import { pipeline } from 'node:stream'
 import path from 'node:path'
+import { pipeline } from 'node:stream'
 
 import { promisify } from 'node:util'
 

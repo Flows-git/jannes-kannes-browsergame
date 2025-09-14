@@ -17,32 +17,28 @@
     "test:unit": "vitest run  --coverage",
     "test:e2e": "playwright test"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@supabase/supabase-js": "^2.57.4",
-    "@tsparticles/confetti": "^3.8.1",
-    "nuxt": "^4.1.0",
-    "vue": "latest",
-    "vue-router": "latest"
+    "@tsparticles/confetti": "^3.9.1",
+    "nuxt": "^4.1.2",
+    "vue": "latest"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.13.1",
-    "@nuxt/test-utils": "^3.19.1",
-    "@playwright/test": "^1.53.1",
+    "@antfu/eslint-config": "^5.3.0",
+    "@nuxt/test-utils": "^3.19.2",
+    "@playwright/test": "^1.55.0",
     "@types/bun": "latest",
     "@types/decompress": "^4.2.7",
     "@vitest/coverage-v8": "3.2.4",
     "@vue/test-utils": "^2.4.6",
-    "convert-csv-to-json": "^3.4.0",
+    "convert-csv-to-json": "^3.6.0",
     "decompress": "^4.2.1",
-    "eslint": "9.26.0",
+    "eslint": "9.35.0",
     "happy-dom": "^18.0.1",
-    "sass": "^1.89.0",
-    "typescript": "~5.8.3",
-    "vite-plugin-vuetify": "^2.1.1",
+    "sass": "^1.92.1",
+    "typescript": "~5.9.2",
+    "vite-plugin-vuetify": "^2.1.2",
     "vitest": "^3.2.4",
     "vuetify": "^3.10.0"
   }

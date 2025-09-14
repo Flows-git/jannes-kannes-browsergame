@@ -1,7 +1,7 @@
 services:
   frontend:
     image: oven/bun
-    container_name: 'janneskannes-frontend'
+    container_name: janneskannes-frontend
     working_dir: /usr/app/frontend
     ports:
       - 3000:3000
@@ -21,7 +21,7 @@ services:
 
   db:
     image: mongo
-    container_name: 'janneskannes-db'
+    container_name: janneskannes-db
     restart: always
     ports:
       - 27017:27017
@@ -34,7 +34,7 @@ services:
       - MONGO_INITDB_DATABASE=${MONGO_DATA_DB}
     networks:
       - app-network
-    healthcheck: 
+    healthcheck:
       test: echo 'db.runCommand({find:"app_db_name.devUser"}).ok' | mongosh --authenticationDatabase admin --host localhost -u root -p root admin --quiet | grep -q 1
       interval: 10s
       timeout: 10s

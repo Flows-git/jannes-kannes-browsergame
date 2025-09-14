@@ -1,6 +1,6 @@
 import { StatsBar } from '#components'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 /**
  * Mounts the StatsBar component with the given props.
@@ -17,7 +17,7 @@ function mountStatsBar(props: Partial<InstanceType<typeof StatsBar>['$props']> =
     },
     global: {
       stubs: {
-        VProgressLinear: true // Stub the VProgressLinear component
+        VProgressLinear: true, // Stub the VProgressLinear component
       },
       renderStubDefaultSlot: true, // Ensure default slot is rendered
     },
@@ -25,8 +25,7 @@ function mountStatsBar(props: Partial<InstanceType<typeof StatsBar>['$props']> =
 }
 
 // @vitest-environment nuxt
-describe('StatsBar', () => {
-
+describe('statsBar', () => {
   it('can mount the component', async () => {
     const component = await mountStatsBar({ total: 3, remaining: 3, color: 'success' })
     expect(component.find('.stats-bar').exists()).toBeTruthy()
@@ -38,9 +37,7 @@ describe('StatsBar', () => {
   })
 
   it('sets expected props on VProgressLinear', async () => {
-    const component = await mountStatsBar({
-      total: 42, remaining: 3, height: 42, color: 'success'
-    })
+    const component = await mountStatsBar({ total: 42, remaining: 3, height: 42, color: 'success' })
 
     const progressBar = component.findComponent({ name: 'VProgressLinear' })
     expect(progressBar.exists()).toBeTruthy()

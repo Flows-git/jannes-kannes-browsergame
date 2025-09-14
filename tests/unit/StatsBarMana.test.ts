@@ -12,14 +12,14 @@ function mountStatsBar(props: Partial<InstanceType<typeof StatsBarMana>['$props'
     props: { // merge default props with provided ones
       total: 0,
       remaining: 0,
-      ...props
+      ...props,
     },
-    shallow: true
+    shallow: true,
   })
 }
 
 // @vitest-environment nuxt
-describe('StatsBarMana', () => {
+describe('statsBarMana', () => {
   it('sets expected props on base StatsBar', async () => {
     const component = await mountStatsBar({ total: 42, remaining: 3 })
     const statsBar = component.findComponent({ name: 'StatsBar' })

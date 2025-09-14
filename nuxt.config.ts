@@ -3,6 +3,7 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  compatibilityDate: '2025-09-14',
   experimental: {
     viewTransition: true,
   },
@@ -16,6 +17,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/test-utils/module',
   ],
+
   vite: {
     vue: {
       template: {
@@ -28,7 +30,10 @@ export default defineNuxtConfig({
   },
   typescript: {
     tsConfig: {
-      include: ['../scripts/**/*'],
+      include: [
+        '../scripts/**/*',
+        '../tests/**/*',
+      ],
     },
   },
 })
