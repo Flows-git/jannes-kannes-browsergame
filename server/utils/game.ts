@@ -162,7 +162,7 @@ export async function useGame(event: H3Event) {
     // returns if given answer was correct and the correct answer
     return {
       correct: answerCorrect,
-      corretAnswer: question.correctAnswer,
+      correctAnswer: question.correctAnswer,
     }
   }
 

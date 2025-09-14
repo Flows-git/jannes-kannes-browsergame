@@ -109,5 +109,5 @@ interface GetQuestionRespone {
 
 interface AnswerQuestionResponse {
   correct: boolean
-  corretAnswer: string
+  correctAnswer: string
 }

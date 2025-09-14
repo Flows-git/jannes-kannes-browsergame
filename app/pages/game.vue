@@ -114,14 +114,15 @@ async function doRestartGame() {
           </div>
         </div>
         <template v-if="!showResult && currentQuestion">
-          <GameQuestion v-model="answer" :current-question-nr="currentQuestion.questionNr" :question="currentQuestion" :loading="loading"
-            :correct-answer="answerResult?.corretAnswer" />
+          <GameQuestion
+            v-model="answer" :current-question-nr="currentQuestion.questionNr" :question="currentQuestion" :loading="loading"
+            :correct-answer="answerResult?.correctAnswer"
+          />
           <!-- <HeroFallenOverlay v-if="gameMeta?.remainingLives === 0" @show-results="showEndResult" /> -->
         </template>
         <template v-if="gameMeta && showResult">
           <GameResultScreen v-if="gameMeta.totalQuestions === 3" :meta="gameMeta" @do-restart="doRestartGame" />
           <GameResultScreenEndless v-else :meta="gameMeta" @do-restart="doRestartGame" />
-
         </template>
       </v-card-text>
 
@@ -136,8 +137,10 @@ async function doRestartGame() {
           <v-btn v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" :loading="loading" @click="sendAnswer">
             Antworten absenden
           </v-btn>
-          <v-btn v-if="gameRunning && answerResult && gameMeta.answeredQuestions < gameMeta.totalQuestions" size="large" color="primary" variant="outlined"
-            :loading="loading" @click="nextQuestion">
+          <v-btn
+            v-if="gameRunning && answerResult && gameMeta.answeredQuestions < gameMeta.totalQuestions" size="large" color="primary" variant="outlined"
+            :loading="loading" @click="nextQuestion"
+          >
             Nächste Frage
           </v-btn>
           <v-btn v-if="!gameRunning" size="large" color="primary" variant="outlined" @click="showEndResult">
