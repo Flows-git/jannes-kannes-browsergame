@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     viewTransition: true,
   },
   runtimeConfig: {
+    sessionSecret: '',
     supabaseUrl: '',
     supabaseApiKey: '',
   },

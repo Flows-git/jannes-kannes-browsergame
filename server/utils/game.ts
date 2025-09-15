@@ -9,13 +9,14 @@ import type { H3Event } from 'h3'
  * })
  */
 export async function useGame(event: H3Event) {
+  const config = useRuntimeConfig()
   /**
    * Creates a new session or takes the existing
    * It's needed for basically all interactions with the game
    */
   const session = await useSession<GameSession>(event, {
     name: 'jannes-kann-es-game',
-    password: 'superSuperSecretSessionPassword!', // TODO: add password to .env
+    password: config.sessionSecret,
     cookie: {
       secure: false,
     },
@@ -24,7 +25,7 @@ export async function useGame(event: H3Event) {
 
   const questions = await useSession<{ questions: Array<string | number> }>(event, {
     name: 'jannes-kann-es-questions',
-    password: 'superSuperSecretSessionPassword!', // TODO: add password to .env
+    password: config.sessionSecret,
     cookie: {
       secure: false,
     },
@@ -67,6 +68,14 @@ export async function useGame(event: H3Event) {
     }
   }
 
+  function getGameSettings(): GameSettings {
+    return {
+      mode: data.gameMode,
+      liveCount: data.totalLives,
+      questionCount: data.totalQuestions,
+    }
+  }
+
   /**
    * returns the question parsed for the player (without answer) and with the necessary meta for the frontend
    */
@@ -105,8 +114,7 @@ export async function useGame(event: H3Event) {
    */
   async function startGame(settings: GameSettings) {
     if (Object.keys(data).length === 0) {
-      await session.clear()
-      await questions.clear()
+      await clearGameSession()
     }
     const questionCount = settings?.questionCount ?? 3
     const questionIds = await getRandomQuestionIds(questionCount)
@@ -179,13 +187,30 @@ export async function useGame(event: H3Event) {
     })
   }
 
+  async function clearGameSession() {
+    await session.clear()
+    await questions.clear()
+  }
+
+  async function submitGameResult(name: string) {
+    await submitGameResultToLeaderboard(name, data)
+    await clearGameSession()
+  }
+
+  async function getRank() {
+    return await getLeaderboardRanking(data)
+  }
+
   return {
     isGameStarted,
     isGameRunning,
     getQuestionForPlayer,
     getGameMeta,
+    getGameSettings,
     startGame,
     answerCurrentQuestion,
     endGame,
+    submitGameResult,
+    getRank,
   }
 }

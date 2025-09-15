@@ -111,3 +111,12 @@ interface AnswerQuestionResponse {
   correct: boolean
   correctAnswer: string
 }
+
+interface LeaderboardEntry {
+  name: string
+  score: number
+  correctAnswers: number
+  usedJoker: number
+  gameTime: string
+  averageAnswerTime: string
+}

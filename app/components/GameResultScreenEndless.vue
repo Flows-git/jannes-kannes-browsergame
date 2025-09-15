@@ -6,6 +6,10 @@ defineProps<{
 const emits = defineEmits<{
   (e: 'doRestart'): void
 }>()
+
+function testAddResult() {
+  $fetch('/api/leaderboard', { method: 'POST', body: { name: 'TESTTTTT' } })
+}
 </script>
 
 <template>
@@ -79,6 +83,12 @@ const emits = defineEmits<{
       </v-card>
     </v-col>
   </v-row>
+  <div class="text-center">
+    <v-btn @click="testAddResult">
+      Ergebnis in Rangliste eintragen!!!
+    </v-btn>
+  </div>
+
   <div class="d-flex justify-center ga-2 flex-wrap">
     <v-btn color="primary" variant="outlined" class="mt-4" @click="emits('doRestart')">
       Spiel neustarten
