@@ -18,20 +18,11 @@ export async function submitGameResultToLeaderboard(name: string, data: GameSess
 
 export async function getLeaderboard() {
   const supabase = await useSupabaseServer()
-  const { data, error } = await supabase.from('leaderboard').select().order('score', { ascending: false })
+  const { data, error } = await supabase.rpc('get_leaderboard')
 
   if (error) {
     throw createError(error)
   }
-
-  let rank = 1
-  data.forEach((item, index) => {
-    const lastScore = index > 0 ? data[index - 1] : data[index]
-    if (lastScore.score !== item.score) {
-      rank++
-    }
-    item.rank = rank
-  })
 
   return data
 }
