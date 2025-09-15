@@ -1,22 +1,76 @@
 <script setup lang="ts">
 import type { DataTableHeader } from 'vuetify'
 
-const { data, pending } = useFetch('/api/leaderboard')
+const route = useRoute()
+
+const { data, pending } = useFetch<Array<LeaderboardEntry>>('/api/leaderboard')
 
 const headers: Array<DataTableHeader> = [
-  { title: 'Rang', key: 'rank', align: 'center', sortable: false },
+  { title: 'Rang', key: 'rank', align: 'center', sortable: false, maxWidth: 100, width: 100 },
   { title: 'Name', key: 'name', sortable: false },
-  { title: 'Punktzahl', key: 'score', align: 'center', sortable: false },
-  { title: 'Spielzeit', key: 'gameTime', sortable: false },
-  { title: 'Durchschnittliche Antwortzeit', key: 'averageAnswerTime', sortable: false },
+  { title: 'Punktzahl', key: 'score', align: 'center', sortable: false, maxWidth: 100, width: 100 },
+  { title: 'Spielzeit', key: 'gameTime', align: 'center', sortable: false, maxWidth: 150, width: 150 },
+  { title: 'Durchschnittliche Antwortzeit', align: 'center', key: 'averageAnswerTime', sortable: false, maxWidth: 150, width: 150 },
 ]
+
+const selected = computed(() => Number.parseInt(route.hash.replaceAll('#id', '')))
+// const selected2 = computed(() => Number.parseInt(route.query.id as string))
+
+function isRowSelected(data: LeaderboardEntry) {
+  if (data.id === selected.value) {
+    return { class: 'active-row', id: `id${selected.value}` }
+  }
+  return {}
+}
 </script>
 
 <template>
-  <v-container>
-    <div class="text-h3 text-center text-primary pb-3">
-      Leaderboard
+  <v-container class="leaderboard" max-width="800">
+    <div class="pb-3">
+      <v-btn color="primary" to="/">
+        <v-icon icon="mdi-chevron-left" />
+        Zurück zum Hauptmenü
+      </v-btn>
     </div>
-    <v-data-table :headers="headers" :items="data" :loading="pending" :items-per-page="-1" hide-default-footer />
+    <v-card>
+      <div class="text-h4 text-center pa-3 bg-surface-variant d-flex  align-center justify-space-between">
+        Bestenliste
+        <GameLogo />
+      </div>
+      <client-only>
+        <v-data-table
+          :model-value="selected ? [selected] : []" :headers="headers" :items="data" :loading="pending" :row-props="(e) => isRowSelected(e.item)"
+          :items-per-page="10" item-value="id"
+        >
+          <template #[`item.rank`]="{ value }">
+            <Medal v-if="value === 1" :val="value" type="gold" />
+            <Medal v-else-if="value === 2" :val="value" type="silver" />
+            <Medal v-else-if="value === 3" :val="value" type="bronze" />
+            <div v-else class="text-h6">
+              {{ value }}
+            </div>
+          </template>
+          <template #[`item.score`]="{ value }">
+            <span class="font-weight-bold text-h6">
+              {{ value }}
+            </span>
+          </template>
+        </v-data-table>
+      </client-only>
+    </v-card>
   </v-container>
 </template>
+
+<style lang="scss" scoped>
+.leaderboard {
+
+  :deep(.v-data-table__tr.active-row) {
+    background-color: rgb(var(--v-theme-primary));
+    color: rgb(var(--v-theme-on-primary));
+  }
+
+  :deep(.v-data-table__tr:not(.active-row):hover) {
+    background: rgba(var(--v-theme-primary), 0.5);
+  }
+}
+</style>

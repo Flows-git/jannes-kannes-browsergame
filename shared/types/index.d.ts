@@ -113,6 +113,7 @@ interface AnswerQuestionResponse {
 }
 
 interface LeaderboardEntry {
+  id?: number
   name: string
   score: number
   correctAnswers: number

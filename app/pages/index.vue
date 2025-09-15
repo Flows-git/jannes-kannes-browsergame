@@ -51,6 +51,12 @@ async function startNewGame(mode: GameMode) {
           </v-card-text>
         </v-card>
       </v-col>
+      <v-col cols="12">
+        <v-card class="fill-height d-flex align-center pa-3" :disabled="loading" to="/leaderboard">
+          <v-icon icon="mdi-trophy-variant-outline" color="primary" size="80" />
+          <v-card-title>Bestenliste</v-card-title>
+        </v-card>
+      </v-col>
       <!-- <v-col cols="12" sm="6">
         <v-card class="fill-height" disabled>
           <v-card-title>Eigenes Spiel</v-card-title>
