@@ -3,7 +3,9 @@ import type { DataTableHeader } from 'vuetify'
 
 const route = useRoute()
 
-const { data, pending } = useFetch<Array<LeaderboardEntry>>('/api/leaderboard')
+const page = ref(1)
+const perPage = ref(10)
+const { data, pending } = useFetch<{ items: Array<LeaderboardEntry>, meta: { totalCount: number } }>(() => `/api/leaderboard?page=${page.value}&perPage=${perPage.value}`)
 
 const headers: Array<DataTableHeader> = [
   { title: 'Rang', key: 'rank', align: 'center', sortable: false, maxWidth: 100, width: 100 },
@@ -38,9 +40,10 @@ function isRowSelected(data: LeaderboardEntry) {
         <GameLogo />
       </div>
       <client-only>
-        <v-data-table
-          :model-value="selected ? [selected] : []" :headers="headers" :items="data" :loading="pending" :row-props="(e) => isRowSelected(e.item)"
-          :items-per-page="10" item-value="id"
+        <v-data-table-server
+          v-model:items-per-page="perPage" v-model:page="page" :model-value="selected ? [selected] : []" :headers="headers" :items="data?.items"
+          :loading="pending" :row-props="(e) => isRowSelected(e.item)" :items-length="data?.meta.totalCount ?? 0" item-value="id"
+          :items-per-page-options="[10, 25, 50, 100]"
         >
           <template #[`item.rank`]="{ value }">
             <Medal v-if="value === 1" :val="value" type="gold" />
@@ -55,7 +58,7 @@ function isRowSelected(data: LeaderboardEntry) {
               {{ value }}
             </span>
           </template>
-        </v-data-table>
+        </v-data-table-server>
       </client-only>
     </v-card>
   </v-container>

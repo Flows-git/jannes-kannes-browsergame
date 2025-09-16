@@ -1,5 +1,4 @@
-import { getLeaderboard } from '~~/server/utils/leaderboard'
-
 export default defineEventHandler(async (event) => {
-  return await getLeaderboard()
+  const params = await getQuery<{ page?: number, perPage?: number }>(event)
+  return await getLeaderboard(params)
 })
