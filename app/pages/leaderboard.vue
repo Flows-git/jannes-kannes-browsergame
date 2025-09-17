@@ -3,9 +3,17 @@ import type { DataTableHeader } from 'vuetify'
 
 const route = useRoute()
 
-const page = ref(1)
+const id: number | undefined = route.query.id ? Number(route.query.id) : undefined
 const perPage = ref(10)
+const page = ref(await getStartPage())
 const { data, pending } = useFetch<{ items: Array<LeaderboardEntry>, meta: { totalCount: number } }>(() => `/api/leaderboard?page=${page.value}&perPage=${perPage.value}`)
+
+async function getStartPage() {
+  if (id) {
+    return await $fetch(`/api/leaderboard/pageById?perPage=${perPage.value}&id=${id}`)
+  }
+  return 1
+}
 
 const headers: Array<DataTableHeader> = [
   { title: 'Rang', key: 'rank', align: 'center', sortable: false, maxWidth: 100, width: 100 },
@@ -15,14 +23,11 @@ const headers: Array<DataTableHeader> = [
   { title: 'Durchschnittliche Antwortzeit', align: 'center', key: 'averageAnswerTime', sortable: false, maxWidth: 150, width: 150 },
 ]
 
-const selected = computed(() => Number.parseInt(route.hash.replaceAll('#id', '')))
-// const selected2 = computed(() => Number.parseInt(route.query.id as string))
-
 function isRowSelected(data: LeaderboardEntry) {
-  if (data.id === selected.value) {
-    return { class: 'active-row', id: `id${selected.value}` }
+  if (data.id === id) {
+    return { class: 'active-row', id: `id${id}` }
   }
-  return {}
+  return { id: `id${data.id}` }
 }
 </script>
 
@@ -39,27 +44,25 @@ function isRowSelected(data: LeaderboardEntry) {
         Bestenliste
         <GameLogo />
       </div>
-      <client-only>
-        <v-data-table-server
-          v-model:items-per-page="perPage" v-model:page="page" :model-value="selected ? [selected] : []" :headers="headers" :items="data?.items"
-          :loading="pending" :row-props="(e) => isRowSelected(e.item)" :items-length="data?.meta.totalCount ?? 0" item-value="id"
-          :items-per-page-options="[10, 25, 50, 100]"
-        >
-          <template #[`item.rank`]="{ value }">
-            <Medal v-if="value === 1" :val="value" type="gold" />
-            <Medal v-else-if="value === 2" :val="value" type="silver" />
-            <Medal v-else-if="value === 3" :val="value" type="bronze" />
-            <div v-else class="text-h6">
-              {{ value }}
-            </div>
-          </template>
-          <template #[`item.score`]="{ value }">
-            <span class="font-weight-bold text-h6">
-              {{ value }}
-            </span>
-          </template>
-        </v-data-table-server>
-      </client-only>
+      <v-data-table-server
+        v-model:items-per-page="perPage" v-model:page="page" :model-value="id ? [id] : []" :headers="headers" :items="data?.items"
+        :loading="pending" :row-props="(e) => isRowSelected(e.item)" :items-length="data?.meta.totalCount ?? 0" item-value="id"
+        :items-per-page-options="[10, 25, 50, 100]"
+      >
+        <template #[`item.rank`]="{ value }">
+          <Medal v-if="value === 1" :val="value" type="gold" />
+          <Medal v-else-if="value === 2" :val="value" type="silver" />
+          <Medal v-else-if="value === 3" :val="value" type="bronze" />
+          <div v-else class="text-h6">
+            {{ value }}
+          </div>
+        </template>
+        <template #[`item.score`]="{ value }">
+          <span class="font-weight-bold text-h6">
+            {{ value }}
+          </span>
+        </template>
+      </v-data-table-server>
     </v-card>
   </v-container>
 </template>

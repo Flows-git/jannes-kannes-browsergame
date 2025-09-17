@@ -121,3 +121,8 @@ interface LeaderboardEntry {
   gameTime: string
   averageAnswerTime: string
 }
+
+interface LeaderboardListEntry extends LeaderboardEntry {
+  rank: number
+  position: number
+}
