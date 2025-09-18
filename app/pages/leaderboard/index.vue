@@ -2,18 +2,29 @@
 import type { DataTableHeader } from 'vuetify'
 
 const route = useRoute()
+const router = useRouter()
 
 const id: number | undefined = route.query.id ? Number(route.query.id) : undefined
-const perPage = ref(10)
-const page = ref(await getStartPage())
-const { data, pending } = useFetch<{ items: Array<LeaderboardEntry>, meta: { totalCount: number } }>(() => `/api/leaderboard?page=${page.value}&perPage=${perPage.value}`)
+const perPage = ref(Number(route.query.perPage as string ?? 10))
 
-async function getStartPage() {
-  if (id) {
-    return await $fetch(`/api/leaderboard/pageById?perPage=${perPage.value}&id=${id}`)
-  }
-  return 1
+const page = computed({
+  get: () => Number(route.query.p as string ?? 1),
+  set: async val => updateQueryParams(val),
+})
+
+watch(perPage, () => {
+  updateQueryParams()
+})
+
+function updateQueryParams(_page?: number, _perPage?: number) {
+  const p = _page ?? page.value
+  const pp = _perPage ?? perPage.value
+  router.replace({ query: { p: p !== 1 ? p : undefined, perPage: pp !== 10 ? pp : undefined, id: route.query.id } })
 }
+
+const { data, pending } = useFetch<{ items: Array<LeaderboardEntry>, meta: { totalCount: number } }>(() => {
+  return `/api/leaderboard?page=${page.value}&perPage=${perPage.value}`
+})
 
 const headers: Array<DataTableHeader> = [
   { title: 'Rang', key: 'rank', align: 'center', sortable: false, maxWidth: 100, width: 100 },
