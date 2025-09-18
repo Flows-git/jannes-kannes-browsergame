@@ -121,8 +121,7 @@ async function doRestartGame() {
           <!-- <HeroFallenOverlay v-if="gameMeta?.remainingLives === 0" @show-results="showEndResult" /> -->
         </template>
         <template v-if="gameMeta && showResult">
-          <GameResultScreen v-if="gameMeta.totalQuestions === 3" :meta="gameMeta" @do-restart="doRestartGame" />
-          <GameResultScreenEndless v-else :meta="gameMeta" @do-restart="doRestartGame" />
+          <GameResultScreen :meta="gameMeta" @do-restart="doRestartGame" />
         </template>
       </v-card-text>
 

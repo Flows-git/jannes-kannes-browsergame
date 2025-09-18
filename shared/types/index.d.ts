@@ -90,6 +90,7 @@ interface GameSettings {
 
 interface GameMeta {
   running: boolean
+  mode: GameMode
   currentQuestion: number
   answeredQuestions: number
   totalQuestions: number

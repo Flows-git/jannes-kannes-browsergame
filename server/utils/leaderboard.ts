@@ -13,7 +13,8 @@ export async function submitGameResultToLeaderboard(name: string, data: GameSess
     averageAnswerTime: data.averageAnswerTime,
   }
 
-  await supabase.from('leaderboard').insert(entry)
+  const { data: _newEntry } = await supabase.from('leaderboard').insert(entry).select('id').single()
+  return _newEntry?.id
 }
 
 export async function getLeaderboard(params?: { page?: number, perPage?: number }) {
@@ -54,10 +55,16 @@ export async function getLeaderboardPageById(id: number, perPage: number) {
   }
 }
 
-export async function getLeaderboardRanking(data: GameSession) {
+export async function getLeaderboardRanking(score: number) {
   const supabase = await useSupabaseServer()
 
-  return await supabase.rpc('get_rank', { _score: data.correctAnswers })
+  const { data, error } = await supabase.rpc('get_rank', { _score: score })
+
+  if (error) {
+    throw createError(error)
+  }
+
+  return data
 }
 
 /**

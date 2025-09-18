@@ -40,7 +40,7 @@ export async function useGame(event: H3Event) {
   function isGameStarted() {
     // When data is empty no game is started
     if (Object.keys(data).length === 0) {
-      throw createError({ status: 416, message: 'No game started' })
+      throw createError({ status: 416, statusMessage: 'No game started' })
     }
     return true
   }
@@ -48,13 +48,14 @@ export async function useGame(event: H3Event) {
   function isGameRunning() {
     isGameStarted()
     if (!data.running) {
-      throw createError({ status: 416, message: 'game ended' })
+      throw createError({ status: 416, statusMessage: 'game has ended' })
     }
   }
 
   async function getGameMeta(): Promise<GameMeta> {
     return {
       running: data.running,
+      mode: data.gameMode,
       totalQuestions: data.totalQuestions,
       currentQuestion: data.currentQuestionNr,
       answeredQuestions: data.answeredQuestions,
@@ -193,12 +194,13 @@ export async function useGame(event: H3Event) {
   }
 
   async function submitGameResult(name: string) {
-    await submitGameResultToLeaderboard(name, data)
+    const id = await submitGameResultToLeaderboard(name, data)
     await clearGameSession()
+    return id
   }
 
   async function getRank() {
-    return await getLeaderboardRanking(data)
+    return await getLeaderboardRanking(data.correctAnswers)
   }
 
   return {
