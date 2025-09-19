@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { ValidationRule } from 'vuetify/lib/types.mjs'
+
+const router = useRouter()
+
 const rank = ref()
 
 const loading = ref(true)
@@ -15,13 +19,36 @@ async function getRank() {
   }
   loading.value = false
 }
-const router = useRouter()
-async function addResultToLeaderboard() {
-  const id = await $fetch('/api/leaderboard', { method: 'POST', body: { name: 'ARGH' } })
-  router.push(`/leaderboard/redirect/${id}`)
-}
 
 getRank()
+
+const leaderboardLoading = ref(false)
+const leaderboardError = ref()
+const name = ref()
+const valid = ref(false)
+const leaderboardForm = useTemplateRef('leaderboardForm')
+const rules: ValidationRule[] = [
+  val => !!val || 'Name eingeben',
+  val => val.length >= 3 || 'Name muss mindestens 3 Zeichen lang sein',
+  val => val.length <= 30 || 'Name darf maximal 30 Zeichen lang sein',
+]
+
+async function addResultToLeaderboard() {
+  leaderboardLoading.value = true
+  leaderboardError.value = undefined
+  try {
+    await leaderboardForm.value?.validate()
+    if (!valid.value) {
+      return
+    }
+    const id = await $fetch('/api/leaderboard', { method: 'POST', body: { name: name.value } })
+    router.push(`/leaderboard/redirect/${id}`)
+  }
+  catch (error) {
+    leaderboardError.value = error
+  }
+  leaderboardLoading.value = false
+}
 </script>
 
 <template>
@@ -37,7 +64,7 @@ getRank()
             {{ rank }}.
           </div>
           <v-alert v-if="error" type="error">
-            {{ error }}
+            {{ error.message }}
           </v-alert>
           <div class="opacity-70">
             Platz erreicht
@@ -45,10 +72,31 @@ getRank()
         </v-card>
       </v-col>
       <v-col cols="12" class=" pt-0 pb-8 text-center">
-        <v-btn color="primary" @click="addResultToLeaderboard">
-          <v-icon icon="mdi-trophy-variant" />
-          Ergebnis in Rangliste eintragen
-        </v-btn>
+        <v-dialog width="500">
+          <template #activator="{ props }">
+            <v-btn color="primary" v-bind="props">
+              <v-icon icon="mdi-trophy-variant" />
+              Ergebnis in Rangliste eintragen
+            </v-btn>
+          </template>
+          <v-form ref="leaderboardForm" v-model="valid" @submit.prevent="addResultToLeaderboard">
+            <v-card>
+              <v-card-title>Name eingeben</v-card-title>
+              <div>{{ name }}</div>
+              <v-card-text>
+                <v-text-field v-model="name" label="Name" :rules="rules" />
+                <v-alert v-if="leaderboardError" type="error" closable @click:close="leaderboardError.value = undefined">
+                  {{ leaderboardError }}
+                </v-alert>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn color="primary" type="submit">
+                  Ergebnis eintragen
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-form>
+        </v-dialog>
       </v-col>
     </v-row>
   </div>
