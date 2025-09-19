@@ -22,7 +22,7 @@ function updateQueryParams(_page?: number, _perPage?: number) {
   router.replace({ query: { p: p !== 1 ? p : undefined, perPage: pp !== 10 ? pp : undefined, id: route.query.id } })
 }
 
-const { data, pending } = useFetch<{ items: Array<LeaderboardEntry>, meta: { totalCount: number } }>(() => {
+const { data, pending } = useFetch<{ items: Array<LeaderboardListEntry>, meta: { totalCount: number } }>(() => {
   return `/api/leaderboard?page=${page.value}&perPage=${perPage.value}`
 })
 
@@ -34,8 +34,15 @@ const headers: Array<DataTableHeader> = [
   { title: 'Durchschnittliche Antwortzeit', align: 'center', key: 'averageAnswerTime', sortable: false, maxWidth: 150, width: 150 },
 ]
 
-function isRowSelected(data: LeaderboardEntry) {
+const confettiDone = ref(false)
+const confetti = useConfetti()
+
+function isRowSelected(data: LeaderboardListEntry) {
   if (data.id === id) {
+    if (data.rank < 4 && !confettiDone.value) {
+      confetti.startConfetti(5)
+      confettiDone.value = true
+    }
     return { class: 'active-row', id: `id${id}` }
   }
   return { id: `id${data.id}` }

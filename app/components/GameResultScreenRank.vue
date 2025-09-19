@@ -41,8 +41,8 @@ async function addResultToLeaderboard() {
     if (!valid.value) {
       return
     }
-    const id = await $fetch('/api/leaderboard', { method: 'POST', body: { name: name.value } })
-    router.push(`/leaderboard/redirect/${id}`)
+    const leaderboardUrl = await $fetch('/api/leaderboard', { method: 'POST', body: { name: name.value } })
+    router.replace(leaderboardUrl)
   }
   catch (error) {
     leaderboardError.value = error
