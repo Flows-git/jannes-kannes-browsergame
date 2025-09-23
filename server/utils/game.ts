@@ -17,19 +17,19 @@ export async function useGame(event: H3Event) {
   const session = await useSession<GameSession>(event, {
     name: 'jannes-kann-es-game',
     password: config.sessionSecret,
-    cookie: {
-      secure: false,
-    },
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    // cookie: {
+    //   secure: false,
+    // },
+    maxAge: 60 * 60 * 24 * 1, // 1 days
   })
 
   const questions = await useSession<{ questions: Array<string | number> }>(event, {
     name: 'jannes-kann-es-questions',
     password: config.sessionSecret,
-    cookie: {
-      secure: false,
-    },
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    // cookie: {
+    //   secure: false,
+    // },
+    maxAge: 60 * 60 * 24 * 1, // 1 days
   })
 
   const data = session.data
