@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <div class="pb-3">
+      <v-btn color="primary" to="/">
+        <v-icon icon="mdi-chevron-left" />
+        Zurück zum Hauptmenü
+      </v-btn>
+    </div>
     <div>
       Logo and Favicon erstellt mit: <a href="https://www.textstudio.com/">Font generator</a>
     </div>
