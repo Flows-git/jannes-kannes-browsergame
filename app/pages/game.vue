@@ -71,6 +71,20 @@ async function doRestartGame() {
   answer.value = undefined
   await restartGame()
 }
+
+const gameModeLabel = computed(() => {
+  let mode = ''
+  if (gameMeta.value?.mode === 'classic') {
+    mode = 'Klassisch'
+  }
+  else if (gameMeta.value?.mode === 'endless') {
+    mode = 'Endlos'
+  }
+  else if (gameMeta.value?.mode === 'ranked') {
+    mode = 'Ranglistenspiel'
+  }
+  return mode
+})
 </script>
 
 <template>
@@ -99,9 +113,14 @@ async function doRestartGame() {
           </v-list>
         </v-menu>
         <GameLogo />
-        <v-chip v-if="currentQuestion" class="jk-game--questions-chip" size="x-large">
-          {{ currentQuestion.questionNr }} / {{ gameMeta?.totalQuestions }}
-        </v-chip>
+        <div class="jk-game--questions-chip">
+          <v-chip v-if="currentQuestion" size="x-large">
+            {{ currentQuestion.questionNr }} / {{ gameMeta?.totalQuestions }}
+          </v-chip>
+          <div class="text-center">
+            {{ gameModeLabel }}
+          </div>
+        </div>
       </v-card-text>
       <v-progress-linear color="primary" :model-value="gameMeta?.answeredQuestions" :buffer-value="gameMeta?.currentQuestion" :max="gameMeta?.totalQuestions" />
 
@@ -127,11 +146,12 @@ async function doRestartGame() {
 
       <!-- Action Bar -->
       <v-card-actions v-if="gameMeta && (gameRunning || !showResult)" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
-        <div v-if="gameMeta.totalLives" class="jk-game--stats-container">
-          <StatsBarHealth v-if="gameMeta.totalLives" :total="gameMeta.totalLives" :remaining="gameMeta.remainingLives as number" />
+        <div>
+          <div v-if="gameMeta.totalLives" class="jk-game--stats-container">
+            <StatsBarHealth v-if="gameMeta.totalLives" :total="gameMeta.totalLives" :remaining="gameMeta.remainingLives as number" />
           <!-- <StatsBarMana :total="3" :remaining="2" /> -->
+          </div>
         </div>
-        <v-spacer v-else />
         <div>
           <v-btn v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" :loading="loading" @click="sendAnswer">
             Antworten absenden
