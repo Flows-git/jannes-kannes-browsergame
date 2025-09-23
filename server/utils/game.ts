@@ -9,26 +9,27 @@ import type { H3Event } from 'h3'
  * })
  */
 export async function useGame(event: H3Event) {
+  const config = useRuntimeConfig()
   /**
    * Creates a new session or takes the existing
    * It's needed for basically all interactions with the game
    */
   const session = await useSession<GameSession>(event, {
     name: 'jannes-kann-es-game',
-    password: 'superSuperSecretSessionPassword!', // TODO: add password to .env
-    cookie: {
-      secure: false,
-    },
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    password: config.sessionSecret,
+    // cookie: {
+    //   secure: false,
+    // },
+    maxAge: 60 * 60 * 24 * 1, // 1 days
   })
 
   const questions = await useSession<{ questions: Array<string | number> }>(event, {
     name: 'jannes-kann-es-questions',
-    password: 'superSuperSecretSessionPassword!', // TODO: add password to .env
-    cookie: {
-      secure: false,
-    },
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    password: config.sessionSecret,
+    // cookie: {
+    //   secure: false,
+    // },
+    maxAge: 60 * 60 * 24 * 1, // 1 days
   })
 
   const data = session.data
@@ -39,7 +40,7 @@ export async function useGame(event: H3Event) {
   function isGameStarted() {
     // When data is empty no game is started
     if (Object.keys(data).length === 0) {
-      throw createError({ status: 416, message: 'No game started' })
+      throw createError({ status: 416, statusMessage: 'No game started' })
     }
     return true
   }
@@ -47,13 +48,14 @@ export async function useGame(event: H3Event) {
   function isGameRunning() {
     isGameStarted()
     if (!data.running) {
-      throw createError({ status: 416, message: 'game ended' })
+      throw createError({ status: 416, statusMessage: 'game has ended' })
     }
   }
 
   async function getGameMeta(): Promise<GameMeta> {
     return {
       running: data.running,
+      mode: data.gameMode,
       totalQuestions: data.totalQuestions,
       currentQuestion: data.currentQuestionNr,
       answeredQuestions: data.answeredQuestions,
@@ -64,6 +66,14 @@ export async function useGame(event: H3Event) {
       gameTime: data.gameTime,
       averageAnswerTime: data.averageAnswerTime,
       answeredQuestionsTotalPercent: await getAnsweredQuestionsInPercent(data.answeredQuestions),
+    }
+  }
+
+  function getGameSettings(): GameSettings {
+    return {
+      mode: data.gameMode,
+      liveCount: data.totalLives,
+      questionCount: data.totalQuestions,
     }
   }
 
@@ -105,8 +115,7 @@ export async function useGame(event: H3Event) {
    */
   async function startGame(settings: GameSettings) {
     if (Object.keys(data).length === 0) {
-      await session.clear()
-      await questions.clear()
+      await clearGameSession()
     }
     const questionCount = settings?.questionCount ?? 3
     const questionIds = await getRandomQuestionIds(questionCount)
@@ -179,13 +188,31 @@ export async function useGame(event: H3Event) {
     })
   }
 
+  async function clearGameSession() {
+    await session.clear()
+    await questions.clear()
+  }
+
+  async function submitGameResult(name: string) {
+    const id = await submitGameResultToLeaderboard(name, data)
+    await clearGameSession()
+    return id
+  }
+
+  async function getRank() {
+    return await getLeaderboardRanking(data.correctAnswers)
+  }
+
   return {
     isGameStarted,
     isGameRunning,
     getQuestionForPlayer,
     getGameMeta,
+    getGameSettings,
     startGame,
     answerCurrentQuestion,
     endGame,
+    submitGameResult,
+    getRank,
   }
 }

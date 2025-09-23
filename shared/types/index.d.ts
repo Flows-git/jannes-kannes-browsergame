@@ -90,6 +90,7 @@ interface GameSettings {
 
 interface GameMeta {
   running: boolean
+  mode: GameMode
   currentQuestion: number
   answeredQuestions: number
   totalQuestions: number
@@ -110,4 +111,19 @@ interface GetQuestionRespone {
 interface AnswerQuestionResponse {
   correct: boolean
   correctAnswer: string
+}
+
+interface LeaderboardEntry {
+  id?: number
+  name: string
+  score: number
+  correctAnswers: number
+  usedJoker: number
+  gameTime: string
+  averageAnswerTime: string
+}
+
+interface LeaderboardListEntry extends LeaderboardEntry {
+  rank: number
+  position: number
 }
