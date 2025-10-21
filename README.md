@@ -1,3 +1,15 @@
+<p align="center">
+  <a href="https://nuxt.com/">
+    <img src="https://img.shields.io/badge/Nuxt-4.x-green?logo=nuxt&logoColor=white" alt="Nuxt 4" />
+  </a>
+  <a href="https://supabase.com/">
+    <img src="https://img.shields.io/badge/Supabase-Database-3ECF8E?logo=supabase&logoColor=white" alt="Supabase" />
+  </a>
+  <a href="https://bun.sh/">
+    <img src="https://img.shields.io/badge/Bun-JS%20Runtime-000000?logo=bun&logoColor=white" alt="Bun" />
+  </a>
+</p>
+
 <div style="text-align: center">
   <img src="./public/logo.png" alt="Jannes Kann es Logo" width="400"/>
 </div>
@@ -11,15 +23,17 @@ Logo created by: <a href="https://www.textstudio.com/">Font generator</a>
 ## Development
 ### Setup
 
-Make sure to install the dependencies and run the setup script:
-
+Install the dependencies:
 ```bash
 bun install
-# downloads the wc3 icons
-# parses the questions, tags to json
-bun run setup
 ```
 
+Create `.env` file:
+```bash
+NUXT_SUPABASE_URL=UrlToYourSupabaseInstance
+NUXT_SUPABASE_API_KEY=SupabaseSecretKey
+NUXT_SESSION_SECRET=RandomStringForCookieEncryption
+```
 ### Start Development Server
 
 Start the development server on `http://localhost:3000`:
@@ -28,21 +42,23 @@ Start the development server on `http://localhost:3000`:
 bun run dev
 ```
 
+### Add Questions to Supabase
+Run the script to add questions to your Supabase database:
+```bash
+bun run setup:db
+```
+
 ## Build for Production
 
 Build the application for production:
-
 ```bash
 bun run build
 ```
 
 Locally preview production build:
-
 ```bash
 bun run preview
 ```
-
-Check out the [nuxt deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
 ## Docs
 
@@ -56,30 +72,13 @@ contains:
 - The current question (with randomized answer order)is  KK
 
 ### API Endpoints
-
-**[POST]** `/api/game/start`
-Parameter: GameSettings
-Starts a new game with the passed settings.
-Inits the server session and selects random questions to be answered
-
-**[GET]** `/api/game`
-Returns the current question
-(maybe use websockets instead later)
-
-**[POST]** `/api/game`
-Parameter: { answer: string }
-Validates the answer of the current question and updates the session
-
-**[DELETE]** `/api/game`
-Ends a game manually
-
-**[GET]** `/api/game/result`
-Returns the game result when the game is finished
-contains:
-- Correct Questions / QuestionCount
-- Result in percent
-- Game Time
-- Answered questions with result (player answer, correct answer
-
-## Download playlist video names:
-yt-dlp https://www.youtube.com/playlist\?list\=PLfU2RMxoOiSBinJrGNPSJffiJybUEFyYt --skip-download --no-warning --print "%(id)s;\"%(title)s\";%(upload_date)s"
+| Method | Endpoint | Parameter | Description |
+|--------|----------|-------------|-------------|
+| `POST` | `/api/game/start` | mode: [GameMode](./shared/types/index.d.ts#L73),<br> settings?: [GameSettings](./shared/types/index.d.ts#L84)  | Starts a new game |
+| `GET` | `/api/game` | - | Returns the current question and meta |
+| `POST` | `/api/game` | answer: **string** | Answer the current question |
+| `DELETE` | `/api/game` | - | Ends the current game and deletes the session |
+| `POST` | `/api/game/restart` | - | Restart the current game with the same GameSettings |
+| `GET` | `/api/leaderboard` | page?: **string** (default: 1),<br> perPage?: **string** (default: 10)  | Get the leaderboard with pagination |
+| `POST` | `/api/leaderboard` | name: **string** | Submit a new score to the leaderboard |
+| `POST` | `/api/leaderboard/rank` | name: **string** | Calculates the rank of the currently running game |
