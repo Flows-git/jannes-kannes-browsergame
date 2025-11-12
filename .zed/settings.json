@@ -1,0 +1,9 @@
+{
+  "format_on_save": "on",
+  "formatter": [
+    // Use ESLint's --fix:
+    { "code_action": "source.fixAll.eslint" },
+    // Organize imports on save:
+    { "code_action": "source.organizeImports" }
+  ]
+}
