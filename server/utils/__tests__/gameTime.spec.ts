@@ -1,9 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
-
   getAverageAnswerTimeString,
   getTimeDurationString,
-} from '../../server/utils/gameTime'
+} from '../gameTime'
 
 describe('gameTime utils', () => {
   describe('getTimeDurationString', () => {

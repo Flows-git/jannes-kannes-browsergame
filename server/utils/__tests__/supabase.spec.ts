@@ -24,7 +24,7 @@ const { mockConfig, mockUseRuntimeConfig } = vi.hoisted(() => {
 mockNuxtImport('useRuntimeConfig', () => mockUseRuntimeConfig)
 
 // Import after mocking
-const { useSupabaseServer } = await import('../../server/utils/supabase')
+const { useSupabaseServer } = await import('../supabase')
 
 describe('useSupabaseServer', () => {
   const mockClient = {

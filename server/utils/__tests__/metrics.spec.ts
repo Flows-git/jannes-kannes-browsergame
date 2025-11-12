@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { createSupabaseError, createSupabaseResponse, mockUseSupabaseServer } from '../helper/supabase'
+import { createSupabaseError, createSupabaseResponse, mockUseSupabaseServer } from './mocks/supabase'
 
 // Set up Supabase mock before imports
 const { mocks, resetMocks } = mockUseSupabaseServer()
 
 // Import after mocking
-const { addAnswerMetrics } = await import('../../server/utils/metrics')
+const { addAnswerMetrics } = await import('../metrics')
 
 describe('addAnswerMetrics', () => {
   beforeEach(() => {
