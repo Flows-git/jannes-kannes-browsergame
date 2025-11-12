@@ -1,17 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { createSupabaseResponse, mockUseSupabaseServer } from '../helper/supabase'
+import { createSupabaseCountResponse, createSupabaseError, createSupabaseResponse, mockUseSupabaseServer } from '../helper/supabase'
 
 // Set up Supabase mock before imports
 const { mocks, resetMocks } = mockUseSupabaseServer()
-
-// Mock createError
-vi.stubGlobal('createError', vi.fn((error: any) => {
-  const err = new Error(typeof error === 'string' ? error : error.statusMessage || 'Error')
-  if (typeof error === 'object') {
-    Object.assign(err, error)
-  }
-  throw err
-}))
 
 // Import after mocking
 const { getAllQuestionsCount, getQuestionById, getRandomQuestionIds, randomizeArrayOrder, getAnsweredQuestionsInPercent } = await import('../../server/utils/questions')
@@ -23,11 +14,7 @@ describe('questions utilities', () => {
 
   describe('getAllQuestionsCount', () => {
     it('should return the total count of questions', async () => {
-      mocks.select.mockResolvedValue({
-        data: null,
-        error: null,
-        count: 42,
-      })
+      mocks.select.mockResolvedValue(createSupabaseCountResponse(42))
 
       const result = await getAllQuestionsCount()
 
@@ -37,11 +24,7 @@ describe('questions utilities', () => {
     })
 
     it('should return 0 when count is null', async () => {
-      mocks.select.mockResolvedValue({
-        data: null,
-        error: null,
-        count: null,
-      })
+      mocks.select.mockResolvedValue(createSupabaseCountResponse(null))
 
       const result = await getAllQuestionsCount()
 
@@ -49,11 +32,7 @@ describe('questions utilities', () => {
     })
 
     it('should throw error when database query fails', async () => {
-      mocks.select.mockResolvedValue({
-        data: null,
-        count: null,
-        error: { message: 'Query failed' },
-      })
+      mocks.select.mockResolvedValue(createSupabaseError('Query failed'))
 
       const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
@@ -76,9 +55,7 @@ describe('questions utilities', () => {
         questionNr: 1,
       }
 
-      mocks.single.mockResolvedValue(
-        createSupabaseResponse(mockQuestion),
-      )
+      mocks.single.mockResolvedValue(createSupabaseResponse(mockQuestion))
 
       const result = await getQuestionById('123')
 
@@ -96,9 +73,7 @@ describe('questions utilities', () => {
         correctAnswer: 'Both',
       }
 
-      mocks.single.mockResolvedValue(
-        createSupabaseResponse(mockQuestion),
-      )
+      mocks.single.mockResolvedValue(createSupabaseResponse(mockQuestion))
 
       const result = await getQuestionById(456)
 
@@ -107,10 +82,7 @@ describe('questions utilities', () => {
     })
 
     it('should throw error when question is not found', async () => {
-      mocks.single.mockResolvedValue({
-        data: null,
-        error: { message: 'Question not found', code: 'PGRST116' },
-      })
+      mocks.single.mockResolvedValue(createSupabaseError('Question not found', 'PGRST116'))
 
       await expect(getQuestionById('999')).rejects.toThrow('question not found')
     })
@@ -172,9 +144,7 @@ describe('questions utilities', () => {
         { id: '5' },
       ]
 
-      mocks.select.mockResolvedValue(
-        createSupabaseResponse(mockData),
-      )
+      mocks.select.mockResolvedValue(createSupabaseResponse(mockData))
 
       const result = await getRandomQuestionIds(3)
 
@@ -192,9 +162,7 @@ describe('questions utilities', () => {
         { id: '3' },
       ]
 
-      mocks.select.mockResolvedValue(
-        createSupabaseResponse(mockData),
-      )
+      mocks.select.mockResolvedValue(createSupabaseResponse(mockData))
 
       const result = await getRandomQuestionIds(10)
 
@@ -208,9 +176,7 @@ describe('questions utilities', () => {
         { id: '3' },
       ]
 
-      mocks.select.mockResolvedValue(
-        createSupabaseResponse(mockData),
-      )
+      mocks.select.mockResolvedValue(createSupabaseResponse(mockData))
 
       const result = await getRandomQuestionIds(0)
 
@@ -220,11 +186,7 @@ describe('questions utilities', () => {
 
   describe('getAnsweredQuestionsInPercent', () => {
     it('should calculate correct percentage', async () => {
-      mocks.select.mockResolvedValue({
-        data: null,
-        error: null,
-        count: 100,
-      })
+      mocks.select.mockResolvedValue(createSupabaseCountResponse(100))
 
       const result = await getAnsweredQuestionsInPercent(25)
 
@@ -232,11 +194,7 @@ describe('questions utilities', () => {
     })
 
     it('should return 0 when no questions answered', async () => {
-      mocks.select.mockResolvedValue({
-        data: null,
-        error: null,
-        count: 100,
-      })
+      mocks.select.mockResolvedValue(createSupabaseCountResponse(100))
 
       const result = await getAnsweredQuestionsInPercent(0)
 
@@ -244,11 +202,7 @@ describe('questions utilities', () => {
     })
 
     it('should return 100 when all questions answered', async () => {
-      mocks.select.mockResolvedValue({
-        data: null,
-        error: null,
-        count: 50,
-      })
+      mocks.select.mockResolvedValue(createSupabaseCountResponse(50))
 
       const result = await getAnsweredQuestionsInPercent(50)
 
@@ -256,11 +210,7 @@ describe('questions utilities', () => {
     })
 
     it('should round to 2 decimal places', async () => {
-      mocks.select.mockResolvedValue({
-        data: null,
-        error: null,
-        count: 3,
-      })
+      mocks.select.mockResolvedValue(createSupabaseCountResponse(3))
 
       const result = await getAnsweredQuestionsInPercent(1)
 
@@ -268,11 +218,7 @@ describe('questions utilities', () => {
     })
 
     it('should handle decimal results correctly', async () => {
-      mocks.select.mockResolvedValue({
-        data: null,
-        error: null,
-        count: 7,
-      })
+      mocks.select.mockResolvedValue(createSupabaseCountResponse(7))
 
       const result = await getAnsweredQuestionsInPercent(3)
 

@@ -166,16 +166,20 @@ export function createSupabaseResponse<T>(data: T, error: any = null) {
 }
 
 /**
+ * Helper to create a mock count response for Supabase queries
+ */
+export function createSupabaseCountResponse(count: number | null) {
+  return { ...createSupabaseResponse(null), count }
+}
+
+/**
  * Helper to create a mock error response for Supabase queries
  */
 export function createSupabaseError(message: string, code?: string) {
-  return {
-    data: null,
-    error: {
-      message,
-      code: code || 'PGRST116',
-      details: null,
-      hint: null,
-    },
-  }
+  return createSupabaseResponse(null, {
+    message,
+    code: code || 'PGRST116',
+    details: null,
+    hint: null,
+  })
 }
