@@ -1,53 +1,46 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { createSupabaseResponse } from '../helper/supabase'
+import { createSupabaseResponse, mockUseSupabaseServer } from '../helper/supabase'
 
-// Create mock Supabase client
-const mockSupabaseClient = {
-  from: vi.fn(),
-}
+// Set up Supabase mock before imports
+const { mocks, resetMocks } = mockUseSupabaseServer()
 
-// Create mock functions
-const useSupabaseServerMock = vi.fn(() => mockSupabaseClient)
+// Mock createError
+vi.stubGlobal('createError', vi.fn((error: any) => {
+  const err = new Error(typeof error === 'string' ? error : error.statusMessage || 'Error')
+  if (typeof error === 'object') {
+    Object.assign(err, error)
+  }
+  throw err
+}))
 
-// Stub globals before importing
-vi.stubGlobal('useSupabaseServer', useSupabaseServerMock)
-
-// Import after stubbing
+// Import after mocking
 const { getAllQuestionsCount, getQuestionById, getRandomQuestionIds, randomizeArrayOrder, getAnsweredQuestionsInPercent } = await import('../../server/utils/questions')
 
 describe('questions utilities', () => {
   beforeEach(() => {
-    vi.clearAllMocks()
+    resetMocks()
   })
 
   describe('getAllQuestionsCount', () => {
     it('should return the total count of questions', async () => {
-      const mockSelect = vi.fn().mockResolvedValue({
+      mocks.select.mockResolvedValue({
         data: null,
         error: null,
         count: 42,
       })
 
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
-      })
-
       const result = await getAllQuestionsCount()
 
-      expect(mockSupabaseClient.from).toHaveBeenCalledWith('questions')
-      expect(mockSelect).toHaveBeenCalledWith('id', { count: 'exact', head: true })
+      expect(mocks.from).toHaveBeenCalledWith('questions')
+      expect(mocks.select).toHaveBeenCalledWith('id', { count: 'exact', head: true })
       expect(result).toBe(42)
     })
 
     it('should return 0 when count is null', async () => {
-      const mockSelect = vi.fn().mockResolvedValue({
+      mocks.select.mockResolvedValue({
         data: null,
         error: null,
         count: null,
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
       })
 
       const result = await getAllQuestionsCount()
@@ -56,14 +49,10 @@ describe('questions utilities', () => {
     })
 
     it('should throw error when database query fails', async () => {
-      const mockSelect = vi.fn().mockResolvedValue({
+      mocks.select.mockResolvedValue({
         data: null,
         count: null,
         error: { message: 'Query failed' },
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
       })
 
       const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
@@ -87,27 +76,15 @@ describe('questions utilities', () => {
         questionNr: 1,
       }
 
-      const mockSingle = vi.fn().mockResolvedValue(
+      mocks.single.mockResolvedValue(
         createSupabaseResponse(mockQuestion),
       )
 
-      const mockFilter = vi.fn().mockReturnValue({
-        single: mockSingle,
-      })
-
-      const mockSelect = vi.fn().mockReturnValue({
-        filter: mockFilter,
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
-      })
-
       const result = await getQuestionById('123')
 
-      expect(mockSupabaseClient.from).toHaveBeenCalledWith('questions')
-      expect(mockSelect).toHaveBeenCalledWith('*')
-      expect(mockFilter).toHaveBeenCalledWith('id', 'eq', '123')
+      expect(mocks.from).toHaveBeenCalledWith('questions')
+      expect(mocks.select).toHaveBeenCalledWith('*')
+      expect(mocks.filter).toHaveBeenCalledWith('id', 'eq', '123')
       expect(result).toEqual(mockQuestion)
     })
 
@@ -119,44 +96,20 @@ describe('questions utilities', () => {
         correctAnswer: 'Both',
       }
 
-      const mockSingle = vi.fn().mockResolvedValue(
+      mocks.single.mockResolvedValue(
         createSupabaseResponse(mockQuestion),
       )
 
-      const mockFilter = vi.fn().mockReturnValue({
-        single: mockSingle,
-      })
-
-      const mockSelect = vi.fn().mockReturnValue({
-        filter: mockFilter,
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
-      })
-
       const result = await getQuestionById(456)
 
-      expect(mockFilter).toHaveBeenCalledWith('id', 'eq', 456)
+      expect(mocks.filter).toHaveBeenCalledWith('id', 'eq', 456)
       expect(result).toEqual(mockQuestion)
     })
 
     it('should throw error when question is not found', async () => {
-      const mockSingle = vi.fn().mockResolvedValue({
+      mocks.single.mockResolvedValue({
         data: null,
         error: { message: 'Question not found', code: 'PGRST116' },
-      })
-
-      const mockFilter = vi.fn().mockReturnValue({
-        single: mockSingle,
-      })
-
-      const mockSelect = vi.fn().mockReturnValue({
-        filter: mockFilter,
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
       })
 
       await expect(getQuestionById('999')).rejects.toThrow('question not found')
@@ -219,13 +172,9 @@ describe('questions utilities', () => {
         { id: '5' },
       ]
 
-      const mockSelect = vi.fn().mockResolvedValue(
+      mocks.select.mockResolvedValue(
         createSupabaseResponse(mockData),
       )
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
-      })
 
       const result = await getRandomQuestionIds(3)
 
@@ -243,13 +192,9 @@ describe('questions utilities', () => {
         { id: '3' },
       ]
 
-      const mockSelect = vi.fn().mockResolvedValue(
+      mocks.select.mockResolvedValue(
         createSupabaseResponse(mockData),
       )
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
-      })
 
       const result = await getRandomQuestionIds(10)
 
@@ -263,13 +208,9 @@ describe('questions utilities', () => {
         { id: '3' },
       ]
 
-      const mockSelect = vi.fn().mockResolvedValue(
+      mocks.select.mockResolvedValue(
         createSupabaseResponse(mockData),
       )
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
-      })
 
       const result = await getRandomQuestionIds(0)
 
@@ -279,14 +220,10 @@ describe('questions utilities', () => {
 
   describe('getAnsweredQuestionsInPercent', () => {
     it('should calculate correct percentage', async () => {
-      const mockSelect = vi.fn().mockResolvedValue({
+      mocks.select.mockResolvedValue({
         data: null,
         error: null,
         count: 100,
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
       })
 
       const result = await getAnsweredQuestionsInPercent(25)
@@ -295,14 +232,10 @@ describe('questions utilities', () => {
     })
 
     it('should return 0 when no questions answered', async () => {
-      const mockSelect = vi.fn().mockResolvedValue({
+      mocks.select.mockResolvedValue({
         data: null,
         error: null,
         count: 100,
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
       })
 
       const result = await getAnsweredQuestionsInPercent(0)
@@ -311,14 +244,10 @@ describe('questions utilities', () => {
     })
 
     it('should return 100 when all questions answered', async () => {
-      const mockSelect = vi.fn().mockResolvedValue({
+      mocks.select.mockResolvedValue({
         data: null,
         error: null,
         count: 50,
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
       })
 
       const result = await getAnsweredQuestionsInPercent(50)
@@ -327,14 +256,10 @@ describe('questions utilities', () => {
     })
 
     it('should round to 2 decimal places', async () => {
-      const mockSelect = vi.fn().mockResolvedValue({
+      mocks.select.mockResolvedValue({
         data: null,
         error: null,
         count: 3,
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
       })
 
       const result = await getAnsweredQuestionsInPercent(1)
@@ -343,14 +268,10 @@ describe('questions utilities', () => {
     })
 
     it('should handle decimal results correctly', async () => {
-      const mockSelect = vi.fn().mockResolvedValue({
+      mocks.select.mockResolvedValue({
         data: null,
         error: null,
         count: 7,
-      })
-
-      mockSupabaseClient.from.mockReturnValue({
-        select: mockSelect,
       })
 
       const result = await getAnsweredQuestionsInPercent(3)

@@ -87,7 +87,12 @@ export function createMockSupabaseClient() {
  *
  * @example
  * ```ts
- * const { mockClient, mocks } = mockUseSupabaseServer()
+ * const { mockClient, mocks, resetMocks } = mockUseSupabaseServer()
+ *
+ * // In beforeEach to reset mocks between tests
+ * beforeEach(() => {
+ *   resetMocks()
+ * })
  *
  * // Configure the mock response
  * mocks.select.mockResolvedValue({
@@ -110,10 +115,46 @@ export function mockUseSupabaseServer() {
   // Use stubGlobal for Nuxt auto-imports
   vi.stubGlobal('useSupabaseServer', useSupabaseServerMock)
 
+  /**
+   * Resets all mock call history while preserving the chainable structure
+   * Use this in beforeEach() to clean up between tests
+   */
+  const resetMocks = () => {
+    // Create chainable mock reference
+    const chainableMock = {
+      select: mocks.select,
+      insert: mocks.insert,
+      update: mocks.update,
+      delete: mocks.delete,
+      filter: mocks.filter,
+      eq: mocks.eq,
+      order: mocks.order,
+      range: mocks.range,
+      single: mocks.single,
+      overrideTypes: mocks.overrideTypes,
+    }
+
+    // Clear and restore chaining for each mock
+    mocks.from.mockClear().mockReturnValue(chainableMock)
+    mocks.select.mockClear().mockReturnValue(chainableMock)
+    mocks.insert.mockClear().mockReturnValue(chainableMock)
+    mocks.update.mockClear().mockReturnValue(chainableMock)
+    mocks.delete.mockClear().mockReturnValue(chainableMock)
+    mocks.filter.mockClear().mockReturnValue(chainableMock)
+    mocks.eq.mockClear().mockReturnValue(chainableMock)
+    mocks.order.mockClear().mockReturnValue(chainableMock)
+    mocks.range.mockClear().mockReturnValue(chainableMock)
+    mocks.overrideTypes.mockClear().mockReturnValue(chainableMock)
+    mocks.single.mockClear().mockResolvedValue({ data: null, error: null })
+    mocks.rpc.mockClear().mockResolvedValue({ data: null, error: null })
+    useSupabaseServerMock.mockClear()
+  }
+
   return {
     mockClient: client,
     mocks,
     useSupabaseServerMock,
+    resetMocks,
   }
 }
 
