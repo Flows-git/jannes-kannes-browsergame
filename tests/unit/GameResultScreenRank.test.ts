@@ -4,7 +4,6 @@ import { describe, expect, it, vi } from 'vitest'
 
 /**
  * Mounts the StatsBar component with the given props.
- * @param props Partial props to override the default ones.
  * @returns The mounted component.
  */
 function mountGameResultScreenRank(
@@ -39,6 +38,7 @@ describe('gameResultScreenRank', () => {
   })
 
   it('shows error when fetching rank fails', async () => {
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     const fetch = vi
       .spyOn(globalThis, '$fetch')
       .mockImplementationOnce(() =>
@@ -49,6 +49,9 @@ describe('gameResultScreenRank', () => {
     expect(wrapper.find('.rank-fetch-error').text()).toContain(
       'Failed to fetch',
     )
+
+    expect(consoleErrorSpy).toHaveBeenCalled()
+    consoleErrorSpy.mockRestore()
   })
 })
 
