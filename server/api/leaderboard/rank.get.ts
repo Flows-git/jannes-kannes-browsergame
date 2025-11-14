@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
   const { getRank, isGameStarted } = await useGame(event)
-  await isGameStarted()
+  isGameStarted()
   return await getRank()
 })
