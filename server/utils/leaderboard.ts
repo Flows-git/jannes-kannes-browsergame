@@ -4,6 +4,10 @@ export async function submitGameResultToLeaderboard(name: string, data: GameSess
     throw createError('game not ended')
   }
 
+  if (data.gameMode !== 'ranked') {
+    throw createError('only ranked games permitted')
+  }
+
   const entry: LeaderboardEntry = {
     name,
     score: data.correctAnswers,

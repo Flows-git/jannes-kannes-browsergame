@@ -45,13 +45,13 @@ export function createMockSupabaseClient() {
   mockOverrideTypes.mockReturnValue(chainableMock)
 
   // single() returns a promise-like object
-  mockSingle.mockResolvedValue({ data: null, error: null })
+  mockSingle.mockResolvedValue({ data: null, error: null, ...chainableMock })
 
   // from() returns the chainable mock
   mockFrom.mockReturnValue(chainableMock)
 
   // rpc() returns a promise-like object
-  mockRpc.mockResolvedValue({ data: null, error: null })
+  mockRpc.mockResolvedValue({ data: null, error: null, ...chainableMock })
 
   const mockClient = {
     from: mockFrom,
@@ -145,7 +145,7 @@ export function mockUseSupabaseServer() {
     mocks.order.mockClear().mockReturnValue(chainableMock)
     mocks.range.mockClear().mockReturnValue(chainableMock)
     mocks.overrideTypes.mockClear().mockReturnValue(chainableMock)
-    mocks.single.mockClear().mockResolvedValue({ data: null, error: null })
+    mocks.single.mockClear().mockReturnValue(chainableMock)
     mocks.rpc.mockClear().mockResolvedValue({ data: null, error: null })
     useSupabaseServerMock.mockClear()
   }
