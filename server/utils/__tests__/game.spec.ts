@@ -51,7 +51,7 @@ vi.stubGlobal('addAnswerMetrics', addAnswerMetricsMock)
 // Import after mocking
 const { useGame } = await import('../game')
 
-describe('game utilities', () => {
+describe('useGame', () => {
   // Mock event object
   const mockEvent = {} as any
 
@@ -115,36 +115,34 @@ describe('game utilities', () => {
     return data
   }
 
-  describe('useGame', () => {
-    it('should create game and question session', async () => {
-      await useGame(mockEvent)
+  it('should create game and question session', async () => {
+    await useGame(mockEvent)
 
-      // Verify useSession was called twice (once for game, once for questions)
-      expect(useSessionMock).toHaveBeenCalledTimes(2)
+    // Verify useSession was called twice (once for game, once for questions)
+    expect(useSessionMock).toHaveBeenCalledTimes(2)
 
-      // Verify game session was created with correct config
-      expect(useSessionMock).toHaveBeenCalledWith(
-        mockEvent,
-        expect.objectContaining({
-          name: 'jannes-kann-es-game',
-          password: 'test-secret',
-          maxAge: 60 * 60 * 24 * 1,
-        }),
-      )
+    // Verify game session was created with correct config
+    expect(useSessionMock).toHaveBeenCalledWith(
+      mockEvent,
+      expect.objectContaining({
+        name: 'jannes-kann-es-game',
+        password: 'test-secret',
+        maxAge: 60 * 60 * 24 * 1,
+      }),
+    )
 
-      // Verify questions session was created with correct config
-      expect(useSessionMock).toHaveBeenCalledWith(
-        mockEvent,
-        expect.objectContaining({
-          name: 'jannes-kann-es-questions',
-          password: 'test-secret',
-          maxAge: 60 * 60 * 24 * 1,
-        }),
-      )
+    // Verify questions session was created with correct config
+    expect(useSessionMock).toHaveBeenCalledWith(
+      mockEvent,
+      expect.objectContaining({
+        name: 'jannes-kann-es-questions',
+        password: 'test-secret',
+        maxAge: 60 * 60 * 24 * 1,
+      }),
+    )
 
-      // Verify sessionSecret from useRuntimeConfig was used
-      expect(mockUseRuntimeConfig).toHaveBeenCalled()
-    })
+    // Verify sessionSecret from useRuntimeConfig was used
+    expect(mockUseRuntimeConfig).toHaveBeenCalled()
   })
 
   describe('isGameStarted', () => {
@@ -182,16 +180,9 @@ describe('game utilities', () => {
     })
 
     it('should throw an error if game is not running (running prop in session is false)', async () => {
-      mockGameSession.setSessionData(createGameSessionData({
+      setGameSessionData({
         running: false,
-        answeredQuestions: 5,
-        correctAnswers: 3,
-        remainingLives: 0,
-        startTime: Date.now() - 60000,
-        endTime: Date.now(),
-        averageAnswerTime: '12s',
-        gameTime: '1m',
-      }))
+      })
 
       const game = await useGame(mockEvent)
 
@@ -245,7 +236,7 @@ describe('game utilities', () => {
         gameMode: 'endless',
         totalQuestions: 20,
         totalLives: 10,
-        remainingLives: 10,
+        remainingLives: 8,
       })
 
       const game = await useGame(mockEvent)
@@ -261,7 +252,7 @@ describe('game utilities', () => {
 
   describe('getQuestionForPlayer', () => {
     it('should return the current question for the player', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
+      setGameSessionData()
 
       const game = await useGame(mockEvent)
       const question = game.getQuestionForPlayer()
@@ -282,7 +273,7 @@ describe('game utilities', () => {
     })
 
     it('should not contain an answer', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
+      setGameSessionData()
 
       const game = await useGame(mockEvent)
       const question = game.getQuestionForPlayer()
@@ -294,36 +285,29 @@ describe('game utilities', () => {
 
   describe('updateCurrentQuestion', () => {
     it('should set next question to question session', async () => {
-      mockGameSession.setSessionData(createGameSessionData({
-        currentQuestionNr: 2,
-        answeredQuestions: 1,
-        correctAnswers: 1,
-        averageAnswerTime: '10s',
-        gameTime: '10s',
-      }))
-
-      mockQuestionsSession.setSessionData({
-        questions: ['1', '2', '3'],
-      })
-
       getQuestionByIdMock.mockResolvedValue(mockQuestion2)
+      getRandomQuestionIdsMock.mockResolvedValue(['42', '69', '1337'])
 
       // Note: updateCurrentQuestion is not exposed, tested through startGame and answerCurrentQuestion
+      const game = await useGame(mockEvent)
+      await game.startGame({ mode: 'classic', questionCount: 3, liveCount: 3 })
+
+      expect(getQuestionByIdMock).toHaveBeenCalledWith('42')
+      expect(mockGameSession.mocks.update).toHaveBeenCalledWith(
+        expect.objectContaining({
+          currentQuestion: mockQuestion2,
+        }),
+      )
     })
 
     it('should randomize answer orders', async () => {
-      setGameSessionData()
-      mockQuestionsSession.setSessionData({
-        questions: ['1', '2', '3'],
-      })
-
       getQuestionByIdMock.mockResolvedValue(mockQuestion2)
-      getRandomQuestionIdsMock.mockResolvedValue(['1', '2', '3'])
 
       const game = await useGame(mockEvent)
       await game.startGame({ mode: 'classic', questionCount: 3, liveCount: 3 })
 
       expect(randomizeArrayOrderMock).toHaveBeenCalled()
+      expect(randomizeArrayOrderMock).toHaveBeenCalledWith(mockQuestion2.answers)
     })
   })
 
@@ -609,13 +593,6 @@ describe('game utilities', () => {
 
   describe('clearSession', () => {
     it('should clear game and question session', async () => {
-      // Start with an empty session (length === 0), which triggers clearGameSession in startGame
-      mockGameSession.setSessionData({} as any)
-      mockQuestionsSession.setSessionData({} as any)
-
-      getRandomQuestionIdsMock.mockResolvedValue(['1', '2', '3'])
-      getQuestionByIdMock.mockResolvedValue(mockQuestion)
-
       const game = await useGame(mockEvent)
       await game.startGame({ mode: 'classic', questionCount: 3, liveCount: 3 })
 
