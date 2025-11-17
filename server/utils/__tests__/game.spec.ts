@@ -32,7 +32,7 @@ const {
 })
 
 // Set up session mocks
-const { mockGameSession, mockQuestionsSession, resetMocks: resetSessionMocks } = mockUseSession()
+const { mockGameSession, mockQuestionsSession, useSessionMock, resetMocks: resetSessionMocks } = mockUseSession()
 
 // Mock Nuxt auto-imports
 mockNuxtImport('useRuntimeConfig', () => mockUseRuntimeConfig)
@@ -109,26 +109,47 @@ describe('game utilities', () => {
     }
   }
 
+  function setGameSessionData(overrides: Partial<GameSession> = {}): GameSession {
+    const data = createGameSessionData(overrides)
+    mockGameSession.setSessionData(data)
+    return data
+  }
+
   describe('useGame', () => {
     it('should create game and question session', async () => {
-      const game = await useGame(mockEvent)
+      await useGame(mockEvent)
 
-      expect(game).toHaveProperty('isGameStarted')
-      expect(game).toHaveProperty('isGameRunning')
-      expect(game).toHaveProperty('getQuestionForPlayer')
-      expect(game).toHaveProperty('getGameMeta')
-      expect(game).toHaveProperty('getGameSettings')
-      expect(game).toHaveProperty('startGame')
-      expect(game).toHaveProperty('answerCurrentQuestion')
-      expect(game).toHaveProperty('endGame')
-      expect(game).toHaveProperty('submitGameResult')
-      expect(game).toHaveProperty('getRank')
+      // Verify useSession was called twice (once for game, once for questions)
+      expect(useSessionMock).toHaveBeenCalledTimes(2)
+
+      // Verify game session was created with correct config
+      expect(useSessionMock).toHaveBeenCalledWith(
+        mockEvent,
+        expect.objectContaining({
+          name: 'jannes-kann-es-game',
+          password: 'test-secret',
+          maxAge: 60 * 60 * 24 * 1,
+        }),
+      )
+
+      // Verify questions session was created with correct config
+      expect(useSessionMock).toHaveBeenCalledWith(
+        mockEvent,
+        expect.objectContaining({
+          name: 'jannes-kann-es-questions',
+          password: 'test-secret',
+          maxAge: 60 * 60 * 24 * 1,
+        }),
+      )
+
+      // Verify sessionSecret from useRuntimeConfig was used
+      expect(mockUseRuntimeConfig).toHaveBeenCalled()
     })
   })
 
   describe('isGameStarted', () => {
     it('should return true if a game session exists', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
+      setGameSessionData()
 
       const game = await useGame(mockEvent)
       const result = game.isGameStarted()
@@ -137,8 +158,6 @@ describe('game utilities', () => {
     })
 
     it('should throw an error if no session is set', async () => {
-      mockGameSession.setSessionData({} as GameSession)
-
       const game = await useGame(mockEvent)
 
       expect(() => game.isGameStarted()).toThrow('No game started')
@@ -147,18 +166,16 @@ describe('game utilities', () => {
 
   describe('isGameRunning', () => {
     it('should return true if a game is running (session set and running is true)', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
+      setGameSessionData()
 
       const game = await useGame(mockEvent)
       game.isGameRunning()
 
       // Should not throw
-      expect(true).toBe(true)
+      expect(() => game.isGameRunning()).not.toThrow()
     })
 
     it('should throw an error if no session is set', async () => {
-      mockGameSession.setSessionData({} as GameSession)
-
       const game = await useGame(mockEvent)
 
       expect(() => game.isGameRunning()).toThrow('No game started')
@@ -183,9 +200,9 @@ describe('game utilities', () => {
   })
 
   describe('getGameMeta', () => {
-    it('should return expected data (GameMeta interface)', async () => {
+    it('should return expected data', async () => {
       const startTime = Date.now() - 60000
-      mockGameSession.setSessionData(createGameSessionData({
+      setGameSessionData({
         gameMode: 'ranked',
         currentQuestionNr: 3,
         answeredQuestions: 2,
@@ -196,14 +213,14 @@ describe('game utilities', () => {
         startTime,
         averageAnswerTime: '15s',
         gameTime: '1m',
-      }))
+      })
 
       getAnsweredQuestionsInPercentMock.mockResolvedValue(20)
 
       const game = await useGame(mockEvent)
       const meta = await game.getGameMeta()
 
-      expect(meta).toEqual({
+      expect(meta).toEqual<GameMeta>({
         running: true,
         mode: 'ranked',
         totalQuestions: 10,
@@ -223,18 +240,18 @@ describe('game utilities', () => {
   })
 
   describe('getGameSettings', () => {
-    it('should return expected data (GameSettings interface)', async () => {
-      mockGameSession.setSessionData(createGameSessionData({
+    it('should return expected data', async () => {
+      setGameSessionData({
         gameMode: 'endless',
         totalQuestions: 20,
         totalLives: 10,
         remainingLives: 10,
-      }))
+      })
 
       const game = await useGame(mockEvent)
       const settings = game.getGameSettings()
 
-      expect(settings).toEqual({
+      expect(settings).toEqual<GameSettings>({
         mode: 'endless',
         liveCount: 10,
         questionCount: 20,
@@ -243,13 +260,13 @@ describe('game utilities', () => {
   })
 
   describe('getQuestionForPlayer', () => {
-    it('should return the current question for the player (GameQuestion interface)', async () => {
+    it('should return the current question for the player', async () => {
       mockGameSession.setSessionData(createGameSessionData())
 
       const game = await useGame(mockEvent)
       const question = game.getQuestionForPlayer()
 
-      expect(question).toEqual({
+      expect(question).toEqual<GameQuestion>({
         id: mockQuestion.id,
         questionNr: 1,
         question: mockQuestion.question,
@@ -295,8 +312,7 @@ describe('game utilities', () => {
     })
 
     it('should randomize answer orders', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
-
+      setGameSessionData()
       mockQuestionsSession.setSessionData({
         questions: ['1', '2', '3'],
       })
@@ -381,14 +397,10 @@ describe('game utilities', () => {
 
   describe('answerCurrentQuestion', () => {
     it('should update game session answeredQuestions and currentQuestionNr data', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
-
+      setGameSessionData()
       mockQuestionsSession.setSessionData({
         questions: ['1', '2', '3', '4', '5'],
       })
-
-      getQuestionByIdMock.mockResolvedValue(mockQuestion2)
-      getAverageAnswerTimeStringMock.mockReturnValue('10s')
 
       const game = await useGame(mockEvent)
       await game.answerCurrentQuestion('A game')
@@ -402,14 +414,10 @@ describe('game utilities', () => {
     })
 
     it('should decrement remainingLives and not increment correctAnswers when answer was not correct', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
-
+      setGameSessionData()
       mockQuestionsSession.setSessionData({
         questions: ['1', '2', '3', '4', '5'],
       })
-
-      getQuestionByIdMock.mockResolvedValue(mockQuestion2)
-      getAverageAnswerTimeStringMock.mockReturnValue('10s')
 
       const game = await useGame(mockEvent)
       const result = await game.answerCurrentQuestion('Wrong answer')
@@ -424,14 +432,10 @@ describe('game utilities', () => {
     })
 
     it('should increment correctAnswers and not decrement remainingLives when answer was correct', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
-
+      setGameSessionData()
       mockQuestionsSession.setSessionData({
         questions: ['1', '2', '3', '4', '5'],
       })
-
-      getQuestionByIdMock.mockResolvedValue(mockQuestion2)
-      getAverageAnswerTimeStringMock.mockReturnValue('10s')
 
       const game = await useGame(mockEvent)
       const result = await game.answerCurrentQuestion('A game')
@@ -446,13 +450,10 @@ describe('game utilities', () => {
     })
 
     it('should regenerate averageAnswerTime', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
-
+      setGameSessionData()
       mockQuestionsSession.setSessionData({
         questions: ['1', '2', '3', '4', '5'],
       })
-
-      getQuestionByIdMock.mockResolvedValue(mockQuestion2)
       getAverageAnswerTimeStringMock.mockReturnValue('15s')
 
       const game = await useGame(mockEvent)
@@ -467,25 +468,7 @@ describe('game utilities', () => {
     })
 
     it('should end the game when remainingLives is 0', async () => {
-      const endTime = Date.now() + 60000
-      mockGameSession.setSessionData(createGameSessionData({
-        currentQuestionNr: 2,
-        answeredQuestions: 1,
-        correctAnswers: 0,
-        remainingLives: 1,
-        averageAnswerTime: '10s',
-      }))
-
-      mockQuestionsSession.setSessionData({
-        questions: ['1', '2', '3', '4', '5'],
-      })
-
-      getQuestionByIdMock.mockResolvedValue(mockQuestion2)
-      getAverageAnswerTimeStringMock.mockReturnValue('15s')
-      getTimeDurationStringMock.mockReturnValue('1m')
-
-      // Mock Date.now() for consistent endTime
-      const dateSpy = vi.spyOn(Date, 'now').mockReturnValue(endTime)
+      setGameSessionData({ remainingLives: 1 })
 
       const game = await useGame(mockEvent)
       await game.answerCurrentQuestion('Wrong answer')
@@ -496,19 +479,14 @@ describe('game utilities', () => {
           running: false,
         }),
       )
-
-      dateSpy.mockRestore()
     })
 
     it('should end the game when last question was answered', async () => {
       const endTime = Date.now() + 120000
-      mockGameSession.setSessionData(createGameSessionData({
+      setGameSessionData({
         currentQuestionNr: 5,
         answeredQuestions: 4,
-        correctAnswers: 3,
-        remainingLives: 2,
-        averageAnswerTime: '20s',
-      }))
+      })
 
       mockQuestionsSession.setSessionData({
         questions: ['1', '2', '3', '4', '5'],
@@ -534,12 +512,10 @@ describe('game utilities', () => {
     })
 
     it('should update the current question when game is not ended', async () => {
-      mockGameSession.setSessionData(createGameSessionData({
+      setGameSessionData({
         currentQuestionNr: 2,
         answeredQuestions: 1,
-        correctAnswers: 1,
-        averageAnswerTime: '10s',
-      }))
+      })
 
       mockQuestionsSession.setSessionData({
         questions: ['1', '2', '3', '4', '5'],
@@ -557,7 +533,7 @@ describe('game utilities', () => {
     })
 
     it('should return if answer was correct and the correct Answer', async () => {
-      mockGameSession.setSessionData(createGameSessionData())
+      setGameSessionData()
 
       mockQuestionsSession.setSessionData({
         questions: ['1', '2', '3', '4', '5'],
@@ -576,9 +552,7 @@ describe('game utilities', () => {
     })
 
     it('should add correct answer metrics', async () => {
-      mockGameSession.setSessionData(createGameSessionData({
-        gameMode: 'ranked',
-      }))
+      setGameSessionData({ gameMode: 'ranked' })
 
       mockQuestionsSession.setSessionData({
         questions: ['1', '2', '3', '4', '5'],
@@ -601,14 +575,7 @@ describe('game utilities', () => {
 
   describe('endGame', () => {
     it('should set running in GameSession to false', async () => {
-      mockGameSession.setSessionData(createGameSessionData({
-        currentQuestionNr: 3,
-        answeredQuestions: 3,
-        correctAnswers: 2,
-        remainingLives: 1,
-        averageAnswerTime: '15s',
-      }))
-
+      setGameSessionData({ running: true })
       getTimeDurationStringMock.mockReturnValue('45s')
 
       const game = await useGame(mockEvent)
@@ -623,22 +590,13 @@ describe('game utilities', () => {
 
     it('should set endTime to current Timestamp and calculate gameTime', async () => {
       const startTime = 1000000
-
-      mockGameSession.setSessionData(createGameSessionData({
-        currentQuestionNr: 5,
-        answeredQuestions: 5,
-        correctAnswers: 4,
-        remainingLives: 2,
-        startTime,
-        averageAnswerTime: '18s',
-      }))
-
+      setGameSessionData({ startTime })
       getTimeDurationStringMock.mockReturnValue('1m 30s')
 
       const game = await useGame(mockEvent)
       await game.endGame()
 
-      // Check that update was called with the right structure
+      // Check that game session update was called with the right structure
       const updateCall = mockGameSession.mocks.update.mock.calls[0][0]
       expect(updateCall.running).toBe(false)
       expect(updateCall.gameTime).toBe('1m 30s')
@@ -669,42 +627,15 @@ describe('game utilities', () => {
 
   describe('submitGameResult', () => {
     it('should submit gameResult from session to leaderboard', async () => {
-      const gameSession = createGameSessionData({
-        running: false,
-        answeredQuestions: 5,
-        correctAnswers: 4,
-        remainingLives: 2,
-        startTime: Date.now() - 120000,
-        endTime: Date.now(),
-        averageAnswerTime: '24s',
-        gameTime: '2m',
-      })
-
-      mockGameSession.setSessionData(gameSession)
-
-      submitGameResultToLeaderboardMock.mockResolvedValue(123)
+      const gameSession = setGameSessionData()
 
       const game = await useGame(mockEvent)
-      const id = await game.submitGameResult('Test Player')
+      await game.submitGameResult('Test Player')
 
       expect(submitGameResultToLeaderboardMock).toHaveBeenCalledWith('Test Player', gameSession)
-      expect(id).toBe(123)
     })
 
     it('should clear session on success', async () => {
-      mockGameSession.setSessionData(createGameSessionData({
-        running: false,
-        answeredQuestions: 5,
-        correctAnswers: 3,
-        remainingLives: 1,
-        startTime: Date.now() - 90000,
-        endTime: Date.now(),
-        averageAnswerTime: '18s',
-        gameTime: '1m 30s',
-      }))
-
-      submitGameResultToLeaderboardMock.mockResolvedValue(456)
-
       const game = await useGame(mockEvent)
       await game.submitGameResult('Another Player')
 
@@ -713,42 +644,17 @@ describe('game utilities', () => {
     })
 
     it('should return the id of the leaderboard entry', async () => {
-      mockGameSession.setSessionData(createGameSessionData({
-        gameMode: 'ranked',
-        running: false,
-        currentQuestionNr: 10,
-        answeredQuestions: 10,
-        totalQuestions: 10,
-        correctAnswers: 8,
-        totalLives: 5,
-        remainingLives: 3,
-        startTime: Date.now() - 180000,
-        endTime: Date.now(),
-        averageAnswerTime: '18s',
-        gameTime: '3m',
-      }))
-
       submitGameResultToLeaderboardMock.mockResolvedValue(789)
 
       const game = await useGame(mockEvent)
       const id = await game.submitGameResult('Pro Player')
-
       expect(id).toBe(789)
     })
   })
 
   describe('getRank', () => {
     it('should return the leaderboard ranking based on the correctAnswers from game session', async () => {
-      mockGameSession.setSessionData(createGameSessionData({
-        running: false,
-        answeredQuestions: 5,
-        correctAnswers: 5,
-        startTime: Date.now() - 100000,
-        endTime: Date.now(),
-        averageAnswerTime: '20s',
-        gameTime: '1m 40s',
-      }))
-
+      setGameSessionData({ correctAnswers: 5 })
       getLeaderboardRankingMock.mockResolvedValue(42)
 
       const game = await useGame(mockEvent)
