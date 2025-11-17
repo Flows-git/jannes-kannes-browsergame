@@ -377,6 +377,19 @@ describe('useGame', () => {
         }),
       )
     })
+
+    it('should start the game with 3 questions when questionCount is not  set', async () => {
+      const game = await useGame(mockEvent)
+      await game.startGame({
+        mode: 'classic',
+      })
+
+      expect(mockGameSession.mocks.update).toHaveBeenCalledWith(
+        expect.objectContaining({
+          totalQuestions: 3,
+        }),
+      )
+    })
   })
 
   describe('answerCurrentQuestion', () => {

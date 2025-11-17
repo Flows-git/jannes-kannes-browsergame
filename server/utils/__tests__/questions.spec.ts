@@ -182,6 +182,12 @@ describe('questions utilities', () => {
 
       expect(result).toEqual([])
     })
+
+    it('should throw a error when database request fails', async () => {
+      mocks.select.mockResolvedValue(createSupabaseError('db error'))
+
+      expect(() => getRandomQuestionIds(10)).rejects.toThrow('db error')
+    })
   })
 
   describe('getAnsweredQuestionsInPercent', () => {
