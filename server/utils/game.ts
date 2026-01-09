@@ -1,4 +1,5 @@
 import type { H3Event } from 'h3'
+import { env } from 'node:process'
 
 /**
  * Composable to manage the game, made for simple usage in a event handler
@@ -17,18 +18,18 @@ export async function useGame(event: H3Event) {
   const session = await useSession<GameSession>(event, {
     name: 'jannes-kann-es-game',
     password: config.sessionSecret,
-    // cookie: {
-    //   secure: false,
-    // },
+    cookie: {
+      secure: env.NODE_ENV !== 'development',
+    },
     maxAge: 60 * 60 * 24 * 1, // 1 days
   })
 
   const questions = await useSession<{ questions: Array<string | number> }>(event, {
     name: 'jannes-kann-es-questions',
     password: config.sessionSecret,
-    // cookie: {
-    //   secure: false,
-    // },
+    cookie: {
+      secure: env.NODE_ENV !== 'development',
+    },
     maxAge: 60 * 60 * 24 * 1, // 1 days
   })
 
