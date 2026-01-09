@@ -1,5 +1,5 @@
 export async function addAnswerMetrics(questionId: number, answer: string, answerCorrect: boolean, gameMode: GameMode): Promise<void> {
-  const supabase = await useSupabaseServer()
+  const supabase = useSupabaseServer()
   const { error } = await supabase
     .from('answerMetrics')
     .insert({

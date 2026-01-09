@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <div class="pb-3">
+      <v-btn color="primary" to="/">
+        <v-icon icon="mdi-chevron-left" />
+        Zurück zum Hauptmenü
+      </v-btn>
+    </div>
     <h1><strong class="gradient-text">Datenschutzerklärung</strong></h1>
     <p>
       Es freut uns sehr, dass Sie sich für unsere Organisation interessieren. Der Schutz Ihrer personenbezogenen Daten ist unserer Geschäftsleitung besonders

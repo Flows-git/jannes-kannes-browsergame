@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
   const { isGameRunning, answerCurrentQuestion, getGameMeta } = await useGame(event)
-  await isGameRunning()
+  isGameRunning()
 
   const body = await readBody<{ answer: string }>(event)
   const result = await answerCurrentQuestion(body.answer)

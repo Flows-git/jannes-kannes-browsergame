@@ -1,7 +1,7 @@
 import type { ThemeDefinition } from 'vuetify'
 import { createVuetify } from 'vuetify'
+import { de } from 'vuetify/locale'
 
-// import this after install `@mdi/font` package
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
@@ -27,7 +27,11 @@ const b2wTheme: ThemeDefinition = {
 
 export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
-    // ... your configuration
+    locale: {
+      locale: 'de',
+      messages: { de },
+
+    },
     theme: {
       defaultTheme: 'b2wTheme',
       themes: {

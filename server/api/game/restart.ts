@@ -1,10 +1,6 @@
 export default defineEventHandler(async (event) => {
-  const { getGameMeta, isGameStarted } = await useGame(event)
-  await isGameStarted()
-  const meta = await getGameMeta()
-  await (await useGame(event)).startGame({
-    liveCount: meta.totalLives,
-    questionCount: meta.totalQuestions,
-  })
+  const { getGameSettings, isGameStarted, startGame } = await useGame(event)
+  isGameStarted()
+  await startGame(getGameSettings())
   return true
 })

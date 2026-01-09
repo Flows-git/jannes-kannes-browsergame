@@ -5,7 +5,7 @@ export default defineVitestConfig({
   root: './',
   test: {
     outputFile: '.test-results/vitest-result.json',
-    include: ['tests/unit/**/*.{test,spec}.?(c|m)[jt]s?(x)', '**/*.unit.?(c|m)[jt]s?(x)'],
+    include: ['**/__tests__/*.spec.ts'],
     environment: 'nuxt',
     coverage: {
       reporter: ['text', 'html'],
