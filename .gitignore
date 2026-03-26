@@ -26,7 +26,6 @@ logs
 # custom
 public/warcraft3_icons/**/*
 data/*.json
-admin/data/*
 
 # vitest/playwright
 .test-results
