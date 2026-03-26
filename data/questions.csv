@@ -1,4 +1,4 @@
-Id;episode;creepjack_episode;question_nr;question_time_on_stream;question;author;answer_video_time;answer;other_answers ;Tags;
+id;episode;creepjack_episode;question_nr;question_time_on_stream;question;author;answer_video_time;answer;other_answers;Tags;
 1;1;1;1;3m 55s;Was passiert mit einem Wisp der getaunted wird?;;4m 39s;Nichts (J);Der Wisp bleibt stehen| Der Wisp bewegt sich Richtung des Mountain Giants;Wisp, Taunt;
 2;1;1;2;5m 15s;Was passiert wenn eine unsichtbare Einheit getaunted wird?;;6m 2s;Nichts;Wird revealed und greift an (J)| Wird revealed greift aber nicht an;Wisp, Taunt;
 3;1;1;3;6m 37s;Kann eine entgangelte Einheit in den Goblinzeppelin geladen werden?;;7m 1s;Nein (J);Ja;;
@@ -207,8 +207,7 @@ Id;episode;creepjack_episode;question_nr;question_time_on_stream;question;author
 206;65;146;1;19m 50s;Was passiert, wenn ein Blademaster mit Lightning Shield Mirror Image benutzt?;bluffster;22m 19s;Lightning Shield verschwindet (J);Nur der originale Blademaster behält Lightning Shield| Alle Blademaster bekommen das Lightning Shield| Alle Blademaster bekommen das Lightning Shield, aber nur das Original macht Schaden;;
 207;65;146;2;22m 39s;Was passiert mit beschworenen Carrion Beetles, wenn der Crypt Lord seine Skillpunkte mit einem Tome of Retraining zurücksetzt?;Kini;25m 22s;Carrion Beetles sterben;Carrion Beetles bleiben am Leben (J)| Skill kann nicht verlernt werden solange noch Carrion Beetles im Spiel sind;;
 208;65;146;3;27m 2s;Was passiert, wenn ein gebanishtes Summon dispellt wird;Nase;30m 54s;Gebanishtes Summon bekommt mehr Schaden als normal;Summons können nicht gebanished werden| (J)| Summon bekommt kein Schaden aber Banish verschwindet| Banish kann nicht dispellt werden;;
-209;66;147;1;1h 8m 31s;Aus welcher Form verwandelt sich der Panda zurück, wenn Storm, Earth and Fire endet?;nWo-Eisi;1h 9m 40s;Earth Form (J);"Storm Form| Fire Form
-";;
+209;66;147;1;1h 8m 31s;Aus welcher Form verwandelt sich der Panda zurück, wenn Storm, Earth and Fire endet?;nWo-Eisi;1h 9m 40s;Earth Form (J);"Storm Form| Fire Form";;
 210;66;147;2;1h 4m 15s;Was passiert mit Backpack eines Talons, wenn er Crow Form aktiviert?;nWo-Eisi;1h 7m 30s;Items die der Talon trägt werden gedroppt wenn die Crow Form aktiviert wird;Talon mit Item im Inventar kann keine Crow Form aktivieren| Talon behält die Items in Crow Form kann sie aber nicht ablegen, übergeben oder neue aufnehmen (J)| Backpack ist in Crow Form genauso nutzbar wie vorher;;
 211;66;147;3;1h 11m 10s;Kann man nachts an einer ungecreepten Goldmine long-distance Minen, ohne die Creeps zu wecken? ;Impidood;1h 12m 57s;Ja (J);Nein;;
 212;67;148;1;1h 6m 15s;Bekommen geburrowte Fiends die Blight-Bonusregeneration?;Richard;1h 8m 15s;Nein;Ja (J);;
@@ -368,12 +367,5 @@ Id;episode;creepjack_episode;question_nr;question_time_on_stream;question;author
 366;118;212;2;35m 17s;Regeneriert ein mit Freezing Breath eingefrorener Moonwell nachts Mana?;Knospa;37m 45s;Ja;Nein (J);;
 367;118;212;3;39m 29s;Was passiert mit einer Kodo, die eine Einheit verschlungen hat und durch Acid Bomb in einem Zeppelin stirbt?;John Holeg;43m 30s;Die Kodo stirbt, die verschlungene Einheit steigt aus dem Zeppelin aus;Die Kodo stirbt, die verschlungene Einheit verschwindet | Die Kodo stirbt, die verschlungene Einheit ist im Zeppelin | Die Kodo stirbt erst wenn sie ausgeladen wird, die verschlungene Einheit kommt normal frei (J);;
 368;119;213;1;1h 9m 8s;Kann ein von einer Banshee übernommener Peon Holz an einer Nekropole abgeben?;Morgoth;1h 10m 58s;Ja (J);Nein;;
-369;119;213;2;1h 11m 45s;Was passiert, wenn eine Kodo einen Creep mit Item verschlingt?;Werner Bock;1h 15m 32s;Das Item droppt gar nicht (J);"Das Item droppt bei der Kodo sobald der Creep verdaut ist | Das Item droppt sofort | 
-Creeps mit Items können nicht verschlungen werden";;
+369;119;213;2;1h 11m 45s;Was passiert, wenn eine Kodo einen Creep mit Item verschlingt?;Werner Bock;1h 15m 32s;Das Item droppt gar nicht (J);"Das Item droppt bei der Kodo sobald der Creep verdaut ist | Das Item droppt sofort | Creeps mit Items können nicht verschlungen werden";;
 370;119;213;3;1h 17m 17s;Wird ein Paladin von Mana Flare getroffen, wenn er Divine Shield aktiviert?;Klötenkröte mit Flöte;1h 19m 56s;Ja;Nein (J);;
-371;120;215;1;;;;;;;;
-372;120;215;2;;;;;;;;
-373;120;215;3;;;;;;;;
-374;121;216;1;;;;;;;;
-375;121;216;2;;;;;;;;
-376;121;216;3;;;;;;;;

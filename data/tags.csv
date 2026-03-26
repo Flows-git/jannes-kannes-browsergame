@@ -69,7 +69,7 @@ Disease Cloud;BTNPlagueCloud.png;Abomination,Spell;Undead
 Frost Wyrm;BTNFrostWyrm.png;Undead,Unit;Undead
 Freezing Breath;BTNFreezingBreath.png;Frost Wyrm,Spell;Undead
 Shade;BTNShade.png;Undead,Unit;Undead
-Skeleton Warrior;BTNSkeletonWarrior.png;Undead,Summon,Necromancer, Rod of Necromancy;Undead
+Skeleton Warrior;BTNSkeletonWarrior.png;Undead,Summon,Necromancer;Undead
 Skeleton Mage;BTNSkeletonMage.png;Undead,Summon,Necromancer;Undead
 Undead Building;;Undead,Building;Undead
 Necropolis;BTNNecropolis.png;Undead Building,Main Building;Undead
@@ -205,8 +205,8 @@ Corrosive Breath;BTNCorrosiveBreath.png;Chimaera,Spell;Night Elf
 Hippogryph Rider;BTNEatTree.png;Night Elf,Unit;Night Elf
 Night Elf Building;;Night Elf,Building;Night Elf
 Ancient;;Night Elf Building;Night Elf
-Uproot;BTNUproot.png;Ancient, Spell;Night Elf
-Eat Tree;BTNEatTree.png;Ancient, Spell;Night Elf
+Uproot;BTNUproot.png;Ancient,Spell;Night Elf
+Eat Tree;BTNEatTree.png;Ancient,Spell;Night Elf
 Tree of Life;BTNTreeOfLife.png;Ancient,Main Building;Night Elf
 Entangled Goldmine;BTNGoldmine.png;Night Elf Building,Goldmine;Night Elf
 Moon Well;BTNMoonWell.png;Night Elf Building,Food Supply Building;Night Elf
