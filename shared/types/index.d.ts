@@ -5,12 +5,11 @@ interface TagCsv {
 }
 
 interface GameTag {
-  id: number
   name: string
   icon?: string
   reforgedIcon?: string
-  parents?: Array<number>
-  children?: Array<number>
+  parents?: Array<string>
+  children?: Array<string>
 }
 
 interface QuestionCsv {
