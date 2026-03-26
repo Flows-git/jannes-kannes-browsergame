@@ -20,4 +20,4 @@ const tags = await parseTagsCsvToJson()
 await upsertJsonFile('tags', tags)
 console.log(`tags.csv is parsed to JSON`)
 
-await setupSupabaseDB()
+// await setupSupabaseDB()

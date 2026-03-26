@@ -1,331 +1,331 @@
-name;icon;main_attributes
-Hero;;
-Unit;;
-Worker;;Unit
-Summon;;Unit
-Spell;;
-Aura;;Spell
-Ultimate Spell;;Spell
-Ability;;
-Building;;
-Main Building;;Building
-Goldmine;BTNGoldmine.png;Building
-Food Supply Building;;Building
-Altar;;Building
-Shop;;Building
-Upgrade Building;;Building
-Tower;;Building
-Production Building;;Building
-Item;BTNPickUpItem.png;
-Gather;BTNGatherGold.png;Worker,Ability
-Repair;BTNRepair.png;Worker,Ability
-Backpack;BTNPackBeast.png;Spell
-Undead;undead.svg;
-Death Knight;BTNHeroDeathKnight.png;Undead,Hero
-Death Coil;BTNDeathCoil.png;Death Knight,Spell
-Death Pact;BTNDeathPact.png;Death Knight,Spell
-Unholy Aura;BTNUnholyAura.png;Death Knight,Aura
-Animate Dead;BTNAnimateDead.png;Death Knight,Ultimate Spell
-Lich;BTNHeroLich.png;Undead,Hero
-Frost Nova;BTNGlacier.png;Lich,Spell
-Frost Armor;BTNFrostArmor.png;Lich,Spell
-Dark Ritual;BTNDarkRitual.png;Lich,Spell
-Death and Decay;BTNDeathAndDecay.png;Lich,Ultimate Spell
-Crypt Lord;BTNHeroCryptLord.png;Undead,Hero
-Carrion Beetle;BTNCarrionScarabsOff.png;Summon,Crypt Lord
-Impale;BTNImpale.png;Crypt Lord,Spell
-Spiked Carapace;BTNThornShield.png;Crypt Lord,Spell
-Locust Swarm;BTNLocustSwarm.png;Crypt Lord,Ultimate Spell
-Dread Lord;BTNHeroDreadLord.png;Undead,Hero
-Carrion Swarm;BTNCarrionSwarm.png;Dreadlord,Spell
-Sleep;BTNSleep.png;Dreadlord,Spell
-Vampiric Aura;BTNVampiricAura.png;Dreadlord,Aura
-Infernal;BTNInfernal.png;Dreadlord,Ultimate Spell
-Acolyte;BTNAcolyte.png;Undead,Worker
-Unsummon Building;BTNUnsummonBuilding.png;Acolyte,Spell
-Ghoul;BTNGhoul.png;Undead,Unit,Worker
-Cannibalize;BTNCannibalize.png;Ghoul,Abomination,Spell
-Ghoul Frenzy;BTNGhoulFrenzy.png;Ghoul,Spell
-Crypt Fiend;BTNCryptFiend.png;Undead,Unit
-Web;BTNWeb.png;Crypt Fiend,Spell
-Burrow;BTNCryptFiendBurrow.png;Crypt Fiend,Spell
-Gargoyle;BTNGargoyle.png;Undead,Unit
-Stone Form;BTNStoneForm.png;Gargoyle,Spell
-Necromancer;BTNNecromancer.png;Undead,Unit
-Raise Dead;BTNRaiseDead.png;Necromancer,Spell
-Unholy Frenzy;BTNUnholyFrenzy.png;Necromancer,Spell
-Cripple;BTNCripple.png;Necromancer,Spell
-Banshee;BTNBanshee.png;Undead,Unit
-Curse;BTNCurse.png;Banshee,Spell
-Anti-magic Shell;BTNAntiMagicShell.png;Banshee,Spell
-Possession;BTNPossession.png;Banshee,Spell
-Meat Wagon;BTNMeatWagon.png;Undead,Unit
-Obsidian Statue;BTNObsidianStatue.png;Undead,Unit
-Destroyer;BTNDestroyer.png;Unit,Obsidian Statue
-Devour Magic;BTNDevourMagic.png;Destroyer,Spell
-Absorb Magic;BTNAbsorbMagic.png;Destroyer,Spell
-Abomination;BTNAbomination.png;Undead,Unit
-Disease Cloud;BTNPlagueCloud.png;Abomination,Spell
-Frost Wyrm;BTNFrostWyrm.png;Undead,Unit
-Freezing Breath;BTNFreezingBreath.png;Frost Wyrm,Spell
-Shade;BTNShade.png;Undead,Unit
-Skeleton Warrior;BTNSkeletonWarrior.png;Undead,Summon,Necromancer, Rod of Necromancy
-Skeleton Mage;BTNSkeletonMage.png;Undead,Summon,Necromancer
-Undead Building;;Undead,Building
-Necropolis;BTNNecropolis.png;Undead Building,Main Building
-Haunted Goldmine;BTNHauntedMine.png;Undead Building,Goldmine
-Ziggurat;BTNZiggurat.png;Undead Building,Food Supply Building
-Altar of Darkness;BTNAltarOfDarkness.png;Undead Building,Altar
-Tomb of Relics;BTNTombOfRelics.png;Undead Building,Shop
-Graveyard;BTNGraveYard.png;Undead Building,Upgrade Building
-Sacrificial Pit;BTNSacrificialPit.png;Undead Building,Production Building
-Crypt;BTNCrypt.png;Undead Building,Production Building
-Temple of the Damned;BTNTempleOfTheDamned.png;Undead Building,Production Building
-Slaughterhouse;BTNSlaughterHouse.png;Undead Building,Production Building
-Boneyard;BTNBoneYard.png;Undead Building,Production Building
-Nerubian Tower;BTNFrostTower.png;Undead Building,Tower,Ziggurat
-Spirit Tower;BTNZigguratUpgrade.png ;Undead Building,Tower,Ziggurat
-Orc;orc.svg;
-Blademaster;BTNHeroBlademaster.png;Orc,Hero
-Wind Walk;BTNWindWalkOn.png;Blademaster,Spell
-Mirror Image;BTNMirrorImage.png;Blademaster,Spell
-Critical Strike;BTNCriticalStrike.png;Blademaster,Spell
-Bladestorm;BTNWhirlwind.png;Blademaster,Ultimate Spell
-Far Seer;BTNHeroFarseer.png;Orc,Hero
-Chain Lightning;BTNChainLightning.png;Far Seer,Spell
-Far Sight;BTNFarSight.png;Far Seer,Spell
-Spirit Wolf;BTNSpiritWolf.png;Far Seer,Summon
-Earthquake;BTNEarthquake.png;Far Seer,Ultimate Spell
-Tauren Chieftain;BTNHeroTaurenChieftain.png;Orc,Hero
-Shockwave;BTNShockWave.png;Tauren Chieftain,Spell
-War Stomp;BTNWarStomp.png;Tauren Chieftain,Spell
-Endurance Aura;BTNCommand.png;Tauren Chieftain,Aura
-Reincarnation;BTNReincarnation.png;Tauren Chieftain,Ultimate Spell
-Shadow Hunter;BTNShadowHunter.png;Orc,Hero
-Healing Wave;BTNHealingWave.png;Shadow Hunter,Spell
-Hex;BTNHex.png;Shadow Hunter,Spell
-Serpent Ward;BTNSerpentWard.png;Shadow Hunter,Summon
-Big Bad Voodoo;BTNBigBadVoodooSpell.png;Shadow Hunter,Ultimate Spell
-Pillage;BTNPillage.png;Orc,Spell
-Peon;BTNPeon.png;Orc,Worker
-Grunt;BTNGrunt.png;Orc,Unit
-Brute Strength;BTNBerserk;Grunt,Spell
-Troll Headhunter;BTNHeadhunter.png;Orc,Unit
-Troll Berserker;BTNHeadHunterBerserker.png;Troll Headhunter,Unit
-Demolisher;BTNDemolisher.png;Orc,Unit
-Burning Oil;BTNFireRocks;Demolisher,Spell
-Shaman;BTNShaman.png;Orc,Unit
-Purge;BTNPurge.png;Shaman,Spell
-Lightning Shield;BTNLightningShield.png;Shaman,Spell
-Bloodlust;BTNBloodLust;Shaman,Spell
-Witch Doctor;BTNWitchDoctor.png;Orc,Unit
-Sentry Ward;BTNSentryWard.png;Witch Doctor,Spell,Neutral
-Stasis Trap Ward;BTNStasisTrap;Witch Doctor,Spell
-Healing Ward;BTNHealingWard.png;Witch Doctor,Spell
-Raider;BTNRaider.png;Orc,Unit
-Ensnare;BTNEnsnare.png;Raider,Spell
-Wind Rider;BTNWyvernRider;Orc,Unit
-Envenomed Spears;BTNEnvenomedSpear;Wind Rider,Spell
-Kodo Beast;BTNKotoBeast;Orc,Unit
-Devour;BTNDevour.png;Kodo Beast,Spell
-War Drums Aura;BTNDrum;Kodo Beast,Aura
-Troll Batrider;BTNTrollBatRider;Orc,Unit
-Unstable Concoction;BTNUnstableConcoction.png;Troll Batrider,Spell
-Liquid Fire;BTNLiquidFire.png;Troll Batrider,Spell
-Spirit Walker;BTNSpiritWalker.png;Orc,Unit
-Spirit Link;BTNSpiritLink.png;Spirit Walker,Spell
-Disenchant;BTNDisenchant.png;Spirit Walker,Spell
-Ancestral Spirit;BTNAncestralSpirit.png;Spirit Walker,Spell
-Ethereal Form;BTNEtherealFormOn.png;Spirit Walker,Spell
-Tauren;BTNTauren.png;Orc,Unit
-Pulverize;BTNSeaGiantPulverize.png;Tauren,Spell
-Orc Building;;Orc,Building
-Great Hall;BTNGreatHall.png;Orc Building,Main Building
-Orc Burrow;BTNTrollBurrow;Orc Building,Food Supply Building
-Altar of Storms;BTNAltarOfStorms;Orc Building,Altar
-Voodoo Lounge;BTNVoodooLounge.png;Orc Building,Shop
-War Mill;BTNForge;Orc Building,Upgrade Building
-Watch Tower;BTNHumanWatchTower.png;Orc Building,Tower
-Barracks;BTNBarracks.png;Orc Building,Production Building
-Spirit Lodge;BTNSpiritLodge;Orc Building,Production Building
-Beastiary;BTNBeastiary.png;Orc Building,Production Building
-Tauren Totem;BTNTaurenTotem.png;Orc Building,Production Building
-Night Elf;nightelf.svg;
-Demon Hunter;BTNHeroDemonHunter.png;Night Elf,Hero
-Mana Burn;BTNManaBurn.png;Demon Hunter,Spell
-Immolation;BTNImmolationOn.png;Demon Hunter,Spell
-Evasion;BTNEvasion.png;Demon Hunter,Spell
-Metamorphosis;BTNMetamorphosis.png;Demon Hunter,Ultimate Spell
-Keeper of the Grove;BTNKeeperOfTheGrove;Night Elf,Hero
-Entangling Roots;BTNEntanglingRoots.png;Keeper of the Grove,Spell
-Treant;BTNTreant.png;Keeper of the Grove,Summon
-Thorns Aura;BTNThorns;Keeper of the Grove,Aura
-Tranquility;BTNTranquility.png;Keeper of the Grove,Ultimate Spell
-Priestess of the Moon;BTNPriestessOfTheMoon;Night Elf,Hero
-Owl Scout;BTNScout;Priestess of the Moon,Summon
-Searing Arrows;BTNSearingArrows.png;Priestess of the Moon,Spell
-Trueshot Aura;BTNTrueShot;Priestess of the Moon,Aura
-Starfall;BTNStarFall;Priestess of the Moon,Ultimate Spell
-Warden;BTNHeroWarden.png;Night Elf,Hero
-Fan of Knives;BTNFanOfKnives;Warden,Spell
-Blink;BTNBlink.png;Warden,Spell
-Shadow Strike;BTNShadowStrike.png;Warden,Spell
-Avatar of Vengeance;BTNSpiritOfVengeance;Warden,Summon,Ultimate Spell
-Spirit of Vengeance;BTNAvengingWatcher;Avatar of Vengeance,Summon
-Ultravision;BTNUltravision.png;Night Elf,Spell
-Hide;BTNAmbush;Night Elf,Spell
-Wisp;BTNWisp.png;Night Elf,Worker
-Detonate;BTNWispSplode;Wisp,Spell
-Archer;BTNArcher.png;Night Elf,Unit
-Huntress;BTNHuntress.png;Night Elf,Unit
-Sentinel;BTNSentinel.png;Huntress,Spell
-Glaive Thrower;BTNGlaiveThrower.png;Night Elf,Unit
-Hippogryph;BTNHippogriff;Night Elf,Unit
-Druid of the Talon;BTNDruidOfTheTalon;Night Elf,Unit
-Faerie Fire;BTNFaerieFire.png;Druid of the Talon,Spell
-Crow Form;BTNRavenForm;Druid of the Talon,Spell
-Cyclone;BTNCyclone.png;Druid of the Talon,Spell
-Faerie Dragon;BTNFaerieDragon.png;Night Elf,Unit
-Phase Shift;BTNPhaseShift.png;Faerie Dragon,Spell
-Mana Flare;BTNManaFlare.png;Faerie Dragon,Spell
-Dryad;BTNDryad.png;Night Elf,Unit
-Slow Poison;BTNSlowPoison.png;Dryad,Spell
-Abolish Magic;BTNDryadDispelMagic;Dryad,Spell
-Druid of the Claw;BTNDruidOfTheClaw;Night Elf,Unit
-Roar;BTNBattleRoar.png;Druid of the Claw,Spell
-Rejuvenation;BTNRejuvenation.png;Druid of the Claw,Spell
-Bear Form;BTNBearForm.png;Druid of the Claw,Spell
-Mountain Giant;BTNMountainGiant.png;Night Elf,Unit
-Taunt;BTNTaunt.png;Mountain Giant,Spell
-War Club;BTNGrabTree;Mountain Giant,Spell
-Resistant Skin;BTNResistantSkin.png;Mountain Giant,Spell
-Hardened Skin;BTNHardenedSkin.png;Mountain Giant,Spell
-Chimaera;BTNChimaera.png;Night Elf,Unit
-Corrosive Breath;BTNCorrosiveBreath.png;Chimaera,Spell
-Hippogryph Rider;BTNEatTree;Night Elf,Unit
-Night Elf Building;;Night Elf,Building
-Ancient;;Night Elf Building
-Uproot;BTNUproot;Ancient, Spell
-Eat Tree;BTNEatTree;Ancient, Spell
-Tree of Life;BTNTreeOfLife;Ancient,Main Building
-Entangled Goldmine;BTNGoldmine;Night Elf Building,Goldmine
-Moon Well;BTNMoonWell.png;Night Elf Building,Food Supply Building
-Altar of Elders;BTNAltarOfElders;Night Elf Building,Altar
-Ancient of Wonders;BTNAncientOfWonders;Ancient,Shop
-Hunters Hall;BTNHuntersHall.png;Night Elf Building,Upgrade Building
-Ancient Protector;BTNCorruptedAncientProtector.png;Ancient,Tower
-Ancient of War;BTNAncientOfTheEarth;Ancient,Production Building
-Ancient of Wind;BTNAncientOfTheMoon;Ancient,Production Building
-Ancient of Lore;BTNAncientOfLore;Ancient,Production Building
-Chimaera Roost;BTNChimaeraRoost.png;Night Elf Building,Production Building
-Human;human.svg;
-Archmage;BTNHeroArchMage;Human,Hero
-Blizzard;BTNBlizzard.png;Archmage,Spell
-Water Elemental;BTNSummonWaterElemental.png;Archmage,Summon
-Brilliance Aura;BTNBrilliance;Archmage,Aura
-Mass Teleport;BTNMassTeleport.png;Archmage,Ultimate Spell
-Mountain King;BTNHeroMountainKing.png;Human,Hero
-Storm Bolt;BTNStormBolt.png;Mountain King,Spell
-Thunder Clap;BTNThunderClap.png;Mountain King,Spell
-Bash;BTNBash.png;Mountain King,Spell
-Avatar;BTNAvatar.png;Mountain King,Ultimate Spell
-Paladin;BTNHeroPaladin.png;Human,Hero
-Holy Light;BTNHolyBolt;Paladin,Spell
-Divine Shield;BTNDivineShieldOff.png;Paladin,Spell
-Devotion Aura;BTNDevotion;Paladin,Aura
-Resurrection;BTNResurrection.png;Paladin,Ultimate Spell
-Blood Mage;BTNBloodMage2;Human,Hero
-Flame Strike;BTNWallOfFire;Blood Mage,Spell
-Banish;BTNBanish.png;Blood Mage,Spell
-Siphon Mana;BTNManaDrain;Blood Mage,Spell
-Phoenix;BTNPhoenix.png;Blood Mage,Ultimate Spell,Summon
-Peasant;BTNPeasant.png;Human,Worker
-Militia;BTNMilitia.png;Peasant,Unit
-Footman;BTNFootman.png;Human,Unit
-Defend;BTNDefend.png;Footman,Spell
-Rifleman;BTNRifleman.png;Human,Unit
-Priest;BTNPriest.png;Human,Unit
-Heal;BTNHeal.png;Priest,Spell
-Dispel Magic;BTNDispelMagic.png;Priest,Spell
-Inner Fire;BTNInnerFire.png;Priest,Spell
-Sorceress;BTNSorceress.png;Human,Unit
-Slow;BTNSlow.png;Sorceress,Spell
-Invisibility;BTNInvisibility.png;Sorceress,Spell
-Polymorph;BTNPolymorph.png;Sorceress,Spell
-Spell Breaker;BTNSpellBreaker.png;Human,Unit
-Spell Steal;BTNSpellSteal.png;Spell Breaker,Spell
-Control Magic;BTNControlMagic.png;Spell Breaker,Spell
-Flying Machine;BTNFlyingMachine.png;Human,Unit
-Flak Cannons;BTNFlakCannons.png;Flying Machine,Spell
-Flying Machine Bombs;BTNHumanArtilleryUpOne;Flying Machine,Spell
-Mortar Team;BTNMortarTeam.png;Human,Unit
-Flare;BTNFlare.png;Mortar Team,Spell
-Fragmentation Shards;BTNFragmentationBombs;Mortar Team,Spell
-Dragonhawk Rider;BTNDragonHawk;Human,Unit
-Aerial Shackles;BTNMagicLariet;Dragonhawk Rider,Spell
-Cloud;BTNCloudOfFog;Dragonhawk Rider,Spell
-Knight;BTNKnight.png;Human,Unit
-Siege Engine;BTNSiegeEngine;Human,Unit
-Barrage;BTNScatterRockets;Sige Engine,Spell
-Gryphon Rider;BTNGryphonRider.png;Human,Unit
-Human Building;BTNGenericHumanBuilding.png;Human,Building
-Town Hall;BTNTownHall.png;Human Building,Main Building
-Farm;BTNFarm.png;Human Building,Food Supply Building
-Altar of Kings;BTNAltarOfKings;Human Building,Altar
-Arcane Vault;BTNArcaneVault.png;Human Building,Shop
-Lumber Mill;BTNHumanLumberMill.png;Human Building,Upgrade Building
-Blacksmith;BTNBlacksmith.png;Human Building,Upgrade Building
-Scout Tower;BTNScoutTower.png;Human Building,Tower
-Guard Tower;BTNGuardTower.png;Human Building,Tower
-Arcane Tower;BTNArcaneTower.png;Human Building,Tower
-Barracks;BTNHumanBarracks.png;Human Building,Production Building
-Arcane Sanctum;BTNArcaneSanctum.png;Human Building,Production Building
-Workshop;BTNWorkshop.png;Human Building,Production Building
-Gryphon Aviary;BTNGryphonAviary.png;Human Building,Production Building
-Natural;;
-Corpse;;Natural
-Critter;BTNSheep;Natural
-Alchemist;BTNHeroAlchemist.png;Natural,Hero
-Healing Spray;BTNHealingSpray.png;Alchemist,Spell
-Chemical Rage;BTNChemicalRage.png;Alchemist,Spell
-Acid Bomb;BTNAcidBomb.png;Alchemist,Spell
-Transmute;BTNTransmute.png;Alchemist,Ultimate Spell
-Beastmaster;BTNBeastMaster;Natural,Hero
-Bear;BTNGrizzlyBear;Beastmaster,Summon
-Quilbeast;BTNQuillBeast;Beastmaster,Summon
-Hawk;;Beastmaster,Summon
-Stampede;BTNStampede.png;Beastmaster,Ultimate Spell
-Dark Ranger;BTNBansheeRanger;Natural,Hero
-Silence;BTNSilence.png;Dark Ranger,Spell
-Black Arrow;BTNTheBlackArrow.png;Dark Ranger,Spell
-Dark Minion;BTNDarkMinion.png;Dark Ranger,Summon
-Life Drain;BTNLifeDrain.png;Dark Ranger,Spell
-Charm;BTNCharm.png;Dark Ranger,Ultimate Spell
-Firelord;BTNHeroAvatarOfFlame;Natural,Hero
-Soul Burn;BTNSoulBurn.png;Firelord,Spell
-Lava Spawn;BTNLavaSpawn.png;Firelord,Summon
-Incinerate;BTNIncinerate.png;Firelord,Spell
-Volcano;BTNVolcano.png;Firelord,Ultimate Spell
-Naga Sea Witch;BTNNagaSeaWitch.png;Natural,Hero
-Forked Lightning;BTNMonsoon;Naga Sea Witch,Spell
-Frost Arrows;BTNColdArrows;Naga Sea Witch,Spell
-Mana Shield;BTNManaShield.png;Naga Sea Witch,Spell
-Tornado;BTNTornado.png;Naga Sea Witch,Ultimate Spell
-Pandaren Brewmaster;BTNPandarenBrewmaster.png;Natural,Hero
-Breath of Fire;BTNBreathOfFire;Pandaren Brewmaster,Spell
-Drunken Haze;BTNStrongDrink;Pandaren Brewmaster,Spell
-Drunken Brawler;BTNDrunkenDodge;Pandaren Brewmaster,Spell
-Storm, Earth, And Fire;BTNStormEarth&Fire;Pandaren Brewmaster,Ultimate Spell
-Pit Lord;BTNPitLord.png;Natural,Hero
-Rain of Fire;BTNFire;Pit Lord,Spell
-Howl of Terror;BTNHowlOfTerror;Pit Lord,Spell
-Cleaving Attack;BTNCleavingAttack.png;Pit Lord,Spell
-Doom;BTNDoom.png;Pit Lord,Ultimate Spell
-Tinker;BTNHeroTinker.png;Natural,Hero
-Pocket Factory;BTNPocketFactory.png;Tinker,Spell
-Cluster Rockets;BTNClusterRockets.png;Tinker,Spell
-Engineering Upgrade;BTNEngineeringUpgrade.png;Tinker,Spell
-Robo-Goblin;BTNROBOGOBLIN;Tinker,Spell
-Goblin Sapper;BTNGoblinSapper.png;Natural,Unit
-Goblin Shredder;BTNGoblinShredder.png;Natural,Unit
-Goblin Zeppelin;BTNGoblinZeppelin.png;Natural,Unit
+name;icon;main_attributes;race
+Hero;;;
+Unit;;;
+Worker;;Unit;
+Summon;;Unit;
+Spell;;;
+Aura;;Spell;
+Ultimate Spell;;Spell;
+Ability;;;
+Building;;;
+Main Building;;Building;
+Goldmine;BTNGoldmine.png;Building;
+Food Supply Building;;Building;
+Altar;;Building;
+Shop;;Building;
+Upgrade Building;;Building;
+Tower;;Building;
+Production Building;;Building;
+Item;;;
+Gather;BTNGatherGold.png;Worker,Ability;
+Repair;BTNRepair.png;Worker,Ability;
+Backpack;BTNPackBeast.png;Spell;
+Undead;;;Undead
+Death Knight;BTNHeroDeathKnight.png;Undead,Hero;Undead
+Death Coil;BTNDeathCoil.png;Death Knight,Spell;Undead
+Death Pact;BTNDeathPact.png;Death Knight,Spell;Undead
+Unholy Aura;BTNUnholyAura.png;Death Knight,Aura;Undead
+Animate Dead;BTNAnimateDead.png;Death Knight,Ultimate Spell;Undead
+Lich;BTNHeroLich.png;Undead,Hero;Undead
+Frost Nova;BTNGlacier.png;Lich,Spell;Undead
+Frost Armor;BTNFrostArmor.png;Lich,Spell;Undead
+Dark Ritual;BTNDarkRitual.png;Lich,Spell;Undead
+Death and Decay;BTNDeathAndDecay.png;Lich,Ultimate Spell;Undead
+Crypt Lord;BTNHeroCryptLord.png;Undead,Hero;Undead
+Carrion Beetle;BTNCarrionScarabsOff.png;Summon,Crypt Lord;Undead
+Impale;BTNImpale.png;Crypt Lord,Spell;Undead
+Spiked Carapace;BTNThornShield.png;Crypt Lord,Spell;Undead
+Locust Swarm;BTNLocustSwarm.png;Crypt Lord,Ultimate Spell;Undead
+Dreadlord;BTNHeroDreadLord.png;Undead,Hero;Undead
+Carrion Swarm;BTNCarrionSwarm.png;Dreadlord,Spell;Undead
+Sleep;BTNSleep.png;Dreadlord,Spell;Undead
+Vampiric Aura;BTNVampiricAura.png;Dreadlord,Aura;Undead
+Infernal;BTNInfernal.png;Dreadlord,Ultimate Spell;Undead
+Acolyte;BTNAcolyte.png;Undead,Worker;Undead
+Unsummon Building;BTNUnsummonBuilding.png;Acolyte,Spell;Undead
+Ghoul;BTNGhoul.png;Undead,Unit,Worker;Undead
+Cannibalize;BTNCannibalize.png;Ghoul,Abomination,Spell;Undead
+Ghoul Frenzy;BTNGhoulFrenzy.png;Ghoul,Spell;Undead
+Crypt Fiend;BTNCryptFiend.png;Undead,Unit;Undead
+Web;BTNWeb.png;Crypt Fiend,Spell;Undead
+Burrow;BTNCryptFiendBurrow.png;Crypt Fiend,Spell;Undead
+Gargoyle;BTNGargoyle.png;Undead,Unit;Undead
+Stone Form;BTNStoneForm.png;Gargoyle,Spell;Undead
+Necromancer;BTNNecromancer.png;Undead,Unit;Undead
+Raise Dead;BTNRaiseDead.png;Necromancer,Spell;Undead
+Unholy Frenzy;BTNUnholyFrenzy.png;Necromancer,Spell;Undead
+Cripple;BTNCripple.png;Necromancer,Spell;Undead
+Banshee;BTNBanshee.png;Undead,Unit;Undead
+Curse;BTNCurse.png;Banshee,Spell;Undead
+Anti-magic Shell;BTNAntiMagicShell.png;Banshee,Spell;Undead
+Possession;BTNPossession.png;Banshee,Spell;Undead
+Meat Wagon;BTNMeatWagon.png;Undead,Unit;Undead
+Obsidian Statue;BTNObsidianStatue.png;Undead,Unit;Undead
+Destroyer;BTNDestroyer.png;Unit,Obsidian Statue;Undead
+Devour Magic;BTNDevourMagic.png;Destroyer,Spell;Undead
+Absorb Magic;BTNAbsorbMagic.png;Destroyer,Spell;Undead
+Abomination;BTNAbomination.png;Undead,Unit;Undead
+Disease Cloud;BTNPlagueCloud.png;Abomination,Spell;Undead
+Frost Wyrm;BTNFrostWyrm.png;Undead,Unit;Undead
+Freezing Breath;BTNFreezingBreath.png;Frost Wyrm,Spell;Undead
+Shade;BTNShade.png;Undead,Unit;Undead
+Skeleton Warrior;BTNSkeletonWarrior.png;Undead,Summon,Necromancer, Rod of Necromancy;Undead
+Skeleton Mage;BTNSkeletonMage.png;Undead,Summon,Necromancer;Undead
+Undead Building;;Undead,Building;Undead
+Necropolis;BTNNecropolis.png;Undead Building,Main Building;Undead
+Haunted Goldmine;BTNHauntedMine.png;Undead Building,Goldmine;Undead
+Ziggurat;BTNZiggurat.png;Undead Building,Food Supply Building;Undead
+Altar of Darkness;BTNAltarOfDarkness.png;Undead Building,Altar;Undead
+Tomb of Relics;BTNTombOfRelics.png;Undead Building,Shop;Undead
+Graveyard;BTNGraveYard.png;Undead Building,Upgrade Building;Undead
+Sacrificial Pit;BTNSacrificialPit.png;Undead Building,Production Building;Undead
+Crypt;BTNCrypt.png;Undead Building,Production Building;Undead
+Temple of the Damned;BTNTempleOfTheDamned.png;Undead Building,Production Building;Undead
+Slaughterhouse;BTNSlaughterHouse.png;Undead Building,Production Building;Undead
+Boneyard;BTNBoneYard.png;Undead Building,Production Building;Undead
+Nerubian Tower;BTNFrostTower.png;Undead Building,Tower,Ziggurat;Undead
+Spirit Tower;BTNZigguratUpgrade.png ;Undead Building,Tower,Ziggurat;Undead
+Orc;;;Orc
+Blademaster;BTNHeroBlademaster.png;Orc,Hero;Orc
+Wind Walk;BTNWindWalkOn.png;Blademaster,Spell;Orc
+Mirror Image;BTNMirrorImage.png;Blademaster,Spell;Orc
+Critical Strike;BTNCriticalStrike.png;Blademaster,Spell;Orc
+Bladestorm;BTNWhirlwind.png;Blademaster,Ultimate Spell;Orc
+Far Seer;BTNHeroFarseer.png;Orc,Hero;Orc
+Chain Lightning;BTNChainLightning.png;Far Seer,Spell;Orc
+Far Sight;BTNFarSight.png;Far Seer,Spell;Orc
+Spirit Wolf;BTNSpiritWolf.png;Far Seer,Summon;Orc
+Earthquake;BTNEarthquake.png;Far Seer,Ultimate Spell;Orc
+Tauren Chieftain;BTNHeroTaurenChieftain.png;Orc,Hero;Orc
+Shockwave;BTNShockWave.png;Tauren Chieftain,Spell;Orc
+War Stomp;BTNWarStomp.png;Tauren Chieftain,Spell;Orc
+Endurance Aura;BTNCommand.png;Tauren Chieftain,Aura;Orc
+Reincarnation;BTNReincarnation.png;Tauren Chieftain,Ultimate Spell;Orc
+Shadow Hunter;BTNShadowHunter.png;Orc,Hero;Orc
+Healing Wave;BTNHealingWave.png;Shadow Hunter,Spell;Orc
+Hex;BTNHex.png;Shadow Hunter,Spell;Orc
+Serpent Ward;BTNSerpentWard.png;Shadow Hunter,Summon;Orc
+Big Bad Voodoo;BTNBigBadVoodooSpell.png;Shadow Hunter,Ultimate Spell;Orc
+Pillage;BTNPillage.png;Orc,Spell;Orc
+Peon;BTNPeon.png;Orc,Worker;Orc
+Grunt;BTNGrunt.png;Orc,Unit;Orc
+Brute Strength;BTNBerserk.png;Grunt,Spell;Orc
+Troll Headhunter;BTNHeadhunter.png;Orc,Unit;Orc
+Troll Berserker;BTNHeadHunterBerserker.png;Troll Headhunter,Unit;Orc
+Demolisher;BTNDemolisher.png;Orc,Unit;Orc
+Burning Oil;BTNFireRocks.png;Demolisher,Spell;Orc
+Shaman;BTNShaman.png;Orc,Unit;Orc
+Purge;BTNPurge.png;Shaman,Spell;Orc
+Lightning Shield;BTNLightningShield.png;Shaman,Spell;Orc
+Bloodlust;BTNBloodLust.png;Shaman,Spell;Orc
+Witch Doctor;BTNWitchDoctor.png;Orc,Unit;Orc
+Sentry Ward;BTNSentryWard.png;Witch Doctor,Spell,Neutral;Orc
+Stasis Trap Ward;BTNStasisTrap.png;Witch Doctor,Spell;Orc
+Healing Ward;BTNHealingWard.png;Witch Doctor,Spell;Orc
+Raider;BTNRaider.png;Orc,Unit;Orc
+Ensnare;BTNEnsnare.png;Raider,Spell;Orc
+Wind Rider;BTNWyvernRider.png;Orc,Unit;Orc
+Envenomed Spears;BTNEnvenomedSpear.png;Wind Rider,Spell;Orc
+Kodo Beast;BTNKotoBeast.png;Orc,Unit;Orc
+Devour;BTNDevour.png;Kodo Beast,Spell;Orc
+War Drums Aura;BTNDrum.png;Kodo Beast,Aura;Orc
+Troll Batrider;BTNTrollBatRider.png;Orc,Unit;Orc
+Unstable Concoction;BTNUnstableConcoction.png;Troll Batrider,Spell;Orc
+Liquid Fire;BTNLiquidFire.png;Troll Batrider,Spell;Orc
+Spirit Walker;BTNSpiritWalker.png;Orc,Unit;Orc
+Spirit Link;BTNSpiritLink.png;Spirit Walker,Spell;Orc
+Disenchant;BTNDisenchant.png;Spirit Walker,Spell;Orc
+Ancestral Spirit;BTNAncestralSpirit.png;Spirit Walker,Spell;Orc
+Ethereal Form;BTNEtherealFormOn.png;Spirit Walker,Spell;Orc
+Tauren;BTNTauren.png;Orc,Unit;Orc
+Pulverize;BTNSeaGiantPulverize.png;Tauren,Spell;Orc
+Orc Building;;Orc,Building;Orc
+Great Hall;BTNGreatHall.png;Orc Building,Main Building;Orc
+Orc Burrow;BTNTrollBurrow.png;Orc Building,Food Supply Building;Orc
+Altar of Storms;BTNAltarOfStorms.png;Orc Building,Altar;Orc
+Voodoo Lounge;BTNVoodooLounge.png;Orc Building,Shop;Orc
+War Mill;BTNForge.png;Orc Building,Upgrade Building;Orc
+Watch Tower;BTNTower.png;Orc Building,Tower;Orc
+Orc Barracks;BTNBarracks.png;Orc Building,Production Building;Orc
+Spirit Lodge;BTNSpiritLodge.png;Orc Building,Production Building;Orc
+Beastiary;BTNBeastiary.png;Orc Building,Production Building;Orc
+Tauren Totem;BTNTaurenTotem.png;Orc Building,Production Building;Orc
+Night Elf;;;Night Elf
+Demon Hunter;BTNHeroDemonHunter.png;Night Elf,Hero;Night Elf
+Mana Burn;BTNManaBurn.png;Demon Hunter,Spell;Night Elf
+Immolation;BTNImmolationOn.png;Demon Hunter,Spell;Night Elf
+Evasion;BTNEvasion.png;Demon Hunter,Spell;Night Elf
+Metamorphosis;BTNMetamorphosis.png;Demon Hunter,Ultimate Spell;Night Elf
+Keeper of the Grove;BTNKeeperOfTheGrove.png;Night Elf,Hero;Night Elf
+Entangling Roots;BTNEntanglingRoots.png;Keeper of the Grove,Spell;Night Elf
+Treant;BTNTreant.png;Keeper of the Grove,Summon;Night Elf
+Thorns Aura;BTNThorns.png;Keeper of the Grove,Aura;Night Elf
+Tranquility;BTNTranquility.png;Keeper of the Grove,Ultimate Spell;Night Elf
+Priestess of the Moon;BTNPriestessOfTheMoon.png;Night Elf,Hero;Night Elf
+Owl Scout;BTNScout.png;Priestess of the Moon,Summon;Night Elf
+Searing Arrows;BTNSearingArrows.png;Priestess of the Moon,Spell;Night Elf
+Trueshot Aura;BTNTrueShot.png;Priestess of the Moon,Aura;Night Elf
+Starfall;BTNStarFall.png;Priestess of the Moon,Ultimate Spell;Night Elf
+Warden;BTNHeroWarden.png;Night Elf,Hero;Night Elf
+Fan of Knives;BTNFanOfKnives.png;Warden,Spell;Night Elf
+Blink;BTNBlink.png;Warden,Spell;Night Elf
+Shadow Strike;BTNShadowStrike.png;Warden,Spell;Night Elf
+Avatar of Vengeance;BTNSpiritOfVengeance.png;Warden,Summon,Ultimate Spell;Night Elf
+Spirit of Vengeance;BTNAvengingWatcher.png;Avatar of Vengeance,Summon;Night Elf
+Ultravision;BTNUltravision.png;Night Elf,Spell;Night Elf
+Hide;BTNAmbush.png;Night Elf,Spell;Night Elf
+Wisp;BTNWisp.png;Night Elf,Worker;Night Elf
+Detonate;BTNWispSplode.png;Wisp,Spell;Night Elf
+Archer;BTNArcher.png;Night Elf,Unit;Night Elf
+Huntress;BTNHuntress.png;Night Elf,Unit;Night Elf
+Sentinel;BTNSentinel.png;Huntress,Spell;Night Elf
+Glaive Thrower;BTNGlaiveThrower.png;Night Elf,Unit;Night Elf
+Hippogryph;BTNHippogriff.png;Night Elf,Unit;Night Elf
+Druid of the Talon;BTNDruidOfTheTalon.png;Night Elf,Unit;Night Elf
+Faerie Fire;BTNFaerieFire.png;Druid of the Talon,Spell;Night Elf
+Crow Form;BTNRavenForm.png;Druid of the Talon,Spell;Night Elf
+Cyclone;BTNCyclone.png;Druid of the Talon,Spell;Night Elf
+Faerie Dragon;BTNFaerieDragon.png;Night Elf,Unit;Night Elf
+Phase Shift;BTNPhaseShift.png;Faerie Dragon,Spell;Night Elf
+Mana Flare;BTNManaFlare.png;Faerie Dragon,Spell;Night Elf
+Dryad;BTNDryad.png;Night Elf,Unit;Night Elf
+Slow Poison;BTNSlowPoison.png;Dryad,Spell;Night Elf
+Abolish Magic;BTNDryadDispelMagic.png;Dryad,Spell;Night Elf
+Druid of the Claw;BTNDruidOfTheClaw.png;Night Elf,Unit;Night Elf
+Roar;BTNBattleRoar.png;Druid of the Claw,Spell;Night Elf
+Rejuvenation;BTNRejuvenation.png;Druid of the Claw,Spell;Night Elf
+Bear Form;BTNBearForm.png;Druid of the Claw,Spell;Night Elf
+Mountain Giant;BTNMountainGiant.png;Night Elf,Unit;Night Elf
+Taunt;BTNTaunt.png;Mountain Giant,Spell;Night Elf
+War Club;BTNGrabTree.png;Mountain Giant,Spell;Night Elf
+Resistant Skin;BTNResistantSkin.png;Mountain Giant,Spell;Night Elf
+Hardened Skin;BTNHardenedSkin.png;Mountain Giant,Spell;Night Elf
+Chimaera;BTNChimaera.png;Night Elf,Unit;Night Elf
+Corrosive Breath;BTNCorrosiveBreath.png;Chimaera,Spell;Night Elf
+Hippogryph Rider;BTNEatTree.png;Night Elf,Unit;Night Elf
+Night Elf Building;;Night Elf,Building;Night Elf
+Ancient;;Night Elf Building;Night Elf
+Uproot;BTNUproot.png;Ancient, Spell;Night Elf
+Eat Tree;BTNEatTree.png;Ancient, Spell;Night Elf
+Tree of Life;BTNTreeOfLife.png;Ancient,Main Building;Night Elf
+Entangled Goldmine;BTNGoldmine.png;Night Elf Building,Goldmine;Night Elf
+Moon Well;BTNMoonWell.png;Night Elf Building,Food Supply Building;Night Elf
+Altar of Elders;BTNAltarOfElders.png;Night Elf Building,Altar;Night Elf
+Ancient of Wonders;BTNAncientOfWonders.png;Ancient,Shop;Night Elf
+Hunters Hall;BTNHuntersHall.png;Night Elf Building,Upgrade Building;Night Elf
+Ancient Protector;BTNCorruptedAncientProtector.png;Ancient,Tower;Night Elf
+Ancient of War;BTNAncientOfTheEarth.png;Ancient,Production Building;Night Elf
+Ancient of Wind;BTNAncientOfTheMoon.png;Ancient,Production Building;Night Elf
+Ancient of Lore;BTNAncientOfLore.png;Ancient,Production Building;Night Elf
+Chimaera Roost;BTNChimaeraRoost.png;Night Elf Building,Production Building;Night Elf
+Human;;;Human
+Archmage;BTNHeroArchMage.png;Human,Hero;Human
+Blizzard;BTNBlizzard.png;Archmage,Spell;Human
+Water Elemental;BTNSummonWaterElemental.png;Archmage,Summon;Human
+Brilliance Aura;BTNBrilliance.png;Archmage,Aura;Human
+Mass Teleport;BTNMassTeleport.png;Archmage,Ultimate Spell;Human
+Mountain King;BTNHeroMountainKing.png;Human,Hero;Human
+Storm Bolt;BTNStormBolt.png;Mountain King,Spell;Human
+Thunder Clap;BTNThunderClap.png;Mountain King,Spell;Human
+Bash;BTNBash.png;Mountain King,Spell;Human
+Avatar;BTNAvatar.png;Mountain King,Ultimate Spell;Human
+Paladin;BTNHeroPaladin.png;Human,Hero;Human
+Holy Light;BTNHolyBolt.png;Paladin,Spell;Human
+Divine Shield;BTNDivineShieldOff.png;Paladin,Spell;Human
+Devotion Aura;BTNDevotion.png;Paladin,Aura;Human
+Resurrection;BTNResurrection.png;Paladin,Ultimate Spell;Human
+Blood Mage;BTNBloodMage2.png;Human,Hero;Human
+Flame Strike;BTNWallOfFire.png;Blood Mage,Spell;Human
+Banish;BTNBanish.png;Blood Mage,Spell;Human
+Siphon Mana;BTNManaDrain.png;Blood Mage,Spell;Human
+Phoenix;BTNMarkOfFire.png;Blood Mage,Ultimate Spell,Summon;Human
+Peasant;BTNPeasant.png;Human,Worker;Human
+Militia;BTNMilitia.png;Peasant,Unit;Human
+Footman;BTNFootman.png;Human,Unit;Human
+Defend;BTNDefend.png;Footman,Spell;Human
+Rifleman;BTNRifleman.png;Human,Unit;Human
+Priest;BTNPriest.png;Human,Unit;Human
+Heal;BTNHeal.png;Priest,Spell;Human
+Dispel Magic;BTNDispelMagic.png;Priest,Spell;Human
+Inner Fire;BTNInnerFire.png;Priest,Spell;Human
+Sorceress;BTNSorceress.png;Human,Unit;Human
+Slow;BTNSlow.png;Sorceress,Spell;Human
+Invisibility;BTNInvisibility.png;Sorceress,Spell;Human
+Polymorph;BTNPolymorph.png;Sorceress,Spell;Human
+Spell Breaker;BTNSpellBreaker.png;Human,Unit;Human
+Spell Steal;BTNSpellSteal.png;Spell Breaker,Spell;Human
+Control Magic;BTNControlMagic.png;Spell Breaker,Spell;Human
+Flying Machine;BTNFlyingMachine.png;Human,Unit;Human
+Flak Cannons;BTNFlakCannons.png;Flying Machine,Spell;Human
+Flying Machine Bombs;BTNHumanArtilleryUpOne.png;Flying Machine,Spell;Human
+Mortar Team;BTNMortarTeam.png;Human,Unit;Human
+Flare;BTNFlare.png;Mortar Team,Spell;Human
+Fragmentation Shards;BTNFragmentationBombs.png;Mortar Team,Spell;Human
+Dragonhawk Rider;BTNDragonHawk.png;Human,Unit;Human
+Aerial Shackles;BTNMagicLariet.png;Dragonhawk Rider,Spell;Human
+Cloud;BTNCloudOfFog.png;Dragonhawk Rider,Spell;Human
+Knight;BTNKnight.png;Human,Unit;Human
+Siege Engine;BTNSiegeEngine.png;Human,Unit;Human
+Barrage;BTNScatterRockets.png;Siege Engine,Spell;Human
+Gryphon Rider;BTNGryphonRider.png;Human,Unit;Human
+Human Building;BTNGenericHumanBuilding.png;Human,Building;Human
+Town Hall;BTNTownHall.png;Human Building,Main Building;Human
+Farm;BTNFarm.png;Human Building,Food Supply Building;Human
+Altar of Kings;BTNAltarOfKings.png;Human Building,Altar;Human
+Arcane Vault;BTNArcaneVault.png;Human Building,Shop;Human
+Lumber Mill;BTNHumanLumberMill.png;Human Building,Upgrade Building;Human
+Blacksmith;BTNBlacksmith.png;Human Building,Upgrade Building;Human
+Scout Tower;BTNScoutTower.png;Human Building,Tower;Human
+Guard Tower;BTNGuardTower.png;Human Building,Tower;Human
+Arcane Tower;BTNArcaneTower.png;Human Building,Tower;Human
+Human Barracks;BTNHumanBarracks.png;Human Building,Production Building;Human
+Arcane Sanctum;BTNArcaneSanctum.png;Human Building,Production Building;Human
+Workshop;BTNWorkshop.png;Human Building,Production Building;Human
+Gryphon Aviary;BTNGryphonAviary.png;Human Building,Production Building;Human
+Neutral;;;Neutral
+Corpse;;Neutral;Neutral
+Critter;BTNSheep.png;Neutral;Neutral
+Alchemist;BTNHeroAlchemist.png;Neutral,Hero;Neutral
+Healing Spray;BTNHealingSpray.png;Alchemist,Spell;Neutral
+Chemical Rage;BTNChemicalRage.png;Alchemist,Spell;Neutral
+Acid Bomb;BTNAcidBomb.png;Alchemist,Spell;Neutral
+Transmute;BTNTransmute.png;Alchemist,Ultimate Spell;Neutral
+Beastmaster;BTNBeastMaster.png;Neutral,Hero;Neutral
+Bear;BTNGrizzlyBear.png;Beastmaster,Summon;Neutral
+Quilbeast;BTNQuillBeast.png;Beastmaster,Summon;Neutral
+Hawk;;Beastmaster,Summon;Neutral
+Stampede;BTNStampede.png;Beastmaster,Ultimate Spell;Neutral
+Dark Ranger;BTNBansheeRanger.png;Neutral,Hero;Neutral
+Silence;BTNSilence.png;Dark Ranger,Spell;Neutral
+Black Arrow;BTNTheBlackArrow.png;Dark Ranger,Spell;Neutral
+Dark Minion;BTNDarkMinion.png;Dark Ranger,Summon;Neutral
+Life Drain;BTNLifeDrain.png;Dark Ranger,Spell;Neutral
+Charm;BTNCharm.png;Dark Ranger,Ultimate Spell;Neutral
+Firelord;BTNHeroAvatarOfFlame.png;Neutral,Hero;Neutral
+Soul Burn;BTNSoulBurn.png;Firelord,Spell;Neutral
+Lava Spawn;BTNLavaSpawn.png;Firelord,Summon;Neutral
+Incinerate;BTNIncinerate.png;Firelord,Spell;Neutral
+Volcano;BTNVolcano.png;Firelord,Ultimate Spell;Neutral
+Naga Sea Witch;BTNNagaSeaWitch.png;Neutral,Hero;Neutral
+Forked Lightning;BTNMonsoon.png;Naga Sea Witch,Spell;Neutral
+Frost Arrows;BTNColdArrows.png;Naga Sea Witch,Spell;Neutral
+Mana Shield;BTNManaShield.png;Naga Sea Witch,Spell;Neutral
+Tornado;BTNTornado.png;Naga Sea Witch,Ultimate Spell;Neutral
+Pandaren Brewmaster;BTNPandarenBrewmaster.png;Neutral,Hero;Neutral
+Breath of Fire;BTNBreathOfFire.png;Pandaren Brewmaster,Spell;Neutral
+Drunken Haze;BTNStrongDrink.png;Pandaren Brewmaster,Spell;Neutral
+Drunken Brawler;BTNDrunkenDodge.png;Pandaren Brewmaster,Spell;Neutral
+Storm, Earth, And Fire;BTNStormEarth&Fire.png;Pandaren Brewmaster,Ultimate Spell;Neutral
+Pit Lord;BTNPitLord.png;Neutral,Hero;Neutral
+Rain of Fire;BTNFire.png;Pit Lord,Spell;Neutral
+Howl of Terror;BTNHowlOfTerror.png;Pit Lord,Spell;Neutral
+Cleaving Attack;BTNCleavingAttack.png;Pit Lord,Spell;Neutral
+Doom;BTNDoom.png;Pit Lord,Ultimate Spell;Neutral
+Tinker;BTNHeroTinker.png;Neutral,Hero;Neutral
+Pocket Factory;BTNPocketFactory.png;Tinker,Spell;Neutral
+Cluster Rockets;BTNClusterRockets.png;Tinker,Spell;Neutral
+Engineering Upgrade;BTNEngineeringUpgrade.png;Tinker,Spell;Neutral
+Robo-Goblin;BTNROBOGOBLIN.png;Tinker,Spell;Neutral
+Goblin Sapper;BTNGoblinSapper.png;Neutral,Unit;Neutral
+Goblin Shredder;BTNGoblinShredder.png;Neutral,Unit;Neutral
+Goblin Zeppelin;BTNGoblinZeppelin.png;Neutral,Unit;Neutral
