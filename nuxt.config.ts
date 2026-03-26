@@ -28,6 +28,11 @@ export default defineNuxtConfig({
     plugins: [
       vuetify({ autoImport: true }),
     ],
+    optimizeDeps: {
+      include: [
+        '@tsparticles/confetti',
+      ]
+    }
   },
   typescript: {
     tsConfig: {
