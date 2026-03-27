@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
   const supabase = useSupabaseServer()
 
-  let query = supabase.from('questions').select('*')
+  let query = supabase.from('questions').select('*, question_tags(tags(name, icon, reforgedIcon))')
 
   if (search) {
     query = query.or(`question.ilike.%${search}%,correctAnswer.ilike.%${search}%,answers.cs.{"${search}"}`)
@@ -15,10 +15,13 @@ export default defineEventHandler(async (event) => {
 
     query = query.order(sortBy ?? 'id', { ascending: sortOrder !== 'desc' })
 
-  const { data, error } = await query.overrideTypes<QuestionDB[]>()
+  const { data, error } = await query.overrideTypes<Array<QuestionDB & { question_tags: Array<{ tags: GameTag }> }>>()
 
   if (error)
     throw createError({ statusCode: 500, message: error.message })
 
-  return data
+  return data.map(({ question_tags, ...q }) => ({
+    ...q,
+    tags: question_tags?.map(t => t.tags) ?? [],
+  }))
 })

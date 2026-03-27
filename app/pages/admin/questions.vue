@@ -53,6 +53,7 @@ const headers: Array<DataTableHeader> = [
   { title: 'Antworten', key: 'answers', sortable: false },
   { title: 'Jannes Antwort', key: 'jannesAnswer' },
   { title: 'questionTimeOnStream', key: 'questionTimeOnStream' },
+  { title: 'Tags', key: 'tags' },
   { title: 'answerTimeOnStream', key: 'answerTimeOnStream' },
   { title: '', key: 'actions', sortable: false, width: 60 },
 ]
@@ -101,6 +102,20 @@ const headers: Array<DataTableHeader> = [
             {{ answer }}
           </v-chip>
         </template>
+
+        <template #[`item.tags`]="{ value }">
+          <div class="d-flex justify-start align-center">
+            <template v-for="tag of value" :key="tag.name">
+              <div v-if="tag.icon">
+                <WarcraftIcon :src="tag.icon" />
+              </div>
+              <v-chip v-else>
+                {{ tag.name }}
+              </v-chip>
+            </template>
+          </div>
+        </template>
+
         <template #[`item.actions`]="{ item }">
           <v-btn icon="mdi-pencil" size="small" variant="text" @click="openEdit(item)" />
         </template>

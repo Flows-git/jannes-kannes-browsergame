@@ -21,6 +21,7 @@ function setupForm(override?: Partial<QuestionDB>): Omit<QuestionDB, 'id'> {
     jannesAnswer: '',
     questionTimeOnStream: '',
     answerTimeOnStream: '',
+    tags: [],
     ...override,
   }
 }

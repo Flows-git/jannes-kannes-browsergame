@@ -133,6 +133,8 @@ function onAnswerUpdate(index: number, newVal: string) {
       </div>
     </div>
 
+    <AdminQuestionTagSelect v-model="form.tags" class="mb-4" />
+
     <v-row>
       <v-col cols="4">
         <v-text-field v-model="form.author" label="Autor" />

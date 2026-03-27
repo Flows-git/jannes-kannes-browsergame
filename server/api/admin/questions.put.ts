@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
   const supabase = useSupabaseServer()
 
-  const { id, ...updateData } = body
+  const { id, tags, ...updateData } = body
 
   const { data, error } = await supabase
     .from('questions')
@@ -20,5 +20,20 @@ export default defineEventHandler(async (event) => {
   if (error)
     throw createError({ statusCode: 500, message: error.message })
 
-  return data
+  const { error: deleteError } = await supabase
+    .from('question_tags')
+    .delete()
+    .eq('question_id', id)
+  if (deleteError)
+    throw createError({ statusCode: 500, message: deleteError.message })
+
+  if (tags?.length) {
+    const { error: tagsError } = await supabase
+      .from('question_tags')
+      .insert(tags.map(t => ({ question_id: id, tag_name: t.name })))
+    if (tagsError)
+      throw createError({ statusCode: 500, message: tagsError.message })
+  }
+
+  return { ...data, tags: tags ?? [] }
 })

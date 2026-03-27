@@ -37,6 +37,7 @@ interface QuestionDB {
   jannesAnswer: string
   questionTimeOnStream: string
   answerTimeOnStream: string
+  tags?: Array<GameTag>
 }
 
 interface GameQuestion {

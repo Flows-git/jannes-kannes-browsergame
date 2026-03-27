@@ -1,17 +1,24 @@
 export default defineEventHandler(async (event) => {
-  const body = await readBody<Omit<QuestionDB, 'id'>>(event)
+  const { tags, ...body } = await readBody<Omit<QuestionDB, 'id'>>(event)
 
   const supabase = useSupabaseServer()
 
   const { data, error } = await supabase
     .from('questions')
     .insert(body)
-    .select()
+    .select('id')
     .single()
-    .overrideTypes<QuestionDB>()
 
   if (error)
     throw createError({ statusCode: 500, message: error.message })
 
-  return data
+  if (tags?.length) {
+    const { error: tagsError } = await supabase
+      .from('question_tags')
+      .insert(tags.map(t => ({ question_id: data.id, tag_name: t.name })))
+    if (tagsError)
+      throw createError({ statusCode: 500, message: tagsError.message })
+  }
+
+  return { ...body, id: data.id, tags: tags ?? [] }
 })

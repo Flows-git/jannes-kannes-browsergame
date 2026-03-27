@@ -19,7 +19,9 @@ function getImage(tag: GameTag) {
 
 <template>
   <v-container>
-    <h1>Tags!!!</h1>
+    <div class="text-h4 pa-4 bg-surface-variant d-flex justify-space-between align-center">
+      Tags
+    </div>
     {{ error }}
     <ClientOnly>
       <VTreeview
