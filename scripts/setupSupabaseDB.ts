@@ -19,6 +19,13 @@ async function setupQuestionsTable() {
   if (skipped.length > 0) {
     console.log(`skipped entries: ${skipped.sort((a, b) => a - b)}`)
   }
+
+  console.log('resetting questions sequence...')
+  const supabase = useSupabase()
+  const { error } = await supabase.rpc('reset_questions_sequence')
+  if (error) throw error
+  console.log('resetting questions sequence... DONE')
+
   console.log('setup Questions table... DONE')
 }
 
