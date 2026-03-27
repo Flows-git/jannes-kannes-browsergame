@@ -38,6 +38,12 @@ async function onEdit(formData: Omit<QuestionDB, 'id'>) {
   refresh()
 }
 
+async function onDelete() {
+  await $fetch('/api/admin/questions', { method: 'DELETE', query: { id: editQuestion.value!.id } })
+  showEditDialog.value = false
+  refresh()
+}
+
 const headers: Array<DataTableHeader> = [
   { title: 'Episode', key: 'id', width: 120 },
   { title: 'Frage', key: 'question' },
@@ -113,6 +119,6 @@ const headers: Array<DataTableHeader> = [
     </v-card>
 
     <AdminQuestionCreateDialog v-model="showCreateDialog" @save="onCreate" />
-    <AdminQuestionEditDialog v-if="editQuestion" v-model="showEditDialog" :question="editQuestion" @save="onEdit" />
+    <AdminQuestionEditDialog v-if="editQuestion" v-model="showEditDialog" :question="editQuestion" @save="onEdit" @delete="onDelete" />
   </v-container>
 </template>

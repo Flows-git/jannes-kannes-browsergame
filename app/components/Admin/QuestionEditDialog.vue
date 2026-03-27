@@ -5,6 +5,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   save: [data: Omit<QuestionDB, 'id'>]
+  delete: []
 }>()
 
 const showDialog = defineModel<boolean>()
@@ -26,6 +27,13 @@ async function save() {
 
   emit('save', { ...form.value, answers: [...form.value.answers] })
 }
+
+const showConfirmDelete = ref(false)
+
+function confirmDelete() {
+  emit('delete')
+  showDialog.value = false
+}
 </script>
 
 <template>
@@ -39,6 +47,9 @@ async function save() {
         <AdminQuestionForm ref="formRef" v-model="form" />
       </v-card-text>
       <v-card-actions>
+        <v-btn color="error" variant="text" prepend-icon="mdi-delete" @click="showConfirmDelete = true">
+          Löschen
+        </v-btn>
         <v-spacer />
         <v-btn variant="text" @click="showDialog = false">
           Abbrechen
@@ -49,4 +60,11 @@ async function save() {
       </v-card-actions>
     </v-card>
   </v-dialog>
+
+  <GameConfirmDialog
+    v-model="showConfirmDelete"
+    text="Soll diese Frage wirklich unwiderruflich gelöscht werden?"
+    accept-btn-text="Löschen"
+    @accept="confirmDelete"
+  />
 </template>
