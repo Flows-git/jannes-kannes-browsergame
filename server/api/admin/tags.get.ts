@@ -13,6 +13,7 @@ export default defineEventHandler(async (event) => {
 
   const { data, error } = await query.overrideTypes<GameTag[]>()
 
-  if (error) throw createError({ statusCode: 500, message: error.message })
-  return data.map(d => ({ ...d, children: d.children?.length ? [] : undefined})) ?? []
+  if (error)
+    throw createError({ statusCode: 500, message: error.message })
+  return data.map(d => ({ ...d, children: d.children?.length ? [] : undefined })) ?? []
 })
