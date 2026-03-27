@@ -18,33 +18,23 @@ function fetchUrl() {
 
 const { data, pending, refresh } = useFetch<QuestionDB[]>(fetchUrl)
 
-const showDialog = ref(false)
+const showCreateDialog = ref(false)
+const showEditDialog = ref(false)
 const editQuestion = ref<QuestionDB>()
-
-function openCreate() {
-  editQuestion.value = undefined
-  showDialog.value = true
-}
 
 function openEdit(question: QuestionDB) {
   editQuestion.value = question
-  showDialog.value = true
+  showEditDialog.value = true
 }
 
-async function onSave(data: Omit<QuestionDB, 'id'>, keepOpen: boolean) {
-  if (editQuestion.value) {
-    await $fetch('/api/admin/questions', {
-      method: 'PUT',
-      body: { id: editQuestion.value.id, ...data },
-    })
-  }
-  else {
-    await $fetch('/api/admin/questions', {
-      method: 'POST',
-      body: data,
-    })
-  }
-  if (!keepOpen) showDialog.value = false
+async function onCreate(formData: Omit<QuestionDB, 'id'>) {
+  await $fetch('/api/admin/questions', { method: 'POST', body: formData })
+  refresh()
+}
+
+async function onEdit(formData: Omit<QuestionDB, 'id'>) {
+  await $fetch('/api/admin/questions', { method: 'PUT', body: { id: editQuestion.value!.id, ...formData } })
+  showEditDialog.value = false
   refresh()
 }
 
@@ -65,7 +55,7 @@ const headers: Array<DataTableHeader> = [
     <v-card>
       <div class="text-h4 pa-4 bg-surface-variant d-flex justify-space-between align-center">
         Fragen verwalten
-        <v-btn color="primary" prepend-icon="mdi-plus" @click="openCreate">
+        <v-btn color="primary" prepend-icon="mdi-plus" @click="showCreateDialog = true">
           Neue Frage
         </v-btn>
       </div>
@@ -122,6 +112,7 @@ const headers: Array<DataTableHeader> = [
       </v-data-table>
     </v-card>
 
-    <AdminQuestionForm v-model="showDialog" :question="editQuestion" @save="onSave" />
+    <AdminQuestionCreateDialog v-model="showCreateDialog" @save="onCreate" />
+    <AdminQuestionEditDialog v-if="editQuestion" v-model="showEditDialog" :question="editQuestion" @save="onEdit" />
   </v-container>
 </template>
