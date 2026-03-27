@@ -5,26 +5,36 @@ const emit = defineEmits<{
 
 const showDialog = defineModel<boolean>()
 
-const defaultForm = (): Omit<QuestionDB, 'id'> => ({
+const form = ref<Omit<QuestionDB, 'id'>>({
   question: '',
   answers: ['Ja', 'Nein'],
   correctAnswer: '',
   author: '',
   creepjackEpisode: 0,
   jkEpisode: '',
-  questionNr: 0,
+  questionNr: 1,
   jannesAnswer: '',
   questionTimeOnStream: '',
   answerTimeOnStream: '',
 })
-
-const form = ref(defaultForm())
 const formRef = useTemplateRef('formRef')
 const addAnother = ref(false)
 
-watch(showDialog, (open) => {
+watch(showDialog, async (open) => {
   if (open) {
-    form.value = defaultForm()
+    const defaults = await $fetch('/api/admin/questions/defaults')
+    form.value = {
+      question: '',
+      answers: ['Ja', 'Nein'],
+      correctAnswer: '',
+      author: '',
+      creepjackEpisode: defaults.creepjackEpisode,
+      jkEpisode: defaults.jkEpisode,
+      questionNr: 1,
+      jannesAnswer: '',
+      questionTimeOnStream: '',
+      answerTimeOnStream: '',
+    }
     formRef.value?.resetValidation()
   }
 })
@@ -36,7 +46,16 @@ async function save() {
   emit('save', { ...form.value, answers: [...form.value.answers] })
 
   if (addAnother.value) {
-    form.value = defaultForm()
+    form.value = {
+      ...form.value,
+      question: '',
+      answers: ['Ja', 'Nein'],
+      correctAnswer: '',
+      jannesAnswer: '',
+      questionTimeOnStream: '',
+      answerTimeOnStream: '',
+      questionNr: form.value.questionNr + 1,
+    }
     formRef.value?.resetValidation()
   }
 }
