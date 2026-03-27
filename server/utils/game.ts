@@ -130,7 +130,7 @@ export async function useGame(event: H3Event) {
       correctAnswers: 0,
       totalLives: settings?.liveCount,
       remainingLives: settings?.liveCount,
-      startTime: new Date().getTime(),
+      startTime: Date.now(),
       averageAnswerTime: '0s',
       gameTime: '0s',
       endTime: undefined,
@@ -181,7 +181,7 @@ export async function useGame(event: H3Event) {
    */
   async function endGame() {
     // session.clear()
-    const endTime = new Date().getTime()
+    const endTime = Date.now()
     await session.update({
       running: false,
       endTime,

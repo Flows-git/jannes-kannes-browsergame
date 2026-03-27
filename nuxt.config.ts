@@ -31,8 +31,8 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: [
         '@tsparticles/confetti',
-      ]
-    }
+      ],
+    },
   },
   typescript: {
     tsConfig: {

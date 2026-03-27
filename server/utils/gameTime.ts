@@ -17,7 +17,7 @@ export function getAverageAnswerTimeString(startTime: number, answeredQuestions:
  * @returns The average answer time in seconds.
  */
 function getAverageAnswerTimeInSeconds(startTime: number, answeredQuestions: number) {
-  const currentTime = new Date().getTime()
+  const currentTime = Date.now()
   const totalSeconds = getTimeDurationInSeconds(startTime, currentTime)
   return totalSeconds / (answeredQuestions || 1)
 }
