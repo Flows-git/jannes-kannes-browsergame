@@ -4,7 +4,32 @@ const form = defineModel<Omit<QuestionDB, 'id'>>({ required: true })
 const valid = ref(false)
 const formRef = useTemplateRef('formRef')
 
-const requiredRule = [(v: string) => !!v || 'Pflichtfeld']
+const requiredStringRule = [(v: string) => !!v?.trim() || 'Pflichtfeld']
+const positiveNumberRule = [(v: number) => v > 0 || 'Pflichtfeld']
+
+function answerRules(index: number) {
+  return [
+    (v: string) => !!v?.trim() || 'Pflichtfeld',
+    (v: string) => form.value.answers.filter((a, i) => i !== index && a.trim() === v.trim()).length === 0 || 'Antwort bereits vorhanden',
+  ]
+}
+
+const showSelectionErrors = ref(false)
+
+defineExpose({
+  validate: async () => {
+    showSelectionErrors.value = true
+    const result = await formRef.value?.validate()
+    const selectionsValid = !!form.value.correctAnswer && !!form.value.jannesAnswer
+    if (!selectionsValid) valid.value = false
+    return result?.valid && selectionsValid ? result : { valid: false }
+  },
+  resetValidation: () => {
+    formRef.value?.resetValidation()
+    showSelectionErrors.value = false
+  },
+  valid,
+})
 
 function addAnswer() {
   form.value.answers.push('')
@@ -24,11 +49,6 @@ function onAnswerUpdate(index: number, newVal: string) {
   form.value.answers[index] = newVal
 }
 
-defineExpose({
-  validate: () => formRef.value?.validate(),
-  resetValidation: () => formRef.value?.resetValidation(),
-  valid,
-})
 </script>
 
 <template>
@@ -37,25 +57,25 @@ defineExpose({
       <v-col cols="4">
         <v-text-field
           v-model.number="form.creepjackEpisode"
-          :rules="requiredRule"
+          :rules="positiveNumberRule"
           label="Creepjack Episode"
           type="number"
         />
       </v-col>
       <v-col cols="4">
-        <v-text-field v-model="form.jkEpisode" label="Jannes Kann es Episode" :rules="requiredRule" />
+        <v-text-field v-model="form.jkEpisode" label="Jannes Kann es Episode" :rules="requiredStringRule" />
       </v-col>
       <v-col cols="4">
         <v-text-field
           v-model.number="form.questionNr"
-          :rules="requiredRule"
+          :rules="positiveNumberRule"
           label="Frage Nr."
           type="number"
         />
       </v-col>
     </v-row>
 
-    <v-text-field v-model="form.question" label="Frage" :rules="requiredRule" />
+    <v-text-field v-model="form.question" label="Frage" :rules="requiredStringRule" />
 
     <div class="text-subtitle-2 mb-2">
       Antworten
@@ -86,7 +106,7 @@ defineExpose({
       <v-text-field
         :model-value="form.answers[i]"
         :label="`Antwort ${i + 1}`"
-        :rules="requiredRule"
+        :rules="answerRules(i)"
         hide-details="auto"
         @update:model-value="onAnswerUpdate(i, $event)"
       />
@@ -102,9 +122,15 @@ defineExpose({
     <v-btn variant="text" size="small" prepend-icon="mdi-plus" class="mb-2" @click="addAnswer">
       Antwort hinzufügen
     </v-btn>
-    <div class="d-flex ga-4 mb-4 text-caption text-medium-emphasis">
-      <span><v-icon icon="mdi-check-circle" color="success" size="small" /> Korrekte Antwort: {{ form.correctAnswer || '–' }}</span>
-      <span><v-icon icon="mdi-account-circle" color="primary" size="small" /> Jannes Antwort: {{ form.jannesAnswer || '–' }}</span>
+    <div class="mb-4">
+      <div class="d-flex ga-4 text-caption text-medium-emphasis">
+        <span><v-icon icon="mdi-check-circle" color="success" size="small" /> Korrekte Antwort: {{ form.correctAnswer || '–' }}</span>
+        <span><v-icon icon="mdi-account-circle" color="primary" size="small" /> Jannes Antwort: {{ form.jannesAnswer || '–' }}</span>
+      </div>
+      <div v-if="showSelectionErrors" class="d-flex ga-4 mt-1">
+        <span v-if="!form.correctAnswer" class="text-caption text-error">Korrekte Antwort auswählen</span>
+        <span v-if="!form.jannesAnswer" class="text-caption text-error">Jannes Antwort auswählen</span>
+      </div>
     </div>
 
     <v-row>

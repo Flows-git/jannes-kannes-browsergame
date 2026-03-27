@@ -1,61 +1,55 @@
 <script setup lang="ts">
 const emit = defineEmits<{
-  save: [data: Omit<QuestionDB, 'id'>]
+  save: [data: Omit<QuestionDB, 'id'>, addAnother: boolean]
 }>()
 
 const showDialog = defineModel<boolean>()
 
-const form = ref<Omit<QuestionDB, 'id'>>({
-  question: '',
-  answers: ['Ja', 'Nein'],
-  correctAnswer: '',
-  author: '',
-  creepjackEpisode: 0,
-  jkEpisode: '',
-  questionNr: 1,
-  jannesAnswer: '',
-  questionTimeOnStream: '',
-  answerTimeOnStream: '',
-})
+const form = ref<Omit<QuestionDB, 'id'>>(setupForm())
 const formRef = useTemplateRef('formRef')
 const addAnother = ref(false)
+
+function setupForm(override?: Partial<QuestionDB>): Omit<QuestionDB, 'id'> {
+  return {
+    question: '',
+    answers: ['Ja', 'Nein'],
+    correctAnswer: '',
+    author: '',
+    creepjackEpisode: 0,
+    jkEpisode: '',
+    questionNr: 1,
+    jannesAnswer: '',
+    questionTimeOnStream: '',
+    answerTimeOnStream: '',
+    ...override,
+  }
+}
 
 watch(showDialog, async (open) => {
   if (open) {
     const defaults = await $fetch('/api/admin/questions/defaults')
-    form.value = {
-      question: '',
-      answers: ['Ja', 'Nein'],
-      correctAnswer: '',
-      author: '',
+    form.value = setupForm({
       creepjackEpisode: defaults.creepjackEpisode,
       jkEpisode: defaults.jkEpisode,
-      questionNr: 1,
-      jannesAnswer: '',
-      questionTimeOnStream: '',
-      answerTimeOnStream: '',
-    }
+    })
     formRef.value?.resetValidation()
   }
 })
 
 async function save() {
   await formRef.value?.validate()
-  if (!formRef.value?.valid) return
+  if (!formRef.value?.valid)
+    return
 
-  emit('save', { ...form.value, answers: [...form.value.answers] })
+  emit('save', { ...form.value, answers: [...form.value.answers] }, addAnother.value)
 
   if (addAnother.value) {
-    form.value = {
-      ...form.value,
-      question: '',
-      answers: ['Ja', 'Nein'],
-      correctAnswer: '',
-      jannesAnswer: '',
-      questionTimeOnStream: '',
-      answerTimeOnStream: '',
+    form.value = setupForm({
+      creepjackEpisode: form.value.creepjackEpisode,
+      jkEpisode: form.value.jkEpisode,
       questionNr: form.value.questionNr + 1,
-    }
+
+    })
     formRef.value?.resetValidation()
   }
 }

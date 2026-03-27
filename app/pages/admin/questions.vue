@@ -27,8 +27,11 @@ function openEdit(question: QuestionDB) {
   showEditDialog.value = true
 }
 
-async function onCreate(formData: Omit<QuestionDB, 'id'>) {
+async function onCreate(formData: Omit<QuestionDB, 'id'>, addAnother: boolean) {
   await $fetch('/api/admin/questions', { method: 'POST', body: formData })
+  if (!addAnother) {
+    showCreateDialog.value = false
+  }
   refresh()
 }
 
