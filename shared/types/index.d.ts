@@ -70,6 +70,7 @@ interface GameSession {
   endTime?: number
   gameTime?: string
   averageAnswerTime: string
+  submitted?: boolean
 }
 
 type GameMode = 'classic' | 'ranked' | 'endless'

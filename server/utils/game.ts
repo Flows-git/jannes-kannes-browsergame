@@ -134,6 +134,7 @@ export async function useGame(event: H3Event) {
       averageAnswerTime: '0s',
       gameTime: '0s',
       endTime: undefined,
+      submitted: false,
     })
     await updateCurrentQuestion()
   }
@@ -195,7 +196,12 @@ export async function useGame(event: H3Event) {
   }
 
   async function submitGameResult(name: string) {
+    if (data.submitted) {
+      throw createError({ status: 409, statusMessage: 'Score already submitted' })
+    }
+
     const id = await submitGameResultToLeaderboard(name, data)
+    await session.update({ submitted: true })
     await clearGameSession()
     return id
   }

@@ -1,15 +1,8 @@
 export async function submitGameResultToLeaderboard(name: string, data: GameSession) {
   const supabase = useSupabaseServer()
-  if (data.running) {
-    throw createError('game not ended')
-  }
-
-  if (data.gameMode !== 'ranked') {
-    throw createError('only ranked games permitted')
-  }
-
+  validateGameResult(name, data)
   const entry: LeaderboardEntry = {
-    name,
+    name: name.trim(),
     score: data.correctAnswers,
     correctAnswers: data.correctAnswers,
     usedJoker: 0,
@@ -19,6 +12,43 @@ export async function submitGameResultToLeaderboard(name: string, data: GameSess
 
   const { data: _newEntry } = await supabase.from('leaderboard').insert(entry).select('id').single()
   return _newEntry?.id
+}
+
+function validateGameResult(name: string, data: GameSession) {
+  if (data.running) {
+    throw createError('game not ended')
+  }
+
+  if (data.gameMode !== 'ranked') {
+    throw createError('only ranked games permitted')
+  }
+
+  // Name validation
+  const trimmedName = name.trim()
+  if (!trimmedName || trimmedName.length < 3 || trimmedName.length > 30) {
+    throw createError({ status: 400, statusMessage: 'Name must be 3-30 characters' })
+  }
+  if (!/^[\p{L}\p{N}\s._-]+$/u.test(trimmedName)) {
+    throw createError({ status: 400, statusMessage: 'Name contains invalid characters' })
+  }
+
+  // Timing validation — minimum 2s per answered question
+  if (!data.startTime || !data.endTime || data.endTime <= data.startTime) {
+    throw createError({ status: 400, statusMessage: 'Invalid game timing' })
+  }
+  const gameDurationMs = data.endTime - data.startTime
+  const minDurationMs = data.answeredQuestions * 2000
+  if (gameDurationMs < minDurationMs) {
+    throw createError({ status: 400, statusMessage: 'Game completed too quickly' })
+  }
+
+  // Game state integrity checks
+  if (data.correctAnswers > data.answeredQuestions) {
+    throw createError({ status: 400, statusMessage: 'Invalid game state' })
+  }
+  if (data.answeredQuestions > data.totalQuestions) {
+    throw createError({ status: 400, statusMessage: 'Invalid game state' })
+  }
 }
 
 export async function getLeaderboard(params?: { page?: number, perPage?: number }) {
