@@ -52,8 +52,8 @@ const headers: Array<DataTableHeader> = [
   { title: 'Frage', key: 'question' },
   { title: 'Antworten', key: 'answers', sortable: false },
   { title: 'Jannes Antwort', key: 'jannesAnswer' },
-  { title: 'questionTimeOnStream', key: 'questionTimeOnStream' },
   { title: 'Tags', key: 'tags' },
+  { title: 'questionTimeOnStream', key: 'questionTimeOnStream' },
   { title: 'answerTimeOnStream', key: 'answerTimeOnStream' },
   { title: '', key: 'actions', sortable: false, width: 60 },
 ]

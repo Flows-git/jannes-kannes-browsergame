@@ -1,3 +1,5 @@
+import { resolveTagIds } from '~~/server/utils/tags'
+
 export default defineEventHandler(async (event) => {
   const { tags, ...body } = await readBody<Omit<QuestionDB, 'id'>>(event)
 
@@ -13,9 +15,10 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, message: error.message })
 
   if (tags?.length) {
+    const allTagIds = await resolveTagIds(supabase, tags)
     const { error: tagsError } = await supabase
       .from('question_tags')
-      .insert(tags.map(t => ({ question_id: data.id, tag_id: t.id })))
+      .insert(allTagIds.map((tag_id: number) => ({ question_id: data.id, tag_id })))
     if (tagsError)
       throw createError({ statusCode: 500, message: tagsError.message })
   }
