@@ -11,7 +11,7 @@ const { data: availableTags } = await useFetch<GameTag[]>('/api/admin/tags/selec
     v-model="selected"
     :items="availableTags ?? []"
     item-title="name"
-    item-value="name"
+    item-value="id"
     label="Tags"
     multiple
     chips

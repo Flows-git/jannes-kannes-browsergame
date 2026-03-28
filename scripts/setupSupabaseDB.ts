@@ -5,7 +5,7 @@ import { parseTagsCsvToJson } from './parseTagsCsvToJson'
 
 export async function setupSupabaseDB() {
   await setupQuestionsTable()
-  await setupTags()
+  await setupTagsTable()
 }
 
 async function setupQuestionsTable() {
@@ -23,19 +23,15 @@ async function setupQuestionsTable() {
   console.log('resetting questions sequence...')
   const supabase = useSupabase()
   const { error } = await supabase.rpc('reset_questions_sequence')
-  if (error) throw error
+  if (error)
+    throw error
   console.log('resetting questions sequence... DONE')
 
   console.log('setup Questions table... DONE')
 }
 
-async function setupTags() {
-  const tags: GameTag[] = await parseTagsCsvToJson()
-  setupTagsTable(tags)
-  setupTagsReferencesTable(tags)
-}
-
-async function setupTagsTable(tags: GameTag[]) {
+async function setupTagsTable() {
+  const tags: Omit<GameTag, 'id'>[] = await parseTagsCsvToJson()
   console.log('setup Tags table...')
   const supabase = await useSupabase()
 
@@ -50,25 +46,30 @@ async function setupTagsTable(tags: GameTag[]) {
     throw result.error
   }
   console.log('setup Tags table... DONE')
-}
 
-async function setupTagsReferencesTable(tags: GameTag[]) {
   console.log(`Setup Tag References Table...`)
-  const supabase = await useSupabase()
-  const references: Array<{ child_id: string, parent_id: string }> = []
-
+  const dbTags = result.data
+  const references: Array<{ child_id: number, parent_id: number }> = []
   for (const tag of tags) {
     if (tag.parents && tag.parents.length > 0) {
       // const parentIds = tag.parents.map(parentIndex => tags[parentIndex].id)
-      references.push(...tag.parents.map(parentId => ({ child_id: tag.name, parent_id: parentId })))
+      const tagId = dbTags.find(t => t.name === tag.name)?.id
+      if (!tagId) {
+        console.warn('Could not find tag in DB for name:', tag.name)
+        continue
+      }
+      const parentIds = dbTags.filter(t => tag.parents?.includes(t.name)).map(t => t.id)
+      references.push(...parentIds.map(parentId => ({ child_id: tagId, parent_id: parentId })))
     }
   }
 
-  const result = await supabase.from('tags_reference').insert(references)
-  if (result.error) {
-    throw result.error
+  const result2 = await supabase.from('tags_reference').insert(references)
+  if (result2.error) {
+    throw new Error(`Error inserting tag references - clear the tags table and try again.`)
   }
   console.log(`Setup Tag References Table... DONE`)
+
+  return result.data
 }
 
 setupSupabaseDB()

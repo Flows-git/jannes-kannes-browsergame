@@ -2,9 +2,8 @@ export default defineEventHandler(async () => {
   const supabase = useSupabaseServer()
 
   const { data, error } = await supabase
-    .from('tags_with_relations')
+    .from('tags')
     .select()
-    // .neq('parents', '{}')
     .overrideTypes<GameTag[]>()
 
   if (error)

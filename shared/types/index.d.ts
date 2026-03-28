@@ -5,6 +5,7 @@ interface TagCsv {
 }
 
 interface GameTag {
+  id: number
   name: string
   icon?: string
   reforgedIcon?: string

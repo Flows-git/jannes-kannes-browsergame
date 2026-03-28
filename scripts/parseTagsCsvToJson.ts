@@ -1,7 +1,7 @@
 import { parseCsvToJson } from './helper/parseCsvToJson'
 
 export async function parseTagsCsvToJson() {
-  return parseCsvToJson<TagCsv, GameTag>('tags', (tag) => {
+  return parseCsvToJson<TagCsv, Omit<GameTag, 'id'>>('tags', (tag) => {
     const icon = tag.icon?.trim() || undefined
 
     return {
