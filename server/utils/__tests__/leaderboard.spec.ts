@@ -10,6 +10,7 @@ describe('leaderboard', () => {
   })
 
   describe('submitGameResultToLeaderboard', () => {
+    const now = Date.now()
     const mockGameSession: GameSession = {
       running: false,
       gameMode: 'ranked',
@@ -17,11 +18,12 @@ describe('leaderboard', () => {
       gameTime: '120',
       averageAnswerTime: '12s',
       questions: [],
-      startTime: Date.now(),
-      answeredQuestions: 1,
+      startTime: now - 30000,
+      endTime: now,
+      answeredQuestions: 10,
       currentQuestion: {} as QuestionDB,
       currentQuestionNr: 2,
-      totalQuestions: 3,
+      totalQuestions: 10,
     }
 
     it('should throw error when game is running', async () => {

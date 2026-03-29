@@ -1,9 +1,13 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import LeaderboardForm from '~/components/LeaderboardForm.vue'
 
 // @vitest-environment nuxt
 describe('test LeaderboardForm', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   it('should submit the correct username', async () => {
     const fetch = vi
       .spyOn(globalThis, '$fetch')
@@ -50,8 +54,12 @@ describe('test LeaderboardForm', () => {
     }))
     const wrapper = await mountSuspended(LeaderboardForm)
 
-    await wrapper.trigger('submit')
+    // Trigger validation first so Vuetify marks the form as invalid
+    const form = wrapper.findComponent({ name: 'VForm' })
+    await (form.vm as any).validate()
+    await wrapper.vm.$nextTick()
 
+    await wrapper.trigger('submit')
     await wrapper.vm.$nextTick()
     await wrapper.vm.$nextTick()
 

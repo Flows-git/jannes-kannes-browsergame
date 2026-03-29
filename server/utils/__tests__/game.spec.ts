@@ -594,13 +594,14 @@ describe('useGame', () => {
       await game.endGame()
 
       // Check that game session update was called with the right structure
-      const updateCall = mockGameSession.mocks.update.mock.calls[0][0]
-      expect(updateCall.running).toBe(false)
-      expect(updateCall.gameTime).toBe('1m 30s')
-      expect(typeof updateCall.endTime).toBe('number')
-      expect(updateCall.endTime).toBeGreaterThan(startTime)
+      const updateCall = mockGameSession.mocks.update.mock.calls[0]?.[0]
+      expect(updateCall).not.toBeUndefined()
+      expect(updateCall!.running).toBe(false)
+      expect(updateCall!.gameTime).toBe('1m 30s')
+      expect(typeof updateCall!.endTime).toBe('number')
+      expect(updateCall!.endTime).toBeGreaterThan(startTime)
 
-      expect(getTimeDurationStringMock).toHaveBeenCalledWith(startTime, updateCall.endTime)
+      expect(getTimeDurationStringMock).toHaveBeenCalledWith(startTime, updateCall!.endTime)
     })
   })
 
