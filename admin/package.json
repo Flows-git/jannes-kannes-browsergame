@@ -4,13 +4,13 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxi dev .playground",
-    "dev:prepare": "nuxt prepare .playground",
+    "build": "nuxt build",
+    "dev": "nuxi dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
     "postinstall": "nuxt prepare .playground",
-    "build": "nuxt build .playground",
-    "generate": "nuxt generate .playground",
-    "preview": "nuxt preview .playground",
-    "lint": "eslint ."
+    "lint": "cd .. && pnpm run lint",
+    "lint:fix": "cd .. && pnpm run lint:fix"
   },
   "devDependencies": {
     "@nuxt/eslint": "latest",
