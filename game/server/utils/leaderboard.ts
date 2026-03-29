@@ -1,3 +1,9 @@
+/**
+ * Regular expression pattern for validating player names.
+ * Allows Unicode letters, numbers, spaces, periods, underscores, and hyphens.
+ */
+const VALID_NAME_REGEX = /^[\p{L}\p{N}\s._-]+$/u
+
 export async function submitGameResultToLeaderboard(name: string, data: GameSession) {
   const supabase = useSupabaseServer()
   validateGameResult(name, data)
@@ -28,7 +34,7 @@ function validateGameResult(name: string, data: GameSession) {
   if (!trimmedName || trimmedName.length < 3 || trimmedName.length > 30) {
     throw createError({ status: 400, statusMessage: 'Name must be 3-30 characters' })
   }
-  if (!/^[\p{L}\p{N}\s._-]+$/u.test(trimmedName)) {
+  if (!VALID_NAME_REGEX.test(trimmedName)) {
     throw createError({ status: 400, statusMessage: 'Name contains invalid characters' })
   }
 

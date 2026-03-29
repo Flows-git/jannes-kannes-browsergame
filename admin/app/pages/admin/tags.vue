@@ -21,7 +21,9 @@ function getImage(tag: GameTag) {
   <v-container>
     <div class="text-h4 pa-4 bg-surface-variant d-flex justify-space-between align-center">
       Tags
-      <v-btn @click="refresh">REFRESH</v-btn>
+      <v-btn @click="refresh">
+        REFRESH
+      </v-btn>
     </div>
     {{ error }}
     <ClientOnly>

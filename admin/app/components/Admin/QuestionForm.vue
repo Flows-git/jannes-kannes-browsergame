@@ -21,7 +21,8 @@ defineExpose({
     showSelectionErrors.value = true
     const result = await formRef.value?.validate()
     const selectionsValid = !!form.value.correctAnswer && !!form.value.jannesAnswer
-    if (!selectionsValid) valid.value = false
+    if (!selectionsValid)
+      valid.value = false
     return result?.valid && selectionsValid ? result : { valid: false }
   },
   resetValidation: () => {
@@ -37,18 +38,21 @@ function addAnswer() {
 
 function removeAnswer(index: number) {
   const removed = form.value.answers[index]
-  if (removed === form.value.correctAnswer) form.value.correctAnswer = ''
-  if (removed === form.value.jannesAnswer) form.value.jannesAnswer = ''
+  if (removed === form.value.correctAnswer)
+    form.value.correctAnswer = ''
+  if (removed === form.value.jannesAnswer)
+    form.value.jannesAnswer = ''
   form.value.answers.splice(index, 1)
 }
 
 function onAnswerUpdate(index: number, newVal: string) {
   const oldVal = form.value.answers[index]
-  if (form.value.correctAnswer === oldVal) form.value.correctAnswer = newVal
-  if (form.value.jannesAnswer === oldVal) form.value.jannesAnswer = newVal
+  if (form.value.correctAnswer === oldVal)
+    form.value.correctAnswer = newVal
+  if (form.value.jannesAnswer === oldVal)
+    form.value.jannesAnswer = newVal
   form.value.answers[index] = newVal
 }
-
 </script>
 
 <template>

@@ -23,7 +23,8 @@ watch(showDialog, (open) => {
 
 async function save() {
   await formRef.value?.validate()
-  if (!formRef.value?.valid) return
+  if (!formRef.value?.valid)
+    return
 
   emit('save', { ...form.value, answers: [...form.value.answers] })
 }

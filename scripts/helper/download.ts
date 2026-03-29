@@ -25,7 +25,7 @@ export async function downloadUnzipAndDeleteFile(url: string, filename: string, 
     console.log(`${filename} unzipped`)
   }
   catch (error) {
-    throw new Error(`Error while unzipping ${filename}`, {cause: error})
+    throw new Error(`Error while unzipping ${filename}`, { cause: error })
   }
 
   // Delete the downloaded file
