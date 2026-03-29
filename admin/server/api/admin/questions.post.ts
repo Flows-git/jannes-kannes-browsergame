@@ -1,5 +1,3 @@
-import { resolveTagIds } from '~~/server/utils/tags'
-
 export default defineEventHandler(async (event) => {
   const { tags, ...body } = await readBody<Omit<QuestionDB, 'id'>>(event)
 

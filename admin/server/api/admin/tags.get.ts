@@ -1,11 +1,11 @@
 export default defineEventHandler(async (event) => {
-  const { tag: parentTagName } = getQuery<{ tag?: string }>(event)
+  const { tag: parentTagId } = getQuery<{ tag?: number }>(event)
   const supabase = useSupabaseServer()
 
   const query = supabase.from('tags_with_relations').select()
 
-  if (parentTagName) {
-    query.contains('parents', [parentTagName])
+  if (parentTagId) {
+    query.contains('parents', [parentTagId])
   }
   else {
     query.eq('parents', '{}')

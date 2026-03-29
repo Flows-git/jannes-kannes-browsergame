@@ -12,7 +12,7 @@ import decompress from 'decompress'
  */
 export async function downloadUnzipAndDeleteFile(url: string, filename: string) {
   // Download downloaded file if it does not exist
-  if (!existsSync(`public/${filename}`)) {
+  if (!existsSync(`game/public/${filename}`)) {
     console.log(`Download ${filename}...`)
     await downloadFile(url, filename)
     console.log(`${filename} downloaded!`)
@@ -21,7 +21,7 @@ export async function downloadUnzipAndDeleteFile(url: string, filename: string) 
   try {
     // Unzip the downloaded file
     console.log(`Unzip ${filename}`)
-    await decompress(`public/${filename}`, 'public')
+    await decompress(`game/public/${filename}`, 'public')
     console.log(`${filename} unzipped`)
   }
   catch (error) {
@@ -29,7 +29,7 @@ export async function downloadUnzipAndDeleteFile(url: string, filename: string) 
   }
 
   // Delete the downloaded file
-  unlinkSync(`public/${filename}`)
+  unlinkSync(`game/public/${filename}`)
   console.log(`${filename} deleted`)
 }
 
@@ -45,7 +45,7 @@ export async function downloadFile(url: string, fileName: string) {
     throw new Error(`unexpected response ${response.status} ${response.statusText}`)
 
   // Save the file in public folder
-  const destination = path.resolve('public', fileName)
+  const destination = path.resolve('game/public', fileName)
   const streamPipeline = promisify(pipeline)
   await streamPipeline(response.body as any, createWriteStream(destination))
 }

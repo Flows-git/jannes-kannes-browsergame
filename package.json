@@ -4,42 +4,21 @@
   "private": true,
   "module": "index.ts",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "build": "cd game && nuxt build",
+    "dev": "cd game && nuxt dev",
+    "preview": "cd game && nuxt preview",
     "lint": "eslint .",
-    "lintfix": "eslint . --fix",
+    "lint:fix": "eslint . --fix",
     "setup": "bun ./scripts/_setup.ts",
     "test": "bun run test:unit && bun run test:e2e",
-    "setup:db": "bun ./scripts/setupSupabaseDB.ts",
-    "test:unit": "vitest run  --coverage",
-    "test:e2e": "playwright test"
-  },
-  "dependencies": {
-    "@mdi/font": "^7.4.47",
-    "@supabase/supabase-js": "^2.100.1",
-    "@tsparticles/confetti": "^3.9.1",
-    "nuxt": "^4.4.2",
-    "vue": "latest"
+    "setup:db": "bun ./scripts/setupSupabaseDB.ts"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.7.3",
-    "@nuxt/test-utils": "^4.0.0",
-    "@playwright/test": "^1.58.2",
     "@types/bun": "latest",
     "@types/decompress": "^4.2.7",
-    "@vitest/coverage-v8": "4.1.2",
-    "@vue/test-utils": "^2.4.6",
     "convert-csv-to-json": "^3.6.0",
     "decompress": "^4.2.1",
-    "eslint": "10.1.0",
-    "happy-dom": "^20.8.8",
-    "sass": "^1.98.0",
-    "typescript": "~6.0.2",
-    "vite-plugin-vuetify": "^2.1.3",
-    "vitest": "^4.1.2",
-    "vuetify": "^3.12.4"
+    "typescript": "~6.0.2"
   }
 }

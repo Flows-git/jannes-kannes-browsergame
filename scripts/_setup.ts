@@ -4,7 +4,7 @@ import { upsertJsonFile } from './helper/upsertJsonFile'
 // import { parseQuestionsCsvToJson } from './parseQuestionsCsvToJson'
 import { parseTagsCsvToJson } from './parseTagsCsvToJson'
 
-if (!existsSync('public/warcraft3_icons')) {
+if (!existsSync('game/public/warcraft3_icons')) {
   downloadUnzipAndDeleteFile('https://wc3icons.coffbox.win/assets/warcraft3_icons.zip', 'warcraft3_icons.zip')
 }
 else {

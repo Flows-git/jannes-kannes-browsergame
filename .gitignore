@@ -24,7 +24,7 @@ logs
 !.env.example
 
 # custom
-public/warcraft3_icons/**/*
+game/public/warcraft3_icons/**/*
 data/*.json
 
 # vitest/playwright

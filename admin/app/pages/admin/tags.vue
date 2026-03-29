@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const { data, error } = await useFetch('/api/admin/tags', { deep: true })
+const { data, error, refresh } = await useFetch('/api/admin/tags', { deep: true })
 
 const tags = computed<GameTag[]>(() => (data.value ?? []))
 
 async function fetchTags(tag: GameTag) {
-  await $fetch(`/api/admin/tags?tag=${tag.name}`)
+  await $fetch(`/api/admin/tags?tag=${tag.id}`)
     .then(res => tag.children = res)
     .catch(err => console.warn(err))
 }
@@ -21,6 +21,7 @@ function getImage(tag: GameTag) {
   <v-container>
     <div class="text-h4 pa-4 bg-surface-variant d-flex justify-space-between align-center">
       Tags
+      <v-btn @click="refresh">REFRESH</v-btn>
     </div>
     {{ error }}
     <ClientOnly>
