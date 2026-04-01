@@ -58,15 +58,21 @@ const mainImg = useTemplateRef<VImg>('mainImg')
 }
 
 ::view-transition-group(game-logo) {
-  animation: none;
+  animation-duration: 1s;
 }
 
 ::view-transition-old(game-logo) {
   animation: vt-slide-out-fwd-center 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  mix-blend-mode: normal;
 }
 
 ::view-transition-new(game-logo) {
   animation: vt-slide-in-fwd-center 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  mix-blend-mode: normal;
+}
+
+::view-transition-image-pair(game-logo) {
+  isolation: auto;
 }
 
 @keyframes vt-slide-out-fwd-center {
@@ -76,19 +82,25 @@ const mainImg = useTemplateRef<VImg>('mainImg')
   }
   100% {
     transform: scale(500);
-    opacity: 0;
+    opacity: 1;
   }
 }
 
 @keyframes vt-slide-in-fwd-center {
   0% {
     transform: scale(500);
-    opacity: 0;
+    opacity: 1;
   }
   100% {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	@view-transition {
+		navigation: auto;
+	}
 }
 
 @keyframes text-focus-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
