@@ -12,6 +12,22 @@ const answerResult = ref()
 const showAbortConfirm = ref(false)
 const showRestartConfirm = ref(false)
 
+const questionContentRef = ref<HTMLElement>()
+const questionHeight = ref<number>()
+
+onMounted(() => {
+  const observer = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      questionHeight.value = entry.target.scrollHeight
+    }
+  })
+  watch(questionContentRef, (el) => {
+    if (el)
+      observer.observe(el)
+  }, { immediate: true })
+  onUnmounted(() => observer.disconnect())
+})
+
 async function fetchCurrentQuestion() {
   loading.value = true
   try {
@@ -125,23 +141,27 @@ const gameModeLabel = computed(() => {
       <v-progress-linear color="primary" :model-value="gameMeta?.answeredQuestions" :buffer-value="gameMeta?.currentQuestion" :max="gameMeta?.totalQuestions" />
 
       <!-- Frage -->
-      <v-card-text>
-        <div v-if="loading && !currentQuestion" class="text-center">
-          <v-progress-circular indeterminate color="primary" size="100" />
-          <div class="text-primary pt-3 text-h5">
-            Spieldaten werden geladen...
+      <v-card-text :style="questionHeight ? { height: `calc(${questionHeight}px + 32px)`, transition: 'height 0.3s ease', overflow: 'hidden' } : {}">
+        <div ref="questionContentRef">
+          <div v-if="loading && !currentQuestion" class="text-center d-flex align-center justify-center" style="min-height: 300px;">
+            <div>
+              <v-progress-circular indeterminate color="primary" size="100" />
+              <div class="text-primary pt-3 text-h5">
+                Spieldaten werden geladen...
+              </div>
+            </div>
           </div>
+          <template v-if="!showResult && currentQuestion">
+            <GameQuestion
+              v-model="answer" :current-question-nr="currentQuestion.questionNr" :question="currentQuestion" :loading="loading"
+              :correct-answer="answerResult?.correctAnswer"
+            />
+            <!-- <HeroFallenOverlay v-if="gameMeta?.remainingLives === 0" @show-results="showEndResult" /> -->
+          </template>
+          <template v-if="gameMeta && showResult">
+            <GameResultScreen :meta="gameMeta" @do-restart="doRestartGame" />
+          </template>
         </div>
-        <template v-if="!showResult && currentQuestion">
-          <GameQuestion
-            v-model="answer" :current-question-nr="currentQuestion.questionNr" :question="currentQuestion" :loading="loading"
-            :correct-answer="answerResult?.correctAnswer"
-          />
-          <!-- <HeroFallenOverlay v-if="gameMeta?.remainingLives === 0" @show-results="showEndResult" /> -->
-        </template>
-        <template v-if="gameMeta && showResult">
-          <GameResultScreen :meta="gameMeta" @do-restart="doRestartGame" />
-        </template>
       </v-card-text>
 
       <!-- Action Bar -->
