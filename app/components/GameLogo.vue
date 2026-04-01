@@ -57,46 +57,36 @@ const mainImg = useTemplateRef<VImg>('mainImg')
   }
 }
 
+::view-transition-group(game-logo) {
+  animation: none;
+}
+
 ::view-transition-old(game-logo) {
-  animation: slide-out-fwd-center 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  animation: vt-slide-out-fwd-center 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 ::view-transition-new(game-logo) {
-  animation: slide-in-fwd-center 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  animation: vt-slide-in-fwd-center 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
-@keyframes slide-out-fwd-center {
+@keyframes vt-slide-out-fwd-center {
   0% {
-    -webkit-transform: translateZ(1);
-            transform: translateZ(1);
-    opacity: 1;
-  }
-  50% {
-    -webkit-transform: translateZ(6000px);
-            transform: translateZ(6000px);
+    transform: scale(1);
     opacity: 1;
   }
   100% {
-    -webkit-transform: translateZ(6000px);
-            transform: translateZ(6000px);
-    opacity: 1;
+    transform: scale(500);
+    opacity: 0;
   }
 }
 
-@keyframes slide-in-fwd-center {
+@keyframes vt-slide-in-fwd-center {
   0% {
-    -webkit-transform: translateZ(6000px);
-            transform: translateZ(6000px);
-    opacity: 1;
-  }
-  50% {
-    -webkit-transform: translateZ(3000px);
-            transform: translateZ(3000px);
-    opacity: 1;
+    transform: scale(500);
+    opacity: 0;
   }
   100% {
-    -webkit-transform: translateZ(1);
-            transform: translateZ(1);
+    transform: scale(1);
     opacity: 1;
   }
 }
