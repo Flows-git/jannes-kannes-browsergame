@@ -1,4 +1,5 @@
 import type { H3Event } from 'h3'
+import { randomUUID } from 'node:crypto'
 import { env } from 'node:process'
 
 /**
@@ -122,6 +123,7 @@ export async function useGame(event: H3Event) {
     const questionIds = await getRandomQuestionIds(questionCount)
     await questions.update({ questions: questionIds })
     await session.update({
+      sessionId: randomUUID().toString(),
       gameMode: settings.mode,
       running: true,
       answeredQuestions: 0,
@@ -161,6 +163,7 @@ export async function useGame(event: H3Event) {
         currentQuestionNr: session.data.currentQuestionNr - 1,
       })
       await endGame()
+      addResultMetrics(session.data)
     }
     else {
       // updates the current question in the session
@@ -168,7 +171,7 @@ export async function useGame(event: H3Event) {
     }
 
     // add answer metrics entry
-    addAnswerMetrics(question.id, answer, answerCorrect, session.data.gameMode)
+    addAnswerMetrics(session.data.sessionId, question.id, answer, answerCorrect, session.data.gameMode)
 
     // returns if given answer was correct and the correct answer
     return {

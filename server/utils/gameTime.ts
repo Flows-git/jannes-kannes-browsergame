@@ -40,7 +40,7 @@ export function getTimeDurationString(startTime: number, endTime: number): strin
  * @param endTime - The end time in milliseconds.
  * @returns Total game time in seconds.
  */
-function getTimeDurationInSeconds(startTime: number, endTime: number): number {
+export function getTimeDurationInSeconds(startTime: number, endTime: number): number {
   const diffMs = endTime - startTime // Difference in ms
   const totalSeconds = Math.floor(diffMs / 1000)
   return totalSeconds

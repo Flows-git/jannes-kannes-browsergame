@@ -56,6 +56,7 @@ interface GameQuestion {
 }
 
 interface GameSession {
+  sessionId: string
   gameMode: GameMode
   currentQuestion: QuestionDB
   questions: Array<string>
