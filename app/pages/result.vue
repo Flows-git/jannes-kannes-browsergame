@@ -18,9 +18,6 @@ async function fetchCurrentQuestion() {
 
 async function initalFetch() {
   await fetchCurrentQuestion()
-  if (gameMeta.value) {
-    gameMeta.value.correctAnswers = 0
-  }
   if (gameMeta.value && gameMeta.value.running) {
     router.replace('/game')
   }
