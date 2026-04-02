@@ -1,7 +1,6 @@
 export function useGame() {
   const gameMeta = ref<GameMeta>()
   const currentQuestion = ref<GameQuestion>()
-  const showResult = ref<boolean>(false)
 
   async function startGame(mode: GameMode, settings?: GameSettings) {
     await $fetch('/api/game/start', { method: 'POST', body: { mode, settings } })
@@ -27,7 +26,6 @@ export function useGame() {
   async function restartGame() {
     await $fetch('/api/game/restart')
     await fetchQuestion()
-    showResult.value = false
   }
 
   async function endGame() {
@@ -39,7 +37,6 @@ export function useGame() {
   return {
     gameMeta,
     currentQuestion,
-    showResult,
     startGame,
     restartGame,
     endGame,

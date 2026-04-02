@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { answerQuestion, currentQuestion, gameMeta, fetchQuestion, endGame, restartGame, showResult } = useGame()
+const { answerQuestion, currentQuestion, gameMeta, fetchQuestion, endGame, restartGame } = useGame()
 const router = useRouter()
 
 const loading = ref(false)
@@ -42,7 +42,7 @@ async function fetchCurrentQuestion() {
 async function initalFetch() {
   await fetchCurrentQuestion()
   if (gameMeta.value && !gameMeta.value.running) {
-    showResult.value = true
+    router.push('/result')
   }
   if (error.value) {
     router.replace('/')
@@ -71,10 +71,7 @@ async function nextQuestion() {
 }
 
 async function showEndResult() {
-  answerResult.value = undefined
-  answer.value = undefined
-  showResult.value = true
-  scrollToTop()
+  router.push('/result')
 }
 
 async function cancelGame() {
@@ -151,21 +148,18 @@ const gameModeLabel = computed(() => {
               </div>
             </div>
           </div>
-          <template v-if="!showResult && currentQuestion">
+          <template v-if="currentQuestion">
             <GameQuestion
               v-model="answer" :current-question-nr="currentQuestion.questionNr" :question="currentQuestion" :loading="loading"
               :correct-answer="answerResult?.correctAnswer"
             />
             <!-- <HeroFallenOverlay v-if="gameMeta?.remainingLives === 0" @show-results="showEndResult" /> -->
           </template>
-          <template v-if="gameMeta && showResult">
-            <GameResultScreen :meta="gameMeta" @do-restart="doRestartGame" />
-          </template>
         </div>
       </v-card-text>
 
       <!-- Action Bar -->
-      <v-card-actions v-if="gameMeta && (gameRunning || !showResult)" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
+      <v-card-actions v-if="gameMeta" class="bg-surface-variant d-flex flex-column flex-sm-row justify-space-between">
         <div>
           <div v-if="gameMeta.totalLives" class="jk-game--stats-container">
             <StatsBarHealth v-if="gameMeta.totalLives" :total="gameMeta.totalLives" :remaining="gameMeta.remainingLives as number" />

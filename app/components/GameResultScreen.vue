@@ -3,10 +3,6 @@ defineProps<{
   meta: GameMeta
 }>()
 
-const emits = defineEmits<{
-  (e: 'doRestart'): void
-}>()
-
 const rank = ref()
 
 const loading = ref(true)
@@ -32,13 +28,4 @@ getRank()
     <v-divider class="my-3" />
     <GameResultScreenRank />
   </template>
-  <v-divider />
-  <div class="d-flex justify-center ga-2 flex-wrap">
-    <v-btn color="primary" variant="outlined" class="mt-4" @click="emits('doRestart')">
-      Spiel neustarten
-    </v-btn>
-    <v-btn color="primary" variant="outlined" class="mt-4" to="/">
-      Zum Hauptmenü
-    </v-btn>
-  </div>
 </template>
