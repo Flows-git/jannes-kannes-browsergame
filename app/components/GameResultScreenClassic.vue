@@ -26,30 +26,44 @@ onMounted(() => {
 
 <template>
   <v-row>
-    <v-col cols="8" offset="2" md="6" offset-md="0" class="text-center">
-      <v-img :src="image" contain max-height="450px" :aspect-ratio="1024 / 1536" />
+    <v-col cols="12" md="6" class="text-center slide-in-animation-container">
+      <v-img class="slide-in-animation" :src="image" contain max-height="450px" :aspect-ratio="1024 / 1536" />
       <v-divider class="d-md-none" />
     </v-col>
     <v-col cols="12" md="6" class="text-center">
       <div class=" d-flex flex-column fill-height">
-        <div class="flex-grow-1 d-flex flex-column justify-center py-4">
-          <div class="text-h5 opacity-50 pb-3">
-            Ergebnis
-          </div>
-          <div class="text-h1 font-weight-bold text-primary">
-            {{ meta.correctAnswers }} / {{ meta.totalQuestions }}
-          </div>
+        <div class="flex-grow-1 d-flex flex-column justify-center align-center py-4">
+          <div class="result-container">
+            <div class="text-h5 opacity-50 pb-3">
+              Ergebnis
+            </div>
+            <div class="text-h1 font-weight-bold text-primary">
+              {{ meta.correctAnswers }} / {{ meta.totalQuestions }}
+            </div>
 
-          <div class="pt-3">
-            Spielzeit: <span class="font-weight-bold">{{ meta.gameTime }}</span>
+            <div class="pt-3">
+              Spielzeit: <span class="font-weight-bold">{{ meta.gameTime }}</span>
+            </div>
           </div>
         </div>
-        <div>
+        <div v-if="phrase">
           <div class="text-h5">
-            {{ phrase }}
+            <TypingText :text="phrase" />
           </div>
         </div>
       </div>
     </v-col>
   </v-row>
 </template>
+
+<style scoped lang="scss">
+.result-container {
+  background: rgb(var(--v-theme-background));
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+</style>
