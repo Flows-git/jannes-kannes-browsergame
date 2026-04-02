@@ -15,8 +15,8 @@ const mainImg = useTemplateRef<VImg>('mainImg')
 
 <template>
   <div class="jk-game-logo--container d-flex justify-center">
-    <div>
-      <v-img ref="mainImg" class="jk-game-logo" :class="{ 'pb-4': showSubtitle }" src="/logo.png" alt="Bild erstellt mit: https://www.textstudio.com/" :width="width" aspect-ratio="1.81" />
+    <div :style="`width: ${width}px;`">
+      <v-img ref="mainImg" class="jk-game-logo" :class="{ 'pb-4': showSubtitle }" src="/logo.png" alt="Bild erstellt mit: https://www.textstudio.com/" aspect-ratio="1.81" />
       <div
         v-if="showSubtitle && mainImg?.state === 'loaded'" class="jk-game-logo--subtitle text-end text-h5 font-weight-bold mt-n7 mr-n3"
       >

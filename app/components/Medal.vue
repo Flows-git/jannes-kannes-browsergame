@@ -1,12 +1,13 @@
 <script setup lang="ts">
 defineProps<{
-  val: string | number
+  val?: string | number
   type: 'gold' | 'silver' | 'bronze'
+  size?: number
 }>()
 </script>
 
 <template>
-  <div class="medal" :class="type">
+  <div class="medal" :class="type" :style="size ? `--medal-size: ${size}px` : ''">
     <div class="content d-flex align-center justify-center">
       {{ val }}
     </div>

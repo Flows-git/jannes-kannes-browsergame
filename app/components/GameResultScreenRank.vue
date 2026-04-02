@@ -16,6 +16,14 @@ async function getRank() {
   loading.value = false
 }
 
+const medalColor = computed(() => {
+  if (rank.value >= 1 && rank.value <= 3) {
+    const color = rank.value === 1 ? 'gold' : rank.value === 2 ? 'silver' : rank.value === 3 ? 'bronze' : null
+    return color
+  }
+  return null
+})
+
 getRank()
 </script>
 
@@ -28,8 +36,11 @@ getRank()
       <v-col cols="12" sm="6" offset-sm="3">
         <v-card color="background" class="pa-3 text-center">
           <v-progress-circular v-if="loading" indeterminate color="primary" size="56" class="mb-1" />
-          <div v-else class="rank text-h2 font-weight-medium text-primary">
-            {{ rank }}.
+          <div v-else class="rank text-h1 font-weight-medium text-primary slide-in-animation-container">
+            <div class="slide-in-animation">
+              <Medal v-if="medalColor" :size="70" :type="medalColor" />
+              {{ rank }}.
+            </div>
           </div>
           <v-alert v-if="error" class="rank-fetch-error" type="error">
             {{ error.message }}
