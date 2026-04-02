@@ -6,7 +6,8 @@
  * @returns A string representing the average answer time.
  */
 export function getAverageAnswerTimeString(startTime: number, answeredQuestions: number) {
-  const averageSeconds = getAverageAnswerTimeInSeconds(startTime, answeredQuestions)
+  const currentTime = Date.now()
+  const averageSeconds = getAverageAnswerTimeInSeconds(startTime, currentTime, answeredQuestions)
   return parseTimeToString(averageSeconds)
 }
 
@@ -16,9 +17,8 @@ export function getAverageAnswerTimeString(startTime: number, answeredQuestions:
  * @param answeredQuestions - The number of questions answered by the player.
  * @returns The average answer time in seconds.
  */
-function getAverageAnswerTimeInSeconds(startTime: number, answeredQuestions: number) {
-  const currentTime = Date.now()
-  const totalSeconds = getTimeDurationInSeconds(startTime, currentTime)
+export function getAverageAnswerTimeInSeconds(startTime: number, endTime: number, answeredQuestions: number) {
+  const totalSeconds = getTimeDurationInSeconds(startTime, endTime)
   return totalSeconds / (answeredQuestions || 1)
 }
 
