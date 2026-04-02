@@ -4,6 +4,7 @@ import { de } from 'vuetify/locale'
 
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
+import '~/assets/global.scss'
 
 const b2wTheme: ThemeDefinition = {
   dark: true,
