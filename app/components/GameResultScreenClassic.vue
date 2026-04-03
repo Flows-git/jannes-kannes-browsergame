@@ -48,7 +48,7 @@ onMounted(() => {
         </div>
         <div v-if="phrase">
           <div class="text-h5">
-            <TypingText :text="phrase" />
+            <TypingText :text="phrase" auto-animate />
           </div>
         </div>
       </div>

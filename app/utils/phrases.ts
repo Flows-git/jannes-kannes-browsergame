@@ -59,6 +59,6 @@ const phraseList = {
 
 export function getRandomPhrase(points: 0 | 1 | 2 | 3) {
   const phrases = phraseList[points] ?? []
-  const i = Math.floor(Math.random() * (phrases.length + 1))
+  const i = Math.floor(Math.random() * (phrases.length))
   return phrases[i]
 }

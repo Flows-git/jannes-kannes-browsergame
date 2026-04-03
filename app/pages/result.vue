@@ -31,13 +31,32 @@ async function doRestartGame() {
   await restartGame()
   router.push('/game')
 }
+
+const gameModeLabel = computed(() => {
+  let mode = ''
+  if (gameMeta.value?.mode === 'classic') {
+    mode = 'Klassisch'
+  }
+  else if (gameMeta.value?.mode === 'endless') {
+    mode = 'Endlos'
+  }
+  else if (gameMeta.value?.mode === 'ranked') {
+    mode = 'Ranglistenspiel'
+  }
+  return mode
+})
 </script>
 
 <template>
   <v-container class="fill-height jk-game--container">
     <v-card width="800">
-      <v-card-text class="jk-game--header d-flex justify-center bg-surface-variant">
-        <GameLogo />
+      <v-card-text class="jk-game--header text-center bg-surface-variant">
+        <div>
+          <GameLogo />
+        </div>
+        <div class="text-h6">
+          {{ gameModeLabel }}
+        </div>
       </v-card-text>
       <v-card-text>
         <div v-if="loading && !gameMeta" class="text-center d-flex align-center justify-center" style="min-height: 300px;">

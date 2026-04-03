@@ -29,9 +29,6 @@ getRank()
 
 <template>
   <div class="ranklist">
-    <div class="text-h5 text-center opacity-70 pb-3">
-      Bestenliste
-    </div>
     <v-row>
       <v-col cols="12" sm="6" offset-sm="3">
         <v-card color="background" class="pa-3 text-center">

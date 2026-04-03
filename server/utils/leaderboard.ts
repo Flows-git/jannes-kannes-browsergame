@@ -1,3 +1,5 @@
+const VALID_NAME_PATTERN = /^[\p{L}\p{N}\s._-]+$/u
+
 export async function submitGameResultToLeaderboard(name: string, data: GameSession) {
   const supabase = useSupabaseServer()
   validateGameResult(name, data)
@@ -28,7 +30,7 @@ function validateGameResult(name: string, data: GameSession) {
   if (!trimmedName || trimmedName.length < 3 || trimmedName.length > 30) {
     throw createError({ status: 400, statusMessage: 'Name must be 3-30 characters' })
   }
-  if (!/^[\p{L}\p{N}\s._-]+$/u.test(trimmedName)) {
+  if (!VALID_NAME_PATTERN.test(trimmedName)) {
     throw createError({ status: 400, statusMessage: 'Name contains invalid characters' })
   }
 
@@ -37,7 +39,7 @@ function validateGameResult(name: string, data: GameSession) {
     throw createError({ status: 400, statusMessage: 'Invalid game timing' })
   }
   const gameDurationMs = data.endTime - data.startTime
-  const minDurationMs = data.answeredQuestions * 2000
+  const minDurationMs = data.answeredQuestions * 3000
   if (gameDurationMs < minDurationMs) {
     throw createError({ status: 400, statusMessage: 'Game completed too quickly' })
   }
@@ -48,6 +50,10 @@ function validateGameResult(name: string, data: GameSession) {
   }
   if (data.answeredQuestions > data.totalQuestions) {
     throw createError({ status: 400, statusMessage: 'Invalid game state' })
+  }
+
+  if (data.correctAnswers < 3) {
+    throw createError({ status: 400, statusMessage: 'Minimun 3 correct answers required to be qualified for a leaderboard entry' })
   }
 }
 

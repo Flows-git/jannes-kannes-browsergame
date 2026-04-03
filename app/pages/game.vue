@@ -83,6 +83,7 @@ async function doRestartGame() {
   answerResult.value = undefined
   answer.value = undefined
   await restartGame()
+  await fetchCurrentQuestion()
 }
 
 const gameModeLabel = computed(() => {

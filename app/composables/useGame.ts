@@ -25,7 +25,6 @@ export function useGame() {
 
   async function restartGame() {
     await $fetch('/api/game/restart')
-    await fetchQuestion()
   }
 
   async function endGame() {

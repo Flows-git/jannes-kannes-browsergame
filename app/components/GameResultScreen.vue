@@ -26,6 +26,12 @@ getRank()
   <GameResultScreenEndless v-if="meta.mode === 'endless' || meta.mode === 'ranked'" :meta="meta" />
   <template v-if="meta.mode === 'ranked'">
     <v-divider class="my-3" />
-    <GameResultScreenRank />
+    <div class="text-h5 text-center opacity-70 pb-3">
+      Bestenliste
+    </div>
+    <GameResultScreenRank v-if="meta.correctAnswers >= 3" />
+    <div v-else class="text-center opacity-50 body-2">
+      Für einen Eintrag in die Bestenliste müssen mindestens 3 Fragen richtig beantwortet worden sein
+    </div>
   </template>
 </template>

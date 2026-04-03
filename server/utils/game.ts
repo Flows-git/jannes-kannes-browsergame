@@ -103,7 +103,7 @@ export async function useGame(event: H3Event) {
    * updates the current question in the question
    */
   async function updateCurrentQuestion() {
-    const questionId = questions.data.questions[session.data.currentQuestionNr - 1]
+    const questionId = questions.data.questions[session.data.currentQuestionNr - 1] as string
     const question = await getQuestionById(questionId)
     randomizeArrayOrder(question.answers)
     await session.update({
