@@ -3,8 +3,8 @@ import type { ValidationRule } from 'vuetify/lib/types.mjs'
 
 const router = useRouter()
 
-const leaderboardLoading = ref(false)
-const leaderboardError = ref()
+const loading = ref(false)
+const error = ref()
 const name = ref()
 const valid = ref(false)
 const leaderboardForm = useTemplateRef('leaderboardForm')
@@ -15,8 +15,8 @@ const rules: ValidationRule[] = [
 ]
 
 async function addResultToLeaderboard() {
-  leaderboardLoading.value = true
-  leaderboardError.value = undefined
+  loading.value = true
+  error.value = undefined
   try {
     await leaderboardForm.value?.validate()
     if (!valid.value) {
@@ -28,10 +28,10 @@ async function addResultToLeaderboard() {
     })
     router.replace(leaderboardUrl)
   }
-  catch (error) {
-    leaderboardError.value = error
+  catch (e) {
+    error.value = e
   }
-  leaderboardLoading.value = false
+  loading.value = false
 }
 </script>
 
@@ -50,18 +50,19 @@ async function addResultToLeaderboard() {
           name="name"
           class="name"
           :rules="rules"
+          :disabled="loading"
         />
         <v-alert
-          v-if="leaderboardError"
+          v-if="error"
           type="error"
           closable
-          @click:close="leaderboardError.value = undefined"
+          @click:close="error.value = undefined"
         >
-          {{ leaderboardError }}
+          {{ error }}
         </v-alert>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="primary" type="submit">
+        <v-btn color="primary" type="submit" :loading="loading">
           Ergebnis eintragen
         </v-btn>
       </v-card-actions>
