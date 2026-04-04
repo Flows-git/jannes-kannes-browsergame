@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  meta: GameMeta
+  meta: GameResult
 }>()
 
 const { startConfetti } = useConfetti()

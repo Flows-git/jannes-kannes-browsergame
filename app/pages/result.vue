@@ -1,46 +1,44 @@
 <script setup lang="ts">
-const { gameMeta, fetchQuestion, restartGame } = useGame()
+import type { NuxtError } from '#app'
+
+const { restartGame } = useGame()
 const router = useRouter()
 
 const loading = ref(false)
-const error = ref()
+const result = ref<GameResult>()
 
-async function fetchCurrentQuestion() {
+async function fetchResult() {
   loading.value = true
   try {
-    await fetchQuestion()
+    result.value = await $fetch<GameResult>('/api/game/result')
   }
   catch (e) {
-    error.value = e
+    const err = e as NuxtError
+    if (err.statusText === 'game_not_ended') {
+      router.replace('/game')
+    }
+    if (err.statusText === 'no_game_started') {
+      router.replace('/')
+    }
   }
   loading.value = false
 }
-
-async function initalFetch() {
-  await fetchCurrentQuestion()
-  if (gameMeta.value && gameMeta.value.running) {
-    router.replace('/game')
-  }
-  if (!gameMeta.value || error.value) {
-    router.replace('/')
-  }
-}
-initalFetch()
+fetchResult()
 
 async function doRestartGame() {
   await restartGame()
-  router.push('/game')
+  router.replace('/game')
 }
 
 const gameModeLabel = computed(() => {
   let mode = ''
-  if (gameMeta.value?.mode === 'classic') {
+  if (result.value?.mode === 'classic') {
     mode = 'Klassisch'
   }
-  else if (gameMeta.value?.mode === 'endless') {
+  else if (result.value?.mode === 'endless') {
     mode = 'Endlos'
   }
-  else if (gameMeta.value?.mode === 'ranked') {
+  else if (result.value?.mode === 'ranked') {
     mode = 'Ranglistenspiel'
   }
   return mode
@@ -59,7 +57,7 @@ const gameModeLabel = computed(() => {
         </div>
       </v-card-text>
       <v-card-text>
-        <div v-if="loading && !gameMeta" class="text-center d-flex align-center justify-center" style="min-height: 300px;">
+        <div v-if="loading && !result" class="text-center d-flex align-center justify-center" style="min-height: 300px;">
           <div>
             <v-progress-circular indeterminate color="primary" size="100" />
             <div class="text-primary pt-3 text-h5">
@@ -67,7 +65,7 @@ const gameModeLabel = computed(() => {
             </div>
           </div>
         </div>
-        <GameResultScreen v-if="gameMeta" :meta="gameMeta" />
+        <GameResultScreen v-if="result" :meta="result" />
       </v-card-text>
       <v-card-actions class="bg-surface-variant d-flex justify-space-around ga-3 flex-wrap">
         <v-btn color="primary" variant="outlined" @click="doRestartGame">

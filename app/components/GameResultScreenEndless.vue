@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  meta: GameMeta
+  meta: GameResult
 }>()
 </script>
 

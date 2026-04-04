@@ -42,7 +42,7 @@ export async function useGame(event: H3Event) {
   function isGameStarted() {
     // When data is empty no game is started
     if (Object.keys(data).length === 0) {
-      throw createError({ status: 416, statusMessage: 'No game started' })
+      throw createError({ status: 416, statusMessage: 'no_game_started', message: 'No game started' })
     }
     return true
   }
@@ -50,7 +50,14 @@ export async function useGame(event: H3Event) {
   function isGameRunning() {
     isGameStarted()
     if (!data.running) {
-      throw createError({ status: 416, statusMessage: 'game has ended' })
+      throw createError({ status: 416, statusMessage: 'game_has_ended', message: 'game has ended' })
+    }
+  }
+
+  function isGameEnded() {
+    isGameStarted()
+    if (data.running) {
+      throw createError({ status: 416, statusMessage: 'game_not_ended', message: 'game has not ended' })
     }
   }
 
@@ -65,9 +72,21 @@ export async function useGame(event: H3Event) {
       wrongAnswers: data.answeredQuestions - data.correctAnswers,
       totalLives: data.totalLives,
       remainingLives: data.remainingLives,
-      gameTime: data.gameTime,
+    }
+  }
+
+  async function getGameResult(): Promise<GameResult> {
+    isGameEnded()
+    return {
+      mode: data.gameMode,
+      totalQuestions: data.totalQuestions,
+      answeredQuestions: data.answeredQuestions,
+      correctAnswers: data.correctAnswers,
+      wrongAnswers: data.answeredQuestions - data.correctAnswers,
+      gameTime: data.gameTime as string,
       averageAnswerTime: data.averageAnswerTime,
       answeredQuestionsTotalPercent: await getAnsweredQuestionsInPercent(data.answeredQuestions),
+      rank: await getRank(),
     }
   }
 
@@ -209,15 +228,19 @@ export async function useGame(event: H3Event) {
     return id
   }
 
-  async function getRank() {
-    return await getLeaderboardRanking(data.correctAnswers)
+  async function getRank(): Promise<number | undefined> {
+    if (data.gameMode === 'ranked' && data.correctAnswers >= 3) {
+      return await getLeaderboardRanking(data.correctAnswers)
+    }
   }
 
   return {
     isGameStarted,
     isGameRunning,
+    isGameEnded,
     getQuestionForPlayer,
     getGameMeta,
+    getGameResult,
     getGameSettings,
     startGame,
     answerCurrentQuestion,

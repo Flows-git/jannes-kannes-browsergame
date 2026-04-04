@@ -104,5 +104,5 @@ export async function getLeaderboardRanking(score: number) {
     throw createError(error)
   }
 
-  return data
+  return data as number
 }
