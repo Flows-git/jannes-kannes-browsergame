@@ -59,10 +59,10 @@ const gameModes = [
                 }" icon="mdi-information-outline" variant="text"
                 style="position: absolute; right: 4px; top: 4px;"
               />
-              <v-avatar color="primary" size="94">
-                <v-icon :icon="mode.icon" size="86" />
+              <v-avatar color="primary" size="94" :style="isSelected ? 'box-shadow: 0 0 16px rgb(var(--v-theme-primary));' : ''">
+                <v-icon :icon="mode.icon" size="86" :class="{ 'rotate-once': isSelected }" style="text-shadow: 0px 2px 0 #fff;" />
               </v-avatar>
-              <div class="text-h5 pt-2">
+              <div class="text-h5 pt-2" :class="{ 'text-pop-up-top': isSelected }">
                 {{ mode.label }}
               </div>
             </v-card>
@@ -71,7 +71,7 @@ const gameModes = [
       </v-row>
     </v-item-group>
     <div class="text-center pt-4">
-      <v-btn size="x-large" color="primary" :loading="loading" :disabled="!selectedGameMode" @click="startNewGame(selectedGameMode.mode)">
+      <v-btn size="x-large" color="primary" :loading="loading" :disabled="!selectedGameMode" :class="{ heartbeat: !!selectedGameMode && !loading }" @click="startNewGame(selectedGameMode.mode)">
         Spiel Starten
       </v-btn>
 
