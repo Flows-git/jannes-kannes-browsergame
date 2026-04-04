@@ -65,7 +65,7 @@ const gameModeLabel = computed(() => {
             </div>
           </div>
         </div>
-        <GameResultScreen v-if="result" :meta="result" />
+        <ResultScreen v-if="result" :meta="result" />
       </v-card-text>
       <v-card-actions class="bg-surface-variant d-flex justify-space-around ga-3 flex-wrap">
         <v-btn color="primary" variant="outlined" @click="doRestartGame">
