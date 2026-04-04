@@ -229,7 +229,7 @@ export async function useGame(event: H3Event) {
   }
 
   async function getRank(): Promise<number | undefined> {
-    if (data.gameMode === 'ranked' && data.correctAnswers >= 3) {
+    if (data.gameMode === 'ranked' && data.correctAnswers >= config.public.leaderboardMinCorrectAnswers) {
       return await getLeaderboardRanking(data.correctAnswers)
     }
   }

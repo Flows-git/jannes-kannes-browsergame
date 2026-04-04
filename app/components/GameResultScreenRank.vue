@@ -1,10 +1,12 @@
 <script setup lang="ts">
 const props = defineProps<{
-  rank: number
+  rank?: number
 }>()
 
+const config = useRuntimeConfig()
+
 const medalColor = computed(() => {
-  if (props.rank >= 1 && props.rank <= 3) {
+  if (props.rank && props.rank >= 1 && props.rank <= 3) {
     const color = props.rank === 1 ? 'gold' : props.rank === 2 ? 'silver' : props.rank === 3 ? 'bronze' : null
     return color
   }
@@ -13,7 +15,10 @@ const medalColor = computed(() => {
 </script>
 
 <template>
-  <div class="ranklist">
+  <div class="text-h5 text-center opacity-70 pb-3">
+    Bestenliste
+  </div>
+  <div v-if="rank" class="ranklist">
     <v-row>
       <v-col cols="12" sm="6" offset-sm="3">
         <v-card color="background" class="pa-3 text-center">
@@ -40,5 +45,8 @@ const medalColor = computed(() => {
         </v-dialog>
       </v-col>
     </v-row>
+  </div>
+  <div v-else class="text-center opacity-50 body-2">
+    Für einen Eintrag in die Bestenliste müssen mindestens {{ config.public.leaderboardMinCorrectAnswers }} Fragen richtig beantwortet worden sein
   </div>
 </template>

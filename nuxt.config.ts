@@ -11,6 +11,9 @@ export default defineNuxtConfig({
     sessionSecret: '',
     supabaseUrl: '',
     supabaseApiKey: '',
+    public: {
+      leaderboardMinCorrectAnswers: 3,
+    },
   },
   build: {
     transpile: ['vuetify'],
