@@ -1,13 +1,14 @@
 export function useGame() {
-  const gameMeta = ref<GameMeta>()
-  const currentQuestion = ref<GameQuestion>()
+  const gameMeta = useState<GameMeta>('game-meta')
+  const currentQuestion = useState<GameQuestion>('game-current-question')
+  const doFetch = useRequestFetch()
 
   async function startGame(mode: GameMode, settings?: GameSettings) {
     await $fetch('/api/game/start', { method: 'POST', body: { mode, settings } })
   }
 
   async function fetchQuestion() {
-    const data = await $fetch<GetQuestionRespone>('/api/game')
+    const data = await doFetch<GetQuestionRespone>('/api/game')
     gameMeta.value = data.meta
     currentQuestion.value = data.question
   }
@@ -28,9 +29,11 @@ export function useGame() {
   }
 
   async function endGame() {
-    const result = await $fetch<{ meta: GameMeta }>('/api/game', { method: 'DELETE' })
-    gameMeta.value = result.meta
-    currentQuestion.value = undefined
+    await $fetch<{ meta: GameMeta }>('/api/game', { method: 'DELETE' })
+  }
+
+  function fetchGameResult(): Promise<GameResult> {
+    return doFetch<GameResult>('/api/game/result')
   }
 
   return {
@@ -41,5 +44,6 @@ export function useGame() {
     endGame,
     fetchQuestion,
     answerQuestion,
+    fetchGameResult,
   }
 }

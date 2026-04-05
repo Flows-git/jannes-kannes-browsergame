@@ -1,29 +1,29 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
 
+definePageMeta({
+  middleware: async () => {
+    const { fetchGameResult } = useGame()
+    const result = useState<GameResult>('game-result')
+    try {
+      result.value = await fetchGameResult()
+    }
+    catch (e) {
+      const err = e as NuxtError
+      if (err.statusText === 'game_not_ended') {
+        return navigateTo('/game')
+      }
+      if (err.statusText === 'no_game_started') {
+        return navigateTo('/')
+      }
+    }
+  },
+})
+
 const { restartGame } = useGame()
 const router = useRouter()
 
-const loading = ref(false)
-const result = ref<GameResult>()
-
-async function fetchResult() {
-  loading.value = true
-  try {
-    result.value = await $fetch<GameResult>('/api/game/result')
-  }
-  catch (e) {
-    const err = e as NuxtError
-    if (err.statusText === 'game_not_ended') {
-      router.replace('/game')
-    }
-    if (err.statusText === 'no_game_started') {
-      router.replace('/')
-    }
-  }
-  loading.value = false
-}
-fetchResult()
+const result = useState<GameResult>('game-result')
 
 async function doRestartGame() {
   await restartGame()
@@ -57,14 +57,6 @@ const gameModeLabel = computed(() => {
         </div>
       </v-card-text>
       <v-card-text>
-        <div v-if="loading && !result" class="text-center d-flex align-center justify-center" style="min-height: 300px;">
-          <div>
-            <v-progress-circular indeterminate color="primary" size="100" />
-            <div class="text-primary pt-3 text-h5">
-              Spieldaten werden geladen...
-            </div>
-          </div>
-        </div>
         <ResultScreen v-if="result" :meta="result" />
       </v-card-text>
       <v-card-actions class="bg-surface-variant d-flex justify-space-around ga-3 flex-wrap">

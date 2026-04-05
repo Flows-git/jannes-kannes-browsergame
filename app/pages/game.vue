@@ -1,4 +1,19 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: async () => {
+    const { fetchQuestion, gameMeta } = useGame()
+    try {
+      await fetchQuestion()
+      if (!gameMeta.value.running) {
+        return navigateTo('/result')
+      }
+    }
+    catch {
+      return navigateTo('/')
+    }
+  },
+})
+
 const { answerQuestion, currentQuestion, gameMeta, fetchQuestion, endGame, restartGame } = useGame()
 const router = useRouter()
 
@@ -38,17 +53,6 @@ async function fetchCurrentQuestion() {
   }
   loading.value = false
 }
-
-async function initalFetch() {
-  await fetchCurrentQuestion()
-  if (gameMeta.value && !gameMeta.value.running) {
-    router.push('/result')
-  }
-  if (error.value) {
-    router.replace('/')
-  }
-}
-initalFetch()
 
 async function sendAnswer() {
   if (answer.value) {
