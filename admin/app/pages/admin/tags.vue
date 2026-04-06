@@ -19,6 +19,11 @@ function getImage(tag: GameTag) {
 
 <template>
   <v-container>
+    <div class="pb-3">
+      <v-btn color="primary" to="/admin">
+        Zurück
+      </v-btn>
+    </div>
     <div class="text-h4 pa-4 bg-surface-variant d-flex justify-space-between align-center">
       Tags
     </div>

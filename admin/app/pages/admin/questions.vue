@@ -61,7 +61,11 @@ const headers: Array<DataTableHeader> = [
 
 <template>
   <v-container fluid>
-    <div class="pb-3" />
+    <div class="pb-3">
+      <v-btn color="primary" to="/admin">
+        Zurück
+      </v-btn>
+    </div>
     <v-card>
       <div class="text-h4 pa-4 bg-surface-variant d-flex justify-space-between align-center">
         Fragen verwalten
