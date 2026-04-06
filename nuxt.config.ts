@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { env } from 'node:process'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
@@ -11,6 +12,7 @@ export default defineNuxtConfig({
     sessionSecret: '',
     supabaseUrl: '',
     supabaseApiKey: '',
+    metrics: env.NODE_ENV === 'production',
     public: {
       leaderboardMinCorrectAnswers: 3,
     },
