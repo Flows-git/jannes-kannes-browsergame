@@ -20,9 +20,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
-  modules: [
-    '@nuxt/test-utils/module',
-  ],
+  modules: ['@nuxt/test-utils/module', '@nuxt/scripts'],
 
   vite: {
     vue: {

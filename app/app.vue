@@ -1,3 +1,11 @@
+<script setup lang="ts">
+useScript({
+  src: 'https://scripts.simpleanalyticscdn.com/latest.js',
+  async: true,
+  crossorigin: false,
+})
+</script>
+
 <template>
   <NuxtLayout>
     <v-app>
