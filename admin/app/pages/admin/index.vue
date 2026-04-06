@@ -20,6 +20,14 @@
           </div>
         </v-card>
       </v-col>
+      <v-col cols="6" sm="4">
+        <v-card class="pa-3 text-center" to="/admin/stats">
+          <v-icon icon="mdi-chart-bar" size="86" color="primary" />
+          <div class="text-h5">
+            Statistiken
+          </div>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>

@@ -10,6 +10,10 @@
     "preview": "nuxt preview",
     "lint": "eslint ."
   },
+  "dependencies": {
+    "echarts": "^6.0.0",
+    "vue-echarts": "^8.0.1"
+  },
   "devDependencies": {
     "@types/node": "^24.12.0",
     "eslint": "^10.1.0",
