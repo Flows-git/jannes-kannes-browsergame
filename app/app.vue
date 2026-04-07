@@ -20,9 +20,12 @@ useScript({
           Datenschutz
         </NuxtLink>
         <v-spacer />
-        Made with <v-icon icon="mdi-heart" class="mx-1" color="error" /> by <NuxtLink class="pl-1" href="https://flowa.me" target="_blank">
-          Flo Wagner
-        </NuxtLink>
+        <span class="text-end">
+          Made with
+          <v-icon icon="mdi-heart" color="error" />
+          by
+          <NuxtLink class="pl-1" href="https://flowa.me" target="_blank">Flo&nbsp;Wagner</NuxtLink>
+        </span>
       </v-footer>
     </v-app>
   </NuxtLayout>

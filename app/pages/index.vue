@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { useDisplay } from 'vuetify'
+
 const { startGame } = useGame()
 const router = useRouter()
+const { xs, sm } = useDisplay()
 
 const loading = ref(false)
 const error = ref()
@@ -43,13 +46,13 @@ const gameModes = [
 <template>
   <v-container max-width="1200px">
     <div>
-      <GameLogo show-subtitle width="500" />
+      <GameLogo show-subtitle :width="xs ? 250 : sm ? 400 : 500" />
     </div>
     <v-item-group v-model="selectedGameMode" selected-class="border-primary border-opacity-100 selected-card">
       <v-row justify="center" class="pt-4">
         <v-col v-for="mode of gameModes" :key="mode.mode" cols="12" sm="6" md="4">
           <v-item v-slot="{ isSelected, selectedClass, select }" :value="mode">
-            <v-card :class="selectedClass" class="pa-3 text-center border-md border-opacity-0" :color="isSelected ? 'surface-variant' : ''" @click="select">
+            <v-card :class="selectedClass" class="pa-3 text-center border-md border-opacity-0 d-flex d-sm-block align-center" :color="isSelected ? 'surface-variant' : ''" @click="select">
               <v-btn
                 v-tooltip="{
                   text: mode.info,
@@ -59,10 +62,10 @@ const gameModes = [
                 }" icon="mdi-information-outline" variant="text"
                 style="position: absolute; right: 4px; top: 4px;"
               />
-              <v-avatar color="primary" size="94" :style="isSelected ? 'box-shadow: 0 0 16px rgb(var(--v-theme-primary));' : ''">
-                <v-icon :icon="mode.icon" size="86" :class="{ 'rotate-once': isSelected }" style="text-shadow: 0px 2px 0 #fff;" />
+              <v-avatar color="primary" :size="xs ? 64 : 94" :style="isSelected ? 'box-shadow: 0 0 16px rgb(var(--v-theme-primary));' : ''">
+                <v-icon :icon="mode.icon" :size="xs ? 56 : 86" :class="{ 'rotate-once': isSelected }" style="text-shadow: 0px 2px 0 #fff;" />
               </v-avatar>
-              <div class="text-h5 pt-2" :class="{ 'text-pop-up-top': isSelected }">
+              <div class="text-h5 pa-2" :class="{ 'text-pop-up-top': isSelected }">
                 {{ mode.label }}
               </div>
             </v-card>
