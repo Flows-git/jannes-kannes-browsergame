@@ -21,7 +21,7 @@ useScript({
         </NuxtLink>
         <v-spacer />
         Made with <v-icon icon="mdi-heart" class="mx-1" color="error" /> by <NuxtLink class="pl-1" href="https://flowa.me" target="_blank">
-          Florian Wagner
+          Flo Wagner
         </NuxtLink>
       </v-footer>
     </v-app>
