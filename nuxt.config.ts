@@ -3,6 +3,14 @@ import { env } from 'node:process'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      title: 'Jannes Kann Es',
+      htmlAttrs: {
+        lang: 'de',
+      },
+    },
+  },
   devtools: { enabled: true },
   compatibilityDate: '2025-09-14',
   experimental: {
