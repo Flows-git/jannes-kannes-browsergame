@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { useDisplay } from 'vuetify'
-
 const { startGame } = useGame()
 const router = useRouter()
-const { xs, sm } = useDisplay()
 
 const loading = ref(false)
 const error = ref()
@@ -45,14 +42,14 @@ const gameModes = [
 
 <template>
   <v-container max-width="1200px">
-    <div>
-      <GameLogo show-subtitle :width="xs ? 250 : sm ? 400 : 500" />
+    <div class="d-flex align-center justify-center">
+      <GameLogo class="game-logo" show-subtitle :width="500" />
     </div>
     <v-item-group v-model="selectedGameMode" selected-class="border-primary border-opacity-100 selected-card">
       <v-row justify="center" class="pt-4">
         <v-col v-for="mode of gameModes" :key="mode.mode" cols="12" sm="6" md="4">
           <v-item v-slot="{ isSelected, selectedClass, select }" :value="mode">
-            <v-card :class="selectedClass" class="pa-3 text-center border-md border-opacity-0 d-flex d-sm-block align-center" :color="isSelected ? 'surface-variant' : ''" @click="select">
+            <v-card :class="selectedClass" class="game-mode-select-btn pa-3 text-center border-md border-opacity-0 d-flex d-sm-block align-center" :color="isSelected ? 'surface-variant' : ''" @click="select">
               <v-btn
                 v-tooltip="{
                   text: mode.info,
@@ -61,9 +58,10 @@ const gameModes = [
                   contentClass: 'wrapped-text',
                 }" icon="mdi-information-outline" variant="text"
                 style="position: absolute; right: 4px; top: 4px;"
+                @click.stop.prevent
               />
-              <v-avatar color="primary" :size="xs ? 64 : 94" :style="isSelected ? 'box-shadow: 0 0 16px rgb(var(--v-theme-primary));' : ''">
-                <v-icon :icon="mode.icon" :size="xs ? 56 : 86" :class="{ 'rotate-once': isSelected }" style="text-shadow: 0px 2px 0 #fff;" />
+              <v-avatar class="avatar" color="primary" :style="isSelected ? 'box-shadow: 0 0 16px rgb(var(--v-theme-primary));' : ''">
+                <v-icon :icon="mode.icon" :class="{ 'rotate-once': isSelected }" style="text-shadow: 0px 2px 0 #fff;" />
               </v-avatar>
               <div class="text-h5 pa-2" :class="{ 'text-pop-up-top': isSelected }">
                 {{ mode.label }}
@@ -94,7 +92,10 @@ const gameModes = [
   </v-container>
 </template>
 
-<style>
+<style lang="scss">
+@use "sass:map";
+@use '../assets/settings';
+
 .wrapped-text {
   white-space: pre-wrap;
 }
@@ -102,5 +103,48 @@ const gameModes = [
 .selected-card {
   box-shadow: 0px 0px 32px rgb(var(--v-theme-primary)) !important;
   transition: boxshadow 1s ease;
+}
+
+.game-logo {
+  max-width: 500px;
+  transition: all .5s ease;
+}
+
+.game-mode-select-btn {
+  .v-avatar {
+    --v-avatar-height: 94px !important;
+  }
+ .v-icon {
+    --v-icon-size-multiplier: 3.5;
+ }
+}
+
+@media #{map.get(settings.$display-breakpoints, 'xs')} {
+  .game-logo {
+    max-width: 250px;
+  }
+  .game-mode-select-btn {
+    .v-avatar {
+      --v-avatar-height: 64px !important;
+    }
+    .v-icon {
+      --v-icon-size-multiplier: 2.3;
+    }
+  }
+}
+
+@media #{map.get(settings.$display-breakpoints, 'sm')} {
+  .game-logo {
+    max-width: 350px;
+  }
+
+    .game-mode-select-btn {
+    .v-avatar {
+      --v-avatar-height: 76px !important;
+    }
+    .v-icon {
+      --v-icon-size-multiplier: 2.8;
+    }
+  }
 }
 </style>

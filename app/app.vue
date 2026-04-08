@@ -4,11 +4,14 @@ useScript({
   async: true,
   crossorigin: false,
 })
+
+const { progress, isLoading } = useLoadingIndicator()
 </script>
 
 <template>
   <NuxtLayout>
     <v-app>
+      <v-progress-linear v-if="isLoading" v-model="progress" color="primary" class="position-fixed" />
       <div class="fill-height">
         <NuxtPage />
       </div>
