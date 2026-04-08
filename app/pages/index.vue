@@ -113,10 +113,10 @@ const gameModes = [
 .game-mode-select-btn {
   .v-avatar {
     --v-avatar-height: 94px !important;
+    .v-icon {
+        --v-icon-size-multiplier: 3.5;
+    }
   }
- .v-icon {
-    --v-icon-size-multiplier: 3.5;
- }
 }
 
 @media #{map.get(settings.$display-breakpoints, 'xs')} {
@@ -126,9 +126,9 @@ const gameModes = [
   .game-mode-select-btn {
     .v-avatar {
       --v-avatar-height: 64px !important;
-    }
-    .v-icon {
-      --v-icon-size-multiplier: 2.3;
+      .v-icon {
+        --v-icon-size-multiplier: 2.3;
+      }
     }
   }
 }
@@ -141,9 +141,9 @@ const gameModes = [
     .game-mode-select-btn {
     .v-avatar {
       --v-avatar-height: 76px !important;
-    }
-    .v-icon {
-      --v-icon-size-multiplier: 2.8;
+      .v-icon {
+        --v-icon-size-multiplier: 2.8;
+      }
     }
   }
 }
