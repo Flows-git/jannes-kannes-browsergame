@@ -1,84 +1,96 @@
-<p align="center">
-  <a href="https://nuxt.com/">
-    <img src="https://img.shields.io/badge/Nuxt-4.x-green?logo=nuxt&logoColor=white" alt="Nuxt 4" />
-  </a>
-  <a href="https://supabase.com/">
-    <img src="https://img.shields.io/badge/Supabase-Database-3ECF8E?logo=supabase&logoColor=white" alt="Supabase" />
-  </a>
-  <a href="https://bun.sh/">
-    <img src="https://img.shields.io/badge/Bun-JS%20Runtime-000000?logo=bun&logoColor=white" alt="Bun" />
-  </a>
-</p>
+# Warcraft 3 Quiz App – Jannes Kann Es
+
+[![Nuxt](https://img.shields.io/badge/Nuxt-4.x-00DC82?logo=nuxt&logoColor=white)](https://nuxt.com)
+[![Vuetify](https://img.shields.io/badge/Vuetify-3.x-1867C0?logo=vuetify&logoColor=white)](https://vuetifyjs.com)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+[![pnpm](https://img.shields.io/badge/pnpm-package_manager-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f0d7ec05-44f2-498a-b701-869edc2b0f61/deploy-status)](https://app.netlify.com/projects/jannes-kann-es/deploys)
 
 <div style="text-align: center">
   <img src="./public/logo.png" alt="Jannes Kann es Logo" width="400"/>
 </div>
-Logo created by: <a href="https://www.textstudio.com/">Font generator</a>
+Logo created by:
+
+[Font Generator](https://www.textstudio.com/)
 
 ---
-# Warcraft 3 Quiz App -  Jannes Kann es
 
-> This is a Warcraft 3 quiz game based on the popular section "Jannes Kann Es" from the internet tv show "Creepjack"
+> A Warcraft 3 quiz game based on the popular section "Jannes Kann Es" from the internet tv show "Creepjack".
+
+## Features
+
+- Three game modes:
+  - **Classic** – 3 random questions for a quick round
+  - **Ranked** – all questions, 3 lives, submit your score to the leaderboard
+  - **Endless** – all questions, no life limit
+- Global **leaderboard** with rank highlighting and confetti for top 3 finishers
+- **Session-based gameplay** with encrypted server-side cookies
+- **Anti-cheat** validation on leaderboard submissions (timing, state integrity, rate limiting)
+- **Admin dashboard** for managing questions, tags, and viewing analytics with ECharts
+- **Mobile-friendly** responsive UI built with Vuetify 3
+- Fully **typed** with TypeScript and tested with Vitest + Playwright
 
 ## Development
+
 ### Setup
 
 Install the dependencies:
+
 ```bash
-bun install
+pnpm install
+pnpm run setup # downloads wc3 icons to /public/warcraft3_icons
 ```
 
-Create `.env` file:
+Create a `.env` file:
+
 ```bash
 NUXT_SUPABASE_URL=UrlToYourSupabaseInstance
 NUXT_SUPABASE_API_KEY=SupabaseSecretKey
 NUXT_SESSION_SECRET=RandomStringForCookieEncryption
+# optional:
+NUXT_PUBLIC_LEADERBOARD_MIN_CORRECT_ANSWERS=0 # default is 3
+NUXT_METRICS=false # auto false in dev
 ```
+
 ### Start Development Server
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
-bun run dev
+pnpm run dev
 ```
 
-### Add Questions to Supabase
-Run the script to add questions to your Supabase database:
+Start the admin dashboard:
+
 ```bash
-bun run setup:db
+pnpm run dev:admin
+```
+
+### Tests
+
+```bash
+pnpm run test       # all tests (unit + e2e)
+pnpm run test:unit  # Vitest with coverage
+pnpm run test:e2e   # Playwright
+```
+
+### Lint
+
+```bash
+pnpm run lint       # check
+pnpm run lintfix    # auto-fix
 ```
 
 ## Build for Production
 
 Build the application for production:
+
 ```bash
-bun run build
+pnpm run build
 ```
 
-Locally preview production build:
+Locally preview the production build:
+
 ```bash
-bun run preview
+pnpm run preview
 ```
-
-## Docs
-
-**Server Session**
-Represents the current state of a game
-When data is empty no game is started
-
-contains:
-- the meta data of the current game
-- a list of ids of the selected questions for the game
-- The current question (with randomized answer order)is  KK
-
-### API Endpoints
-| Method | Endpoint | Parameter | Description |
-|--------|----------|-------------|-------------|
-| `POST` | `/api/game/start` | mode: [GameMode](./shared/types/index.d.ts#L73),<br> settings?: [GameSettings](./shared/types/index.d.ts#L84)  | Starts a new game |
-| `GET` | `/api/game` | - | Returns the current question and meta |
-| `POST` | `/api/game` | answer: **string** | Answer the current question |
-| `DELETE` | `/api/game` | - | Ends the current game and deletes the session |
-| `POST` | `/api/game/restart` | - | Restart the current game with the same GameSettings |
-| `GET` | `/api/leaderboard` | page?: **string** (default: 1),<br> perPage?: **string** (default: 10)  | Get the leaderboard with pagination |
-| `POST` | `/api/leaderboard` | name: **string** | Submit a new score to the leaderboard |
-| `POST` | `/api/leaderboard/rank` | name: **string** | Calculates the rank of the currently running game |

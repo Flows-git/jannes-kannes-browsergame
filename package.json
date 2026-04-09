@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "jannes-kann-es-browsergame",
   "type": "module",
   "private": true,
   "module": "index.ts",
