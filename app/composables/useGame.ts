@@ -2,9 +2,13 @@ export function useGame() {
   const gameMeta = useState<GameMeta>('game-meta')
   const currentQuestion = useState<GameQuestion>('game-current-question')
   const doFetch = useRequestFetch()
+  const { leaderboardId } = useLeaderboard()
 
   async function startGame(mode: GameMode, settings?: GameSettings) {
-    await $fetch('/api/game/start', { method: 'POST', body: { mode, settings } })
+    await $fetch('/api/game/start', {
+      method: 'POST',
+      body: { mode, settings, leaderboardId: leaderboardId.value },
+    })
   }
 
   async function fetchQuestion() {

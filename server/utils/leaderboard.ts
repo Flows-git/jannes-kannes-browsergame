@@ -1,7 +1,38 @@
 const VALID_NAME_PATTERN = /^[\p{L}\p{N}\s._-]+$/u
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+export function isValidLeaderboardId(leaderboardId: string | undefined): leaderboardId is string {
+  return !!leaderboardId && UUID_PATTERN.test(leaderboardId)
+}
+
+export function isNewResultBetter(
+  existing: { score: number, gameTime: string },
+  candidate: { score: number, gameTime: string },
+): boolean {
+  if (candidate.score > existing.score) {
+    return true
+  }
+  if (candidate.score === existing.score) {
+    return parseGameTimeSeconds(candidate.gameTime) < parseGameTimeSeconds(existing.gameTime)
+  }
+  return false
+}
+
+export async function getLeaderboardEntryById(id: string) {
+  const supabase = useSupabaseServer()
+  const { data, error } = await supabase
+    .from('leaderboard_with_rank')
+    .select('id, name, score, gameTime')
+    .eq('id', id)
+    .maybeSingle<Pick<LeaderboardEntry, 'id' | 'name' | 'score' | 'gameTime'>>()
+
+  if (error) {
+    throw createError(error)
+  }
+  return data
+}
 
 export async function submitGameResultToLeaderboard(name: string, data: GameSession) {
-  const supabase = useSupabaseServer()
   validateGameResult(name, data)
   const entry: LeaderboardEntry = {
     name: name.trim(),
@@ -12,8 +43,42 @@ export async function submitGameResultToLeaderboard(name: string, data: GameSess
     averageAnswerTime: data.averageAnswerTime,
   }
 
-  const { data: _newEntry } = await supabase.from('leaderboard').insert(entry).select('id').single()
-  return _newEntry?.id
+  if (isValidLeaderboardId(data.leaderboardId)) {
+    const existing = await getLeaderboardEntryById(data.leaderboardId)
+    if (existing && !isNewResultBetter(existing, { score: entry.score, gameTime: entry.gameTime })) {
+      throw createError({
+        status: 409,
+        statusMessage: 'not_better',
+        data: {
+          name: existing.name,
+          score: existing.score,
+          gameTime: existing.gameTime,
+        },
+      })
+    }
+    if (existing) {
+      return await updateLeaderboardEntry(entry, data.leaderboardId)
+    }
+  }
+  return await createLeaderboardEntry(entry)
+}
+
+async function createLeaderboardEntry(entry: LeaderboardEntry) {
+  const supabase = useSupabaseServer()
+  const { data, error } = await supabase.from('leaderboard').insert(entry).select('id').single().overrideTypes<{ id: string }>()
+  if (error) {
+    throw createError(error)
+  }
+  return data.id
+}
+
+async function updateLeaderboardEntry(entry: LeaderboardEntry, id: string) {
+  const supabase = useSupabaseServer()
+  const { data, error } = await supabase.from('leaderboard').update(entry).select('id').eq('id', id).single().overrideTypes<{ id: string }>()
+  if (error) {
+    throw createError(error)
+  }
+  return data.id
 }
 
 function validateGameResult(name: string, data: GameSession) {
@@ -57,7 +122,7 @@ function validateGameResult(name: string, data: GameSession) {
   }
 }
 
-export async function getLeaderboard(params?: { page?: number, perPage?: number }) {
+export async function getLeaderboard(params?: { page?: number, perPage?: number, leaderboardId?: string }) {
   const supabase = useSupabaseServer()
 
   const perPage = Number(params?.perPage ?? 99999999)
@@ -65,14 +130,21 @@ export async function getLeaderboard(params?: { page?: number, perPage?: number 
   const to = from + perPage - 1
 
   const { data, error } = await supabase.from('leaderboard_with_rank').select('*').order('position').range(from, to).overrideTypes<LeaderboardListEntry[]>()
-  const { count } = await supabase.from('leaderboard').select('id', { count: 'exact', head: true })
+  const { count } = await supabase.from('leaderboard').select('id', { count: 'exact', head: true }).eq('deactivated', false)
 
   if (error) {
     throw createError(error)
   }
 
+  const items = (data ?? []).map((entry) => {
+    if (isValidLeaderboardId(params?.leaderboardId) && entry.id === params.leaderboardId) {
+      return { ...entry, isPlayerEntry: true }
+    }
+    return entry
+  })
+
   return {
-    items: data,
+    items,
     meta: {
       totalCount: count,
       from,
@@ -81,7 +153,7 @@ export async function getLeaderboard(params?: { page?: number, perPage?: number 
   }
 }
 
-export async function getLeaderboardPageById(id: number, perPage: number) {
+export async function getLeaderboardPageById(id: string, perPage: number) {
   const supabase = useSupabaseServer()
 
   const { data, error } = await supabase.from('leaderboard_with_rank').select('position').eq('id', id).single().overrideTypes<LeaderboardListEntry>()

@@ -87,6 +87,25 @@ export async function useGame(event: H3Event) {
       averageAnswerTime: data.averageAnswerTime,
       answeredQuestionsTotalPercent: await getAnsweredQuestionsInPercent(data.answeredQuestions),
       rank: await getRank(),
+      existingLeaderboardEntry: await getExistingLeaderboardEntryInfo(),
+    }
+  }
+
+  async function getExistingLeaderboardEntryInfo(): Promise<ExistingLeaderboardEntryInfo | undefined> {
+    if (data.gameMode !== 'ranked' || !isValidLeaderboardId(data.leaderboardId)) {
+      return undefined
+    }
+    const existing = await getLeaderboardEntryById(data.leaderboardId)
+    if (!existing) {
+      return undefined
+    }
+    const candidate = { score: data.correctAnswers, gameTime: data.gameTime as string }
+    const existingIsBetter = !isNewResultBetter(existing, candidate)
+    return {
+      name: existing.name,
+      score: existing.score,
+      gameTime: existing.gameTime,
+      existingIsBetter,
     }
   }
 
@@ -134,15 +153,20 @@ export async function useGame(event: H3Event) {
    * Inits a player session with game data to play a new game
    *
    */
-  async function startGame(settings: GameSettings) {
+  async function startGame(settings: GameSettings, leaderboardIdClient?: string) {
     if (Object.keys(data).length === 0) {
       await clearGameSession()
     }
     const questionCount = settings?.questionCount ?? 3
     const questionIds = await getRandomQuestionIds(questionCount)
     await questions.update({ questions: questionIds })
+
+    const leaderboardId = data.leaderboardId
+      ?? (isValidLeaderboardId(leaderboardIdClient) ? leaderboardIdClient : undefined)
+
     await session.update({
       sessionId: randomUUID().toString(),
+      leaderboardId,
       gameMode: settings.mode,
       running: true,
       answeredQuestions: 0,
@@ -223,6 +247,11 @@ export async function useGame(event: H3Event) {
     }
 
     const id = await submitGameResultToLeaderboard(name, data)
+
+    if (!data.leaderboardId) {
+      await session.update({ leaderboardId: id })
+    }
+
     await session.update({ submitted: true })
     await clearGameSession()
     return id

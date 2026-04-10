@@ -66,3 +66,20 @@ function parseTimeToString(timeInSeconds: number): string {
 
   return time
 }
+
+const GAME_TIME_PATTERN = /(\d+(?:\.\d+)?)/
+/**
+ * Parses a Game Time string back to seconds number
+ * @param gameTime
+ * @returns number - game time in seconds
+ */
+export function parseGameTimeSeconds(gameTime: string | undefined): number {
+  if (!gameTime) {
+    return Number.POSITIVE_INFINITY
+  }
+  const match = gameTime.match(GAME_TIME_PATTERN)
+  if (!match) {
+    return Number.POSITIVE_INFINITY
+  }
+  return Number(match[1])
+}

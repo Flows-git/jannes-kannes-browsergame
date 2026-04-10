@@ -8,6 +8,7 @@ const { xs } = useDisplay()
 
 const id: number | undefined = route.query.id ? Number(route.query.id) : undefined
 const perPage = ref(Number(route.query.perPage as string ?? 10))
+const { leaderboardId } = useLeaderboard()
 
 const page = computed({
   get: () => Number(route.query.p as string ?? 1),
@@ -25,7 +26,11 @@ function updateQueryParams(_page?: number, _perPage?: number) {
 }
 
 const { data, pending } = useFetch<{ items: Array<LeaderboardListEntry>, meta: { totalCount: number } }>(() => {
-  return `/api/leaderboard?page=${page.value}&perPage=${perPage.value}`
+  const params = new URLSearchParams({ page: String(page.value), perPage: String(perPage.value) })
+  if (leaderboardId.value) {
+    params.set('leaderboardId', leaderboardId.value)
+  }
+  return `/api/leaderboard?${params.toString()}`
 })
 
 const headers = computed<Array<DataTableHeader>>(() => {
@@ -56,6 +61,9 @@ function isRowSelected(data: LeaderboardListEntry) {
       confettiDone.value = true
     }
     return { class: 'active-row', id: `id${id}` }
+  }
+  if (data.isPlayerEntry) {
+    return { class: 'player-row', id: `id${data.id}` }
   }
   return { id: `id${data.id}` }
 }
@@ -117,7 +125,11 @@ function isRowSelected(data: LeaderboardListEntry) {
     color: rgb(var(--v-theme-on-primary));
   }
 
-  :deep(.v-data-table__tr:not(.active-row):hover) {
+  :deep(.v-data-table__tr.player-row) {
+    background-color: rgba(var(--v-theme-primary), 0.25);
+  }
+
+  :deep(.v-data-table__tr:not(.active-row):not(.player-row):hover) {
     background: rgba(var(--v-theme-primary), 0.5);
   }
 }

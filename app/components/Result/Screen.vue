@@ -31,7 +31,7 @@ onMounted(animate)
     <ResultSectionGameTime ref="game-time" :meta="meta" />
     <template v-if="meta.mode === 'ranked'">
       <v-divider class="my-3" />
-      <ResultSectionRank ref="ranked" :rank="meta.rank" />
+      <ResultSectionRank ref="ranked" :meta="meta" />
     </template>
   </template>
 </template>
