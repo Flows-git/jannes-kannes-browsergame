@@ -86,26 +86,27 @@ export async function useGame(event: H3Event) {
       gameTime: data.gameTime as string,
       averageAnswerTime: data.averageAnswerTime,
       answeredQuestionsTotalPercent: await getAnsweredQuestionsInPercent(data.answeredQuestions),
-      rank: await getRank(),
-      existingLeaderboardEntry: await getExistingLeaderboardEntryInfo(),
+      ranking: await getGameRank(),
     }
   }
 
-  async function getExistingLeaderboardEntryInfo(): Promise<ExistingLeaderboardEntryInfo | undefined> {
-    if (data.gameMode !== 'ranked' || !isValidLeaderboardId(data.leaderboardId)) {
-      return undefined
-    }
-    const existing = await getLeaderboardEntryById(data.leaderboardId)
-    if (!existing) {
-      return undefined
-    }
-    const candidate = { score: data.correctAnswers, gameTime: data.gameTime as string }
-    const existingIsBetter = !isNewResultBetter(existing, candidate)
-    return {
-      name: existing.name,
-      score: existing.score,
-      gameTime: existing.gameTime,
-      existingIsBetter,
+  async function getGameRank(): Promise<GameResultRank | undefined> {
+    if (data.gameMode === 'ranked' && data.correctAnswers >= config.public.leaderboardMinCorrectAnswers) {
+      const existingLeaderboardEntry = data.leaderboardId ? await getLeaderboardEntryById(data.leaderboardId) ?? undefined : undefined
+      let existingIsBetter = false
+      if (existingLeaderboardEntry) {
+        existingIsBetter = !isNewResultBetter(existingLeaderboardEntry, { score: data.correctAnswers, gameTime: data.gameTime as string })
+      }
+      let rank: number | undefined
+      if (!existingLeaderboardEntry || !existingIsBetter) {
+        rank = await getLeaderboardRanking(data.correctAnswers)
+      }
+
+      return {
+        existingLeaderboardEntry,
+        existingIsBetter,
+        rank,
+      }
     }
   }
 
@@ -257,12 +258,6 @@ export async function useGame(event: H3Event) {
     return id
   }
 
-  async function getRank(): Promise<number | undefined> {
-    if (data.gameMode === 'ranked' && data.correctAnswers >= config.public.leaderboardMinCorrectAnswers) {
-      return await getLeaderboardRanking(data.correctAnswers)
-    }
-  }
-
   return {
     isGameStarted,
     isGameRunning,
@@ -275,6 +270,5 @@ export async function useGame(event: H3Event) {
     answerCurrentQuestion,
     endGame,
     submitGameResult,
-    getRank,
   }
 }

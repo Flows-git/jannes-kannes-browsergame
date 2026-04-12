@@ -22,9 +22,9 @@ export async function getLeaderboardEntryById(id: string) {
   const supabase = useSupabaseServer()
   const { data, error } = await supabase
     .from('leaderboard_with_rank')
-    .select('id, name, score, gameTime')
+    .select()
     .eq('id', id)
-    .maybeSingle<Pick<LeaderboardEntry, 'id' | 'name' | 'score' | 'gameTime'>>()
+    .maybeSingle<LeaderboardEntry>()
 
   if (error) {
     throw createError(error)

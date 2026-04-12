@@ -115,8 +115,13 @@ interface GameResult {
   gameTime: string
   averageAnswerTime: string
   answeredQuestionsTotalPercent: number
+  ranking?: GameResultRank
+}
+
+interface GameResultRank {
   rank?: number
-  existingLeaderboardEntry?: ExistingLeaderboardEntryInfo
+  existingIsBetter?: boolean
+  existingLeaderboardEntry?: LeaderboardEntry
 }
 
 interface ExistingLeaderboardEntryInfo {
