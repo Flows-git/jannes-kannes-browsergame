@@ -119,6 +119,7 @@ interface GameResult {
 }
 
 interface GameResultRank {
+  canSubmit: boolean
   rank?: number
   existingIsBetter?: boolean
   existingLeaderboardEntry?: LeaderboardEntry

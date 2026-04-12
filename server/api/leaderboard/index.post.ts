@@ -5,8 +5,13 @@ export default defineEventHandler(async (event): Promise<LeaderboardSubmitRespon
   const { submitGameResult } = await useGame(event)
   const { name } = await readBody<{ name: string }>(event)
   try {
-    const id = await submitGameResult(name)
+    const { id, rank } = await submitGameResult(name)
     const entryPage = await getLeaderboardPageById(id, 10)
+
+    if (rank <= 3) {
+      setCookie(event, 'jannes-kann-es-show-confetti', 'true', { maxAge: 60 })
+    }
+
     return {
       ok: true,
       redirect: `/leaderboard?p=${entryPage}`,

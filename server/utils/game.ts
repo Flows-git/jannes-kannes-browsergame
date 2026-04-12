@@ -90,7 +90,7 @@ export async function useGame(event: H3Event) {
     }
   }
 
-  async function getGameRank(): Promise<GameResultRank | undefined> {
+  async function getGameRank(): Promise<GameResultRank> {
     if (data.gameMode === 'ranked' && data.correctAnswers >= config.public.leaderboardMinCorrectAnswers) {
       const existingLeaderboardEntry = data.leaderboardId ? await getLeaderboardEntryById(data.leaderboardId) ?? undefined : undefined
       let existingIsBetter = false
@@ -103,10 +103,14 @@ export async function useGame(event: H3Event) {
       }
 
       return {
+        canSubmit: !!rank && !existingIsBetter,
         existingLeaderboardEntry,
         existingIsBetter,
         rank,
       }
+    }
+    return {
+      canSubmit: false,
     }
   }
 
@@ -246,16 +250,19 @@ export async function useGame(event: H3Event) {
     if (data.submitted) {
       throw createError({ status: 409, statusMessage: 'Score already submitted' })
     }
+    const ranking = await getGameRank()
+    if (!ranking || !ranking.canSubmit) {
+      throw createError({ status: 409, statusMessage: 'Not permitted for ranking' })
+    }
 
     const id = await submitGameResultToLeaderboard(name, data)
-
     if (!data.leaderboardId) {
       await session.update({ leaderboardId: id })
     }
 
     await session.update({ submitted: true })
     await clearGameSession()
-    return id
+    return { id, rank: ranking.rank as number }
   }
 
   return {
