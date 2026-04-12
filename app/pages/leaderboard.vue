@@ -24,10 +24,12 @@ function updateQueryParams(_page?: number, _perPage?: number) {
 
 const { data, pending } = await useFetch<{ items: Array<LeaderboardListEntry>, meta: { totalCount: number } }>(() => {
   const params = new URLSearchParams({ page: String(page.value), perPage: String(perPage.value) })
-  if (leaderboardId.value) {
-    params.set('leaderboardId', leaderboardId.value)
-  }
   return `/api/leaderboard?${params.toString()}`
+}, {
+  method: 'POST',
+  body: {
+    leaderboardId: leaderboardId.value,
+  },
 })
 
 const headers = computed<Array<DataTableHeader>>(() => [

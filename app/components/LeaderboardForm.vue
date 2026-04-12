@@ -31,7 +31,7 @@ async function addResultToLeaderboard() {
     if (!valid.value) {
       return
     }
-    const response = await $fetch<LeaderboardSubmitResponse>('/api/leaderboard', {
+    const response = await $fetch<LeaderboardSubmitResponse>('/api/leaderboard/submit', {
       method: 'POST',
       body: { name: name.value },
     })
