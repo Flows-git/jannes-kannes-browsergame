@@ -41,6 +41,7 @@ export async function submitGameResultToLeaderboard(name: string, data: GameSess
     usedJoker: 0,
     gameTime: data.gameTime as string,
     averageAnswerTime: data.averageAnswerTime,
+    count: 1,
   }
 
   if (isValidLeaderboardId(data.leaderboardId)) {
@@ -57,6 +58,7 @@ export async function submitGameResultToLeaderboard(name: string, data: GameSess
       })
     }
     if (existing) {
+      entry.count = existing.count + 1
       return await updateLeaderboardEntry(entry, data.leaderboardId)
     }
   }
@@ -74,7 +76,7 @@ async function createLeaderboardEntry(entry: LeaderboardEntry) {
 
 async function updateLeaderboardEntry(entry: LeaderboardEntry, id: string) {
   const supabase = useSupabaseServer()
-  const { data, error } = await supabase.from('leaderboard').update(entry).select('id').eq('id', id).single().overrideTypes<{ id: string }>()
+  const { data, error } = await supabase.from('leaderboard').update({ ...entry, updated_at: new Date().toISOString() }).select('id').eq('id', id).single().overrideTypes<{ id: string }>()
   if (error) {
     throw createError(error)
   }

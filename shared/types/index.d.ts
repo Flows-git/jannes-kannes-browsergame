@@ -153,6 +153,7 @@ interface LeaderboardEntry {
   usedJoker: number
   gameTime: string
   averageAnswerTime: string
+  count: number
 }
 
 interface LeaderboardListEntry extends LeaderboardEntry {
