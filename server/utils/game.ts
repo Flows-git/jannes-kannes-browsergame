@@ -86,7 +86,31 @@ export async function useGame(event: H3Event) {
       gameTime: data.gameTime as string,
       averageAnswerTime: data.averageAnswerTime,
       answeredQuestionsTotalPercent: await getAnsweredQuestionsInPercent(data.answeredQuestions),
-      rank: await getRank(),
+      ranking: await getGameRank(),
+    }
+  }
+
+  async function getGameRank(): Promise<GameResultRank> {
+    if (data.gameMode === 'ranked' && data.correctAnswers >= config.public.leaderboardMinCorrectAnswers) {
+      const existingLeaderboardEntry = data.leaderboardId ? await getLeaderboardEntryById(data.leaderboardId) ?? undefined : undefined
+      let existingIsBetter = false
+      if (existingLeaderboardEntry) {
+        existingIsBetter = !isNewResultBetter(existingLeaderboardEntry, { score: data.correctAnswers, gameTime: data.gameTime as string })
+      }
+      let rank: number | undefined
+      if (!existingLeaderboardEntry || !existingIsBetter) {
+        rank = await getLeaderboardRanking(data.correctAnswers)
+      }
+
+      return {
+        canSubmit: !!rank && !existingIsBetter,
+        existingLeaderboardEntry,
+        existingIsBetter,
+        rank,
+      }
+    }
+    return {
+      canSubmit: false,
     }
   }
 
@@ -134,15 +158,20 @@ export async function useGame(event: H3Event) {
    * Inits a player session with game data to play a new game
    *
    */
-  async function startGame(settings: GameSettings) {
+  async function startGame(settings: GameSettings, leaderboardIdClient?: string) {
     if (Object.keys(data).length === 0) {
       await clearGameSession()
     }
     const questionCount = settings?.questionCount ?? 3
     const questionIds = await getRandomQuestionIds(questionCount)
     await questions.update({ questions: questionIds })
+
+    const leaderboardId = data.leaderboardId
+      ?? (isValidLeaderboardId(leaderboardIdClient) ? leaderboardIdClient : undefined)
+
     await session.update({
       sessionId: randomUUID().toString(),
+      leaderboardId,
       gameMode: settings.mode,
       running: true,
       answeredQuestions: 0,
@@ -221,17 +250,19 @@ export async function useGame(event: H3Event) {
     if (data.submitted) {
       throw createError({ status: 409, statusMessage: 'Score already submitted' })
     }
+    const ranking = await getGameRank()
+    if (!ranking || !ranking.canSubmit) {
+      throw createError({ status: 409, statusMessage: 'Not permitted for ranking' })
+    }
 
     const id = await submitGameResultToLeaderboard(name, data)
+    if (!data.leaderboardId) {
+      await session.update({ leaderboardId: id })
+    }
+
     await session.update({ submitted: true })
     await clearGameSession()
-    return id
-  }
-
-  async function getRank(): Promise<number | undefined> {
-    if (data.gameMode === 'ranked' && data.correctAnswers >= config.public.leaderboardMinCorrectAnswers) {
-      return await getLeaderboardRanking(data.correctAnswers)
-    }
+    return { id, rank: ranking.rank as number }
   }
 
   return {
@@ -246,6 +277,5 @@ export async function useGame(event: H3Event) {
     answerCurrentQuestion,
     endGame,
     submitGameResult,
-    getRank,
   }
 }

@@ -57,6 +57,7 @@ interface GameQuestion {
 
 interface GameSession {
   sessionId: string
+  leaderboardId?: string
   gameMode: GameMode
   currentQuestion: QuestionDB
   questions: Array<string>
@@ -83,6 +84,7 @@ type GameMode = 'classic' | 'ranked' | 'endless'
 interface GameStartParams {
   mode: GameMode
   settings?: GameSettings
+  leaderboardId?: string
 }
 
 interface GameSettings {
@@ -113,7 +115,25 @@ interface GameResult {
   gameTime: string
   averageAnswerTime: string
   answeredQuestionsTotalPercent: number
+  ranking?: GameResultRank
+}
+
+interface GameResultRank {
+  canSubmit: boolean
   rank?: number
+  existingIsBetter?: boolean
+  existingLeaderboardEntry?: LeaderboardEntry
+}
+
+interface ExistingLeaderboardEntryInfo {
+  name: string
+  score: number
+  gameTime: string
+  /**
+   * If true, the existing entry is better than (or equal to) the current
+   * game result and submitting would be rejected by the server.
+   */
+  existingIsBetter: boolean
 }
 
 interface GetQuestionRespone {
@@ -127,16 +147,30 @@ interface AnswerQuestionResponse {
 }
 
 interface LeaderboardEntry {
-  id?: number
+  id?: string
   name: string
   score: number
   correctAnswers: number
   usedJoker: number
   gameTime: string
   averageAnswerTime: string
+  count: number
 }
 
 interface LeaderboardListEntry extends LeaderboardEntry {
   rank: number
   position: number
+  isPlayerEntry?: boolean
+}
+
+interface LeaderboardSubmitResponse {
+  ok: boolean
+  redirect?: string
+  leaderboardId?: string
+  reason?: 'not_better'
+  existing?: {
+    name: string
+    score: number
+    gameTime: string
+  }
 }

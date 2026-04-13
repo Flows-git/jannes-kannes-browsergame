@@ -66,3 +66,34 @@ function parseTimeToString(timeInSeconds: number): string {
 
   return time
 }
+
+const GAME_TIME_PATTERN = /(\d+(?:\.\d+)?)\s*([hms])/g
+/**
+ * Parses a Game Time string back to seconds number
+ * TODO: Remove after refactoring gameTime and averageGameTime to number
+ * @param gameTime
+ * @returns number - game time in seconds
+ */
+export function parseGameTimeSeconds(gameTime: string | undefined): number {
+  if (!gameTime) {
+    return 0
+  }
+  const matches = gameTime.matchAll(GAME_TIME_PATTERN)
+  let totalSeconds = 0
+  let found = false
+  for (const match of matches) {
+    found = true
+    const value = Number(match[1])
+    const unit = match[2]
+    if (unit === 'h') {
+      totalSeconds += value * 3600
+    }
+    else if (unit === 'm') {
+      totalSeconds += value * 60
+    }
+    else {
+      totalSeconds += value
+    }
+  }
+  return found ? totalSeconds : 0
+}

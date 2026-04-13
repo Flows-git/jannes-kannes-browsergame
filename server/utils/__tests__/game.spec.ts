@@ -642,17 +642,4 @@ describe('useGame', () => {
       expect(id).toBe(789)
     })
   })
-
-  describe('getRank', () => {
-    it('should return the leaderboard ranking based on the correctAnswers from game session', async () => {
-      setGameSessionData({ correctAnswers: 5 })
-      getLeaderboardRankingMock.mockResolvedValue(42)
-
-      const game = await useGame(mockEvent)
-      const rank = await game.getRank()
-
-      expect(getLeaderboardRankingMock).toHaveBeenCalledWith(5)
-      expect(rank).toBe(42)
-    })
-  })
 })

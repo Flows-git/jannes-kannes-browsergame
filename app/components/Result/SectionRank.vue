@@ -1,13 +1,16 @@
 <script setup lang="ts">
 const props = defineProps<{
-  rank?: number
+  meta: GameResult
+
 }>()
 
 const config = useRuntimeConfig()
+const ranking = computed(() => props.meta.ranking)
+const rank = computed(() => ranking.value?.rank)
 
 const medalColor = computed(() => {
-  if (props.rank && props.rank >= 1 && props.rank <= 3) {
-    const color = props.rank === 1 ? 'gold' : props.rank === 2 ? 'silver' : props.rank === 3 ? 'bronze' : null
+  if (rank.value && rank.value >= 1 && rank.value <= 3) {
+    const color = rank.value === 1 ? 'gold' : rank.value === 2 ? 'silver' : rank.value === 3 ? 'bronze' : null
     return color
   }
   return null
@@ -53,13 +56,18 @@ defineExpose({ animate })
               Ergebnis in Rangliste eintragen
             </v-btn>
           </template>
-          <LeaderboardForm />
+          <LeaderboardForm :name="ranking?.existingLeaderboardEntry?.name" />
         </v-dialog>
       </v-col>
     </v-row>
   </div>
   <div v-else class="text-center opacity-50 body-2">
-    <TypingText ref="no-rank" :text="`Für einen Eintrag in die Bestenliste müssen mindestens ${config.public.leaderboardMinCorrectAnswers} Fragen richtig beantwortet worden sein`" :tick="10" />
+    <div v-if="ranking?.existingIsBetter">
+      Du hast bereits einen besseren Eintrag in der Bestenliste:
+      <strong>{{ ranking.existingLeaderboardEntry?.score }} Punkte</strong> in
+      <strong>{{ ranking.existingLeaderboardEntry?.gameTime }}</strong>.
+    </div>
+    <TypingText v-else ref="no-rank" :text="`Für einen Eintrag in die Bestenliste müssen mindestens ${config.public.leaderboardMinCorrectAnswers} Fragen richtig beantwortet worden sein`" :tick="10" />
   </div>
 </template>
 

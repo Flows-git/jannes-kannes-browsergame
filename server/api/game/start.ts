@@ -14,6 +14,6 @@ export default defineEventHandler(async (event) => {
     gameSettings.questionCount = questionCount
     gameSettings.liveCount = questionCount
   }
-  await (await useGame(event)).startGame(gameSettings)
+  await (await useGame(event)).startGame(gameSettings, request.leaderboardId)
   return true
 })
