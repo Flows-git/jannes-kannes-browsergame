@@ -37,8 +37,8 @@ export async function addResultMetrics(session: GameSession): Promise<void> {
         correctAnswers: session.correctAnswers,
         startTime: new Date(session.startTime).toISOString(),
         endTime: new Date(session.endTime!).toISOString(),
-        gameTimeInSeconds: getTimeDurationInSeconds(session.startTime, session.endTime as number),
-        averageAnswerTimeInSeconds: getAverageAnswerTimeInSeconds(session.startTime, session.endTime as number, session.answeredQuestions).toFixed(1),
+        gameTime: session.gameTime,
+        averageAnswerTime: session.averageAnswerTime,
         sessionId: session.sessionId,
       })
 

@@ -6,14 +6,14 @@ export function isValidLeaderboardId(leaderboardId: string | undefined): leaderb
 }
 
 export function isNewResultBetter(
-  existing: { score: number, gameTime: string },
-  candidate: { score: number, gameTime: string },
+  existing: { score: number, gameTime: number },
+  candidate: { score: number, gameTime: number },
 ): boolean {
   if (candidate.score > existing.score) {
     return true
   }
   if (candidate.score === existing.score) {
-    return parseGameTimeSeconds(candidate.gameTime) < parseGameTimeSeconds(existing.gameTime)
+    return candidate.gameTime < existing.gameTime
   }
   return false
 }
@@ -39,7 +39,7 @@ export async function submitGameResultToLeaderboard(name: string, data: GameSess
     score: data.correctAnswers,
     correctAnswers: data.correctAnswers,
     usedJoker: 0,
-    gameTime: data.gameTime as string,
+    gameTime: data.gameTime,
     averageAnswerTime: data.averageAnswerTime,
     count: 1,
   }

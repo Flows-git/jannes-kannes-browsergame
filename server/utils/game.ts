@@ -83,8 +83,8 @@ export async function useGame(event: H3Event) {
       answeredQuestions: data.answeredQuestions,
       correctAnswers: data.correctAnswers,
       wrongAnswers: data.answeredQuestions - data.correctAnswers,
-      gameTime: data.gameTime as string,
-      averageAnswerTime: data.averageAnswerTime,
+      gameTime: parseTimeToString(data.gameTime),
+      averageAnswerTime: parseTimeToString(data.averageAnswerTime),
       answeredQuestionsTotalPercent: await getAnsweredQuestionsInPercent(data.answeredQuestions),
       ranking: await getGameRank(),
     }
@@ -95,7 +95,7 @@ export async function useGame(event: H3Event) {
       const existingLeaderboardEntry = data.leaderboardId ? await getLeaderboardEntryById(data.leaderboardId) ?? undefined : undefined
       let existingIsBetter = false
       if (existingLeaderboardEntry) {
-        existingIsBetter = !isNewResultBetter(existingLeaderboardEntry, { score: data.correctAnswers, gameTime: data.gameTime as string })
+        existingIsBetter = !isNewResultBetter(existingLeaderboardEntry, { score: data.correctAnswers, gameTime: data.gameTime })
       }
       let rank: number | undefined
       if (!existingLeaderboardEntry || !existingIsBetter) {
@@ -181,8 +181,8 @@ export async function useGame(event: H3Event) {
       totalLives: settings?.liveCount,
       remainingLives: settings?.liveCount,
       startTime: Date.now(),
-      averageAnswerTime: '0s',
-      gameTime: '0s',
+      averageAnswerTime: 0,
+      gameTime: 0,
       endTime: undefined,
       submitted: false,
     })
@@ -202,7 +202,7 @@ export async function useGame(event: H3Event) {
       currentQuestionNr: session.data.currentQuestionNr + 1,
       correctAnswers: answerCorrect ? session.data.correctAnswers + 1 : session.data.correctAnswers,
       remainingLives: (!answerCorrect && typeof session.data.remainingLives === 'number') ? session.data.remainingLives - 1 : session.data.remainingLives,
-      averageAnswerTime: getAverageAnswerTimeString(session.data.startTime, session.data.answeredQuestions + 1),
+      averageAnswerTime: getAverageAnswerTime(session.data.startTime, Date.now(), session.data.answeredQuestions + 1),
     })
 
     // ends the game after the last question was answered
@@ -237,7 +237,7 @@ export async function useGame(event: H3Event) {
     await session.update({
       running: false,
       endTime,
-      gameTime: getTimeDurationString(data.startTime, endTime),
+      gameTime: getTimeDuration(data.startTime, endTime),
     })
   }
 

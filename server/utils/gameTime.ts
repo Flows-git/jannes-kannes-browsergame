@@ -1,99 +1,43 @@
 /**
- * Calculates the average time to answer a question in a game.
- * usage: getAverageAnswerTimeString(date.getTime(), answeredQuestions)
- * @param startTime - The start time of the game in milliseconds.
+ * Calculates the average time to answer a question in ms.
+ * @param startTime - The start time of the game in ms.
+ * @param endTime - The end time of the game in ms.
  * @param answeredQuestions - The number of questions answered by the player.
- * @returns A string representing the average answer time.
+ * @returns The average answer time in ms.
  */
-export function getAverageAnswerTimeString(startTime: number, answeredQuestions: number) {
-  const currentTime = Date.now()
-  const averageSeconds = getAverageAnswerTimeInSeconds(startTime, currentTime, answeredQuestions)
-  return parseTimeToString(averageSeconds)
+export function getAverageAnswerTime(startTime: number, endTime: number, answeredQuestions: number) {
+  const duration = getTimeDuration(startTime, endTime)
+  return answeredQuestions > 0 ? Math.floor(duration / answeredQuestions) : 0
 }
 
 /**
- * Calculates the average time to answer a question in seconds.
- * @param startTime - The start time of the game in milliseconds.
- * @param answeredQuestions - The number of questions answered by the player.
- * @returns The average answer time in seconds.
+ * Calculates the total game time in ms from start to end.
+ * @param startTime - The start time in ms.
+ * @param endTime - The end time in ms.
+ * @returns Duration in ms
  */
-export function getAverageAnswerTimeInSeconds(startTime: number, endTime: number, answeredQuestions: number) {
-  const totalSeconds = getTimeDurationInSeconds(startTime, endTime)
-  return totalSeconds / (answeredQuestions || 1)
-}
-
-/**
- * Gets a string representation of the time duration between two timestamps.
- * usage: getTimeDurationString(date.getTime(), new Date().getTime())
- * @param startTime - The start time in milliseconds.
- * @param endTime - The end time in milliseconds.
- * @returns A string representing the time duration.
- */
-export function getTimeDurationString(startTime: number, endTime: number): string {
-  const totalSeconds = getTimeDurationInSeconds(startTime, endTime)
-  return parseTimeToString(totalSeconds)
-}
-
-/**
- * Calculates the total game time in seconds from start to end.
- * @param startTime - The start time in milliseconds.
- * @param endTime - The end time in milliseconds.
- * @returns Total game time in seconds.
- */
-export function getTimeDurationInSeconds(startTime: number, endTime: number): number {
-  const diffMs = endTime - startTime // Difference in ms
-  const totalSeconds = Math.floor(diffMs / 1000)
-  return totalSeconds
+export function getTimeDuration(startTime: number, endTime: number): number {
+  return endTime - startTime
 }
 
 /**
  * Parses a time in seconds to a string format like "1h 2m 3s".
- * @param timeInSeconds
+ * @param time time in ms
  * @returns string representation of the time
  */
-function parseTimeToString(timeInSeconds: number): string {
-  let time = ``
+export function parseTimeToString(time: number): string {
+  let timeString = ``
+  const timeInSeconds = time / 1000
   const hours = Math.floor(timeInSeconds / 3600)
   if (hours > 0) {
-    time += `${hours}h `
+    timeString += `${hours}h `
   }
   const minutes = Math.floor((timeInSeconds % 3600) / 60)
   if (minutes > 0) {
-    time += `${minutes}m `
+    timeString += `${minutes}m `
   }
-  const seconds = (timeInSeconds % 60).toFixed(0)
-  time += `${seconds}s`
+  const seconds = (timeInSeconds % 60).toFixed(hours === 0 && minutes === 0 ? 1 : 0)
+  timeString += `${seconds}s`
 
-  return time
-}
-
-const GAME_TIME_PATTERN = /(\d+(?:\.\d+)?)\s*([hms])/g
-/**
- * Parses a Game Time string back to seconds number
- * TODO: Remove after refactoring gameTime and averageGameTime to number
- * @param gameTime
- * @returns number - game time in seconds
- */
-export function parseGameTimeSeconds(gameTime: string | undefined): number {
-  if (!gameTime) {
-    return 0
-  }
-  const matches = gameTime.matchAll(GAME_TIME_PATTERN)
-  let totalSeconds = 0
-  let found = false
-  for (const match of matches) {
-    found = true
-    const value = Number(match[1])
-    const unit = match[2]
-    if (unit === 'h') {
-      totalSeconds += value * 3600
-    }
-    else if (unit === 'm') {
-      totalSeconds += value * 60
-    }
-    else {
-      totalSeconds += value
-    }
-  }
-  return found ? totalSeconds : 0
+  return timeString
 }

@@ -6,5 +6,10 @@ export default defineEventHandler(async (event) => {
     page: params.page,
     perPage: params.perPage,
     leaderboardId: body.leaderboardId,
+  }).then((result) => {
+    return {
+      ...result,
+      items: result.items.map(entry => ({ ...entry, averageAnswerTime: parseTimeToString(entry.averageAnswerTime), gameTime: parseTimeToString(entry.gameTime) })),
+    }
   })
 })

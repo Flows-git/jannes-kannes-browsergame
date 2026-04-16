@@ -70,8 +70,8 @@ interface GameSession {
   remainingLives?: number
   startTime: number
   endTime?: number
-  gameTime?: string
-  averageAnswerTime: string
+  gameTime: number
+  averageAnswerTime: number
   submitted?: boolean
 }
 
@@ -125,17 +125,6 @@ interface GameResultRank {
   existingLeaderboardEntry?: LeaderboardEntry
 }
 
-interface ExistingLeaderboardEntryInfo {
-  name: string
-  score: number
-  gameTime: string
-  /**
-   * If true, the existing entry is better than (or equal to) the current
-   * game result and submitting would be rejected by the server.
-   */
-  existingIsBetter: boolean
-}
-
 interface GetQuestionRespone {
   question: GameQuestion
   meta: GameMeta
@@ -152,8 +141,8 @@ interface LeaderboardEntry {
   score: number
   correctAnswers: number
   usedJoker: number
-  gameTime: string
-  averageAnswerTime: string
+  gameTime: number
+  averageAnswerTime: number
   count: number
 }
 
