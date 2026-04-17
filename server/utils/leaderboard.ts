@@ -84,6 +84,8 @@ async function updateLeaderboardEntry(entry: LeaderboardEntry, id: string) {
 }
 
 function validateGameResult(name: string, data: GameSession) {
+  const config = useRuntimeConfig()
+
   if (data.running) {
     throw createError('game not ended')
   }
@@ -119,8 +121,8 @@ function validateGameResult(name: string, data: GameSession) {
     throw createError({ status: 400, statusMessage: 'Invalid game state' })
   }
 
-  if (data.correctAnswers < 3) {
-    throw createError({ status: 400, statusMessage: 'Minimun 3 correct answers required to be qualified for a leaderboard entry' })
+  if (data.correctAnswers < config.public.leaderboardMinCorrectAnswers) {
+    throw createError({ status: 400, statusMessage: `Minimun ${config.public.leaderboardMinCorrectAnswers} correct answers required to be qualified for a leaderboard entry` })
   }
 }
 
