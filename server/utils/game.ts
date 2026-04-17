@@ -232,6 +232,7 @@ export async function useGame(event: H3Event) {
    * Ends the game manually to enable to cancel a running game
    */
   async function endGame() {
+    isGameStarted()
     // session.clear()
     const endTime = Date.now()
     await session.update({
@@ -239,6 +240,11 @@ export async function useGame(event: H3Event) {
       endTime,
       gameTime: getTimeDuration(data.startTime, endTime),
     })
+  }
+
+  async function restartGame() {
+    isGameStarted()
+    await startGame(getGameSettings())
   }
 
   async function clearGameSession() {
@@ -272,7 +278,7 @@ export async function useGame(event: H3Event) {
     getQuestionForPlayer,
     getGameMeta,
     getGameResult,
-    getGameSettings,
+    restartGame,
     startGame,
     answerCurrentQuestion,
     endGame,

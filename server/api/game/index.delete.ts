@@ -1,8 +1,1 @@
-export default defineEventHandler(async (event) => {
-  const { isGameStarted, endGame, getGameMeta } = await useGame(event)
-  isGameStarted()
-  await endGame()
-  return {
-    meta: await getGameMeta(),
-  }
-})
+export default defineEventHandler(async event => (await useGame(event)).endGame())
