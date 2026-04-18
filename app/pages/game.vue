@@ -26,6 +26,7 @@ const answerResult = ref()
 
 const showAbortConfirm = ref(false)
 const showRestartConfirm = ref(false)
+const dialogOpen = computed(() => showAbortConfirm.value || showRestartConfirm.value)
 
 const questionContentRef = ref<HTMLElement>()
 const questionHeight = ref<number>()
@@ -110,7 +111,7 @@ const gameModeLabel = computed(() => {
     <v-card width="800">
       <!-- Header -->
       <v-card-text class="jk-game--header d-flex justify-center bg-surface-variant">
-        <v-menu v-if="gameRunning" icon="mdi-dots-vertical">
+        <v-menu v-if="gameRunning && !dialogOpen" icon="mdi-dots-vertical">
           <template #activator="{ props }">
             <v-btn icon="mdi-dots-vertical" variant="text" v-bind="props" style="position: absolute; top: 50%; left: 16px; transform: translateY(-50%);" />
           </template>
@@ -143,7 +144,7 @@ const gameModeLabel = computed(() => {
       <v-progress-linear color="primary" :model-value="gameMeta?.answeredQuestions" :buffer-value="gameMeta?.currentQuestion" :max="gameMeta?.totalQuestions" />
 
       <!-- Frage -->
-      <v-card-text :style="questionHeight ? { height: `calc(${questionHeight}px + 32px)`, transition: 'height 0.3s ease', overflow: 'hidden' } : {}">
+      <v-card-text :style="questionHeight ? { height: `calc(${questionHeight}px + 32px)`, transition: 'height 0.3s ease', overflow: 'hidden' } : {}" style="position: relative;">
         <div ref="questionContentRef">
           <div v-if="loading && !currentQuestion" class="text-center d-flex align-center justify-center" style="min-height: 300px;">
             <div>
@@ -161,6 +162,8 @@ const gameModeLabel = computed(() => {
             <!-- <HeroFallenOverlay v-if="gameMeta?.remainingLives === 0" @show-results="showEndResult" /> -->
           </template>
         </div>
+        <GameRestartDialog v-model="showRestartConfirm" @restart-game="doRestartGame()" />
+        <GameCancelDialog v-model="showAbortConfirm" @cancel-game="cancelGame()" />
       </v-card-text>
 
       <!-- Action Bar -->
@@ -168,10 +171,10 @@ const gameModeLabel = computed(() => {
         <div>
           <div v-if="gameMeta.totalLives" class="jk-game--stats-container">
             <StatsBarHealth v-if="gameMeta.totalLives" :total="gameMeta.totalLives" :remaining="gameMeta.remainingLives as number" />
-          <!-- <StatsBarMana :total="3" :remaining="2" /> -->
+            <!-- <StatsBarMana :total="3" :remaining="2" /> -->
           </div>
         </div>
-        <div>
+        <div v-if="!dialogOpen">
           <v-btn v-if="!answerResult && gameRunning" size="large" :disabled="!answer" color="primary" variant="outlined" :loading="loading" @click="sendAnswer">
             Antworten absenden
           </v-btn>
@@ -187,8 +190,6 @@ const gameModeLabel = computed(() => {
         </div>
       </v-card-actions>
     </v-card>
-    <GameCancelDialog v-model="showAbortConfirm" @cancel-game="cancelGame()" />
-    <GameRestartDialog v-model="showRestartConfirm" @restart-game="doRestartGame()" />
   </v-container>
 </template>
 

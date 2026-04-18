@@ -26,22 +26,19 @@ function cancel() {
 </script>
 
 <template>
-  <v-dialog v-model="showDialog" width="400">
-    <v-card>
-      <v-card-text class="text-h6 d-flex justify-space-between align-start">
-        <div class="pr-2">
-          {{ text }}
-        </div>
-        <v-btn icon="mdi-close" variant="text" class="mr-n3 mt-n3" @click="cancel" />
-      </v-card-text>
-      <v-card-actions>
-        <v-btn @click="accept">
+  <GameDialog v-model="showDialog">
+    <div class="d-flex align-center justify-center flex-column pt-4">
+      <div class="text-h5 text-sm-h4 pa-3 text-white">
+        {{ text }}
+      </div>
+      <div class="pt-3">
+        <v-btn class="mx-2" size="large" @click="accept">
           {{ acceptBtnText }}
         </v-btn>
-        <v-btn color="primary" @click="cancel">
+        <v-btn class="mx-2" size="large" color="primary" @click="cancel">
           {{ abortBtnText }}
         </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+      </div>
+    </div>
+  </GameDialog>
 </template>
