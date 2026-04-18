@@ -171,10 +171,14 @@ export async function getLeaderboardPageById(id: string, perPage: number) {
   }
 }
 
-export async function getLeaderboardRanking(score: number) {
+export async function getLeaderboardRanking(score: number, averageAnswerTime: number, gameTime: number) {
   const supabase = useSupabaseServer()
 
-  const { data, error } = await supabase.rpc('get_rank', { _score: score })
+  const { data, error } = await supabase.rpc('get_rank', {
+    _score: score,
+    _average_answer_time: averageAnswerTime,
+    _game_time: gameTime,
+  })
 
   if (error) {
     throw createError(error)

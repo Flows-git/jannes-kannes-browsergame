@@ -227,15 +227,21 @@ describe('leaderboard', () => {
   })
 
   describe('getLeaderboardRanking', () => {
-    it('should call supabase rpc \'get_rank\' with passed score', async () => {
+    it('should call supabase rpc \'get_rank\' with score and tie-breakers', async () => {
       const testScore = 85
+      const testAvg = 1500
+      const testGame = 30000
       const mockRank = 15
 
       mocks.rpc.mockResolvedValue(createSupabaseResponse(mockRank))
 
-      const result = await getLeaderboardRanking(testScore)
+      const result = await getLeaderboardRanking(testScore, testAvg, testGame)
 
-      expect(mocks.rpc).toHaveBeenCalledWith('get_rank', { _score: testScore })
+      expect(mocks.rpc).toHaveBeenCalledWith('get_rank', {
+        _score: testScore,
+        _average_answer_time: testAvg,
+        _game_time: testGame,
+      })
       expect(result).toBe(mockRank)
     })
 
@@ -243,7 +249,7 @@ describe('leaderboard', () => {
       const error = createSupabaseError('RPC function failed')
       mocks.rpc.mockResolvedValue(error)
 
-      await expect(getLeaderboardRanking(100)).rejects.toThrow()
+      await expect(getLeaderboardRanking(100, 1000, 30000)).rejects.toThrow()
     })
   })
 })

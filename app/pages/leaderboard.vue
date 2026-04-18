@@ -36,8 +36,8 @@ const headers = computed<Array<DataTableHeader>>(() => [
   { title: 'Rang', key: 'rank', align: 'center', sortable: false, maxWidth: 100, width: 100 },
   { title: 'Name', key: 'name', sortable: false },
   { title: 'Punktzahl', key: 'score', align: 'center', sortable: false, maxWidth: 100, width: 100 },
-  { title: 'Spielzeit', key: 'gameTime', align: 'center', sortable: false, maxWidth: 150, width: 150 },
   { title: 'Durchschnittliche Antwortzeit', align: 'center', key: 'averageAnswerTime', sortable: false, maxWidth: 150, width: 150 },
+  { title: 'Spielzeit', key: 'gameTime', align: 'center', sortable: false, maxWidth: 150, width: 150 },
 ])
 
 const confettiDone = ref(false)
