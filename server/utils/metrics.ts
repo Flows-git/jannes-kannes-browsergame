@@ -3,7 +3,7 @@ function metricsActivated() {
   return config.metrics
 }
 
-export async function addAnswerMetrics(sessionId: string, questionId: number, answer: string, answerCorrect: boolean, gameMode: GameMode): Promise<void> {
+export async function addAnswerMetrics(sessionId: string, questionId: number, answer: string, answerCorrect: boolean, gameMode: GameMode, answerTime: number): Promise<void> {
   if (metricsActivated()) {
     const supabase = useSupabaseServer()
     const { error } = await supabase
@@ -14,6 +14,7 @@ export async function addAnswerMetrics(sessionId: string, questionId: number, an
         answer,
         answerCorrect,
         gameMode,
+        answerTime,
       })
 
     if (error) {
@@ -38,7 +39,7 @@ export async function addResultMetrics(session: GameSession): Promise<void> {
         startTime: new Date(session.startTime).toISOString(),
         endTime: new Date(session.endTime!).toISOString(),
         gameTime: session.gameTime,
-        averageAnswerTime: session.averageAnswerTime,
+        averageAnswerTime: getAverageAnswerTimeDuration(session.totalAnswerTime, session.answeredQuestions),
         sessionId: session.sessionId,
       })
 

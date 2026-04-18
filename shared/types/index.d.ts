@@ -60,6 +60,7 @@ interface GameSession {
   leaderboardId?: string
   gameMode: GameMode
   currentQuestion: QuestionDB
+  currentQuestionFirstFetch?: number // timestamp
   questions: Array<string>
   running: boolean
   currentQuestionNr: number
@@ -71,8 +72,8 @@ interface GameSession {
   startTime: number
   endTime?: number
   gameTime: number
-  averageAnswerTime: number
   submitted?: boolean
+  totalAnswerTime: number
 }
 
 type GameMode = 'classic' | 'ranked' | 'endless'

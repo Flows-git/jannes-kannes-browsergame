@@ -84,7 +84,7 @@ export async function useGame(event: H3Event) {
       correctAnswers: data.correctAnswers,
       wrongAnswers: data.answeredQuestions - data.correctAnswers,
       gameTime: parseTimeToString(data.gameTime),
-      averageAnswerTime: parseTimeToString(data.averageAnswerTime),
+      averageAnswerTime: parseTimeToString(getAverageAnswerTimeDuration(data.totalAnswerTime, data.answeredQuestions)),
       answeredQuestionsTotalPercent: await getAnsweredQuestionsInPercent(data.answeredQuestions),
       ranking: await getGameRank(),
     }
@@ -125,8 +125,11 @@ export async function useGame(event: H3Event) {
   /**
    * returns the question parsed for the player (without answer) and with the necessary meta for the frontend
    */
-  function getQuestionForPlayer(): GameQuestion {
+  async function getQuestionForPlayer(): Promise<GameQuestion> {
     const question = data.currentQuestion
+    if (!data.currentQuestionFirstFetch) {
+      await session.update({ currentQuestionFirstFetch: Date.now() })
+    }
     return {
       id: question.id,
       questionNr: data.currentQuestionNr,
@@ -151,6 +154,7 @@ export async function useGame(event: H3Event) {
     randomizeArrayOrder(question.answers)
     await session.update({
       currentQuestion: question,
+      currentQuestionFirstFetch: undefined,
     })
   }
 
@@ -181,10 +185,10 @@ export async function useGame(event: H3Event) {
       totalLives: settings?.liveCount,
       remainingLives: settings?.liveCount,
       startTime: Date.now(),
-      averageAnswerTime: 0,
       gameTime: 0,
       endTime: undefined,
       submitted: false,
+      totalAnswerTime: 0,
     })
     await updateCurrentQuestion()
   }
@@ -193,16 +197,20 @@ export async function useGame(event: H3Event) {
    * updates the session and generates a response for the player
    */
   async function answerCurrentQuestion(answer: string): Promise<AnswerQuestionResponse> {
+    if (!data.currentQuestionFirstFetch) {
+      throw createError({ statusCode: 409, statusMessage: 'Cannot answer question before fetching it' })
+    }
     const question = data.currentQuestion
-
+    const now = Date.now()
+    const answerTime = now - data.currentQuestionFirstFetch
     // check if answer was correct and updates the session accordingly
     const answerCorrect = answer === question.correctAnswer
     await session.update({
-      answeredQuestions: session.data.answeredQuestions + 1,
-      currentQuestionNr: session.data.currentQuestionNr + 1,
-      correctAnswers: answerCorrect ? session.data.correctAnswers + 1 : session.data.correctAnswers,
-      remainingLives: (!answerCorrect && typeof session.data.remainingLives === 'number') ? session.data.remainingLives - 1 : session.data.remainingLives,
-      averageAnswerTime: getAverageAnswerTime(session.data.startTime, Date.now(), session.data.answeredQuestions + 1),
+      answeredQuestions: data.answeredQuestions + 1,
+      currentQuestionNr: data.currentQuestionNr + 1,
+      correctAnswers: answerCorrect ? data.correctAnswers + 1 : data.correctAnswers,
+      remainingLives: (!answerCorrect && typeof data.remainingLives === 'number') ? data.remainingLives - 1 : data.remainingLives,
+      totalAnswerTime: data.totalAnswerTime + answerTime,
     })
 
     // ends the game after the last question was answered
@@ -219,7 +227,7 @@ export async function useGame(event: H3Event) {
     }
 
     // add answer metrics entry
-    addAnswerMetrics(session.data.sessionId, question.id, answer, answerCorrect, session.data.gameMode)
+    addAnswerMetrics(session.data.sessionId, question.id, answer, answerCorrect, session.data.gameMode, answerTime)
 
     // returns if given answer was correct and the correct answer
     return {

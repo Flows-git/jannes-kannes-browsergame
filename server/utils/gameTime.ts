@@ -7,6 +7,10 @@
  */
 export function getAverageAnswerTime(startTime: number, endTime: number, answeredQuestions: number) {
   const duration = getTimeDuration(startTime, endTime)
+  return getAverageAnswerTimeDuration(duration, answeredQuestions)
+}
+
+export function getAverageAnswerTimeDuration(duration: number, answeredQuestions: number) {
   return answeredQuestions > 0 ? Math.floor(duration / answeredQuestions) : 0
 }
 
