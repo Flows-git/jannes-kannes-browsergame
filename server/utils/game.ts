@@ -84,7 +84,7 @@ export async function useGame(event: H3Event) {
       correctAnswers: data.correctAnswers,
       wrongAnswers: data.answeredQuestions - data.correctAnswers,
       gameTime: parseTimeToString(data.gameTime),
-      averageAnswerTime: parseTimeToString(getAverageAnswerTimeDuration(data.totalAnswerTime, data.answeredQuestions)),
+      averageAnswerTime: parseTimeToString(getAverageAnswerTime(data)),
       answeredQuestionsTotalPercent: await getAnsweredQuestionsInPercent(data.answeredQuestions),
       ranking: await getGameRank(),
     }
@@ -99,7 +99,7 @@ export async function useGame(event: H3Event) {
       }
       let rank: number | undefined
       if (!existingLeaderboardEntry || !existingIsBetter) {
-        rank = await getLeaderboardRanking(data.correctAnswers)
+        rank = await getLeaderboardRanking(data.correctAnswers, getAverageAnswerTime(data), data.gameTime)
       }
 
       return {

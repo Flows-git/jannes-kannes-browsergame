@@ -39,7 +39,7 @@ export async function addResultMetrics(session: GameSession): Promise<void> {
         startTime: new Date(session.startTime).toISOString(),
         endTime: new Date(session.endTime!).toISOString(),
         gameTime: session.gameTime,
-        averageAnswerTime: getAverageAnswerTimeDuration(session.totalAnswerTime, session.answeredQuestions),
+        averageAnswerTime: getAverageAnswerTime(session),
         sessionId: session.sessionId,
       })
 

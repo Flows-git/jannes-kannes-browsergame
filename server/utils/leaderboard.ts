@@ -40,7 +40,7 @@ export async function submitGameResultToLeaderboard(name: string, data: GameSess
     correctAnswers: data.correctAnswers,
     usedJoker: 0,
     gameTime: data.gameTime,
-    averageAnswerTime: getAverageAnswerTimeDuration(data.totalAnswerTime, data.answeredQuestions),
+    averageAnswerTime: getAverageAnswerTime(data),
     count: 1,
   }
 

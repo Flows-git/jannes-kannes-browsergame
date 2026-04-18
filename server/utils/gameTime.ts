@@ -1,17 +1,10 @@
 /**
  * Calculates the average time to answer a question in ms.
- * @param startTime - The start time of the game in ms.
- * @param endTime - The end time of the game in ms.
- * @param answeredQuestions - The number of questions answered by the player.
+ * @param data - Game Session
  * @returns The average answer time in ms.
  */
-export function getAverageAnswerTime(startTime: number, endTime: number, answeredQuestions: number) {
-  const duration = getTimeDuration(startTime, endTime)
-  return getAverageAnswerTimeDuration(duration, answeredQuestions)
-}
-
-export function getAverageAnswerTimeDuration(duration: number, answeredQuestions: number) {
-  return answeredQuestions > 0 ? Math.floor(duration / answeredQuestions) : 0
+export function getAverageAnswerTime(data: GameSession) {
+  return data.answeredQuestions > 0 ? Math.floor(data.totalAnswerTime / data.answeredQuestions) : 0
 }
 
 /**
