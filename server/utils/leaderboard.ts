@@ -134,7 +134,7 @@ export async function getLeaderboard(params?: { page?: number, perPage?: number,
   const to = from + perPage - 1
 
   const { data, error } = await supabase.from('leaderboard_with_rank').select('id, rank, position, name, score, gameTime, averageAnswerTime').order('position').range(from, to).overrideTypes<LeaderboardListEntry[]>()
-  const { count } = await supabase.from('leaderboard').select('id', { count: 'exact', head: true }).eq('deactivated', false)
+  const { count } = await supabase.from('leaderboard').select('id', { count: 'exact', head: true })
 
   if (error) {
     throw createError(error)

@@ -9,7 +9,11 @@ const { leaderboardId } = useLeaderboard()
 
 const page = computed({
   get: () => Number(route.query.p as string ?? 1),
-  set: async val => updateQueryParams(val),
+  set: async (val) => {
+    updateQueryParams(val)
+    if (import.meta.client)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+  },
 })
 
 watch(perPage, () => {
