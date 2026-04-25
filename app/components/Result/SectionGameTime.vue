@@ -31,17 +31,6 @@ defineExpose({ animate })
     <TypingText ref="game-time-header" text="Spielzeit" />
   </div>
   <v-row>
-    <v-col cols="12" sm="6" class="result-card" :class="{ 'result-card--visible': visibleCards >= 1 }">
-      <v-card color="background" class="pa-3 text-center">
-        <div class="text-h3 font-weight-medium text-primary">
-          {{ meta.gameTime }}
-        </div>
-        <div class="opacity-70">
-          gesamt Spielzeit
-        </div>
-      </v-card>
-    </v-col>
-
     <v-col cols="12" sm="6" class="result-card" :class="{ 'result-card--visible': visibleCards >= 2 }">
       <v-card color="background" class="pa-3 text-center">
         <div class="text-h3 font-weight-medium text-primary">
@@ -49,6 +38,17 @@ defineExpose({ animate })
         </div>
         <div class="opacity-70">
           durchschnittliche Antwortzeit
+        </div>
+      </v-card>
+    </v-col>
+
+    <v-col cols="12" sm="6" class="result-card" :class="{ 'result-card--visible': visibleCards >= 1 }">
+      <v-card color="background" class="pa-3 text-center">
+        <div class="text-h3 font-weight-medium text-primary">
+          {{ meta.gameTime }}
+        </div>
+        <div class="opacity-70">
+          gesamt Spielzeit
         </div>
       </v-card>
     </v-col>

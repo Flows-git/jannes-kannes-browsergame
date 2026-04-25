@@ -56,7 +56,7 @@ const gameModeLabel = computed(() => {
           {{ gameModeLabel }}
         </div>
       </v-card-text>
-      <v-card-text>
+      <v-card-text style="position: relative;">
         <ResultScreen v-if="result" :meta="result" />
       </v-card-text>
       <v-card-actions class="bg-surface-variant d-flex justify-space-around ga-3 flex-wrap">

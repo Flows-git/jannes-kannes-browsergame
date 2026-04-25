@@ -25,7 +25,7 @@ defineExpose({
 <template>
   <span>
     <TypingText ref="text1" text="Du hast " />
-    <TypingText ref="text2" :text="`${meta.answeredQuestionsTotalPercent.toLocaleString()}%`" class="text-h5 text-primary heartbeat" />
+    <TypingText ref="text2" :text="`${meta.answeredQuestionsTotalPercent.toString().replace('.', ',')}%`" class="text-h5 text-primary heartbeat" />
     <TypingText ref="text3" text=" aller erfassten Fragen (" />
     <TypingText ref="text4" class="text-primary" :text="meta.totalQuestions.toString()" />
     <TypingText ref="text5" text=") beantwortet" />

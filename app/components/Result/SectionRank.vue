@@ -27,6 +27,8 @@ async function animate() {
 }
 
 defineExpose({ animate })
+
+const showSubmitDialog = ref(false)
 </script>
 
 <template>
@@ -39,8 +41,7 @@ defineExpose({ animate })
         <v-card color="background" class="pa-3 text-center">
           <div class="rank text-h1 font-weight-medium text-primary slide-in-animation-container">
             <div :class="{ 'slide-in-animation': showResult }">
-              <Medal v-if="medalColor" :size="70" :type="medalColor" />
-              {{ rank }}.
+              <Medal v-if="medalColor" :size="70" :type="medalColor" />{{ rank }}.
             </div>
           </div>
           <div class="opacity-70">
@@ -49,15 +50,11 @@ defineExpose({ animate })
         </v-card>
       </v-col>
       <v-col cols="12" class=" pt-0 pb-8 text-center">
-        <v-dialog width="500">
-          <template #activator="{ props }">
-            <v-btn class="submit-leaderboard-dialog-btn result-card" color="primary" v-bind="props" :class="{ 'result-card--visible': showResult }">
-              <v-icon icon="mdi-trophy-variant" />
-              Ergebnis in Rangliste eintragen
-            </v-btn>
-          </template>
-          <LeaderboardForm :name="ranking?.existingLeaderboardEntry?.name" />
-        </v-dialog>
+        <v-btn class="submit-leaderboard-dialog-btn result-card" color="primary" :class="{ 'result-card--visible': showResult }" @click="showSubmitDialog = true">
+          <v-icon icon="mdi-trophy-variant" />
+          Ergebnis in Rangliste eintragen
+        </v-btn>
+        <LeaderboardSubmitDialog v-model="showSubmitDialog" :meta="meta" />
       </v-col>
     </v-row>
   </div>

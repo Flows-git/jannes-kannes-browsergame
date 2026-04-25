@@ -61,45 +61,42 @@ async function addResultToLeaderboard() {
     v-model="valid"
     @submit.prevent="addResultToLeaderboard"
   >
-    <v-card>
-      <v-card-title>Name eingeben</v-card-title>
-      <v-card-text>
-        <v-text-field
-          v-model="name"
-          label="Name"
-          name="name"
-          class="name"
-          :rules="rules"
-          :disabled="loading"
-        />
-        <v-checkbox
-          v-if="!isReturningPlayer"
-          v-model="privacyConsent"
-          density="compact"
-          color="primary"
-          hide-details
-        >
-          <template #label>
-            <span class="text-body-2 pl-2">
-              Ich stimme zu, dass eine Kennung im lokalen Speicher meines Browsers abgelegt wird, um mein Ergebnis in der Bestenliste aktualisieren zu können.
-            </span>
-          </template>
-        </v-checkbox>
-        <v-alert
-          v-if="error"
-          type="error"
-          class="mt-3"
-          closable
-          @click:close="error = undefined"
-        >
-          {{ error }}
-        </v-alert>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn color="primary" type="submit" :loading="loading" :disabled="!canSubmit">
-          Ergebnis eintragen
-        </v-btn>
-      </v-card-actions>
-    </v-card>
+    <div>
+      <v-text-field
+        v-model="name"
+        label="Name"
+        name="name"
+        class="name"
+        :rules="rules"
+        :disabled="loading"
+      />
+      <v-checkbox
+        v-if="!isReturningPlayer"
+        v-model="privacyConsent"
+        density="compact"
+        color="primary"
+        hide-details
+      >
+        <template #label>
+          <span class="text-body-2 pl-2">
+            Ich stimme zu, dass eine Kennung im lokalen Speicher meines Browsers abgelegt wird, um mein Ergebnis in der Bestenliste aktualisieren zu können.
+          </span>
+        </template>
+      </v-checkbox>
+      <v-alert
+        v-if="error"
+        type="error"
+        class="mt-3"
+        closable
+        @click:close="error = undefined"
+      >
+        {{ error }}
+      </v-alert>
+    </div>
+    <div class="d-flex align-center justify-center pt-4">
+      <v-btn color="primary" type="submit" :loading="loading" :disabled="!canSubmit">
+        Ergebnis eintragen
+      </v-btn>
+    </div>
   </v-form>
 </template>
