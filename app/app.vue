@@ -16,6 +16,9 @@ const { progress, isLoading } = useLoadingIndicator()
         <NuxtPage />
       </div>
       <v-footer height="36px">
+        <div class="d-none d-sm-block pr-2">
+          v1.0.0
+        </div>
         <NuxtLink href="/impressum">
           Impressum
         </NuxtLink>
